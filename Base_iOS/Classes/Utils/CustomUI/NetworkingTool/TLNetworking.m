@@ -25,13 +25,18 @@
     
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     manager.requestSerializer.timeoutInterval = 15.0;
+    //去除返回的null的value
+    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
+    response.removesKeysWithNullValues = YES;
+    manager.responseSerializer = response;
+    
     NSSet *set = manager.responseSerializer.acceptableContentTypes;
     
     set = [set setByAddingObject:@"text/plain"];
     set = [set setByAddingObject:@"text/html"];
     set = [set setByAddingObject:@"text/html"];
+    
     manager.responseSerializer.acceptableContentTypes = set;
-   manager.responseSerializer.acceptableContentTypes = [set setByAddingObject:@"text/plain"];
     
     return manager;
 }

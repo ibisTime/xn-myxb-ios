@@ -100,9 +100,7 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
         } else {
             
             _urls = [NSMutableArray arrayWithArray:imgUrls];
-            
         }
-        
         
         if (_isAuto) {
             
@@ -112,7 +110,6 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
                 if ([obj isKindOfClass:[UIPageControl class]]) {
                     [obj removeFromSuperview];
                 }
-                
             }];
             
             //添加
@@ -127,29 +124,16 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
 //            tmpPageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"#fe4332"];
             tmpPageControl.currentPageIndicatorTintColor = kAppCustomMainColor;
             
-            
-            
             //
-            if (self.urls.count - 2 >= 2) {
-                
-                tmpPageControl.numberOfPages = self.urls.count - 2;
-                
-            } else {
-                
-                tmpPageControl.numberOfPages = 1;
-                
-            }
+            tmpPageControl.numberOfPages = (self.urls.count - 2 >= 2) ? self.urls.count - 2: 1;
             
             //添加指示
             [self addSubview:tmpPageControl];
             self.pageControl = tmpPageControl;
-            
-            
         }
         
         _currentPage = 1;
         self.pageControl.currentPage = 0;
-        
         
         //销毁原来的定时器
         
@@ -161,9 +145,7 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
             //
             [[NSRunLoop currentRunLoop] addTimer:tmpTimer forMode:NSRunLoopCommonModes];
             self.timer = tmpTimer;
-            
         }
-        
         
         [self.bannerCollectionView reloadData];
         
@@ -195,9 +177,7 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
     if (_currentPage == self.urls.count - 1) {
         
         _currentPage = 0;
-        
     }
-    
 }
 
 #pragma mark - scrollView delegate
@@ -208,12 +188,11 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
             return;
         }
     }
-    
-    
+
     NSInteger index = (self.bannerCollectionView .contentOffset.x )/self.frame.size.width;
     _currentPage = index - 1;
     
-    //    //不循环
+    //不循环
     if(_urls.count <= 2) return;
     
     self.pageControl.currentPage = _currentPage;
@@ -229,25 +208,22 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
         [self.bannerCollectionView  setContentOffset:CGPointMake(self.frame.size.width*(self.urls.count - 2), 0)];
         return;
     }
-    
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     //    XNLog(@"开始拖动");
     self.timer.fireDate = [NSDate distantFuture];
-    
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
     self.timer.fireDate = [NSDate distantPast];
     //    XNLog(@"结束拖动");
 }
 
 #pragma  mark - collectionView 点击事件
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (self.selected) {
         
         if (_urls.count <= 2) {
@@ -271,20 +247,17 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
         }
         
         self.selected(idx);
-        
     }
-    
 }
 
 #pragma  mark - DataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return self.urls.count;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
+    return self.urls.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     BannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:XNBannerCellID forIndexPath:indexPath];
     //    cell.backgroundColor = [UIColor grayColor];
     

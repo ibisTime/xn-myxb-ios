@@ -112,8 +112,6 @@
     
     //登出
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
-    //登录
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin) name:kIMLoginNotification object:nil];
 }
 
 #pragma mark- 退出登录

@@ -9,7 +9,6 @@
 #import "TLUserLoginVC.h"
 
 #import "BindMobileVC.h"
-#import "TLUserRegisterVC.h"
 #import "TLUserForgetPwdVC.h"
 
 #import "APICodeMacro.h"
@@ -60,8 +59,6 @@
 
     //取消按钮
     [UIBarButtonItem addLeftItemWithImageName:kCancelIcon frame:CGRectMake(-30, 0, 80, 44) vc:self action:@selector(back)];
-    //注册
-    [UIBarButtonItem addRightItemWithTitle:@"注册" titleColor:kTextColor frame:CGRectMake(0, 0, 60, 44) vc:self action:@selector(goReg)];
 }
 
 - (void)setUpUI {
@@ -183,14 +180,6 @@
     
     TLUserForgetPwdVC *vc = [[TLUserForgetPwdVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-    
-}
-
-- (void)goReg {
-    
-    TLUserRegisterVC *registerVC = [[TLUserRegisterVC alloc] init];
-    
-    [self.navigationController pushViewController:registerVC animated:YES];
     
 }
 

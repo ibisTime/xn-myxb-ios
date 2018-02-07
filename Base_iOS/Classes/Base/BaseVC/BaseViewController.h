@@ -9,20 +9,22 @@
 #import <UIKit/UIKit.h>
 
 #import "CoinHeader.h"
+#import "PromptView.h"
 
 @interface BaseViewController : UIViewController <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSString *titleStr;
 
-@property (nonatomic, strong) UIView *placeholderView;
+@property (nonatomic, strong) PromptView *placeholderView;
 
 @property (nonatomic, strong) UIScrollView *bgSV;
 
+- (void)setPlaceholderView;
+//移除
+- (void)removePlaceholderView;
+// 添加
+- (void)addPlaceholderView;
+
 - (void)placeholderOperation;
-
-- (void)setPlaceholderViewTitle:(NSString *)title  operationTitle:(NSString *)optitle;
-
-- (void)removePlaceholderView; //移除
-- (void)addPlaceholderView; // 添加
 
 @end

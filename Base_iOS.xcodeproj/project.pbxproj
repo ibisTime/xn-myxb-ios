@@ -47,6 +47,19 @@
 		2121703D1F3842BC007C9855 /* ZHAddressChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2121703C1F3842BC007C9855 /* ZHAddressChooseView.m */; };
 		212BE41720285DF8000BCC66 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE41620285DF8000BCC66 /* HomeVC.m */; };
 		212BE41F202862E8000BCC66 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE41E202862E8000BCC66 /* UIImage+Tint.m */; };
+		212BE4262029AE45000BCC66 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4252029AE44000BCC66 /* NullSafe.m */; };
+		212BE42A202A9CC2000BCC66 /* InviteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE429202A9CC2000BCC66 /* InviteVC.m */; };
+		212BE431202A9E19000BCC66 /* HelpCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE430202A9E19000BCC66 /* HelpCenterVC.m */; };
+		212BE43B202A9EC4000BCC66 /* MineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE43A202A9EC4000BCC66 /* MineVC.m */; };
+		212BE442202A9F37000BCC66 /* PlatfromProposalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE441202A9F37000BCC66 /* PlatfromProposalVC.m */; };
+		212BE448202AD4E8000BCC66 /* PromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE447202AD4E8000BCC66 /* PromptView.m */; };
+		212BE44E202B000E000BCC66 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE44B202B000D000BCC66 /* BannerModel.m */; };
+		212BE44F202B000E000BCC66 /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE44D202B000E000BCC66 /* NoticeModel.m */; };
+		212BE452202B002C000BCC66 /* HomeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE450202B002B000BCC66 /* HomeScrollView.m */; };
+		212BE458202B0184000BCC66 /* LoopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE456202B0184000BCC66 /* LoopScrollView.m */; };
+		212BE45C202B031F000BCC66 /* NSTimer+Loop.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE45B202B031F000BCC66 /* NSTimer+Loop.m */; };
+		212BE460202B04CC000BCC66 /* SystemNoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE45F202B04CC000BCC66 /* SystemNoticeVC.m */; };
+		212BE464202B0618000BCC66 /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE463202B0618000BCC66 /* NoticeCell.m */; };
 		216AB7EC1F189F04006C26A1 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */; };
 		216AB7EE1F189F11006C26A1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7ED1F189F11006C26A1 /* libresolv.tbd */; };
 		216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */; };
@@ -115,7 +128,6 @@
 		21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B6A1F17719D0019B176 /* BaseCollectionView.m */; };
 		21F82CA31F17719D0019B176 /* TLAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82B781F17719D0019B176 /* TLAuthHelper.m */; };
 		21F82D1C1F17719D0019B176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C931F17719D0019B176 /* Assets.xcassets */; };
-		21F82D1D1F17719D0019B176 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C951F17719D0019B176 /* Info.plist */; };
 		21F82D1E1F17719D0019B176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C961F17719D0019B176 /* LaunchScreen.storyboard */; };
 		21F82D1F1F17719D0019B176 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F82C971F17719D0019B176 /* main.m */; };
 		21F82D201F17719D0019B176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21F82C981F17719D0019B176 /* Main.storyboard */; };
@@ -205,6 +217,31 @@
 		212BE41620285DF8000BCC66 /* HomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
 		212BE41D202862E8000BCC66 /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
 		212BE41E202862E8000BCC66 /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
+		212BE4252029AE44000BCC66 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
+		212BE428202A9CC2000BCC66 /* InviteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteVC.h; sourceTree = "<group>"; };
+		212BE429202A9CC2000BCC66 /* InviteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteVC.m; sourceTree = "<group>"; };
+		212BE42F202A9E19000BCC66 /* HelpCenterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpCenterVC.h; sourceTree = "<group>"; };
+		212BE430202A9E19000BCC66 /* HelpCenterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpCenterVC.m; sourceTree = "<group>"; };
+		212BE439202A9EC4000BCC66 /* MineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineVC.h; sourceTree = "<group>"; };
+		212BE43A202A9EC4000BCC66 /* MineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineVC.m; sourceTree = "<group>"; };
+		212BE440202A9F37000BCC66 /* PlatfromProposalVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatfromProposalVC.h; sourceTree = "<group>"; };
+		212BE441202A9F37000BCC66 /* PlatfromProposalVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatfromProposalVC.m; sourceTree = "<group>"; };
+		212BE446202AD4E8000BCC66 /* PromptView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PromptView.h; sourceTree = "<group>"; };
+		212BE447202AD4E8000BCC66 /* PromptView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PromptView.m; sourceTree = "<group>"; };
+		212BE44A202B000C000BCC66 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		212BE44B202B000D000BCC66 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
+		212BE44C202B000D000BCC66 /* NoticeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeModel.h; sourceTree = "<group>"; };
+		212BE44D202B000E000BCC66 /* NoticeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeModel.m; sourceTree = "<group>"; };
+		212BE450202B002B000BCC66 /* HomeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScrollView.m; sourceTree = "<group>"; };
+		212BE451202B002C000BCC66 /* HomeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScrollView.h; sourceTree = "<group>"; };
+		212BE456202B0184000BCC66 /* LoopScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopScrollView.m; sourceTree = "<group>"; };
+		212BE457202B0184000BCC66 /* LoopScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopScrollView.h; sourceTree = "<group>"; };
+		212BE45A202B031F000BCC66 /* NSTimer+Loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Loop.h"; sourceTree = "<group>"; };
+		212BE45B202B031F000BCC66 /* NSTimer+Loop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Loop.m"; sourceTree = "<group>"; };
+		212BE45E202B04CC000BCC66 /* SystemNoticeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemNoticeVC.h; sourceTree = "<group>"; };
+		212BE45F202B04CC000BCC66 /* SystemNoticeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemNoticeVC.m; sourceTree = "<group>"; };
+		212BE462202B0618000BCC66 /* NoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCell.h; sourceTree = "<group>"; };
+		212BE463202B0618000BCC66 /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
 		216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		216AB7ED1F189F11006C26A1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -575,6 +612,8 @@
 			isa = PBXGroup;
 			children = (
 				21111B951F8B5EFF0021B3FE /* Foundation+Log.m */,
+				212BE459202B031F000BCC66 /* NSTimer */,
+				212BE4242029AE21000BCC66 /* NSNull */,
 				21111B891F8B5EFF0021B3FE /* NSDictionary */,
 				21111B8C1F8B5EFF0021B3FE /* NSString */,
 				21111B961F8B5EFF0021B3FE /* NSArray */,
@@ -747,6 +786,8 @@
 		212BE41220285DD3000BCC66 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				212BE466202B0635000BCC66 /* Banner */,
+				212BE465202B0621000BCC66 /* Notice */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -754,6 +795,9 @@
 		212BE41320285DDC000BCC66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				212BE451202B002C000BCC66 /* HomeScrollView.h */,
+				212BE450202B002B000BCC66 /* HomeScrollView.m */,
+				212BE461202B05F8000BCC66 /* Notice */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -763,6 +807,7 @@
 			children = (
 				212BE41520285DF8000BCC66 /* HomeVC.h */,
 				212BE41620285DF8000BCC66 /* HomeVC.m */,
+				212BE45D202B04B3000BCC66 /* Notice */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -774,6 +819,200 @@
 				212BE41E202862E8000BCC66 /* UIImage+Tint.m */,
 			);
 			path = UIImage;
+			sourceTree = "<group>";
+		};
+		212BE4242029AE21000BCC66 /* NSNull */ = {
+			isa = PBXGroup;
+			children = (
+				212BE4252029AE44000BCC66 /* NullSafe.m */,
+			);
+			path = NSNull;
+			sourceTree = "<group>";
+		};
+		212BE427202A9CA7000BCC66 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				212BE42D202A9CD2000BCC66 /* Controller */,
+				212BE42C202A9CCD000BCC66 /* View */,
+				212BE42B202A9CC6000BCC66 /* Model */,
+			);
+			path = Invite;
+			sourceTree = "<group>";
+		};
+		212BE42B202A9CC6000BCC66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		212BE42C202A9CCD000BCC66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		212BE42D202A9CD2000BCC66 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				212BE428202A9CC2000BCC66 /* InviteVC.h */,
+				212BE429202A9CC2000BCC66 /* InviteVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		212BE42E202A9E03000BCC66 /* HelpCenter */ = {
+			isa = PBXGroup;
+			children = (
+				212BE434202A9E2A000BCC66 /* Controller */,
+				212BE433202A9E25000BCC66 /* View */,
+				212BE432202A9E1E000BCC66 /* Model */,
+			);
+			path = HelpCenter;
+			sourceTree = "<group>";
+		};
+		212BE432202A9E1E000BCC66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		212BE433202A9E25000BCC66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		212BE434202A9E2A000BCC66 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				212BE42F202A9E19000BCC66 /* HelpCenterVC.h */,
+				212BE430202A9E19000BCC66 /* HelpCenterVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		212BE435202A9E3A000BCC66 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				212BE438202A9E56000BCC66 /* Controller */,
+				212BE437202A9E4B000BCC66 /* View */,
+				212BE436202A9E44000BCC66 /* Model */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		212BE436202A9E44000BCC66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		212BE437202A9E4B000BCC66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		212BE438202A9E56000BCC66 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				212BE439202A9EC4000BCC66 /* MineVC.h */,
+				212BE43A202A9EC4000BCC66 /* MineVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		212BE43C202A9ED1000BCC66 /* PlatfromProposal */ = {
+			isa = PBXGroup;
+			children = (
+				212BE43F202A9F15000BCC66 /* Controller */,
+				212BE43E202A9F0F000BCC66 /* View */,
+				212BE43D202A9F08000BCC66 /* Model */,
+			);
+			path = PlatfromProposal;
+			sourceTree = "<group>";
+		};
+		212BE43D202A9F08000BCC66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		212BE43E202A9F0F000BCC66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		212BE43F202A9F15000BCC66 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				212BE440202A9F37000BCC66 /* PlatfromProposalVC.h */,
+				212BE441202A9F37000BCC66 /* PlatfromProposalVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		212BE455202B0184000BCC66 /* LoopScroll */ = {
+			isa = PBXGroup;
+			children = (
+				212BE457202B0184000BCC66 /* LoopScrollView.h */,
+				212BE456202B0184000BCC66 /* LoopScrollView.m */,
+			);
+			path = LoopScroll;
+			sourceTree = "<group>";
+		};
+		212BE459202B031F000BCC66 /* NSTimer */ = {
+			isa = PBXGroup;
+			children = (
+				212BE45A202B031F000BCC66 /* NSTimer+Loop.h */,
+				212BE45B202B031F000BCC66 /* NSTimer+Loop.m */,
+			);
+			path = NSTimer;
+			sourceTree = "<group>";
+		};
+		212BE45D202B04B3000BCC66 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				212BE45E202B04CC000BCC66 /* SystemNoticeVC.h */,
+				212BE45F202B04CC000BCC66 /* SystemNoticeVC.m */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		212BE461202B05F8000BCC66 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				212BE462202B0618000BCC66 /* NoticeCell.h */,
+				212BE463202B0618000BCC66 /* NoticeCell.m */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		212BE465202B0621000BCC66 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				212BE44C202B000D000BCC66 /* NoticeModel.h */,
+				212BE44D202B000E000BCC66 /* NoticeModel.m */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		212BE466202B0635000BCC66 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				212BE44A202B000C000BCC66 /* BannerModel.h */,
+				212BE44B202B000D000BCC66 /* BannerModel.m */,
+			);
+			path = Banner;
 			sourceTree = "<group>";
 		};
 		21AC58FE1FDE798A00F19DE8 /* Header */ = {
@@ -1040,6 +1279,8 @@
 				21158E421F1C4F4D00A07266 /* CustomTabBar.m */,
 				21158E471F1C502400A07266 /* BarButton.h */,
 				21158E481F1C502400A07266 /* BarButton.m */,
+				212BE446202AD4E8000BCC66 /* PromptView.h */,
+				212BE447202AD4E8000BCC66 /* PromptView.m */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -1075,6 +1316,10 @@
 			isa = PBXGroup;
 			children = (
 				212BE41120285DCD000BCC66 /* Home */,
+				212BE42E202A9E03000BCC66 /* HelpCenter */,
+				212BE427202A9CA7000BCC66 /* Invite */,
+				212BE43C202A9ED1000BCC66 /* PlatfromProposal */,
+				212BE435202A9E3A000BCC66 /* Mine */,
 				21216F471F380DD3007C9855 /* User */,
 			);
 			path = Modules;
@@ -1103,6 +1348,7 @@
 		21FB2F7D1F26E9EE0028ADEE /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				212BE455202B0184000BCC66 /* LoopScroll */,
 				21111AD21F8B5ED00021B3FE /* AddressPicker */,
 				21111B121F8B5ED10021B3FE /* CircleGuideView */,
 				21111AC61F8B5ECF0021B3FE /* PayTextField */,
@@ -1221,7 +1467,7 @@
 		21F827C71F1742E80019B176 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = caizhuoyue;
 				TargetAttributes = {
 					21F827CE1F1742E80019B176 = {
@@ -1262,7 +1508,6 @@
 				21F82D201F17719D0019B176 /* Main.storyboard in Resources */,
 				21F82D1C1F17719D0019B176 /* Assets.xcassets in Resources */,
 				21F82D1E1F17719D0019B176 /* LaunchScreen.storyboard in Resources */,
-				21F82D1D1F17719D0019B176 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1336,6 +1581,7 @@
 				21AC58951FDE741A00F19DE8 /* CaptchaView.m in Sources */,
 				21111BA01F8B5F2C0021B3FE /* Province.m in Sources */,
 				21111BA11F8B5F2C0021B3FE /* AddressPickerView.m in Sources */,
+				212BE442202A9F37000BCC66 /* PlatfromProposalVC.m in Sources */,
 				21111BA21F8B5F2C0021B3FE /* CircleGuideView.m in Sources */,
 				21AC58851FDE73B200F19DE8 /* TLChangeMobileVC.m in Sources */,
 				21AC589F1FDE754400F19DE8 /* AppConfig.m in Sources */,
@@ -1349,6 +1595,7 @@
 				21111BB71F8B5F2C0021B3FE /* WTReTextField.m in Sources */,
 				21111BB81F8B5F2C0021B3FE /* WTReParser.m in Sources */,
 				21AC596D1FDE814C00F19DE8 /* UIView+Responder.m in Sources */,
+				212BE460202B04CC000BCC66 /* SystemNoticeVC.m in Sources */,
 				21111BB91F8B5F2C0021B3FE /* TLDisplayPhotoVC.m in Sources */,
 				21111BBA1F8B5F2C0021B3FE /* TLImagePickerController.m in Sources */,
 				21AC59611FDE80A300F19DE8 /* UIButton+EnLargeEdge.m in Sources */,
@@ -1359,23 +1606,29 @@
 				21AC588F1FDE73FE00F19DE8 /* TLUserExt.m in Sources */,
 				21AC595B1FDE804500F19DE8 /* UILable+convience.m in Sources */,
 				21AC593E1FDE7A1B00F19DE8 /* TopLabelUtil.m in Sources */,
+				212BE42A202A9CC2000BCC66 /* InviteVC.m in Sources */,
 				21AC58AA1FDE75AA00F19DE8 /* HttpLogger.m in Sources */,
 				21AC58961FDE741A00F19DE8 /* AccountTf.m in Sources */,
 				21111BCB1F8B5F2C0021B3FE /* MovieAddComment.m in Sources */,
+				212BE44F202B000E000BCC66 /* NoticeModel.m in Sources */,
 				212BE41720285DF8000BCC66 /* HomeVC.m in Sources */,
 				21AC59401FDE7A1B00F19DE8 /* SortBar.m in Sources */,
 				21AC59451FDE7A1B00F19DE8 /* CustomPickerView.m in Sources */,
 				21AC59441FDE7A1B00F19DE8 /* TLPickerTextField.m in Sources */,
 				21AC594D1FDE7A1B00F19DE8 /* TLNetworking.m in Sources */,
 				21111BCD1F8B5F2C0021B3FE /* CustomTextView.m in Sources */,
+				212BE431202A9E19000BCC66 /* HelpCenterVC.m in Sources */,
+				212BE448202AD4E8000BCC66 /* PromptView.m in Sources */,
 				21AC595A1FDE804500F19DE8 /* UILabel+Extension.m in Sources */,
 				21111BCF1F8B5F2C0021B3FE /* DetailWebView.m in Sources */,
+				212BE458202B0184000BCC66 /* LoopScrollView.m in Sources */,
 				21111BD01F8B5F2C0021B3FE /* ZipImg.m in Sources */,
 				21AC59431FDE7A1B00F19DE8 /* HourPickerView.m in Sources */,
 				21111BD81F8B5F2C0021B3FE /* UIApplication+Custom.m in Sources */,
 				21AC58871FDE73B200F19DE8 /* TLPwdRelatedVC.m in Sources */,
 				21AC59501FDE7A1B00F19DE8 /* TLPlaceholderView.m in Sources */,
 				21AC58841FDE73B200F19DE8 /* BindMobileVC.m in Sources */,
+				212BE44E202B000E000BCC66 /* BannerModel.m in Sources */,
 				21AC594E1FDE7A1B00F19DE8 /* TLPageDataHelper.m in Sources */,
 				21111BE31F8B5F2C0021B3FE /* LKViewAttribute.m in Sources */,
 				21AC59481FDE7A1B00F19DE8 /* TLTimeButton.m in Sources */,
@@ -1394,12 +1647,15 @@
 				21AC59471FDE7A1B00F19DE8 /* TLAlert.m in Sources */,
 				21AC59661FDE80FB00F19DE8 /* UIColor+Extension.m in Sources */,
 				21158E461F1C4F9E00A07266 /* TabBarModel.m in Sources */,
+				212BE43B202A9EC4000BCC66 /* MineVC.m in Sources */,
 				21AC59671FDE80FB00F19DE8 /* UIColor+theme.m in Sources */,
 				21216F8C1F380DD3007C9855 /* ZHAddressCell.m in Sources */,
 				2121703D1F3842BC007C9855 /* ZHAddressChooseView.m in Sources */,
 				21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */,
+				212BE4262029AE45000BCC66 /* NullSafe.m in Sources */,
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				21AC587B1FDE737200F19DE8 /* TLUserForgetPwdVC.m in Sources */,
+				212BE45C202B031F000BCC66 /* NSTimer+Loop.m in Sources */,
 				21AC59551FDE7F1500F19DE8 /* WebVC.m in Sources */,
 				21AC58901FDE73FE00F19DE8 /* TLUser.m in Sources */,
 				21AC597D1FDE823C00F19DE8 /* NSString+CGSize.m in Sources */,
@@ -1425,10 +1681,12 @@
 				21AC593F1FDE7A1B00F19DE8 /* SelectScrollView.m in Sources */,
 				21158E491F1C502400A07266 /* BarButton.m in Sources */,
 				21F82CA31F17719D0019B176 /* TLAuthHelper.m in Sources */,
+				212BE464202B0618000BCC66 /* NoticeCell.m in Sources */,
 				21AC597E1FDE823C00F19DE8 /* NSString+Date.m in Sources */,
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
 				21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
+				212BE452202B002C000BCC66 /* HomeScrollView.m in Sources */,
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1446,7 +1704,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1454,7 +1714,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1495,7 +1759,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1503,7 +1769,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

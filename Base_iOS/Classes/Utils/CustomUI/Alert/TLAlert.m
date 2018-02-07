@@ -7,7 +7,6 @@
 //
 
 #import "TLAlert.h"
-#import "MBProgressHUD.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @implementation TLAlert

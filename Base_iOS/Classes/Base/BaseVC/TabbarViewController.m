@@ -15,6 +15,7 @@
 //C
 #import "NavigationController.h"
 #import "TLUserLoginVC.h"
+#import "InviteVC.h"
 
 @interface TabbarViewController () <UITabBarControllerDelegate, TabBarDelegate>
 //ItemArray
@@ -52,15 +53,12 @@
     tabBar.translucent = NO;
     tabBar.delegate = self;
     tabBar.backgroundColor = [UIColor orangeColor];
-    
     [self setValue:tabBar forKey:@"tabBar"];
-    
     [tabBar layoutSubviews];
-    
-    self.customTabbar = tabBar;
-    
     tabBar.tabBarItems = self.tabBarItems.copy;
-    
+
+    self.customTabbar = tabBar;
+
 }
 
 - (void)createSubControllers {
@@ -68,27 +66,27 @@
     self.tabBarItems = [NSMutableArray array];
     
     NSArray *titles = @[@"首页",
+                        @"帮助中心",
                         @"邀请好友",
                         @"平台建议",
-                        @"帮助中心",
                         @"我的"];
     
     NSArray *normalImages = @[@"home",
-                              @"invite",
-                              @"platfrom_proposal",
                               @"help_center",
+                              @"",
+                              @"platfrom_proposal",
                               @"mine"];
     
     NSArray *selectImages = @[@"home_select",
-                              @"invite_select",
-                              @"platfrom_proposal_select",
                               @"help_center_select",
+                              @"",
+                              @"platfrom_proposal_select",
                               @"mine_select"];
     
     NSArray *vcNames = @[@"HomeVC",
-                         @"HomeVC",
-                         @"HomeVC",
-                         @"HomeVC",
+                         @"HelpCenterVC",
+                         @"InviteVC",
+                         @"PlatfromProposalVC",
                          @"MineVC"];
     
     for (int i = 0; i < normalImages.count; i++) {
@@ -99,7 +97,6 @@
                       imgSelected:selectImages[i]];
     }
     
-    self.selectedIndex = 2;
 }
 
 - (void)addChildVCWithTitle:(NSString *)title
@@ -145,9 +142,11 @@
 }
 
 #pragma mark - TabBarDelegate
-- (BOOL)didSelected:(NSInteger)idx tabBar:(UITabBar *)tabBar {
+
+- (BOOL)didSelected:(NSInteger)idx tabBar:(CustomTabBar *)tabBar {
     
-    if (idx == 4 && ![TLUser user].isLogin) {
+    //当用户点击邀请好友、平台建议和我的模块时，判断用户是否登录
+    if ((idx == 2 || idx == 3 || idx == 4) && ![TLUser user].isLogin) {
         
         TLUserLoginVC *loginVC = [TLUserLoginVC new];
         NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
@@ -155,6 +154,16 @@
         
         return NO;
     }
+    
+    if ((idx == 2) && [TLUser user].isLogin) {
+        
+        InviteVC *inviteVC = [InviteVC new];
+        
+        NavigationController *navi = [[NavigationController alloc] initWithRootViewController:inviteVC];
+        [self presentViewController:navi animated:YES completion:nil];
+        
+    }
+    
     //
     self.selectedIndex = idx;
     

@@ -16,16 +16,13 @@
 #define kAnimationType 1
 
 
-@interface BaseViewController () <UIGestureRecognizerDelegate>
-
-@property (nonatomic, strong) UILabel *placeholderTitleLbl;
-
-@property (nonatomic, strong) UIButton *opBtn;
+@interface BaseViewController () <UIGestureRecognizerDelegate, PromptViewDelegate>
 
 @end
 
 @implementation BaseViewController
 
+#pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -51,9 +48,15 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
-
 }
 
+- (void)viewDidLayoutSubviews {
+    
+    //断网显示
+    [self setPlaceholderView];
+}
+
+#pragma mark - LazyLoad
 - (UIScrollView *)bgSV {
     
     if (!_bgSV) {
@@ -61,14 +64,24 @@
         _bgSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
         
         _bgSV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        
         _bgSV.contentSize = CGSizeMake(kScreenWidth, kSuperViewHeight + 1);
         
         [self.view addSubview:_bgSV];
     }
     
     return _bgSV;
+}
+
+- (PromptView *)placeholderView {
     
+    if (!_placeholderView) {
+        
+        _placeholderView = [[PromptView alloc] initWithFrame:self.view.bounds];
+        _placeholderView.backgroundColor = kBackgroundColor;
+        _placeholderView.delegate = self;
+        
+    }
+    return _placeholderView;
 }
 
 #pragma mark - Setting
@@ -87,6 +100,7 @@
 }
 
 - (BOOL)isRootViewController {
+    
     return (self == self.navigationController.viewControllers.firstObject);
 }
 
@@ -112,90 +126,19 @@
     }
 }
 
-- (void)setPlaceholderViewTitle:(NSString *)title  operationTitle:(NSString *)opTitle {
+- (void)setPlaceholderView {
     
-    if (self.placeholderView) {
-        
-        _placeholderTitleLbl.text = title;
-        [_opBtn setTitle:opTitle forState:UIControlStateNormal];
-        
-    } else {
-        
-        UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
-        view.backgroundColor = self.view.backgroundColor;
-        UILabel *lbl = [UILabel labelWithFrame:CGRectMake(0, 100, view.width, 50) textAligment:NSTextAlignmentCenter backgroundColor:[UIColor clearColor] font:FONT(16) textColor:kTextColor];
-        [view addSubview:lbl];
-        lbl.text = title;
-        _placeholderTitleLbl = lbl;
-        
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(20, lbl.yy + 10, 200, 40)];
-        [self.view addSubview:btn];
-        btn.titleLabel.font = FONT(14);
-        [btn setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
-        btn.centerX = view.width/2.0;
-        btn.layer.cornerRadius = 5;
-        btn.layer.borderWidth = 1;
-        btn.layer.borderColor = [UIColor textColor].CGColor;
-        [btn addTarget:self action:@selector(placeholderOperation) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitle:opTitle forState:UIControlStateNormal];
-        [view addSubview:btn];
-        _opBtn = btn;
-        _placeholderView = view;
-    }
+    [self.placeholderView setTitle:@"当前网络不可用, 请检查网络设置"
+                          btnTitle:@"点击重试"
+                              icon:@"网络错误"];
 }
 
-- (UIView *)placholderViewWithTitle:(NSString *)title opTitle:(NSString *)opTitle {
-    
-    if (!_placeholderView) {
-        
-        UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
-        view.backgroundColor = self.view.backgroundColor;
-        UILabel *lbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:18.0];
-        
-        lbl.frame = CGRectMake(0, 100, view.width, 50);
-        lbl.textAlignment = NSTextAlignmentCenter;
-        lbl.backgroundColor = [UIColor clearColor];
-        
-        [view addSubview:lbl];
-        lbl.text = title;
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(20, lbl.yy + 10, 200, 40)];
-        [self.view addSubview:btn];
-        btn.titleLabel.font = FONT(15);
-        [btn setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
-        btn.centerX = view.width/2.0;
-        btn.layer.cornerRadius = 5;
-        btn.layer.borderWidth = 1;
-        btn.layer.borderColor = [UIColor textColor].CGColor;
-        [btn addTarget:self action:@selector(placeholderOperation) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitle:opTitle forState:UIControlStateNormal];
-        [view addSubview:btn];
-        
-        _placeholderView = view;
-    }
-    return _placeholderView;
-    
-}
-
-#pragma mark- 站位操作
+#pragma mark - PromptViewDelegate
 - (void)placeholderOperation {
     
     if ([self isMemberOfClass:NSClassFromString(@"BaseViewController")]) {
         
         NSLog(@"子类请重写该方法");
-    }
-}
-
-- (UIView *)placeholderView {
-    
-    if (_placeholderView) {
-        
-        return _placeholderView;
-    } else {
-        
-        ;
-        NSLog(@"请先调用%@ 进行初始化",NSStringFromSelector(@selector(placholderViewWithTitle:opTitle:)));
-        
-        return nil;
     }
 }
 

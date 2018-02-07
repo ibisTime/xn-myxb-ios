@@ -14,10 +14,11 @@ target ‘Base_iOS’ do
     pod 'IQKeyboardManager',        '4.0.13'
 
 #    pod 'MLLabel',                  '1.10.3'
-    pod 'MBProgressHUD',            '0.9.2’
+#    pod 'MBProgressHUD',            '0.9.2’
     pod 'PYPhotoBrowser',           '1.1.5'
     pod 'TZImagePickerController',  '1.8.0'
     pod 'FDFullscreenPopGesture',   '1.1'
+    pod 'YYText',                   '1.0.7'
 
     #七牛云
     pod 'Qiniu',                    '7.1.5'
@@ -27,3 +28,4 @@ target ‘Base_iOS’ do
     pod 'CDCommon', '1.0.3'
 
 end
+
