@@ -46,7 +46,7 @@
     [self addSubview:bgIV];
     
     //title
-    UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(0, 20, kScreenWidth, 44)
+    UILabel *titleLbl = [UILabel labelWithFrame:CGRectMake(0, kNavigationBarHeight - 44, kScreenWidth, 44)
                                    textAligment:NSTextAlignmentCenter
                                 backgroundColor:kClearColor
                                            font:Font(18)

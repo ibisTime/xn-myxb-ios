@@ -173,10 +173,6 @@
     //当前选中的小标
     NSInteger idx = btn.tag - 100;
     
-    if (idx == 2) {
-        
-        return;
-    }
     //--//
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelected:tabBar:)]) {
         

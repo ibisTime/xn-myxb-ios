@@ -154,17 +154,7 @@
 //
 //        return NO;
 //    }
-//    if ((idx == 2) && [TLUser user].isLogin) {
 
-    if ((idx == 2)) {
-        
-        InviteVC *inviteVC = [InviteVC new];
-        
-        NavigationController *navi = [[NavigationController alloc] initWithRootViewController:inviteVC];
-        [self presentViewController:navi animated:YES completion:nil];
-        
-    }
-    
     //
     self.selectedIndex = idx;
     

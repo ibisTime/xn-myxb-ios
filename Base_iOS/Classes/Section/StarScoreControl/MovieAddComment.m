@@ -8,6 +8,11 @@
 
 #import "MovieAddComment.h"
 
+#import "TLUIHeader.h"
+#import "AppColorMacro.h"
+
+#define kStarNum 5
+
 @implementation MovieAddComment
 
 - (void)dealloc {
@@ -19,13 +24,11 @@
     
     if (self = [super init]) {
         
-        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"MovieAddComment1"
-                                                       owner:self
-                                                     options:nil];
+        [self initSubviews];
         
         _imageViewArray = @[self.img_star1, self.img_star2, self.img_star3, self.img_star4, self.img_star5];
         
-        self.v_addcomment = [array objectAtIndex:0];
+//        self.v_addcomment = [array objectAtIndex:0];
         
         [self cleamCount];
         [self addSubview:self.v_addcomment];
@@ -37,16 +40,67 @@
     return self;
 }
 
+#pragma mark - Init
+- (void)initSubviews {
+ 
+    self.v_star = [[UIView alloc] initWithFrame:self.bounds];
+    
+    [self addSubview:self.v_star];
+    [self.v_star mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.edges.mas_equalTo(0);
+        
+    }];
+    
+    for (int i = 0; i < kStarNum; i++) {
+        
+        CGFloat x = 5+i*26;
+        CGFloat w = 15;
+        
+        UIImageView *iv = [[UIImageView alloc] initWithImage:kImage(@"big_star_unselect")];
+        
+        [self.v_star addSubview:iv];
+        [iv mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(@(x));
+            make.width.height.equalTo(@(w));
+            make.centerY.equalTo(@0);
+        }];
+    
+        if (i == 0) {
+            
+            self.img_star1 = iv;
+            
+        } else if (i == 1) {
+            
+            self.img_star2 = iv;
+
+        }else if (i == 2) {
+            
+            self.img_star3 = iv;
+            
+        }else if (i == 3) {
+            
+            self.img_star4 = iv;
+            
+        }else if (i == 4) {
+            
+            self.img_star5 = iv;
+            
+        }
+    };
+    
+}
 
 - (void)cleamCount {
 
     self.count = -1;
     
-    [self.img_star1 setImage:[UIImage imageNamed:@"star_un_selected"]];
-    [self.img_star2 setImage:[UIImage imageNamed:@"star_un_selected"]];
-    [self.img_star3 setImage:[UIImage imageNamed:@"star_un_selected"]];
-    [self.img_star4 setImage:[UIImage imageNamed:@"star_un_selected"]];
-    [self.img_star5 setImage:[UIImage imageNamed:@"star_un_selected"]];
+    [self.img_star1 setImage:[UIImage imageNamed:@"big_star_unselect"]];
+    [self.img_star2 setImage:[UIImage imageNamed:@"big_star_unselect"]];
+    [self.img_star3 setImage:[UIImage imageNamed:@"big_star_unselect"]];
+    [self.img_star4 setImage:[UIImage imageNamed:@"big_star_unselect"]];
+    [self.img_star5 setImage:[UIImage imageNamed:@"big_star_unselect"]];
 
 }
 
@@ -104,7 +158,7 @@
     if(count == 0) {
         
         count = 1;
-        [self.img_star1 setImage:[UIImage imageNamed:@"star_selected"]];
+        [self.img_star1 setImage:[UIImage imageNamed:@"big_star_select"]];
     }
     
     self.count = count;
@@ -116,13 +170,13 @@
     if(x >= img.frame.origin.x ) {
         
         NSLog(@"%f",img.frame.origin.x);
-        [img setImage:[UIImage imageNamed:@"star_selected"]];
+        [img setImage:[UIImage imageNamed:@"big_star_select"]];
         
         return 1;
 //        [self setImageAnimation:img];
     }else {
         
-        [img setImage:[UIImage imageNamed:@"star_un_selected"]];
+        [img setImage:[UIImage imageNamed:@"big_star_unselect"]];
         
         return 0;
     }
@@ -154,7 +208,7 @@
     for (int i = 0; i < starNum; i++) {
         
         UIImageView *imageView = _imageViewArray[i];
-        [imageView setImage:[UIImage imageNamed:@"star_selected"]];
+        [imageView setImage:[UIImage imageNamed:@"big_star_select"]];
     }
 }
 

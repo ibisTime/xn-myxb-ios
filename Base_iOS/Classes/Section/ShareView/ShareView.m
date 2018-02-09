@@ -8,12 +8,20 @@
 
 #import "ShareView.h"
 
-#import "UIView+Responder.h"
-#import "AppMacro.h"
-
-#import "TLBaseVC.h"
-#import "WXApi.h"
+//Manager
 #import "TLWXManager.h"
+//Macro
+#import "AppMacro.h"
+#import "TLUIHeader.h"
+#import "AppColorMacro.h"
+//Framework
+//Category
+#import "UIView+Responder.h"
+#import "NSString+Extension.h"
+//Extension
+#import "WXApi.h"
+//M
+//V
 
 @interface ShareView ()
 
@@ -67,7 +75,7 @@
         
     }];
     
-    CoinWeakSelf;
+    BaseWeakSelf;
     _shareView.cancleBlock = ^(){
         
         [weakSelf removeFromSuperview];
@@ -85,7 +93,7 @@
 - (void)shareWithTitle:(NSString*)title
 {
  
-    CoinWeakSelf;
+    BaseWeakSelf;
     
     NSString *shareTitle = PASS_NULL_TO_NIL(_shareTitle).length > 0 ? _shareTitle : @"九州宝";
     NSString *shareDesc = PASS_NULL_TO_NIL(_shareDesc).length > 0 ? _shareDesc : @"欢迎使用九州宝";

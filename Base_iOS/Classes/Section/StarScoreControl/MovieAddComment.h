@@ -12,14 +12,14 @@
 
 @property (strong,nonatomic) UIView *v_addcomment;
 
-@property(strong,nonatomic) IBOutlet UIView *v_star;
-@property(strong,nonatomic) UIView *v_count;
+@property (strong,nonatomic) UIView *v_star;
+@property (strong,nonatomic) UIView *v_count;
 
-@property(strong,nonatomic) IBOutlet UIImageView *img_star1;
-@property(strong,nonatomic) IBOutlet UIImageView *img_star2;
-@property(strong,nonatomic) IBOutlet UIImageView *img_star3;
-@property(strong,nonatomic) IBOutlet UIImageView *img_star4;
-@property(strong,nonatomic) IBOutlet UIImageView *img_star5;
+@property (strong,nonatomic) UIImageView *img_star1;
+@property (strong,nonatomic) UIImageView *img_star2;
+@property (strong,nonatomic) UIImageView *img_star3;
+@property (strong,nonatomic) UIImageView *img_star4;
+@property (strong,nonatomic) UIImageView *img_star5;
 
 @property (nonatomic, strong) NSArray *imageViewArray;
 

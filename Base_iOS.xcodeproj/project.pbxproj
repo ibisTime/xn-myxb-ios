@@ -81,6 +81,16 @@
 		212BE4B1202C510F000BCC66 /* LinkServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4B0202C510F000BCC66 /* LinkServiceVC.m */; };
 		212BE4B4202C51F5000BCC66 /* HelpCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4B3202C51F5000BCC66 /* HelpCenterCell.m */; };
 		212BE4B7202C54A9000BCC66 /* HelpCenterAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4B6202C54A9000BCC66 /* HelpCenterAnswerCell.m */; };
+		21302323202D49C400A954E7 /* CustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2130231F202D49C300A954E7 /* CustomShareView.m */; };
+		21302324202D49C400A954E7 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302322202D49C400A954E7 /* ShareView.m */; };
+		2130232C202D49FC00A954E7 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21302328202D49FC00A954E7 /* README.txt */; };
+		2130232D202D49FC00A954E7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2130232A202D49FC00A954E7 /* libWeChatSDK.a */; };
+		2130232E202D49FC00A954E7 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2130232B202D49FC00A954E7 /* read_me.txt */; };
+		21302332202D4A4000A954E7 /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302330202D4A4000A954E7 /* TLWXManager.m */; };
+		21302335202D6F4D00A954E7 /* ProposalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302334202D6F4D00A954E7 /* ProposalHeaderView.m */; };
+		21302338202D898600A954E7 /* ProposalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302337202D898600A954E7 /* ProposalTableView.m */; };
+		2130233E202D8AA800A954E7 /* ProposalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2130233D202D8AA800A954E7 /* ProposalModel.m */; };
+		21302341202D8B6C00A954E7 /* ProposalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302340202D8B6C00A954E7 /* ProposalCell.m */; };
 		216AB7EC1F189F04006C26A1 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */; };
 		216AB7EE1F189F11006C26A1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7ED1F189F11006C26A1 /* libresolv.tbd */; };
 		216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */; };
@@ -304,6 +314,26 @@
 		212BE4B3202C51F5000BCC66 /* HelpCenterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpCenterCell.m; sourceTree = "<group>"; };
 		212BE4B5202C54A9000BCC66 /* HelpCenterAnswerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpCenterAnswerCell.h; sourceTree = "<group>"; };
 		212BE4B6202C54A9000BCC66 /* HelpCenterAnswerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpCenterAnswerCell.m; sourceTree = "<group>"; };
+		2130231F202D49C300A954E7 /* CustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomShareView.m; sourceTree = "<group>"; };
+		21302320202D49C300A954E7 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		21302321202D49C400A954E7 /* CustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShareView.h; sourceTree = "<group>"; };
+		21302322202D49C400A954E7 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		21302326202D49FC00A954E7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		21302327202D49FC00A954E7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		21302328202D49FC00A954E7 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		21302329202D49FC00A954E7 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		2130232A202D49FC00A954E7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		2130232B202D49FC00A954E7 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		21302330202D4A4000A954E7 /* TLWXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLWXManager.m; sourceTree = "<group>"; };
+		21302331202D4A4000A954E7 /* TLWXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLWXManager.h; sourceTree = "<group>"; };
+		21302333202D6F4D00A954E7 /* ProposalHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProposalHeaderView.h; sourceTree = "<group>"; };
+		21302334202D6F4D00A954E7 /* ProposalHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProposalHeaderView.m; sourceTree = "<group>"; };
+		21302336202D898600A954E7 /* ProposalTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProposalTableView.h; sourceTree = "<group>"; };
+		21302337202D898600A954E7 /* ProposalTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProposalTableView.m; sourceTree = "<group>"; };
+		2130233C202D8AA800A954E7 /* ProposalModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProposalModel.h; sourceTree = "<group>"; };
+		2130233D202D8AA800A954E7 /* ProposalModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProposalModel.m; sourceTree = "<group>"; };
+		2130233F202D8B6C00A954E7 /* ProposalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProposalCell.h; sourceTree = "<group>"; };
+		21302340202D8B6C00A954E7 /* ProposalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProposalCell.m; sourceTree = "<group>"; };
 		216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		216AB7ED1F189F11006C26A1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -459,6 +489,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2130232D202D49FC00A954E7 /* libWeChatSDK.a in Frameworks */,
 				216AB7F41F189F39006C26A1 /* libz.tbd in Frameworks */,
 				216AB7F21F189F30006C26A1 /* libc++.tbd in Frameworks */,
 				216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */,
@@ -547,8 +578,8 @@
 		21111AEC1F8B5ED10021B3FE /* StarScoreControl */ = {
 			isa = PBXGroup;
 			children = (
-				21111AED1F8B5ED10021B3FE /* MovieAddComment.m */,
 				21111AEE1F8B5ED10021B3FE /* MovieAddComment.h */,
+				21111AED1F8B5ED10021B3FE /* MovieAddComment.m */,
 				21111AEF1F8B5ED10021B3FE /* MovieAddComment1.xib */,
 			);
 			path = StarScoreControl;
@@ -1018,6 +1049,8 @@
 		212BE43D202A9F08000BCC66 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2130233C202D8AA800A954E7 /* ProposalModel.h */,
+				2130233D202D8AA800A954E7 /* ProposalModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1025,6 +1058,12 @@
 		212BE43E202A9F0F000BCC66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				21302333202D6F4D00A954E7 /* ProposalHeaderView.h */,
+				21302334202D6F4D00A954E7 /* ProposalHeaderView.m */,
+				21302336202D898600A954E7 /* ProposalTableView.h */,
+				21302337202D898600A954E7 /* ProposalTableView.m */,
+				2130233F202D8B6C00A954E7 /* ProposalCell.h */,
+				21302340202D8B6C00A954E7 /* ProposalCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1187,6 +1226,28 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		21302325202D49FC00A954E7 /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				21302326202D49FC00A954E7 /* WXApi.h */,
+				21302327202D49FC00A954E7 /* WXApiObject.h */,
+				21302329202D49FC00A954E7 /* WechatAuthSDK.h */,
+				21302328202D49FC00A954E7 /* README.txt */,
+				2130232B202D49FC00A954E7 /* read_me.txt */,
+				2130232A202D49FC00A954E7 /* libWeChatSDK.a */,
+			);
+			path = WeChat;
+			sourceTree = "<group>";
+		};
+		2130232F202D4A3200A954E7 /* WX */ = {
+			isa = PBXGroup;
+			children = (
+				21302331202D4A4000A954E7 /* TLWXManager.h */,
+				21302330202D4A4000A954E7 /* TLWXManager.m */,
+			);
+			path = WX;
+			sourceTree = "<group>";
+		};
 		21AC58FE1FDE798A00F19DE8 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -1298,6 +1359,10 @@
 		21AC59291FDE7A1B00F19DE8 /* ShareView */ = {
 			isa = PBXGroup;
 			children = (
+				21302321202D49C400A954E7 /* CustomShareView.h */,
+				2130231F202D49C300A954E7 /* CustomShareView.m */,
+				21302320202D49C300A954E7 /* ShareView.h */,
+				21302322202D49C400A954E7 /* ShareView.m */,
 			);
 			path = ShareView;
 			sourceTree = "<group>";
@@ -1470,6 +1535,7 @@
 		21F82B731F17719D0019B176 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				2130232F202D4A3200A954E7 /* WX */,
 				21F82B741F17719D0019B176 /* BaseManager */,
 			);
 			path = Manager;
@@ -1500,6 +1566,7 @@
 		21F82C911F17719D0019B176 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				21302325202D49FC00A954E7 /* WeChat */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1679,7 +1746,9 @@
 			files = (
 				21F82D201F17719D0019B176 /* Main.storyboard in Resources */,
 				21F82D1C1F17719D0019B176 /* Assets.xcassets in Resources */,
+				2130232C202D49FC00A954E7 /* README.txt in Resources */,
 				21F82D1E1F17719D0019B176 /* LaunchScreen.storyboard in Resources */,
+				2130232E202D49FC00A954E7 /* read_me.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1793,6 +1862,7 @@
 				212BE49E202C3D9A000BCC66 /* YYImageClipViewController.m in Sources */,
 				212BE48A202C371D000BCC66 /* MineGroup.m in Sources */,
 				21AC58961FDE741A00F19DE8 /* AccountTf.m in Sources */,
+				21302341202D8B6C00A954E7 /* ProposalCell.m in Sources */,
 				21111BCB1F8B5F2C0021B3FE /* MovieAddComment.m in Sources */,
 				212BE44F202B000E000BCC66 /* NoticeModel.m in Sources */,
 				212BE497202C3774000BCC66 /* MineTableView.m in Sources */,
@@ -1805,6 +1875,7 @@
 				21111BCD1F8B5F2C0021B3FE /* CustomTextView.m in Sources */,
 				212BE431202A9E19000BCC66 /* HelpCenterVC.m in Sources */,
 				212BE448202AD4E8000BCC66 /* PromptView.m in Sources */,
+				21302332202D4A4000A954E7 /* TLWXManager.m in Sources */,
 				21AC595A1FDE804500F19DE8 /* UILabel+Extension.m in Sources */,
 				21111BCF1F8B5F2C0021B3FE /* DetailWebView.m in Sources */,
 				212BE458202B0184000BCC66 /* LoopScrollView.m in Sources */,
@@ -1831,6 +1902,7 @@
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
 				21AC59421FDE7A1B00F19DE8 /* TLDatePicker.m in Sources */,
 				2121702B1F384216007C9855 /* ZHReceivingAddress.m in Sources */,
+				21302323202D49C400A954E7 /* CustomShareView.m in Sources */,
 				212BE46E202BF649000BCC66 /* HomeCollectionView.m in Sources */,
 				21AC59851FDE828500F19DE8 /* NSObject+Extension.m in Sources */,
 				21AC59471FDE7A1B00F19DE8 /* TLAlert.m in Sources */,
@@ -1840,11 +1912,14 @@
 				212BE43B202A9EC4000BCC66 /* MineVC.m in Sources */,
 				21AC59671FDE80FB00F19DE8 /* UIColor+theme.m in Sources */,
 				21216F8C1F380DD3007C9855 /* ZHAddressCell.m in Sources */,
+				2130233E202D8AA800A954E7 /* ProposalModel.m in Sources */,
 				2121703D1F3842BC007C9855 /* ZHAddressChooseView.m in Sources */,
 				21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */,
+				21302338202D898600A954E7 /* ProposalTableView.m in Sources */,
 				212BE4262029AE45000BCC66 /* NullSafe.m in Sources */,
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				21AC587B1FDE737200F19DE8 /* TLUserForgetPwdVC.m in Sources */,
+				21302335202D6F4D00A954E7 /* ProposalHeaderView.m in Sources */,
 				212BE45C202B031F000BCC66 /* NSTimer+Loop.m in Sources */,
 				21AC59551FDE7F1500F19DE8 /* WebVC.m in Sources */,
 				21AC58901FDE73FE00F19DE8 /* TLUser.m in Sources */,
@@ -1877,6 +1952,7 @@
 				212BE464202B0618000BCC66 /* NoticeCell.m in Sources */,
 				21AC597E1FDE823C00F19DE8 /* NSString+Date.m in Sources */,
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
+				21302324202D49C400A954E7 /* ShareView.m in Sources */,
 				21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
