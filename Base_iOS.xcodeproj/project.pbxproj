@@ -55,11 +55,32 @@
 		212BE448202AD4E8000BCC66 /* PromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE447202AD4E8000BCC66 /* PromptView.m */; };
 		212BE44E202B000E000BCC66 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE44B202B000D000BCC66 /* BannerModel.m */; };
 		212BE44F202B000E000BCC66 /* NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE44D202B000E000BCC66 /* NoticeModel.m */; };
-		212BE452202B002C000BCC66 /* HomeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE450202B002B000BCC66 /* HomeScrollView.m */; };
 		212BE458202B0184000BCC66 /* LoopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE456202B0184000BCC66 /* LoopScrollView.m */; };
 		212BE45C202B031F000BCC66 /* NSTimer+Loop.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE45B202B031F000BCC66 /* NSTimer+Loop.m */; };
 		212BE460202B04CC000BCC66 /* SystemNoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE45F202B04CC000BCC66 /* SystemNoticeVC.m */; };
 		212BE464202B0618000BCC66 /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE463202B0618000BCC66 /* NoticeCell.m */; };
+		212BE46A202BEB32000BCC66 /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE469202BEB32000BCC66 /* CategoryItem.m */; };
+		212BE46E202BF649000BCC66 /* HomeCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE46D202BF649000BCC66 /* HomeCollectionView.m */; };
+		212BE472202BF677000BCC66 /* BrandModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE471202BF677000BCC66 /* BrandModel.m */; };
+		212BE478202BF741000BCC66 /* BrandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE477202BF741000BCC66 /* BrandCell.m */; };
+		212BE47E202C0023000BCC66 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE47D202C0023000BCC66 /* HomeHeaderView.m */; };
+		212BE482202C3115000BCC66 /* MineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE481202C3115000BCC66 /* MineHeaderView.m */; };
+		212BE489202C371D000BCC66 /* MineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE485202C371D000BCC66 /* MineModel.m */; };
+		212BE48A202C371D000BCC66 /* MineGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE486202C371D000BCC66 /* MineGroup.m */; };
+		212BE490202C3735000BCC66 /* SettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE48E202C3735000BCC66 /* SettingModel.m */; };
+		212BE491202C3735000BCC66 /* SettingGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE48F202C3735000BCC66 /* SettingGroup.m */; };
+		212BE496202C3774000BCC66 /* MineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE493202C3773000BCC66 /* MineCell.m */; };
+		212BE497202C3774000BCC66 /* MineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE495202C3773000BCC66 /* MineTableView.m */; };
+		212BE49A202C3CFC000BCC66 /* TLImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE498202C3CFB000BCC66 /* TLImagePicker.m */; };
+		212BE49E202C3D9A000BCC66 /* YYImageClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE49D202C3D99000BCC66 /* YYImageClipViewController.m */; };
+		212BE4A4202C4009000BCC66 /* SettingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4A1202C4009000BCC66 /* SettingTableView.m */; };
+		212BE4A5202C4009000BCC66 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4A2202C4009000BCC66 /* SettingCell.m */; };
+		212BE4A8202C4036000BCC66 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4A7202C4036000BCC66 /* SettingVC.m */; };
+		212BE4AB202C4FA1000BCC66 /* HelpCenterTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4AA202C4FA1000BCC66 /* HelpCenterTableView.m */; };
+		212BE4AE202C5082000BCC66 /* QuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4AD202C5082000BCC66 /* QuestionModel.m */; };
+		212BE4B1202C510F000BCC66 /* LinkServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4B0202C510F000BCC66 /* LinkServiceVC.m */; };
+		212BE4B4202C51F5000BCC66 /* HelpCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4B3202C51F5000BCC66 /* HelpCenterCell.m */; };
+		212BE4B7202C54A9000BCC66 /* HelpCenterAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212BE4B6202C54A9000BCC66 /* HelpCenterAnswerCell.m */; };
 		216AB7EC1F189F04006C26A1 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */; };
 		216AB7EE1F189F11006C26A1 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7ED1F189F11006C26A1 /* libresolv.tbd */; };
 		216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */; };
@@ -92,7 +113,6 @@
 		21AC59431FDE7A1B00F19DE8 /* HourPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC59191FDE7A1B00F19DE8 /* HourPickerView.m */; };
 		21AC59441FDE7A1B00F19DE8 /* TLPickerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC591A1FDE7A1B00F19DE8 /* TLPickerTextField.m */; };
 		21AC59451FDE7A1B00F19DE8 /* CustomPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC591B1FDE7A1B00F19DE8 /* CustomPickerView.m */; };
-		21AC59461FDE7A1B00F19DE8 /* TLImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC591F1FDE7A1B00F19DE8 /* TLImagePicker.m */; };
 		21AC59471FDE7A1B00F19DE8 /* TLAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC59231FDE7A1B00F19DE8 /* TLAlert.m */; };
 		21AC59481FDE7A1B00F19DE8 /* TLTimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC59251FDE7A1B00F19DE8 /* TLTimeButton.m */; };
 		21AC59491FDE7A1B00F19DE8 /* TLCaptchaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC59261FDE7A1B00F19DE8 /* TLCaptchaView.m */; };
@@ -232,8 +252,6 @@
 		212BE44B202B000D000BCC66 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
 		212BE44C202B000D000BCC66 /* NoticeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeModel.h; sourceTree = "<group>"; };
 		212BE44D202B000E000BCC66 /* NoticeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeModel.m; sourceTree = "<group>"; };
-		212BE450202B002B000BCC66 /* HomeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScrollView.m; sourceTree = "<group>"; };
-		212BE451202B002C000BCC66 /* HomeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScrollView.h; sourceTree = "<group>"; };
 		212BE456202B0184000BCC66 /* LoopScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopScrollView.m; sourceTree = "<group>"; };
 		212BE457202B0184000BCC66 /* LoopScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopScrollView.h; sourceTree = "<group>"; };
 		212BE45A202B031F000BCC66 /* NSTimer+Loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Loop.h"; sourceTree = "<group>"; };
@@ -242,6 +260,50 @@
 		212BE45F202B04CC000BCC66 /* SystemNoticeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemNoticeVC.m; sourceTree = "<group>"; };
 		212BE462202B0618000BCC66 /* NoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCell.h; sourceTree = "<group>"; };
 		212BE463202B0618000BCC66 /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
+		212BE468202BEB32000BCC66 /* CategoryItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryItem.h; sourceTree = "<group>"; };
+		212BE469202BEB32000BCC66 /* CategoryItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryItem.m; sourceTree = "<group>"; };
+		212BE46C202BF649000BCC66 /* HomeCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeCollectionView.h; sourceTree = "<group>"; };
+		212BE46D202BF649000BCC66 /* HomeCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionView.m; sourceTree = "<group>"; };
+		212BE470202BF677000BCC66 /* BrandModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandModel.h; sourceTree = "<group>"; };
+		212BE471202BF677000BCC66 /* BrandModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandModel.m; sourceTree = "<group>"; };
+		212BE476202BF741000BCC66 /* BrandCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandCell.h; sourceTree = "<group>"; };
+		212BE477202BF741000BCC66 /* BrandCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandCell.m; sourceTree = "<group>"; };
+		212BE47C202C0023000BCC66 /* HomeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderView.h; sourceTree = "<group>"; };
+		212BE47D202C0023000BCC66 /* HomeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderView.m; sourceTree = "<group>"; };
+		212BE480202C3115000BCC66 /* MineHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineHeaderView.h; sourceTree = "<group>"; };
+		212BE481202C3115000BCC66 /* MineHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineHeaderView.m; sourceTree = "<group>"; };
+		212BE485202C371D000BCC66 /* MineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineModel.m; sourceTree = "<group>"; };
+		212BE486202C371D000BCC66 /* MineGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineGroup.m; sourceTree = "<group>"; };
+		212BE487202C371D000BCC66 /* MineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineModel.h; sourceTree = "<group>"; };
+		212BE488202C371D000BCC66 /* MineGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineGroup.h; sourceTree = "<group>"; };
+		212BE48C202C3735000BCC66 /* SettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingModel.h; sourceTree = "<group>"; };
+		212BE48D202C3735000BCC66 /* SettingGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingGroup.h; sourceTree = "<group>"; };
+		212BE48E202C3735000BCC66 /* SettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingModel.m; sourceTree = "<group>"; };
+		212BE48F202C3735000BCC66 /* SettingGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingGroup.m; sourceTree = "<group>"; };
+		212BE492202C3773000BCC66 /* MineTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTableView.h; sourceTree = "<group>"; };
+		212BE493202C3773000BCC66 /* MineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineCell.m; sourceTree = "<group>"; };
+		212BE494202C3773000BCC66 /* MineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineCell.h; sourceTree = "<group>"; };
+		212BE495202C3773000BCC66 /* MineTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTableView.m; sourceTree = "<group>"; };
+		212BE498202C3CFB000BCC66 /* TLImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLImagePicker.m; sourceTree = "<group>"; };
+		212BE499202C3CFC000BCC66 /* TLImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLImagePicker.h; sourceTree = "<group>"; };
+		212BE49C202C3D99000BCC66 /* YYImageClipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageClipViewController.h; sourceTree = "<group>"; };
+		212BE49D202C3D99000BCC66 /* YYImageClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageClipViewController.m; sourceTree = "<group>"; };
+		212BE4A0202C4009000BCC66 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		212BE4A1202C4009000BCC66 /* SettingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableView.m; sourceTree = "<group>"; };
+		212BE4A2202C4009000BCC66 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
+		212BE4A3202C4009000BCC66 /* SettingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableView.h; sourceTree = "<group>"; };
+		212BE4A6202C4036000BCC66 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
+		212BE4A7202C4036000BCC66 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		212BE4A9202C4FA1000BCC66 /* HelpCenterTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpCenterTableView.h; sourceTree = "<group>"; };
+		212BE4AA202C4FA1000BCC66 /* HelpCenterTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpCenterTableView.m; sourceTree = "<group>"; };
+		212BE4AC202C5082000BCC66 /* QuestionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionModel.h; sourceTree = "<group>"; };
+		212BE4AD202C5082000BCC66 /* QuestionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionModel.m; sourceTree = "<group>"; };
+		212BE4AF202C510F000BCC66 /* LinkServiceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkServiceVC.h; sourceTree = "<group>"; };
+		212BE4B0202C510F000BCC66 /* LinkServiceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkServiceVC.m; sourceTree = "<group>"; };
+		212BE4B2202C51F5000BCC66 /* HelpCenterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpCenterCell.h; sourceTree = "<group>"; };
+		212BE4B3202C51F5000BCC66 /* HelpCenterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpCenterCell.m; sourceTree = "<group>"; };
+		212BE4B5202C54A9000BCC66 /* HelpCenterAnswerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpCenterAnswerCell.h; sourceTree = "<group>"; };
+		212BE4B6202C54A9000BCC66 /* HelpCenterAnswerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpCenterAnswerCell.m; sourceTree = "<group>"; };
 		216AB7EB1F189F03006C26A1 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		216AB7ED1F189F11006C26A1 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -300,7 +362,6 @@
 		21AC59121FDE7A1B00F19DE8 /* SelectScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectScrollView.h; sourceTree = "<group>"; };
 		21AC59141FDE7A1B00F19DE8 /* TLProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLProgressHUD.m; sourceTree = "<group>"; };
 		21AC59151FDE7A1B00F19DE8 /* TLProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLProgressHUD.h; sourceTree = "<group>"; };
-		21AC59171FDE7A1B00F19DE8 /* TLImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLImagePicker.h; sourceTree = "<group>"; };
 		21AC59181FDE7A1B00F19DE8 /* TLDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLDatePicker.m; sourceTree = "<group>"; };
 		21AC59191FDE7A1B00F19DE8 /* HourPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HourPickerView.m; sourceTree = "<group>"; };
 		21AC591A1FDE7A1B00F19DE8 /* TLPickerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLPickerTextField.m; sourceTree = "<group>"; };
@@ -308,7 +369,6 @@
 		21AC591C1FDE7A1B00F19DE8 /* TLPickerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLPickerTextField.h; sourceTree = "<group>"; };
 		21AC591D1FDE7A1B00F19DE8 /* HourPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HourPickerView.h; sourceTree = "<group>"; };
 		21AC591E1FDE7A1B00F19DE8 /* TLDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLDatePicker.h; sourceTree = "<group>"; };
-		21AC591F1FDE7A1B00F19DE8 /* TLImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLImagePicker.m; sourceTree = "<group>"; };
 		21AC59201FDE7A1B00F19DE8 /* CustomPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPickerView.h; sourceTree = "<group>"; };
 		21AC59221FDE7A1B00F19DE8 /* TLAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAlert.h; sourceTree = "<group>"; };
 		21AC59231FDE7A1B00F19DE8 /* TLAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAlert.m; sourceTree = "<group>"; };
@@ -786,6 +846,7 @@
 		212BE41220285DD3000BCC66 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				212BE46F202BF661000BCC66 /* Brand */,
 				212BE466202B0635000BCC66 /* Banner */,
 				212BE465202B0621000BCC66 /* Notice */,
 			);
@@ -795,8 +856,8 @@
 		212BE41320285DDC000BCC66 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				212BE451202B002C000BCC66 /* HomeScrollView.h */,
-				212BE450202B002B000BCC66 /* HomeScrollView.m */,
+				212BE46B202BF60A000BCC66 /* Brand */,
+				212BE467202BEB14000BCC66 /* Category */,
 				212BE461202B05F8000BCC66 /* Notice */,
 			);
 			path = View;
@@ -875,6 +936,8 @@
 		212BE432202A9E1E000BCC66 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				212BE4AC202C5082000BCC66 /* QuestionModel.h */,
+				212BE4AD202C5082000BCC66 /* QuestionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -882,6 +945,12 @@
 		212BE433202A9E25000BCC66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				212BE4A9202C4FA1000BCC66 /* HelpCenterTableView.h */,
+				212BE4AA202C4FA1000BCC66 /* HelpCenterTableView.m */,
+				212BE4B2202C51F5000BCC66 /* HelpCenterCell.h */,
+				212BE4B3202C51F5000BCC66 /* HelpCenterCell.m */,
+				212BE4B5202C54A9000BCC66 /* HelpCenterAnswerCell.h */,
+				212BE4B6202C54A9000BCC66 /* HelpCenterAnswerCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -891,6 +960,8 @@
 			children = (
 				212BE42F202A9E19000BCC66 /* HelpCenterVC.h */,
 				212BE430202A9E19000BCC66 /* HelpCenterVC.m */,
+				212BE4AF202C510F000BCC66 /* LinkServiceVC.h */,
+				212BE4B0202C510F000BCC66 /* LinkServiceVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -908,6 +979,8 @@
 		212BE436202A9E44000BCC66 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				212BE48B202C3735000BCC66 /* Setting */,
+				212BE484202C371D000BCC66 /* Mine */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -915,6 +988,8 @@
 		212BE437202A9E4B000BCC66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				212BE49F202C4009000BCC66 /* Setting */,
+				212BE47F202C30E7000BCC66 /* Mine */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -924,6 +999,8 @@
 			children = (
 				212BE439202A9EC4000BCC66 /* MineVC.h */,
 				212BE43A202A9EC4000BCC66 /* MineVC.m */,
+				212BE49B202C3D82000BCC66 /* ImageClip */,
+				212BE483202C35D9000BCC66 /* Setting */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1015,6 +1092,101 @@
 			path = Banner;
 			sourceTree = "<group>";
 		};
+		212BE467202BEB14000BCC66 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				212BE468202BEB32000BCC66 /* CategoryItem.h */,
+				212BE469202BEB32000BCC66 /* CategoryItem.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		212BE46B202BF60A000BCC66 /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				212BE46C202BF649000BCC66 /* HomeCollectionView.h */,
+				212BE46D202BF649000BCC66 /* HomeCollectionView.m */,
+				212BE47C202C0023000BCC66 /* HomeHeaderView.h */,
+				212BE47D202C0023000BCC66 /* HomeHeaderView.m */,
+				212BE476202BF741000BCC66 /* BrandCell.h */,
+				212BE477202BF741000BCC66 /* BrandCell.m */,
+			);
+			path = Brand;
+			sourceTree = "<group>";
+		};
+		212BE46F202BF661000BCC66 /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				212BE470202BF677000BCC66 /* BrandModel.h */,
+				212BE471202BF677000BCC66 /* BrandModel.m */,
+			);
+			path = Brand;
+			sourceTree = "<group>";
+		};
+		212BE47F202C30E7000BCC66 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				212BE494202C3773000BCC66 /* MineCell.h */,
+				212BE493202C3773000BCC66 /* MineCell.m */,
+				212BE492202C3773000BCC66 /* MineTableView.h */,
+				212BE495202C3773000BCC66 /* MineTableView.m */,
+				212BE480202C3115000BCC66 /* MineHeaderView.h */,
+				212BE481202C3115000BCC66 /* MineHeaderView.m */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		212BE483202C35D9000BCC66 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				212BE4A6202C4036000BCC66 /* SettingVC.h */,
+				212BE4A7202C4036000BCC66 /* SettingVC.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		212BE484202C371D000BCC66 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				212BE487202C371D000BCC66 /* MineModel.h */,
+				212BE485202C371D000BCC66 /* MineModel.m */,
+				212BE488202C371D000BCC66 /* MineGroup.h */,
+				212BE486202C371D000BCC66 /* MineGroup.m */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		212BE48B202C3735000BCC66 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				212BE48C202C3735000BCC66 /* SettingModel.h */,
+				212BE48E202C3735000BCC66 /* SettingModel.m */,
+				212BE48D202C3735000BCC66 /* SettingGroup.h */,
+				212BE48F202C3735000BCC66 /* SettingGroup.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		212BE49B202C3D82000BCC66 /* ImageClip */ = {
+			isa = PBXGroup;
+			children = (
+				212BE49C202C3D99000BCC66 /* YYImageClipViewController.h */,
+				212BE49D202C3D99000BCC66 /* YYImageClipViewController.m */,
+			);
+			path = ImageClip;
+			sourceTree = "<group>";
+		};
+		212BE49F202C4009000BCC66 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				212BE4A0202C4009000BCC66 /* SettingCell.h */,
+				212BE4A2202C4009000BCC66 /* SettingCell.m */,
+				212BE4A3202C4009000BCC66 /* SettingTableView.h */,
+				212BE4A1202C4009000BCC66 /* SettingTableView.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		21AC58FE1FDE798A00F19DE8 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -1089,8 +1261,8 @@
 		21AC59161FDE7A1B00F19DE8 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
-				21AC59171FDE7A1B00F19DE8 /* TLImagePicker.h */,
-				21AC591F1FDE7A1B00F19DE8 /* TLImagePicker.m */,
+				212BE499202C3CFC000BCC66 /* TLImagePicker.h */,
+				212BE498202C3CFB000BCC66 /* TLImagePicker.m */,
 				21AC591E1FDE7A1B00F19DE8 /* TLDatePicker.h */,
 				21AC59181FDE7A1B00F19DE8 /* TLDatePicker.m */,
 				21AC591D1FDE7A1B00F19DE8 /* HourPickerView.h */,
@@ -1581,17 +1753,22 @@
 				21AC58951FDE741A00F19DE8 /* CaptchaView.m in Sources */,
 				21111BA01F8B5F2C0021B3FE /* Province.m in Sources */,
 				21111BA11F8B5F2C0021B3FE /* AddressPickerView.m in Sources */,
+				212BE46A202BEB32000BCC66 /* CategoryItem.m in Sources */,
 				212BE442202A9F37000BCC66 /* PlatfromProposalVC.m in Sources */,
+				212BE491202C3735000BCC66 /* SettingGroup.m in Sources */,
 				21111BA21F8B5F2C0021B3FE /* CircleGuideView.m in Sources */,
 				21AC58851FDE73B200F19DE8 /* TLChangeMobileVC.m in Sources */,
 				21AC589F1FDE754400F19DE8 /* AppConfig.m in Sources */,
 				21111BA91F8B5F2C0021B3FE /* TLBannerView.m in Sources */,
 				21AC589C1FDE751700F19DE8 /* TLBaseModel.m in Sources */,
+				212BE489202C371D000BCC66 /* MineModel.m in Sources */,
 				21111BAF1F8B5F2C0021B3FE /* BannerCell.m in Sources */,
+				212BE49A202C3CFC000BCC66 /* TLImagePicker.m in Sources */,
 				21AC59491FDE7A1B00F19DE8 /* TLCaptchaView.m in Sources */,
 				21AC594C1FDE7A1B00F19DE8 /* TLTextField.m in Sources */,
 				21111BB61F8B5F2C0021B3FE /* PasswordView.m in Sources */,
 				21AC59881FDE891B00F19DE8 /* SegmentUnil.m in Sources */,
+				212BE4A4202C4009000BCC66 /* SettingTableView.m in Sources */,
 				21111BB71F8B5F2C0021B3FE /* WTReTextField.m in Sources */,
 				21111BB81F8B5F2C0021B3FE /* WTReParser.m in Sources */,
 				21AC596D1FDE814C00F19DE8 /* UIView+Responder.m in Sources */,
@@ -1600,22 +1777,31 @@
 				21111BBA1F8B5F2C0021B3FE /* TLImagePickerController.m in Sources */,
 				21AC59611FDE80A300F19DE8 /* UIButton+EnLargeEdge.m in Sources */,
 				21AC597C1FDE823C00F19DE8 /* NSString+Extension.m in Sources */,
+				212BE4AB202C4FA1000BCC66 /* HelpCenterTableView.m in Sources */,
+				212BE472202BF677000BCC66 /* BrandModel.m in Sources */,
 				21111BBB1F8B5F2C0021B3FE /* TLPhotoChooseItem.m in Sources */,
 				21111BBC1F8B5F2C0021B3FE /* TLChooseResultManager.m in Sources */,
 				21111BBD1F8B5F2C0021B3FE /* TLPhotoCell.m in Sources */,
 				21AC588F1FDE73FE00F19DE8 /* TLUserExt.m in Sources */,
 				21AC595B1FDE804500F19DE8 /* UILable+convience.m in Sources */,
 				21AC593E1FDE7A1B00F19DE8 /* TopLabelUtil.m in Sources */,
+				212BE482202C3115000BCC66 /* MineHeaderView.m in Sources */,
 				212BE42A202A9CC2000BCC66 /* InviteVC.m in Sources */,
+				212BE4A5202C4009000BCC66 /* SettingCell.m in Sources */,
+				212BE4AE202C5082000BCC66 /* QuestionModel.m in Sources */,
 				21AC58AA1FDE75AA00F19DE8 /* HttpLogger.m in Sources */,
+				212BE49E202C3D9A000BCC66 /* YYImageClipViewController.m in Sources */,
+				212BE48A202C371D000BCC66 /* MineGroup.m in Sources */,
 				21AC58961FDE741A00F19DE8 /* AccountTf.m in Sources */,
 				21111BCB1F8B5F2C0021B3FE /* MovieAddComment.m in Sources */,
 				212BE44F202B000E000BCC66 /* NoticeModel.m in Sources */,
+				212BE497202C3774000BCC66 /* MineTableView.m in Sources */,
 				212BE41720285DF8000BCC66 /* HomeVC.m in Sources */,
 				21AC59401FDE7A1B00F19DE8 /* SortBar.m in Sources */,
 				21AC59451FDE7A1B00F19DE8 /* CustomPickerView.m in Sources */,
 				21AC59441FDE7A1B00F19DE8 /* TLPickerTextField.m in Sources */,
 				21AC594D1FDE7A1B00F19DE8 /* TLNetworking.m in Sources */,
+				212BE496202C3774000BCC66 /* MineCell.m in Sources */,
 				21111BCD1F8B5F2C0021B3FE /* CustomTextView.m in Sources */,
 				212BE431202A9E19000BCC66 /* HelpCenterVC.m in Sources */,
 				212BE448202AD4E8000BCC66 /* PromptView.m in Sources */,
@@ -1632,9 +1818,12 @@
 				21AC594E1FDE7A1B00F19DE8 /* TLPageDataHelper.m in Sources */,
 				21111BE31F8B5F2C0021B3FE /* LKViewAttribute.m in Sources */,
 				21AC59481FDE7A1B00F19DE8 /* TLTimeButton.m in Sources */,
+				212BE4B1202C510F000BCC66 /* LinkServiceVC.m in Sources */,
 				21111BE51F8B5F2C0021B3FE /* UIControl+Block.m in Sources */,
+				212BE4A8202C4036000BCC66 /* SettingVC.m in Sources */,
 				21AC59821FDE825700F19DE8 /* NSNumber+Extension.m in Sources */,
 				21AC59411FDE7A1B00F19DE8 /* TLProgressHUD.m in Sources */,
+				212BE490202C3735000BCC66 /* SettingModel.m in Sources */,
 				21AC593D1FDE7A1B00F19DE8 /* TLTextView.m in Sources */,
 				21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */,
 				21111BEC1F8B5F2C0021B3FE /* Foundation+Log.m in Sources */,
@@ -1642,9 +1831,10 @@
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
 				21AC59421FDE7A1B00F19DE8 /* TLDatePicker.m in Sources */,
 				2121702B1F384216007C9855 /* ZHReceivingAddress.m in Sources */,
-				21AC59461FDE7A1B00F19DE8 /* TLImagePicker.m in Sources */,
+				212BE46E202BF649000BCC66 /* HomeCollectionView.m in Sources */,
 				21AC59851FDE828500F19DE8 /* NSObject+Extension.m in Sources */,
 				21AC59471FDE7A1B00F19DE8 /* TLAlert.m in Sources */,
+				212BE4B4202C51F5000BCC66 /* HelpCenterCell.m in Sources */,
 				21AC59661FDE80FB00F19DE8 /* UIColor+Extension.m in Sources */,
 				21158E461F1C4F9E00A07266 /* TabBarModel.m in Sources */,
 				212BE43B202A9EC4000BCC66 /* MineVC.m in Sources */,
@@ -1658,15 +1848,18 @@
 				212BE45C202B031F000BCC66 /* NSTimer+Loop.m in Sources */,
 				21AC59551FDE7F1500F19DE8 /* WebVC.m in Sources */,
 				21AC58901FDE73FE00F19DE8 /* TLUser.m in Sources */,
+				212BE478202BF741000BCC66 /* BrandCell.m in Sources */,
 				21AC597D1FDE823C00F19DE8 /* NSString+CGSize.m in Sources */,
 				21F82C9D1F17719D0019B176 /* BaseWKWebViewController.m in Sources */,
 				21AC597F1FDE823C00F19DE8 /* NSString+Check.m in Sources */,
 				21AC59731FDE820600F19DE8 /* NSDictionary+Extension.m in Sources */,
 				21158E431F1C4F4D00A07266 /* CustomTabBar.m in Sources */,
 				21F82C9C1F17719D0019B176 /* BaseViewController.m in Sources */,
+				212BE47E202C0023000BCC66 /* HomeHeaderView.m in Sources */,
 				21FB30CB1F26E9EF0028ADEE /* UINavigationController+MethodSwizzling.m in Sources */,
 				21AC596C1FDE814C00F19DE8 /* UIView+Extension.m in Sources */,
 				21AC594F1FDE7A1B00F19DE8 /* TLUploadManager.m in Sources */,
+				212BE4B7202C54A9000BCC66 /* HelpCenterAnswerCell.m in Sources */,
 				21AC59701FDE81D500F19DE8 /* UIBarButtonItem+convience.m in Sources */,
 				21F82C9E1F17719D0019B176 /* NavigationController.m in Sources */,
 				21AC588E1FDE73FE00F19DE8 /* UserDefaultsUtil.m in Sources */,
@@ -1686,7 +1879,6 @@
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
 				21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
-				212BE452202B002C000BCC66 /* HomeScrollView.m in Sources */,
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,35 +13,32 @@
 //Macro
 //Framework
 //Category
-#import "UIButton+EnLargeEdge.h"
 //Extension
 #import "MJRefresh.h"
 //M
 #import "BannerModel.h"
 #import "NoticeModel.h"
+#import "BrandModel.h"
 //V
-#import "HomeScrollView.h"
 #import "TLBannerView.h"
 #import "LoopScrollView.h"
+#import "CategoryItem.h"
+#import "HomeCollectionView.h"
 //C
 #import "WebVC.h"
 #import "SystemNoticeVC.h"
 
 @interface HomeVC ()<UIScrollViewDelegate>
-
-//滚动视图
-@property (nonatomic, strong) HomeScrollView *scrollView;
-//轮播图
-@property (nonatomic,strong) TLBannerView *bannerView;
+//
+@property (nonatomic, strong) HomeCollectionView *collectionView;
+//品牌列表
+@property (nonatomic,strong) NSMutableArray <BrandModel *>*brands;
 //
 @property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
-//图片
-@property (nonatomic,strong) NSMutableArray *bannerPics;
-//头条
-@property (nonatomic, strong) UIView *headLineView;
-@property (nonatomic, strong) UIButton *headBtn;
 //系统消息
 @property (nonatomic,strong) NSMutableArray <NoticeModel *>*notices;
+//图片
+@property (nonatomic,strong) NSMutableArray *bannerPics;
 
 @end
 
@@ -55,7 +52,9 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     //系统消息
-    [self requestNoticeList];
+//    [self requestNoticeList];
+//    //获取商品列表
+//    [self requestBrandList];
 }
 
 - (void)viewDidLoad {
@@ -63,20 +62,19 @@
     // Do any additional setup after loading the view.
     self.title = @"首页";
     
-    [self initScrollView];
     //添加下拉刷新
     [self addDownRefresh];
-    //轮播图
-    [self initBannerView];
-    //头条
-    [self initHeadLineView];
-    
+    //品牌列表
+    [self initCollectionView];
 }
 
 #pragma mark - 断网操作
 - (void)placeholderOperation {
     
-    
+    //系统消息
+    [self requestNoticeList];
+    //获取商品列表
+    [self requestBrandList];
 }
 
 #pragma mark - Init
@@ -84,93 +82,52 @@
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(clickRefresh)];
     
-    self.scrollView.mj_header = header;
+    self.collectionView.mj_header = header;
 }
 
-- (void)initScrollView {
-    
-    self.scrollView = [[HomeScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight - kTabBarHeight)];
-    
-    self.scrollView.delegate = self;
-    
-    [self.view addSubview:self.scrollView];
-}
-
-- (void)initBannerView {
+- (void)initCollectionView {
     
     BaseWeakSelf;
     
-    //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(185))];
+    //布局对象
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     
-    bannerView.selected = ^(NSInteger index) {
+    //
+    CGFloat itemWidth = (kScreenWidth - 10)/2.0;
+    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 98);
+    flowLayout.minimumLineSpacing = 10;
+    flowLayout.minimumInteritemSpacing = 10;
+    flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
+    self.collectionView = [[HomeCollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight) collectionViewLayout:flowLayout];
+    
+    self.collectionView.homeBlock = ^(NSIndexPath *indexPath) {
         
-        if (!(weakSelf.bannerRoom[index].url && weakSelf.bannerRoom[index].url.length > 0)) {
-            return ;
-        }
+        BrandModel *good = weakSelf.brands[indexPath.row];
         
-        WebVC *webVC = [WebVC new];
-        
-        webVC.url = weakSelf.bannerRoom[index].url;
-        
-        [weakSelf.navigationController pushViewController:webVC animated:YES];
-        
+//        GoodDetailVC *detailVC = [[GoodDetailVC alloc] init];
+//
+//        detailVC.code = good.code;
+//
+//        detailVC.userId = weakSelf.userId;
+//
+//        [weakSelf.navigationController pushViewController:detailVC animated:YES];
     };
     
-    bannerView.imgUrls = @[@"健康专家"];
+    if (self.collectionView.headerView) {
+        
+        self.collectionView.headerView.headerBlock = ^(HomeEventsType type, NSInteger index) {
+            
+            [weakSelf headerViewEventsWithType:type index:index];
+        };
+    }
     
-    [self.scrollView addSubview:bannerView];
+    [self.view addSubview:self.collectionView];
     
-    self.bannerView = bannerView;
-}
+    [self.collectionView reloadData];
 
-- (void)initHeadLineView {
-    
-    BaseWeakSelf;
-    
-    self.headLineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bannerView.yy, kScreenWidth, 50)];
-    
-    self.headLineView.backgroundColor = kWhiteColor;
-    
-    //背景
-    LoopScrollView *loopView = [LoopScrollView loopTitleViewWithFrame:CGRectMake(15, 0, kScreenWidth - 2*15, 50) titleImgArr:nil];
-    
-    loopView.timeinterval = 3.f;
-    
-    loopView.titlesArr = @[@"我淘网上线啦！！！", @"倍可盈上线啦！！！", @"九州宝上线啦！！！", @"健康e购上线啦！！！"];
-    
-    loopView.leftImage = kImage(@"我淘头条");
-    
-    loopView.loopBlock = ^{
-        
-        SystemNoticeVC *noticeVC = [SystemNoticeVC new];
-        
-        [weakSelf.navigationController pushViewController:noticeVC animated:YES];
-    };
-    
-    loopView.layer.borderWidth = 0.5;
-    loopView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6"].CGColor;
-    
-    [self.headLineView addSubview:loopView];
-    
-    //更多
-    UIImageView *moreIV = [[UIImageView alloc] init];
-    
-    moreIV.image = kImage(@"更多");
-    
-    moreIV.frame = CGRectMake(loopView.width - 17, 0, 7, 12);
-    
-    moreIV.centerY = loopView.centerY;
-    
-    [loopView addSubview:moreIV];
-    
-    UIButton *contentBtn = [UIButton buttonWithTitle:@"" titleColor:kTextColor backgroundColor:kClearColor titleFont:14.0];
-    
-    [loopView addSubview:contentBtn];
-    
-    self.headBtn = contentBtn;
-    
-    [self.scrollView addSubview:self.headLineView];
 }
 
 #pragma mark - Data
@@ -201,32 +158,96 @@
     //消息数据
     [helper refresh:^(NSMutableArray <NoticeModel *>*objs, BOOL stillHave) {
         
-        [self removePlaceholderView];
+        [weakSelf removePlaceholderView];
         
-        weakSelf.notices = objs;
-        
-        if (weakSelf.notices.count > 0) {
-            
-            NoticeModel *notice = weakSelf.notices[0];
-            
-            [self.headBtn setTitle:notice.smsTitle forState:UIControlStateNormal];
-            
-        } else {
-            
-            [self.headBtn setTitle:@"无" forState:UIControlStateNormal];
-            
-        }
-        
-        [self.headBtn setTitleLeft];
+        weakSelf.collectionView.headerView.notices = objs;
         
     } failure:^(NSError *error) {
         
-        [self addPlaceholderView];
+        [weakSelf addPlaceholderView];
 
     }];
     
 }
 
+- (void)requestBrandList {
+    
+    BaseWeakSelf;
+    //location： 0 普通列表 1 推荐列表
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"808021";
+    
+    //    helper.parameters[@"statusList"] = @[@"3"];
+    
+    //    helper.parameters[@"statusList"] = @[@"4", @"5", @"6"];
+    
+    helper.parameters[@"start"] = @"1";
+    helper.parameters[@"limit"] = @"10";
+    if ([TLUser user].userId) {
+        
+        helper.parameters[@"userId"] = [TLUser user].userId;
+    }
+    helper.parameters[@"orderColumn"] = @"update_datetime";
+    helper.parameters[@"orderDir"] = @"desc";
+    
+    [helper modelClass:[BrandModel class]];
+    
+    //店铺数据
+    [helper refresh:^(NSMutableArray <BrandModel *>*objs, BOOL stillHave) {
+        
+        weakSelf.brands = objs;
+        
+        weakSelf.collectionView.brands = objs;
+        
+        [weakSelf.collectionView reloadData];
+        
+        //加载headerView
+//        weakSelf.collectionView.headerView.headerBlock = ^(HomePageType type) {
+//
+//            [weakSelf headerViewEventsWithType:type];
+//        };
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+    
+}
+
+#pragma mark - HeaderEvents
+- (void)headerViewEventsWithType:(HomeEventsType)type index:(NSInteger)index {
+    
+    switch (type) {
+        case HomeEventsTypeBanner:
+        {
+            if (!(self.bannerRoom[index].url && self.bannerRoom[index].url.length > 0)) {
+                return ;
+            }
+            
+            WebVC *webVC = [WebVC new];
+            webVC.url = self.bannerRoom[index].url;
+            [self.navigationController pushViewController:webVC animated:YES];
+            
+        }break;
+            
+        case HomeEventsTypeNotice:
+        {
+            SystemNoticeVC *noticeVC = [SystemNoticeVC new];
+            
+            [self.navigationController pushViewController:noticeVC animated:YES];
+            
+        }break;
+            
+        case HomeEventsTypeCategory:
+        {
+            
+        }break;
+            
+        default:
+            break;
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

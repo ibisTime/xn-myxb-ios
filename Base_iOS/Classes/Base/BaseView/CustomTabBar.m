@@ -83,6 +83,8 @@
         
         middleBtn.backgroundColor = kWhiteColor;
         middleBtn.adjustsImageWhenHighlighted = NO;
+        middleBtn.contentMode = UIViewContentModeScaleAspectFill;
+        
         middleBtn.tag = 102;
         [middleBtn setEnlargeEdgeWithTop:0 right:0 bottom:21 left:0];
         [middleBtn addTarget:self action:@selector(selectInvite:) forControlEvents:UIControlEventTouchUpInside];
@@ -95,7 +97,7 @@
             make.width.height.equalTo(@(56));
         }];
         
-        middleBtn.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+//        middleBtn.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         
         self.middleBtn = middleBtn;
     
@@ -171,6 +173,10 @@
     //当前选中的小标
     NSInteger idx = btn.tag - 100;
     
+    if (idx == 2) {
+        
+        return;
+    }
     //--//
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelected:tabBar:)]) {
         

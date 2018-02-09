@@ -91,10 +91,10 @@
 
 #pragma mark - Image
 
-#define USER_PLACEHOLDER_SMALL [UIImage imageNamed:@"头像"]
-#define PLACEHOLDER_SMALL @"icon"
-#define kCancelIcon @"cancel"
-#define GOOD_PLACEHOLDER_SMALL [UIImage imageNamed:@"icon"]
+#define USER_PLACEHOLDER_SMALL  [UIImage imageNamed:@"头像"]
+#define PLACEHOLDER_SMALL       @"icon"
+#define kCancelIcon             @"cancel"
+#define GOOD_PLACEHOLDER_SMALL  [UIImage imageNamed:@"icon"]
 
 #define kDateFormmatter @"MMM dd, yyyy hh:mm:ss aa"
 

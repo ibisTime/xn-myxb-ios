@@ -19,13 +19,15 @@ typedef NS_ENUM(NSInteger, ImageType) {
 
 @interface TLImagePicker : NSObject<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
-@property (nonatomic,copy)  void(^pickFinish)(NSDictionary *info);
+@property (nonatomic,copy)  void(^pickFinish)(UIImage *photo, NSDictionary *info);
 
 @property (nonatomic, assign) ImageType imageType;
 
 - (instancetype)initWithVC:(UIViewController *)ctrl;
 
 @property (nonatomic,assign) BOOL allowsEditing;
+//裁剪高度
+@property (nonatomic, assign) CGFloat clipHeight;
 
 - (void)picker;
 

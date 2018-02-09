@@ -54,6 +54,9 @@
     
     //断网显示
     [self setPlaceholderView];
+    //
+    self.bgSV.frame = self.view.bounds;
+//    self.bgSV.contentSize = self.view.bounds.size;
 }
 
 #pragma mark - LazyLoad
@@ -61,12 +64,13 @@
     
     if (!_bgSV) {
         
-        _bgSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
+        _bgSV = [[UIScrollView alloc] initWithFrame:CGRectZero];
         
         _bgSV.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-        _bgSV.contentSize = CGSizeMake(kScreenWidth, kSuperViewHeight + 1);
         
-        [self.view addSubview:_bgSV];
+        if (@available(iOS 11.0, *)) {
+            _bgSV.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
     }
     
     return _bgSV;
@@ -128,7 +132,7 @@
 
 - (void)setPlaceholderView {
     
-    [self.placeholderView setTitle:@"当前网络不可用, 请检查网络设置"
+    [self.placeholderView setTitle:@"加载失败, 请检查网络设置"
                           btnTitle:@"点击重试"
                               icon:@"网络错误"];
 }
