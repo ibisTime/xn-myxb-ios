@@ -280,7 +280,7 @@
     
 //    self.headerView.nameLbl.text = [TLUser user].mobile;
     self.headerView.nameLbl.text = @"CzyGod";
-    self.headerView.genderIV.image = kImage(@"nan");
+    self.headerView.genderIV.image = kImage(@"男");
     self.headerView.infoLbl.text = @"专家 · 养生";
 }
 

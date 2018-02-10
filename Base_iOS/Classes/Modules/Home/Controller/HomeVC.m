@@ -27,6 +27,7 @@
 //C
 #import "WebVC.h"
 #import "SystemNoticeVC.h"
+#import "AppointmentListVC.h"
 
 @interface HomeVC ()<UIScrollViewDelegate>
 //
@@ -116,18 +117,21 @@
 //        [weakSelf.navigationController pushViewController:detailVC animated:YES];
     };
     
-    if (self.collectionView.headerView) {
-        
-        self.collectionView.headerView.headerBlock = ^(HomeEventsType type, NSInteger index) {
-            
-            [weakSelf headerViewEventsWithType:type index:index];
-        };
-    }
-    
     [self.view addSubview:self.collectionView];
     
     [self.collectionView reloadData];
 
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if (self.collectionView.headerView) {
+            
+            self.collectionView.headerView.headerBlock = ^(HomeEventsType type, NSInteger index) {
+                
+                [weakSelf headerViewEventsWithType:type index:index];
+            };
+        }
+    });
+    
 }
 
 #pragma mark - Data
@@ -241,7 +245,41 @@
             
         case HomeEventsTypeCategory:
         {
+            NSString *title = @"";
             
+            switch (index) {
+                case 0:
+                {
+                    title = @"品牌";
+                }break;
+                    
+                case 1:
+                {
+                    title = @"美导预约";
+                }break;
+                    
+                case 2:
+                {
+                    title = @"讲师预约";
+                }break;
+                    
+                case 3:
+                {
+                    title = @"专家预约";
+                }break;
+                    
+                default:
+                    break;
+            }
+            
+            if (index > 0) {
+                
+                AppointmentListVC *appointmentListVC = [AppointmentListVC new];
+                
+                appointmentListVC.title = title;
+                
+                [self.navigationController pushViewController:appointmentListVC animated:YES];
+            }
         }break;
             
         default:

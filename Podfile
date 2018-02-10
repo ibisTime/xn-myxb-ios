@@ -13,7 +13,7 @@ target ‘Base_iOS’ do
     pod 'SVProgressHUD',            '2.2'
     pod 'IQKeyboardManager',        '4.0.13'
 
-#    pod 'MLLabel',                  '1.10.3'
+    pod 'MLLabel',                  '1.10.3'
 #    pod 'MBProgressHUD',            '0.9.2’
     pod 'PYPhotoBrowser',           '1.1.5'
     pod 'TZImagePickerController',  '1.8.0'

@@ -91,6 +91,8 @@
 #pragma mark - Setting
 - (void)setTitle:(NSString *)title {
     
+    _titleStr = title;
+    
     self.navigationItem.titleView = [UILabel labelWithTitle:title frame:CGRectMake(0, 0, 200, 44)];
 }
 

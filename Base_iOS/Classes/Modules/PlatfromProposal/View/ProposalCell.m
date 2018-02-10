@@ -14,11 +14,8 @@
 #import "NSString+Extension.h"
 #import "NSString+CGSize.h"
 #import <UIImageView+WebCache.h>
-//头像
-//昵称
-//日期
-//评分
-//内容
+#import "UILabel+Extension.h"
+
 @interface ProposalCell()
 //头像
 @property (nonatomic, strong) UIImageView *photoIV;
@@ -129,16 +126,12 @@
         make.top.equalTo(self.nickNameLbl.mas_bottom).offset(8);
     }];
     //内容
-    CGFloat w = kScreenWidth - 30;
-    
-    CGFloat h = [_proposal.comment calculateStringSize:CGSizeMake(w, MAXFLOAT) font:Font(13.0)].height;
     
     [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@(leftMargin));
         make.right.equalTo(@(-leftMargin));
         make.top.equalTo(self.photoIV.mas_bottom).offset(10);
-        make.height.equalTo(@(h));
     }];
 }
 
@@ -169,20 +162,15 @@
             make.centerY.equalTo(@0);
         }];
     }
-
-    self.contentLbl.text = proposal.comment;
+    
+    [self.contentLbl labelWithTextString:proposal.comment lineSpace:5];
     
     [self setSubViewLayout];
 
     //
     [self layoutSubviews];
     
-    CGFloat w = kScreenWidth - 30;
-    
-    CGFloat h = [_proposal.comment calculateStringSize:CGSizeMake(w, MAXFLOAT) font:Font(13.0)].height;
-    
     proposal.cellHeight = self.contentLbl.yy + 15;
-    
 
 }
 
