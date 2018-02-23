@@ -19,11 +19,13 @@
 //V
 #import "SettingTableView.h"
 #import "SettingCell.h"
+#import "CustomTabBar.h"
 //C
 #import "TLChangeMobileVC.h"
 #import "TLPwdRelatedVC.h"
 #import "NavigationController.h"
 #import "TLUserLoginVC.h"
+#import "ZHAddressChooseVC.h"
 
 @interface SettingVC ()
 
@@ -101,10 +103,21 @@
         [weakSelf.navigationController pushViewController:pwdRelatedVC animated:YES];
         
     }];
+    //收货地址
+    SettingModel *address = [SettingModel new];
+    address.text = @"收货地址";
+    [address setAction:^{
+        
+        ZHAddressChooseVC *chooseVC = [ZHAddressChooseVC new];
+        
+        
+        [self
+         .navigationController pushViewController:chooseVC animated:YES];
+    }];
     
     self.group = [SettingGroup new];
     
-    self.group.sections = @[@[changeMobile, changeLoginPwd]];
+    self.group.sections = @[@[changeMobile, changeLoginPwd, address]];
     
 }
 
@@ -129,10 +142,14 @@
 
 - (void)logout {
     
+    UITabBarController *tbcController = self.tabBarController;
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        [self.navigationController popViewControllerAnimated:NO];
+        tbcController.selectedIndex = 0;
         
+        CustomTabBar *tabBar = (CustomTabBar *)tbcController.tabBar;
+        tabBar.selectedIdx = 0;
     });
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];

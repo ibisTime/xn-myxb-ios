@@ -57,7 +57,7 @@
     self.title = @"我的";
     
     //模型
-    if ([TLUser user].userType == UserTypeBeautySalon) {
+    if ([[TLUser user].kind isEqualToString:@"C"]) {
         //美容院
         [self initSclonGroup];
     } else {
@@ -152,6 +152,9 @@
     jfBalance.imgName = @"积分余额";
     jfBalance.action = ^{
         
+        IntegralMallVC *integralMallVC = [IntegralMallVC new];
+        
+        [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
     };
     
     //行程列表

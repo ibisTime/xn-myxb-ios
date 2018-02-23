@@ -10,13 +10,19 @@
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "UILabel+Extension.h"
 
 #define ADDRESS_CHANGE_NOTIFICATION @"ADDRESS_CHANGE_NOTIFICATION"
 
 @interface ZHAddressCell()
 
+//姓名
 @property (nonatomic,strong) UILabel *infoLbl;
+//手机号
+@property (nonatomic, strong) UILabel *mobileLbl;
+//省市区
 @property (nonatomic,strong) UILabel *addressLbl;
+//详细地址
 @property (nonatomic,strong) UILabel *detailAddressLbl;
 
 @property (nonatomic,strong) UIButton *selectedBtn;
@@ -41,79 +47,114 @@
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         //1.
-        self.infoLbl = [UILabel labelWithFrame:CGRectMake(15, 15, kScreenWidth - 15 - 35, 0)
+        self.infoLbl = [UILabel labelWithFrame:CGRectZero
                                   textAligment:NSTextAlignmentLeft
                                backgroundColor:[UIColor clearColor]
                                           font:Font(15.0)
                                      textColor:kTextColor];
-        [self addSubview:self.infoLbl];
-        self.infoLbl.height = [Font(15.0) lineHeight];
         
+        [self.contentView addSubview:self.infoLbl];
+        [self.infoLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.mas_equalTo(15);
+            make.width.mas_lessThanOrEqualTo(200);
+            make.top.mas_equalTo(20);
+            make.height.mas_equalTo(kFontHeight(15.0));
+            
+        }];
         //2.
-        self.addressLbl = [UILabel labelWithFrame:CGRectMake(15, self.infoLbl.yy + 10 , self.infoLbl.width, 0)
-                                  textAligment:NSTextAlignmentLeft
-                               backgroundColor:[UIColor clearColor]
-                                          font:FONT(13)
-                                     textColor:kTextColor];
-        [self addSubview:self.addressLbl];
-        self.addressLbl.height = [FONT(13) lineHeight];
+        self.mobileLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentRight backgroundColor:kClearColor font:Font(15.0) textColor:kTextColor];
         
-        //
-        self.detailAddressLbl = [UILabel labelWithFrame:CGRectMake(15, self.addressLbl.yy + 10 , self.infoLbl.width, self.addressLbl.height)
+        [self.contentView addSubview:self.mobileLbl];
+        [self.mobileLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.mas_equalTo(-15);
+            make.width.mas_lessThanOrEqualTo(150);
+            make.top.mas_equalTo(self.infoLbl.mas_top).mas_equalTo(0);
+            make.height.mas_equalTo(kFontHeight(15.0));
+            
+        }];
+        //3.
+        self.addressLbl = [UILabel labelWithFrame:CGRectZero
                                      textAligment:NSTextAlignmentLeft
                                   backgroundColor:[UIColor clearColor]
-                                             font:FONT(13)
+                                             font:Font(13)
                                         textColor:kTextColor];
-        [self addSubview:self.detailAddressLbl];
         
-        //
-        self.selectedBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - 35, 0, 20, 20)];
-        [self addSubview:self.selectedBtn];
-        [self.selectedBtn setImage:[UIImage imageNamed:@"address_unselected"] forState:UIControlStateNormal];
-        [self.selectedBtn addTarget:self action:@selector(selectedAddress) forControlEvents:UIControlEventTouchUpInside];
-        [self.selectedBtn  mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self);
-            make.right.equalTo(self.mas_right).offset(-15);
-            make.height.width.mas_equalTo(@20);
+        self.addressLbl.numberOfLines = 0;
+        
+        [self.contentView addSubview:self.addressLbl];
+        [self.addressLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(self.infoLbl.mas_left);
+            make.right.equalTo(self.mobileLbl.mas_right);
+            make.top.equalTo(self.infoLbl.mas_bottom).offset(11);
+            
         }];
         
-        
-        //编ewe辑 和 删除
-        CGFloat w = 70;
-        UIButton *deleteBtn = [self btnWithFrame:CGRectMake(kScreenWidth - w, 110, w, 30) imageName:@"delete" title:@"删除"];
-        [deleteBtn addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:deleteBtn];
-        deleteBtn.xx = kScreenWidth - 10;
-//        [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.mas_right).offset(10);
-//            make.top.mas_equalTo(@100);
-//            make.width.equalTo();
-//        }];
-//        
-        //编辑按钮
-        UIButton *editBtn = [self btnWithFrame:CGRectMake(0, 110, w, deleteBtn.height) imageName:@"edit" title:@"编辑"];
-        [editBtn addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
-        editBtn.xx = deleteBtn.x - 15;
-        [self addSubview:editBtn];
-        
-     
-    
-        
-        
+        //
+        //        self.detailAddressLbl = [UILabel labelWithFrame:CGRectMake(15, self.addressLbl.yy + 10 , self.infoLbl.width, self.addressLbl.height)
+        //                                     textAligment:NSTextAlignmentLeft
+        //                                  backgroundColor:[UIColor clearColor]
+        //                                             font:FONT(13)
+        //                                        textColor:[UIColor zh_textColor]];
+        //        [self addSubview:self.detailAddressLbl];
         
         UIView *line = [[UIView alloc] init];
+        
         line.backgroundColor = kLineColor;
-        [self addSubview:line];
+        [self.contentView addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.mas_left);
             make.width.equalTo(self.mas_width);
-            make.height.mas_equalTo(@(kLineHeight));
-            make.bottom.equalTo(self.mas_bottom).offset(-30);
+            make.height.equalTo(@(kLineHeight));
+            make.top.equalTo(self.addressLbl.mas_bottom).offset(20);
+        }];
+        
+        //
+        self.selectedBtn = [UIButton buttonWithTitle:@"默认地址" titleColor:kTextColor backgroundColor:kClearColor titleFont:12.0];
+        
+        [self.selectedBtn setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];
+        [self.selectedBtn addTarget:self action:@selector(selectedAddress) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.contentView addSubview:self.selectedBtn];
+        
+        [self.selectedBtn  mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.mas_equalTo(line.mas_bottom).mas_equalTo(12);
+            make.left.equalTo(self.mas_left).offset(15);
+            make.height.mas_equalTo(20);
+            make.width.mas_equalTo(100);
+        }];
+        
+        [self.selectedBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+        [self.selectedBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+        
+        //编辑 和 删除
+        CGFloat w = 70;
+        UIButton *deleteBtn = [self btnWithFrame:CGRectZero imageName:@"删除" title:@"删除"];
+        [deleteBtn addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:deleteBtn];
+        [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-15);
+            make.top.mas_equalTo(line.mas_bottom).mas_equalTo(0);
+            make.width.mas_equalTo(w);
+            make.height.mas_equalTo(45);
+        }];
+        
+        //编辑按钮
+        UIButton *editBtn = [self btnWithFrame:CGRectMake(0, 110, w, deleteBtn.height) imageName:@"编辑" title:@"编辑"];
+        [editBtn addTarget:self action:@selector(edit) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:editBtn];
+        [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.mas_equalTo(deleteBtn.mas_left).mas_equalTo(-15);
+            make.top.mas_equalTo(line.mas_bottom).mas_equalTo(0);
+            make.width.mas_equalTo(w);
+            make.height.mas_equalTo(45);
         }];
         
     }
-    
-
     
     return self;
 
@@ -139,9 +180,7 @@
         
         __weak typeof(self) weakSelf = self;
         self.deleteAddr(weakSelf);
-        
     }
-
 }
 
 #pragma mark- 便捷收货地址
@@ -151,11 +190,8 @@
         
         __weak typeof(self) weakSelf = self;
         self.editAddr(weakSelf);
-        
     }
-
 }
-
 
 - (void)addressChangeAction:(NSNotification *)noti {
 
@@ -163,18 +199,17 @@
     
     if (self.address.isSelected) {
         
-        self.address.isSelected = NO;
-        [self.selectedBtn setImage:[UIImage imageNamed:@"address_unselected"] forState:UIControlStateNormal];
+        [self.selectedBtn setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];
+        [self.selectedBtn setTitleColor:kTextColor forState:UIControlStateNormal];
+        
         return;
     }
     
     if ([obj isEqual:self]) {
         
-        self.address.isSelected = YES;
-        [self.selectedBtn setImage:[UIImage imageNamed:@"address_selected"] forState:UIControlStateNormal];
-        
+        [self.selectedBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+        [self.selectedBtn setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateNormal];
     }
-    
 }
 
 - (void)setIsDisplay:(BOOL)isDisplay {
@@ -193,26 +228,33 @@
         return;
     }
     
-//    [[NSNotificationCenter defaultCenter] postNotificationName:ADDRESS_CHANGE_NOTIFICATION object:self userInfo:@{
-//                                                                                                                  @"sender" : self
-//                                                                                                                  }];
-
-    
+    if (self.defaultAddr) {
+        
+        __weak typeof(self) weakSelf = self;
+        self.defaultAddr(weakSelf);
+    }
 }
 
 
 - (void)setAddress:(ZHReceivingAddress *)address {
 
     _address = address;
-
-    self.infoLbl.text = [NSString stringWithFormat:@"%@  %@",_address.addressee,_address.mobile];
-    self.addressLbl.text = [NSString stringWithFormat:@"%@ %@ %@",_address.province,_address.city,_address.district];
-    self.detailAddressLbl.text = _address.detailAddress;
-    if (address.isSelected) {
+    
+    self.infoLbl.text = [NSString stringWithFormat:@"%@ ",_address.addressee];
+    self.mobileLbl.text = _address.mobile;
+    
+    [self.addressLbl labelWithTextString:[NSString stringWithFormat:@"%@ %@ %@ %@",_address.province,_address.city,_address.district, _address.detailAddress] lineSpace:5];
+    
+    if (address.isDefault) {
         
-        [self.selectedBtn setImage:[UIImage imageNamed:@"address_selected"] forState:UIControlStateNormal];
+        [self.selectedBtn setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateNormal];
         
+        [self.selectedBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
     }
+    
+    [self.contentView layoutIfNeeded];
+    
+    _address.cellHeight = self.selectedBtn.yy + 12;
 }
 
 

@@ -26,7 +26,7 @@
 //产品编号
 @property (nonatomic, copy) NSString *code;
 //价格
-@property (nonatomic, assign) NSInteger price;
+@property (nonatomic, strong) NSNumber *price;
 
 @property (nonatomic, copy) NSString *remark;
 //产品名称

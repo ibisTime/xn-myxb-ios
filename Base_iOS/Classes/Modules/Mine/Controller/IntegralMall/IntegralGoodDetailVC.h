@@ -9,5 +9,9 @@
 #import "BaseViewController.h"
 
 @interface IntegralGoodDetailVC : BaseViewController
+//产品编号
+@property (nonatomic, copy) NSString *code;
+//
+@property (nonatomic,copy) void(^paySuccess)();
 
 @end

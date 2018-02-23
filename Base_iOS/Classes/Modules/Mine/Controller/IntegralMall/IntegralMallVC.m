@@ -16,6 +16,7 @@
 #import "IntegralCollectionView.h"
 //C
 #import "IntegralGoodDetailVC.h"
+#import "IntegralOrderVC.h"
 
 @interface IntegralMallVC ()<RefreshCollectionViewDelegate>
 //
@@ -105,7 +106,9 @@
             
         case IntegralTypeIntegralOrder:
         {
+            IntegralOrderVC *orderVC = [IntegralOrderVC new];
             
+            [self.navigationController pushViewController:orderVC animated:YES];
         }break;
             
         case IntegralTypeIntegralRecord:
@@ -122,12 +125,12 @@
 - (void)requestGoodList {
     
     BaseWeakSelf;
-    //status： 0 未上架 1 已上架
+    //status： 1 未上架 2 已上架
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     helper.code = @"805285";
     
-    helper.parameters[@"status"] = @"1";
+    helper.parameters[@"status"] = @"2";
 //    helper.parameters[@"orderColumn"] = @"update_datetime";
 //    helper.parameters[@"orderDir"] = @"asc";
     
@@ -150,15 +153,23 @@
 #pragma mark - RefreshCollectionViewDelegate
 - (void)refreshCollectionView:(BaseCollectionView *)refreshCollectionview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    IntegralModel *good = self.goods[indexPath.row];
+    
     IntegralGoodDetailVC *detailVC = [IntegralGoodDetailVC new];
+    
+    detailVC.code = good.code;
     
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)refreshCollectionViewButtonClick:(BaseCollectionView *)refreshCollectionView WithButton:(UIButton *)sender SelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    IntegralModel *good = self.goods[indexPath.row];
+
     IntegralGoodDetailVC *detailVC = [IntegralGoodDetailVC new];
     
+    detailVC.code = good.code;
+
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

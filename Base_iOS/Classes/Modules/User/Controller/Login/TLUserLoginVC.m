@@ -20,17 +20,16 @@
 //#import "CurrencyModel.h"
 
 #import "AccountTf.h"
-
-//腾讯云
-//#import "ChatManager.h"
-//#import "IMModel.h"
-//
-//#import <ImSDK/TIMManager.h>
+#import "TLPickerTextField.h"
 
 @interface TLUserLoginVC ()
 
-@property (nonatomic,strong) AccountTf *phoneTf;
-@property (nonatomic,strong) AccountTf *pwdTf;
+@property (nonatomic, strong) AccountTf *phoneTf;
+@property (nonatomic, strong) AccountTf *pwdTf;
+//角色类型
+@property (nonatomic, strong) TLPickerTextField *userTypeTf;
+//kind
+@property (nonatomic, copy) NSString *kind;
 
 @property (nonatomic, copy) NSString *verifyCode;
 
@@ -48,7 +47,7 @@
     [self setBarButtonItem];
     
     [self setUpUI];
-    //腾讯云登录成功
+    //登录成功回调
     [self setUpNotification];
     
 }
@@ -67,6 +66,7 @@
     
     CGFloat w = kScreenWidth;
     CGFloat h = ACCOUNT_HEIGHT;
+    CGFloat count = 3;
     
     UIView *bgView = [[UIView alloc] init];
     
@@ -76,10 +76,9 @@
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@(10));
-        make.left.mas_equalTo(0);
-        make.height.mas_equalTo(2*h + 1);
-        make.width.mas_equalTo(w);
-        
+        make.left.equalTo(@0);
+        make.height.equalTo(@(count*(h + 1)));
+        make.width.equalTo(@(w));
     }];
     
     //账号
@@ -90,7 +89,6 @@
     self.phoneTf = phoneTf;
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     
-    
     //密码
     AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, w, h)];
     pwdTf.secureTextEntry = YES;
@@ -99,7 +97,20 @@
     [bgView addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
-    for (int i = 0; i < 2; i++) {
+    NSArray *typeArr = @[@"美容院", @"讲师", @"专家", @"美导"];
+    
+    //角色类型
+    TLPickerTextField *userTypeTf = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, pwdTf.yy + 1, w, h)];
+    
+    userTypeTf.placeHolder = @"请选择角色";
+    userTypeTf.leftIconView.image = [UIImage imageNamed:@"手机"];
+    
+    userTypeTf.tagNames = typeArr;
+
+    [bgView addSubview:userTypeTf];
+    self.userTypeTf = userTypeTf;
+    
+    for (int i = 0; i < count; i++) {
         
         UIView *line = [[UIView alloc] init];
         
@@ -108,13 +119,25 @@
         [bgView addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(0);
-            make.right.mas_equalTo(0);
-            make.height.mas_equalTo(0.5);
-            make.top.mas_equalTo((i+1)*h);
+            make.left.equalTo(@0);
+            make.right.equalTo(@0);
+            make.height.equalTo(@0.5);
+            make.top.equalTo(@((i+1)*(h+1)));
             
         }];
     }
+    
+    //右箭头
+    CGFloat arrowW = 6;
+    CGFloat arrowH = 10;
+    CGFloat rightMargin = 10;
+    
+    UIImageView *arrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
+    
+    arrowIV.frame = CGRectMake(self.userTypeTf.width - rightMargin - arrowW, 0, arrowW, arrowH);
+    arrowIV.centerY = self.userTypeTf.height/2.0;
+    
+    [self.userTypeTf addSubview:arrowIV];
     //登录
     UIButton *loginBtn = [UIButton buttonWithTitle:@"登录" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:17.0 cornerRadius:5];
     [loginBtn addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
@@ -185,6 +208,38 @@
 
 - (void)goLogin {
     
+    NSString *kind = @"";
+
+    switch (_userTypeTf.selectIndex) {
+        case 0:
+        {
+            kind = @"C";
+        }break;
+            
+        case 1:
+        {
+            kind = @"L";
+
+        }break;
+            
+        case 2:
+        {
+            kind = @"S";
+            
+        }break;
+            
+        case 3:
+        {
+            kind = @"T";
+            
+        }break;
+            
+        default:
+            break;
+    }
+    
+    self.kind = kind;
+    
     if (![self.phoneTf.text isPhoneNum]) {
         
         [TLAlert alertWithInfo:@"请输入正确的手机号"];
@@ -198,6 +253,12 @@
         return;
     }
     
+    if (self.userTypeTf.text.length == 0) {
+        
+        [TLAlert alertWithInfo:@"请选择角色"];
+        return ;
+    }
+    
     [self.view endEditing:YES];
 
     TLNetworking *http = [TLNetworking new];
@@ -206,14 +267,13 @@
     
     http.parameters[@"loginName"] = self.phoneTf.text;
     http.parameters[@"loginPwd"] = self.pwdTf.text;
-    http.parameters[@"kind"] = APP_KIND;
+    http.parameters[@"kind"] = kind;
 
     [http postWithSuccess:^(id responseObject) {
         
         [self requesUserInfoWithResponseObject:responseObject];
         
     } failure:^(NSError *error) {
-        
         
     }];
     
@@ -225,6 +285,7 @@
     NSString *userId = responseObject[@"data"][@"userId"];
     
     //保存用户账号和密码
+    [TLUser user].kind = self.kind;
     [[TLUser user] saveUserName:self.phoneTf.text pwd:self.pwdTf.text];
     
     //1.获取用户信息

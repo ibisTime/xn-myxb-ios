@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewCell.h"
 #import "ZHReceivingAddress.h"
 
-@interface ZHAddressCell : UITableViewCell
+@interface ZHAddressCell :BaseTableViewCell
 
 @property (nonatomic,strong) ZHReceivingAddress *address;
 @property (nonatomic,assign) BOOL isDisplay;
@@ -17,5 +18,6 @@
 @property (nonatomic,copy) void(^deleteAddr)(UITableViewCell *cell);
 @property (nonatomic,copy) void(^editAddr)(UITableViewCell *cell);
 
+@property (nonatomic,copy) void(^defaultAddr)(UITableViewCell *cell);
 
 @end

@@ -76,13 +76,14 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     
     self.userName = [UserDefaultsUtil getUserDefaultName];
     self.userPassward = [UserDefaultsUtil getUserDefaultPassword];
+    self.kind = [UserDefaultsUtil getUserDefaultKind];
     
     TLNetworking *http = [TLNetworking new];
     
     http.code = USER_LOGIN_CODE;
     http.parameters[@"loginName"] = self.userName;
     http.parameters[@"loginPwd"] = self.userPassward;
-    http.parameters[@"kind"] = APP_KIND;
+    http.parameters[@"kind"] = self.kind;
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -210,10 +211,10 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
     
     self.userName = userName;
     self.userPassward = pwd;
-    
+
     [UserDefaultsUtil setUserDefaultName:userName];
     [UserDefaultsUtil setUserDefaultPassword:pwd];
-    
+    [UserDefaultsUtil setUserDefaultKind:self.kind];
 }
 
 @end

@@ -22,6 +22,8 @@
 @property (nonatomic,strong) NSString *userId;
 
 @property (nonatomic,copy) NSString *totalAddress;
+//是否默认   0:否  1:是
+@property (nonatomic, copy) NSString *isDefault;
 
 @property (nonatomic, assign) CGFloat cellHeight;
 

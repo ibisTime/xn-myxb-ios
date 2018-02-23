@@ -6,9 +6,9 @@
 //  Copyright © 2016年 田磊. All rights reserved.
 //
 
-#import "TLTextField.h"
+#import "AccountTf.h"
 
-@interface TLPickerTextField : TLTextField
+@interface TLPickerTextField : AccountTf
 
 @property (nonatomic,copy) NSArray *tagNames;
 

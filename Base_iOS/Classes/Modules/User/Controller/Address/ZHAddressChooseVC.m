@@ -38,11 +38,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"收货地址";
-    TLTableView *addressTableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight) delegate:self dataSource:self];
+    self.title = @"地址选择";
+    
+    [self initAddBtn];
+    
+    [self initTableView];
+    
+}
+
+- (void)initAddBtn {
+    
+    UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, kSuperViewHeight - 60 - kBottomInsetHeight, kScreenWidth, 60)];
+    
+    whiteView.backgroundColor = kWhiteColor;
+    
+    [self.view addSubview:whiteView];
+    //增加
+    UIButton *addBtn = [UIButton buttonWithTitle:@"添加新地址" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18.0 cornerRadius:5];
+    [addBtn addTarget:self action:@selector(addAddress) forControlEvents:UIControlEventTouchUpInside];
+    [whiteView addSubview:addBtn];
+    
+    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.height.mas_equalTo(44);
+        make.left.mas_equalTo(15);
+        make.centerY.mas_equalTo(0);
+        make.right.mas_equalTo(-15);
+        
+    }];
+    
+    self.addBtn = addBtn;
+}
+
+- (void)initTableView {
+    
+    TLTableView *addressTableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 60 - kBottomInsetHeight) delegate:self dataSource:self];
+    
+    addressTableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无收货地址"];
+    
     [self.view addSubview:addressTableView];
     self.addressTableView = addressTableView;
-    addressTableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无收货地址"];
     
     [addressTableView addRefreshAction:^{
         
@@ -59,12 +94,6 @@
             
             self.addressRoom = [ZHReceivingAddress tl_objectArrayWithDictionaryArray:adderssRoom];
             
-            if (self.addressRoom.count == 0) {
-                
-                [self initAddBtn];
-                
-            }
-            
             if (self.selectedAddrCode) {
                 [self.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if ([obj.code isEqualToString:self.selectedAddrCode]) {
@@ -75,7 +104,6 @@
                 }];
             }
             
-            
             [self.addressTableView reloadData_tl];
             
         } failure:^(NSError *error) {
@@ -85,25 +113,6 @@
         }];
         
     }];
-    
-}
-
-- (void)initAddBtn {
-
-    //增加
-    UIButton *addBtn = [UIButton buttonWithTitle:@"添加新地址" titleColor:kWhiteColor backgroundColor:kAppCustomMainColor titleFont:18.0 cornerRadius:5];
-    
-
-    [self.view addSubview:addBtn];
-    [addBtn addTarget:self action:@selector(addAddress) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.bottom.left.right.equalTo(self.view);
-        make.height.mas_equalTo(@49);
-        
-    }];
-    
-    self.addBtn = addBtn;
 }
 
 - (void)addAddress {
@@ -111,6 +120,8 @@
     BaseWeakSelf;
     
     ZHAddAddressVC *address = [[ZHAddAddressVC alloc] init];
+    
+    address.addressType = AddressTypeAdd;
     address.addAddress = ^(ZHReceivingAddress *address){
         
         if (self.isDisplay) {//个人主页进入的界面
@@ -122,8 +133,6 @@
             address.isSelected = NO;
             //            [self.addressRoom addObject:address];
             [weakSelf.addressTableView beginRefreshing];
-            
-            
         }
         
     };
@@ -154,36 +163,34 @@
         cell.isDisplay = self.isDisplay;
         
         __weak typeof(self) weakSelf = self;
-        //        cell.deleteAddr = ^(UITableViewCell *cell){
-        //
-        //            NSInteger idx = [tableView indexPathForCell:cell].section;
-        //            [TLAlert alertWithTitle:nil msg:@"确认删除该收货地址" confirmMsg:@"删除" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-        //
-        //            } confirm:^(UIAlertAction *action) {
-        //
-        //                TLNetworking *http = [TLNetworking new];
-        //                http.showView = self.view;
-        //                http.code = @"805161";
-        //                http.parameters[@"code"] = weakSelf.addressRoom[idx].code;
-        //                http.parameters[@"token"] = [TLUser user].token;
-        //                [http postWithSuccess:^(id responseObject) {
-        //
-        //                    [TLAlert alertWithSucces:@"删除成功"];
-        //
-        //                    [weakSelf.addressRoom removeObjectAtIndex:idx];
-        //                    [weakSelf.addressTableView reloadData_tl];
-        //
-        //                } failure:^(NSError *error) {
-        //
-        //                }];
-        //
-        //
-        //            }];
-        //
-        //        };
+        cell.deleteAddr = ^(UITableViewCell *cell){
+            
+            NSInteger idx = [tableView indexPathForCell:cell].section;
+            [TLAlert alertWithTitle:nil msg:@"确认删除该收货地址" confirmMsg:@"删除" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+                
+            } confirm:^(UIAlertAction *action) {
+                
+                TLNetworking *http = [TLNetworking new];
+                http.showView = self.view;
+                http.code = @"805161";
+                http.parameters[@"code"] = weakSelf.addressRoom[idx].code;
+                http.parameters[@"token"] = [TLUser user].token;
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:@"删除成功"];
+                    
+                    [weakSelf.addressRoom removeObjectAtIndex:idx];
+                    [weakSelf.addressTableView reloadData_tl];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+                
+            }];
+            
+        };
         
         cell.editAddr = ^(UITableViewCell *cell){
-            
             
             NSInteger idx = [tableView indexPathForCell:cell].section;
             ZHAddAddressVC *editAddVC = [[ZHAddAddressVC alloc] init];
@@ -198,8 +205,49 @@
             };
             [weakSelf.navigationController pushViewController:editAddVC animated:YES];
         };
+        
+        //设置为默认
+        
+        cell.defaultAddr = ^(UITableViewCell *cell) {
+            
+            NSInteger index = [tableView indexPathForCell:cell].section;
+            
+            TLNetworking *http = [TLNetworking new];
+            http.showView = self.view;
+            http.code = @"805163";
+            http.parameters[@"code"] = weakSelf.addressRoom[index].code;
+            http.parameters[@"token"] = [TLUser user].token;
+            [http postWithSuccess:^(id responseObject) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ADDRESS_CHANGE_NOTIFICATION" object:self userInfo:@{
+                                                                                                                                 @"sender" : self
+                                                                                                                                 }];
+                //改变数据
+                [weakSelf.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    
+                    if (idx == index) {
+                        
+                        obj.isDefault = @"1";
+                        
+                    } else {
+                        
+                        obj.isDefault = @"0";
+                    }
+                }];
+                
+                [weakSelf.addressTableView reloadData_tl];
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        };
+        
     }
+    
     cell.address = self.addressRoom[indexPath.section];
+    
+    cell.backgroundColor = kWhiteColor;
+    
     return cell;
     
 }
@@ -215,43 +263,43 @@
     
     ZHReceivingAddress *selectedAddr = self.addressRoom[indexPath.section];
     
-    if (selectedAddr.isSelected == YES) {
+    //    if (selectedAddr.isSelected == YES) {
+    //
+    //
+    //    } else {
+    //
+    //        [self.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress *addr, NSUInteger idx, BOOL * _Nonnull stop) {
+    //
+    //            if (![addr isEqual:selectedAddr]) {
+    //                addr.isSelected = NO;
+    //            }
+    //
+    //        }];
+    //        selectedAddr.isSelected = YES;
+    //
+    //    }
+    
+    if (self.chooseAddress) {
         
-        
-    } else {
-        
-        [self.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress *addr, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-            if (![addr isEqual:selectedAddr]) {
-                addr.isSelected = NO;
-            }
-            
-        }];
-        selectedAddr.isSelected = YES;
-        if (self.chooseAddress) {
-            
-            self.chooseAddress(selectedAddr);
-            
-        }
+        self.chooseAddress(selectedAddr);
         
     }
     
-    
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (self.addressRoom.count > 0) {
         
-        ZHReceivingAddress *address = self.addressRoom[0];
-
+        ZHReceivingAddress *address = self.addressRoom[indexPath.section];
+        
         return address.cellHeight;
-
+        
     }
-    return 120;
     
+    return 120;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -277,3 +325,4 @@
 
 
 @end
+

@@ -11,17 +11,6 @@
 
 @class TLUserExt;
 
-/**
- 用户角色
- */
-typedef NS_ENUM(NSInteger, UserType) {
-    
-    UserTypeBeautySalon = 0,    //美容院
-    UserTypeExpert,             //专家
-    UserTypeLecturer,           //讲师
-    UserTypeBeautyGuide,        //美导
-};
-
 @interface TLUser : TLBaseModel
 
 /*
@@ -58,8 +47,7 @@ typedef NS_ENUM(NSInteger, UserType) {
 @property (nonatomic, copy) NSString *inviteCode;
 //邀请人个数
 @property (nonatomic, copy) NSString *referrerNum;
-//用户角色
-@property (nonatomic, assign) UserType userType;
+
 
 + (instancetype)user;
 

@@ -35,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"添加新地址";
+    
     UIScrollView *bgScrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     [self.view addSubview:bgScrollview];
     bgScrollview.delegate = self;

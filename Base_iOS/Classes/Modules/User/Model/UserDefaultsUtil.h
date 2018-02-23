@@ -13,6 +13,7 @@
 #define kUserDefaultCookie   @"userDefaultCookie"
 #define kUserDefaultUserName @"userDefaultUserName"
 #define kUserDefaultPassword @"userDefaultPassword"
+#define kUserDefaultKind @"userDefaultKind"
 #define kUserLoginStatus     @"userLoginStatus"
 #define kIsSandbox           @"isSandbox"
 
@@ -34,6 +35,8 @@
 + (NSString*)getUserDefaultName;
 + (void)setUserDefaultPassword:(NSString*)password;
 + (NSString*)getUserDefaultPassword;
++ (void)setUserDefaultKind:(NSString*)kind;
++ (NSString*)getUserDefaultKind;
 + (BOOL)isContainUserDefault;
 + (void)setUserLogin;
 + (void)removeUserLogin;

@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AccountTf : UITextField
+#import "TLTextField.h"
+
+@interface AccountTf : TLTextField
 
 @property (nonatomic,strong) UIImageView *leftIconView;
 

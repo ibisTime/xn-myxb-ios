@@ -68,6 +68,16 @@
     return [self getObjectForKey:kUserDefaultPassword];
 }
 
++ (void)setUserDefaultKind:(NSString *)kind {
+    
+    [self setObject:kind forKey:kUserDefaultKind];
+}
+
++ (NSString *)getUserDefaultKind {
+    
+    return [self getObjectForKey:kUserDefaultKind];
+}
+
 + (BOOL)isContainUserDefault {
     
     return [[NSUserDefaults standardUserDefaults] boolForKey:kUserLoginStatus];
