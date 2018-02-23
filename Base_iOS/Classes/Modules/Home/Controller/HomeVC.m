@@ -28,6 +28,7 @@
 #import "WebVC.h"
 #import "SystemNoticeVC.h"
 #import "AppointmentListVC.h"
+#import "BrandVC.h"
 
 @interface HomeVC ()<UIScrollViewDelegate>
 //
@@ -250,7 +251,7 @@
             switch (index) {
                 case 0:
                 {
-                    title = @"品牌";
+                    title = @"品牌下单";
                 }break;
                     
                 case 1:
@@ -279,13 +280,23 @@
                 appointmentListVC.title = title;
                 
                 [self.navigationController pushViewController:appointmentListVC animated:YES];
+                
+                return ;
             }
+            
+            BrandVC *brandVC = [BrandVC new];
+            
+            brandVC.title = title;
+            
+            [self.navigationController pushViewController:brandVC animated:YES];
+
         }break;
             
         default:
             break;
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -39,7 +39,8 @@
 #pragma mark - Init
 - (void)initTableView {
     
-    self.tableView = [[AppointmentDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = [[AppointmentDetailTableView alloc] initWithFrame:CGRectZero
+                                                                 style:UITableViewStylePlain];
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

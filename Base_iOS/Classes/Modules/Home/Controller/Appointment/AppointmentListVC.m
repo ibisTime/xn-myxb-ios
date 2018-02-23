@@ -40,12 +40,16 @@
 #pragma mark - Init
 - (void)setSearchItem {
     
-    [UIBarButtonItem addRightItemWithImageName:@"搜索" frame:CGRectMake(0, 0, 40, 40) vc:self action:@selector(clickSearch)];
+    [UIBarButtonItem addRightItemWithImageName:@"搜索"
+                                         frame:CGRectMake(0, 0, 40, 40)
+                                            vc:self
+                                        action:@selector(clickSearch)];
 }
 
 - (void)initTableView {
     
-    self.tableView = [[AppointmentListTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = [[AppointmentListTableView alloc] initWithFrame:CGRectZero
+                                                               style:UITableViewStylePlain];
     
     self.tableView.refreshDelegate = self;
     

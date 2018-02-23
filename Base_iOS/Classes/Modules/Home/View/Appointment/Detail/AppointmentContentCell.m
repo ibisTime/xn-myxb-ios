@@ -37,6 +37,8 @@
 @property (nonatomic, strong) PhotosView *photosView;
 //右箭头
 @property (nonatomic, strong) UIImageView *arrowIV;
+//介绍
+@property (nonatomic, copy) NSString *introduce;
 
 @end
 
@@ -54,8 +56,7 @@
 
 - (void)initSubviews {
     
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    self.backgroundColor = kWhiteColor;
     //内容
     self.contentLbl = [UILabel labelWithBackgroundColor:kClearColor
                                               textColor:kTextColor
@@ -63,6 +64,7 @@
     
     self.contentLbl.numberOfLines = 5;
     self.contentLbl.backgroundColor = [UIColor whiteColor];
+    self.contentLbl.width = kScreenWidth - 30;
     
     [self addSubview:self.contentLbl];
     
@@ -71,9 +73,10 @@
                              backgroundColor:kClearColor
                                    titleFont:13.0];
     
-    [self.showBtn setImage:kImage(@"展开") forState:UIControlStateNormal];
+    [self.showBtn setImage:kImage(@"下拉") forState:UIControlStateNormal];
     [self.showBtn setTitle:@"收起" forState:UIControlStateSelected];
-    [self.showBtn setImage:kImage(@"收起") forState:UIControlStateSelected];
+    [self.showBtn setImage:kImage(@"上拉") forState:UIControlStateSelected];
+
     [self.showBtn addTarget:self action:@selector(showTitleContent:) forControlEvents:UIControlEventTouchUpInside];
     [self.showBtn setEnlargeEdge:20];
     
@@ -113,19 +116,21 @@
     [self.showBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -_showBtn.titleLabel.intrinsicContentSize.width - 20)];
     //图片
     [self.photosView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(0);
-        make.height.equalTo(@(self.photosView.photoH));
+
+        make.left.equalTo(@0);
+        make.height.mas_equalTo(self.photosView.photoH);
         make.width.equalTo(@(kScreenWidth));
         
         if (!_showBtn.hidden) {
             
-            make.top.equalTo(self.showBtn.mas_bottom);
+            make.top.equalTo(self.showBtn.mas_bottom).offset(0);
             
         } else {
             
             make.top.equalTo(self.contentLbl.mas_bottom).offset(10);
         }
+
+        
     }];
     
 }
@@ -138,7 +143,7 @@
     
     _contentLbl.numberOfLines = sender.selected ? 0: 5;
 
-    [_contentLbl labelWithTextString:_detailModel.introduce lineSpace:5];
+    [_contentLbl labelWithTextString:self.introduce lineSpace:5];
 
     if ([self.delegate respondsToSelector:@selector(didSelectActionWithType:index:)]) {
         
@@ -162,6 +167,8 @@
     
     _detailModel = detailModel;
     
+    _introduce = detailModel.introduce;
+    
     //_layoutItem.good.desc
     [_contentLbl labelWithTextString:detailModel.introduce lineSpace:5];
     
@@ -176,6 +183,29 @@
     //cell高度
     detailModel.contentHeight = self.photosView.yy + 15;
     
+}
+
+- (void)setBrandModel:(BrandModel *)brandModel {
+    
+    _brandModel = brandModel;
+    
+    _introduce = brandModel.introduce;
+
+    //_layoutItem.good.desc
+    [_contentLbl labelWithTextString:brandModel.introduce lineSpace:5];
+    //照片
+    self.photosView.pics = @[@"https://www.baidu.com/img/bd_logo1.png"];
+    
+    //判断是否超出5行
+    NSInteger lineCount = [_contentLbl getLinesArrayOfStringInLabel];
+    
+    _showBtn.hidden = lineCount > 5 ? NO: YES;
+    //
+    [self setSubviewLayout];
+    //
+    [self layoutSubviews];
+    //cell高度
+    brandModel.contentHeight = self.photosView.yy + 15;
 }
 
 @end

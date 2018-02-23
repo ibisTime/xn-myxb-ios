@@ -114,6 +114,24 @@
 		216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */; };
 		216AB7F21F189F30006C26A1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7F11F189F30006C26A1 /* libc++.tbd */; };
 		216AB7F41F189F39006C26A1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7F31F189F39006C26A1 /* libz.tbd */; };
+		21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F0203E598700A8AD34 /* TripListView.m */; };
+		21A1E9F5203E68C300A8AD34 /* BrandListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F4203E68C300A8AD34 /* BrandListVC.m */; };
+		21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F7203E695500A8AD34 /* BrandVC.m */; };
+		21A1E9FD203E6CA500A8AD34 /* BrandListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9FC203E6CA500A8AD34 /* BrandListCell.m */; };
+		21A1EA00203E71F600A8AD34 /* BrandListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9FF203E71F600A8AD34 /* BrandListTableView.m */; };
+		21A1EA03203E731300A8AD34 /* BrandDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA02203E731300A8AD34 /* BrandDetailVC.m */; };
+		21A1EA06203E8DE600A8AD34 /* BrandDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA05203E8DE600A8AD34 /* BrandDetailTableView.m */; };
+		21A1EA09203E8E5A00A8AD34 /* BrandCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA08203E8E5A00A8AD34 /* BrandCommentCell.m */; };
+		21A1EA0C203E8E7B00A8AD34 /* BrandDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA0B203E8E7B00A8AD34 /* BrandDetailHeaderView.m */; };
+		21A1EA12203EBBC800A8AD34 /* BrandBuyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA11203EBBC800A8AD34 /* BrandBuyVC.m */; };
+		21A1EA16203EC4F900A8AD34 /* IntegralMallVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA15203EC4F900A8AD34 /* IntegralMallVC.m */; };
+		21A1EA1B203EC58D00A8AD34 /* IntegralMallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA1A203EC58D00A8AD34 /* IntegralMallHeaderView.m */; };
+		21A1EA1E203EC6C600A8AD34 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA1D203EC6C600A8AD34 /* BaseView.m */; };
+		21A1EA21203FAAB600A8AD34 /* IntegralCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA20203FAAB600A8AD34 /* IntegralCollectionView.m */; };
+		21A1EA24203FAC7300A8AD34 /* IntegralGoodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA23203FAC7300A8AD34 /* IntegralGoodCell.m */; };
+		21A1EA28203FAD9800A8AD34 /* IntegralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA27203FAD9800A8AD34 /* IntegralModel.m */; };
+		21A1EA2B203FBD7400A8AD34 /* IntegralGoodDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA2A203FBD7400A8AD34 /* IntegralGoodDetailVC.m */; };
+		21A1EA2E203FDF7B00A8AD34 /* IntegralGoodHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EA2D203FDF7B00A8AD34 /* IntegralGoodHeaderView.m */; };
 		21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC58701FDE734D00F19DE8 /* TLAccountBaseVC.m */; };
 		21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC58741FDE736C00F19DE8 /* TLUserLoginVC.m */; };
 		21AC587A1FDE737200F19DE8 /* TLUserRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC58751FDE736D00F19DE8 /* TLUserRegisterVC.m */; };
@@ -394,6 +412,42 @@
 		216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		216AB7F11F189F30006C26A1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		216AB7F31F189F39006C26A1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		21A1E9EF203E598700A8AD34 /* TripListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListView.h; sourceTree = "<group>"; };
+		21A1E9F0203E598700A8AD34 /* TripListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListView.m; sourceTree = "<group>"; };
+		21A1E9F3203E68C300A8AD34 /* BrandListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandListVC.h; sourceTree = "<group>"; };
+		21A1E9F4203E68C300A8AD34 /* BrandListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandListVC.m; sourceTree = "<group>"; };
+		21A1E9F6203E695500A8AD34 /* BrandVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandVC.h; sourceTree = "<group>"; };
+		21A1E9F7203E695500A8AD34 /* BrandVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandVC.m; sourceTree = "<group>"; };
+		21A1E9FB203E6CA500A8AD34 /* BrandListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandListCell.h; sourceTree = "<group>"; };
+		21A1E9FC203E6CA500A8AD34 /* BrandListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandListCell.m; sourceTree = "<group>"; };
+		21A1E9FE203E71F600A8AD34 /* BrandListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandListTableView.h; sourceTree = "<group>"; };
+		21A1E9FF203E71F600A8AD34 /* BrandListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandListTableView.m; sourceTree = "<group>"; };
+		21A1EA01203E731300A8AD34 /* BrandDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandDetailVC.h; sourceTree = "<group>"; };
+		21A1EA02203E731300A8AD34 /* BrandDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandDetailVC.m; sourceTree = "<group>"; };
+		21A1EA04203E8DE600A8AD34 /* BrandDetailTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandDetailTableView.h; sourceTree = "<group>"; };
+		21A1EA05203E8DE600A8AD34 /* BrandDetailTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandDetailTableView.m; sourceTree = "<group>"; };
+		21A1EA07203E8E5A00A8AD34 /* BrandCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandCommentCell.h; sourceTree = "<group>"; };
+		21A1EA08203E8E5A00A8AD34 /* BrandCommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandCommentCell.m; sourceTree = "<group>"; };
+		21A1EA0A203E8E7B00A8AD34 /* BrandDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandDetailHeaderView.h; sourceTree = "<group>"; };
+		21A1EA0B203E8E7B00A8AD34 /* BrandDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandDetailHeaderView.m; sourceTree = "<group>"; };
+		21A1EA10203EBBC800A8AD34 /* BrandBuyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandBuyVC.h; sourceTree = "<group>"; };
+		21A1EA11203EBBC800A8AD34 /* BrandBuyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandBuyVC.m; sourceTree = "<group>"; };
+		21A1EA14203EC4F900A8AD34 /* IntegralMallVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralMallVC.h; sourceTree = "<group>"; };
+		21A1EA15203EC4F900A8AD34 /* IntegralMallVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralMallVC.m; sourceTree = "<group>"; };
+		21A1EA19203EC58D00A8AD34 /* IntegralMallHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralMallHeaderView.h; sourceTree = "<group>"; };
+		21A1EA1A203EC58D00A8AD34 /* IntegralMallHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralMallHeaderView.m; sourceTree = "<group>"; };
+		21A1EA1C203EC6C600A8AD34 /* BaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
+		21A1EA1D203EC6C600A8AD34 /* BaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
+		21A1EA1F203FAAB600A8AD34 /* IntegralCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralCollectionView.h; sourceTree = "<group>"; };
+		21A1EA20203FAAB600A8AD34 /* IntegralCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralCollectionView.m; sourceTree = "<group>"; };
+		21A1EA22203FAC7300A8AD34 /* IntegralGoodCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralGoodCell.h; sourceTree = "<group>"; };
+		21A1EA23203FAC7300A8AD34 /* IntegralGoodCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralGoodCell.m; sourceTree = "<group>"; };
+		21A1EA26203FAD9800A8AD34 /* IntegralModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralModel.h; sourceTree = "<group>"; };
+		21A1EA27203FAD9800A8AD34 /* IntegralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralModel.m; sourceTree = "<group>"; };
+		21A1EA29203FBD7400A8AD34 /* IntegralGoodDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralGoodDetailVC.h; sourceTree = "<group>"; };
+		21A1EA2A203FBD7400A8AD34 /* IntegralGoodDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralGoodDetailVC.m; sourceTree = "<group>"; };
+		21A1EA2C203FDF7B00A8AD34 /* IntegralGoodHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralGoodHeaderView.h; sourceTree = "<group>"; };
+		21A1EA2D203FDF7B00A8AD34 /* IntegralGoodHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralGoodHeaderView.m; sourceTree = "<group>"; };
 		21AC586D1FDE72B800F19DE8 /* AppMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		21AC586E1FDE72B900F19DE8 /* APICodeMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICodeMacro.h; sourceTree = "<group>"; };
 		21AC586F1FDE72BA00F19DE8 /* AppColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppColorMacro.h; sourceTree = "<group>"; };
@@ -943,6 +997,7 @@
 		212BE41320285DDC000BCC66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				21A1E9F9203E6C7A00A8AD34 /* Home */,
 				21302346202DA5BE00A954E7 /* Appointment */,
 				212BE46B202BF60A000BCC66 /* Brand */,
 				212BE467202BEB14000BCC66 /* Category */,
@@ -956,6 +1011,7 @@
 			children = (
 				212BE41520285DF8000BCC66 /* HomeVC.h */,
 				212BE41620285DF8000BCC66 /* HomeVC.m */,
+				21A1E9F2203E68AB00A8AD34 /* Brand */,
 				21302342202DA43600A954E7 /* Appointment */,
 				212BE45D202B04B3000BCC66 /* Notice */,
 			);
@@ -1088,6 +1144,7 @@
 			children = (
 				212BE439202A9EC4000BCC66 /* MineVC.h */,
 				212BE43A202A9EC4000BCC66 /* MineVC.m */,
+				21A1EA13203EC4B100A8AD34 /* IntegralMall */,
 				212BE49B202C3D82000BCC66 /* ImageClip */,
 				212BE483202C35D9000BCC66 /* Setting */,
 			);
@@ -1201,12 +1258,10 @@
 		212BE46B202BF60A000BCC66 /* Brand */ = {
 			isa = PBXGroup;
 			children = (
-				212BE46C202BF649000BCC66 /* HomeCollectionView.h */,
-				212BE46D202BF649000BCC66 /* HomeCollectionView.m */,
-				212BE47C202C0023000BCC66 /* HomeHeaderView.h */,
-				212BE47D202C0023000BCC66 /* HomeHeaderView.m */,
 				212BE476202BF741000BCC66 /* BrandCell.h */,
 				212BE477202BF741000BCC66 /* BrandCell.m */,
+				21A1EA0E203EBB6B00A8AD34 /* List */,
+				21A1EA0D203EBB5C00A8AD34 /* Detail */,
 			);
 			path = Brand;
 			sourceTree = "<group>";
@@ -1223,12 +1278,8 @@
 		212BE47F202C30E7000BCC66 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				212BE494202C3773000BCC66 /* MineCell.h */,
-				212BE493202C3773000BCC66 /* MineCell.m */,
-				212BE492202C3773000BCC66 /* MineTableView.h */,
-				212BE495202C3773000BCC66 /* MineTableView.m */,
-				212BE480202C3115000BCC66 /* MineHeaderView.h */,
-				212BE481202C3115000BCC66 /* MineHeaderView.m */,
+				21A1EA18203EC56F00A8AD34 /* Mine */,
+				21A1EA17203EC56200A8AD34 /* IntegralMall */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1245,6 +1296,7 @@
 		212BE484202C371D000BCC66 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				21A1EA25203FAD7000A8AD34 /* Integral */,
 				212BE487202C371D000BCC66 /* MineModel.h */,
 				212BE485202C371D000BCC66 /* MineModel.m */,
 				212BE488202C371D000BCC66 /* MineGroup.h */,
@@ -1365,6 +1417,8 @@
 				2130235D202EC98200A954E7 /* AppointmentCommentCell.m */,
 				21302369202ECE4700A954E7 /* PhotosView.h */,
 				21302368202ECE4600A954E7 /* PhotosView.m */,
+				21A1E9EF203E598700A8AD34 /* TripListView.h */,
+				21A1E9F0203E598700A8AD34 /* TripListView.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1390,6 +1444,104 @@
 				2130237E202EEFF500A954E7 /* UIColor+Extend.m */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		21A1E9F2203E68AB00A8AD34 /* Brand */ = {
+			isa = PBXGroup;
+			children = (
+				21A1E9F6203E695500A8AD34 /* BrandVC.h */,
+				21A1E9F7203E695500A8AD34 /* BrandVC.m */,
+				21A1E9F3203E68C300A8AD34 /* BrandListVC.h */,
+				21A1E9F4203E68C300A8AD34 /* BrandListVC.m */,
+				21A1EA01203E731300A8AD34 /* BrandDetailVC.h */,
+				21A1EA02203E731300A8AD34 /* BrandDetailVC.m */,
+				21A1EA10203EBBC800A8AD34 /* BrandBuyVC.h */,
+				21A1EA11203EBBC800A8AD34 /* BrandBuyVC.m */,
+			);
+			path = Brand;
+			sourceTree = "<group>";
+		};
+		21A1E9F9203E6C7A00A8AD34 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				212BE46C202BF649000BCC66 /* HomeCollectionView.h */,
+				212BE46D202BF649000BCC66 /* HomeCollectionView.m */,
+				212BE47C202C0023000BCC66 /* HomeHeaderView.h */,
+				212BE47D202C0023000BCC66 /* HomeHeaderView.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		21A1EA0D203EBB5C00A8AD34 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				21A1EA04203E8DE600A8AD34 /* BrandDetailTableView.h */,
+				21A1EA05203E8DE600A8AD34 /* BrandDetailTableView.m */,
+				21A1EA0A203E8E7B00A8AD34 /* BrandDetailHeaderView.h */,
+				21A1EA0B203E8E7B00A8AD34 /* BrandDetailHeaderView.m */,
+				21A1EA07203E8E5A00A8AD34 /* BrandCommentCell.h */,
+				21A1EA08203E8E5A00A8AD34 /* BrandCommentCell.m */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		21A1EA0E203EBB6B00A8AD34 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				21A1E9FB203E6CA500A8AD34 /* BrandListCell.h */,
+				21A1E9FC203E6CA500A8AD34 /* BrandListCell.m */,
+				21A1E9FE203E71F600A8AD34 /* BrandListTableView.h */,
+				21A1E9FF203E71F600A8AD34 /* BrandListTableView.m */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		21A1EA13203EC4B100A8AD34 /* IntegralMall */ = {
+			isa = PBXGroup;
+			children = (
+				21A1EA14203EC4F900A8AD34 /* IntegralMallVC.h */,
+				21A1EA15203EC4F900A8AD34 /* IntegralMallVC.m */,
+				21A1EA29203FBD7400A8AD34 /* IntegralGoodDetailVC.h */,
+				21A1EA2A203FBD7400A8AD34 /* IntegralGoodDetailVC.m */,
+			);
+			path = IntegralMall;
+			sourceTree = "<group>";
+		};
+		21A1EA17203EC56200A8AD34 /* IntegralMall */ = {
+			isa = PBXGroup;
+			children = (
+				21A1EA19203EC58D00A8AD34 /* IntegralMallHeaderView.h */,
+				21A1EA1A203EC58D00A8AD34 /* IntegralMallHeaderView.m */,
+				21A1EA1F203FAAB600A8AD34 /* IntegralCollectionView.h */,
+				21A1EA20203FAAB600A8AD34 /* IntegralCollectionView.m */,
+				21A1EA22203FAC7300A8AD34 /* IntegralGoodCell.h */,
+				21A1EA23203FAC7300A8AD34 /* IntegralGoodCell.m */,
+				21A1EA2C203FDF7B00A8AD34 /* IntegralGoodHeaderView.h */,
+				21A1EA2D203FDF7B00A8AD34 /* IntegralGoodHeaderView.m */,
+			);
+			path = IntegralMall;
+			sourceTree = "<group>";
+		};
+		21A1EA18203EC56F00A8AD34 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				212BE494202C3773000BCC66 /* MineCell.h */,
+				212BE493202C3773000BCC66 /* MineCell.m */,
+				212BE492202C3773000BCC66 /* MineTableView.h */,
+				212BE495202C3773000BCC66 /* MineTableView.m */,
+				212BE480202C3115000BCC66 /* MineHeaderView.h */,
+				212BE481202C3115000BCC66 /* MineHeaderView.m */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		21A1EA25203FAD7000A8AD34 /* Integral */ = {
+			isa = PBXGroup;
+			children = (
+				21A1EA26203FAD9800A8AD34 /* IntegralModel.h */,
+				21A1EA27203FAD9800A8AD34 /* IntegralModel.m */,
+			);
+			path = Integral;
 			sourceTree = "<group>";
 		};
 		21AC58FE1FDE798A00F19DE8 /* Header */ = {
@@ -1658,6 +1810,8 @@
 				21F82B6A1F17719D0019B176 /* BaseCollectionView.m */,
 				21302351202E8AB200A954E7 /* BaseTableViewCell.h */,
 				21302352202E8AB200A954E7 /* BaseTableViewCell.m */,
+				21A1EA1C203EC6C600A8AD34 /* BaseView.h */,
+				21A1EA1D203EC6C600A8AD34 /* BaseView.m */,
 				21158E411F1C4F4D00A07266 /* CustomTabBar.h */,
 				21158E421F1C4F4D00A07266 /* CustomTabBar.m */,
 				21158E471F1C502400A07266 /* BarButton.h */,
@@ -1969,7 +2123,9 @@
 				21111B9F1F8B5F2C0021B3FE /* City.m in Sources */,
 				21AC58951FDE741A00F19DE8 /* CaptchaView.m in Sources */,
 				2130235E202EC98200A954E7 /* AppointmentCommentCell.m in Sources */,
+				21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */,
 				21111BA01F8B5F2C0021B3FE /* Province.m in Sources */,
+				21A1EA2B203FBD7400A8AD34 /* IntegralGoodDetailVC.m in Sources */,
 				21111BA11F8B5F2C0021B3FE /* AddressPickerView.m in Sources */,
 				212BE46A202BEB32000BCC66 /* CategoryItem.m in Sources */,
 				212BE442202A9F37000BCC66 /* PlatfromProposalVC.m in Sources */,
@@ -1981,7 +2137,9 @@
 				21302381202EEFF600A954E7 /* LDCalendarView.m in Sources */,
 				21AC589C1FDE751700F19DE8 /* TLBaseModel.m in Sources */,
 				2130236A202ECE4700A954E7 /* PhotosView.m in Sources */,
+				21A1EA1E203EC6C600A8AD34 /* BaseView.m in Sources */,
 				212BE489202C371D000BCC66 /* MineModel.m in Sources */,
+				21A1E9F5203E68C300A8AD34 /* BrandListVC.m in Sources */,
 				21302349202DA5E000A954E7 /* AppointmentListTableView.m in Sources */,
 				21302377202EEDB700A954E7 /* AppointmentCalendarCell.m in Sources */,
 				21111BAF1F8B5F2C0021B3FE /* BannerCell.m in Sources */,
@@ -1996,18 +2154,24 @@
 				21AC596D1FDE814C00F19DE8 /* UIView+Responder.m in Sources */,
 				2130234C202DA5FC00A954E7 /* AppointmentListCell.m in Sources */,
 				212BE460202B04CC000BCC66 /* SystemNoticeVC.m in Sources */,
+				21A1EA00203E71F600A8AD34 /* BrandListTableView.m in Sources */,
+				21A1EA06203E8DE600A8AD34 /* BrandDetailTableView.m in Sources */,
 				21111BB91F8B5F2C0021B3FE /* TLDisplayPhotoVC.m in Sources */,
 				21111BBA1F8B5F2C0021B3FE /* TLImagePickerController.m in Sources */,
 				21AC59611FDE80A300F19DE8 /* UIButton+EnLargeEdge.m in Sources */,
 				21AC597C1FDE823C00F19DE8 /* NSString+Extension.m in Sources */,
 				212BE4AB202C4FA1000BCC66 /* HelpCenterTableView.m in Sources */,
+				21A1EA16203EC4F900A8AD34 /* IntegralMallVC.m in Sources */,
 				212BE472202BF677000BCC66 /* BrandModel.m in Sources */,
+				21A1EA21203FAAB600A8AD34 /* IntegralCollectionView.m in Sources */,
 				21111BBB1F8B5F2C0021B3FE /* TLPhotoChooseItem.m in Sources */,
 				21111BBC1F8B5F2C0021B3FE /* TLChooseResultManager.m in Sources */,
 				21111BBD1F8B5F2C0021B3FE /* TLPhotoCell.m in Sources */,
 				21AC588F1FDE73FE00F19DE8 /* TLUserExt.m in Sources */,
+				21A1E9FD203E6CA500A8AD34 /* BrandListCell.m in Sources */,
 				21AC595B1FDE804500F19DE8 /* UILable+convience.m in Sources */,
 				21AC593E1FDE7A1B00F19DE8 /* TopLabelUtil.m in Sources */,
+				21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */,
 				212BE482202C3115000BCC66 /* MineHeaderView.m in Sources */,
 				21302364202ECB1900A954E7 /* AppointmentDetailHeaderView.m in Sources */,
 				212BE42A202A9CC2000BCC66 /* InviteVC.m in Sources */,
@@ -2046,12 +2210,15 @@
 				21111BE31F8B5F2C0021B3FE /* LKViewAttribute.m in Sources */,
 				21AC59481FDE7A1B00F19DE8 /* TLTimeButton.m in Sources */,
 				212BE4B1202C510F000BCC66 /* LinkServiceVC.m in Sources */,
+				21A1EA09203E8E5A00A8AD34 /* BrandCommentCell.m in Sources */,
 				21111BE51F8B5F2C0021B3FE /* UIControl+Block.m in Sources */,
 				21302345202DA4E400A954E7 /* AppointmentListVC.m in Sources */,
 				212BE4A8202C4036000BCC66 /* SettingVC.m in Sources */,
 				21AC59821FDE825700F19DE8 /* NSNumber+Extension.m in Sources */,
+				21A1EA0C203E8E7B00A8AD34 /* BrandDetailHeaderView.m in Sources */,
 				21AC59411FDE7A1B00F19DE8 /* TLProgressHUD.m in Sources */,
 				212BE490202C3735000BCC66 /* SettingModel.m in Sources */,
+				21A1EA1B203EC58D00A8AD34 /* IntegralMallHeaderView.m in Sources */,
 				21AC593D1FDE7A1B00F19DE8 /* TLTextView.m in Sources */,
 				21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */,
 				21111BEC1F8B5F2C0021B3FE /* Foundation+Log.m in Sources */,
@@ -2060,6 +2227,8 @@
 				21AC59421FDE7A1B00F19DE8 /* TLDatePicker.m in Sources */,
 				21302374202EEB9800A954E7 /* AppointmentTripCell.m in Sources */,
 				21302361202ECA4700A954E7 /* AppointmentContentCell.m in Sources */,
+				21A1EA12203EBBC800A8AD34 /* BrandBuyVC.m in Sources */,
+				21A1EA24203FAC7300A8AD34 /* IntegralGoodCell.m in Sources */,
 				2121702B1F384216007C9855 /* ZHReceivingAddress.m in Sources */,
 				21302323202D49C400A954E7 /* CustomShareView.m in Sources */,
 				212BE46E202BF649000BCC66 /* HomeCollectionView.m in Sources */,
@@ -2103,9 +2272,11 @@
 				21AC588E1FDE73FE00F19DE8 /* UserDefaultsUtil.m in Sources */,
 				21AC587A1FDE737200F19DE8 /* TLUserRegisterVC.m in Sources */,
 				21F82C9F1F17719D0019B176 /* TabbarViewController.m in Sources */,
+				21A1EA28203FAD9800A8AD34 /* IntegralModel.m in Sources */,
 				212170291F384216007C9855 /* ZHAddAddressVC.m in Sources */,
 				21FB30CC1F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m in Sources */,
 				21F82D1F1F17719D0019B176 /* main.m in Sources */,
+				21A1EA03203E731300A8AD34 /* BrandDetailVC.m in Sources */,
 				21F82C9A1F17719D0019B176 /* AppDelegate.mm in Sources */,
 				2121702A1F384216007C9855 /* ZHAddressChooseVC.m in Sources */,
 				21AC593C1FDE7A1B00F19DE8 /* TLTableView.m in Sources */,
@@ -2114,6 +2285,7 @@
 				21F82CA31F17719D0019B176 /* TLAuthHelper.m in Sources */,
 				21302350202DA64400A954E7 /* AppointmentListModel.m in Sources */,
 				212BE464202B0618000BCC66 /* NoticeCell.m in Sources */,
+				21A1EA2E203FDF7B00A8AD34 /* IntegralGoodHeaderView.m in Sources */,
 				21AC597E1FDE823C00F19DE8 /* NSString+Date.m in Sources */,
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
 				21302324202D49C400A954E7 /* ShareView.m in Sources */,

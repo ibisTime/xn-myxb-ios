@@ -7,8 +7,9 @@
 //
 
 #import "BaseTableViewCell.h"
-
+//M
 #import "AppointmentDetailModel.h"
+#import "BrandModel.h"
 
 typedef NS_ENUM(NSInteger, AppointmentType) {
     
@@ -28,8 +29,9 @@ typedef NS_ENUM(NSInteger, AppointmentType) {
 @property (nonatomic, assign) BOOL isCurrentUser;
 //
 @property (nonatomic, weak) id <AppointmentDetailCellDelegate>delegate;
-//
+//美导
 @property (nonatomic, strong) AppointmentDetailModel *detailModel;
-
+//品牌
+@property (nonatomic, strong) BrandModel *brandModel;
 
 @end

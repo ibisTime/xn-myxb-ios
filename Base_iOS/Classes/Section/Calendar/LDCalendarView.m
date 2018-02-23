@@ -240,7 +240,7 @@ static const NSInteger kBtnStartTag = 100;
         UILabel *lab        = [[UILabel alloc] initWithFrame:baseRect];
         lab.textColor       = [UIColor hexColorWithString:@"848484"];
         lab.textAlignment   = NSTextAlignmentCenter;
-        lab.font            = [UIFont systemFontOfSize:10];
+        lab.font            = [UIFont systemFontOfSize:12];
         lab.backgroundColor = [UIColor clearColor];
         lab.text            = [tmparr objectAtIndex:i];
         [bgView addSubview:lab];
@@ -376,8 +376,13 @@ static const NSInteger kBtnStartTag = 100;
 
         NSInteger index = row * kCol + col;
         
-//        [self clickForIndex:index];
+        [self lookTripForIndex:index];
     }
+}
+//点击查看行程
+- (void)lookTripForIndex:(NSInteger)index {
+    
+    
 }
 
 - (void)clickForIndex:(NSInteger)index

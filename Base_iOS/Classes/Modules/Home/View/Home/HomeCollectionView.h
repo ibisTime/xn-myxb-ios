@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "BrandModel.h"
+//V
+#import "BaseCollectionView.h"
 #import "HomeHeaderView.h"
+
+//M
+#import "BrandModel.h"
 
 typedef void(^HomeBlock)(NSIndexPath *indexPath);
 
-@interface HomeCollectionView : UICollectionView
+@interface HomeCollectionView : BaseCollectionView
 //
 @property (nonatomic, strong) HomeHeaderView *headerView;
 //品牌列表

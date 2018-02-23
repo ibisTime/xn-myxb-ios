@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MJRefresh/MJRefresh.h>
+//Macro
+#import "TLUIHeader.h"
+#import "AppColorMacro.h"
 
 @class BaseCollectionView;
 

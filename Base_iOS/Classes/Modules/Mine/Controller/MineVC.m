@@ -26,6 +26,7 @@
 #import "TLImagePicker.h"
 //C
 #import "SettingVC.h"
+#import "IntegralMallVC.h"
 
 @interface MineVC ()<MineHeaderSeletedDelegate>
 //模型
@@ -85,6 +86,9 @@
     jfBalance.imgName = @"积分余额";
     jfBalance.action = ^{
         
+        IntegralMallVC *integralMallVC = [IntegralMallVC new];
+        
+        [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
     };
     
     //行程列表
