@@ -238,14 +238,11 @@
         {
             
             ZHAddressChooseVC *chooseVC = [[ZHAddressChooseVC alloc] init];
-            //    chooseVC.addressRoom = self.addressRoom;
-            //            chooseVC.selectedAddrCode = self.currentAddress.code;
             
             chooseVC.chooseAddress = ^(ZHReceivingAddress *addr){
                 
                 weakSelf.currentAddress = addr;
                 [weakSelf setHeaderAddress:addr];
-                
             };
             
             [self.navigationController pushViewController:chooseVC animated:YES];

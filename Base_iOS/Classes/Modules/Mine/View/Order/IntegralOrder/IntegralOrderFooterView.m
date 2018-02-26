@@ -30,21 +30,22 @@
         
         self.contentView.backgroundColor = [UIColor whiteColor];
         
-        UIButton *btn = [UIButton buttonWithTitle:@""
-                                       titleColor:kThemeColor
-                                  backgroundColor:kClearColor
-                                        titleFont:14.0
-                                     cornerRadius:3];
-        
-        [self addSubview:btn];
-        self.statusBtn = btn;
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).offset(15);
-            make.centerY.equalTo(self.mas_centerY);
-            make.height.equalTo(@30);
-            make.width.equalTo(@70);
-            
-        }];
+//        UIButton *btn = [UIButton buttonWithTitle:@""
+//                                       titleColor:kThemeColor
+//                                  backgroundColor:kClearColor
+//                                        titleFont:14.0
+//                                     cornerRadius:3];
+//
+//        [self addSubview:btn];
+//        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.mas_left).offset(15);
+//            make.centerY.equalTo(self.mas_centerY);
+//            make.height.equalTo(@30);
+//            make.width.equalTo(@70);
+//
+//        }];
+//
+//        self.statusBtn = btn;
         
     }
     return self;
@@ -55,7 +56,11 @@
     
     if (!_receiptBtn) {
         
-        _receiptBtn = [UIButton buttonWithTitle:@"确认收货" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:14.0 cornerRadius:3];
+        _receiptBtn = [UIButton buttonWithTitle:@"确认收货"
+                                     titleColor:kAppCustomMainColor
+                                backgroundColor:kClearColor
+                                      titleFont:14.0
+                                   cornerRadius:3];
         
         _receiptBtn.layer.borderWidth = 1;
         _receiptBtn.layer.borderColor = kAppCustomMainColor.CGColor;
@@ -110,7 +115,7 @@
     _order = order;
     
     //按钮状态
-    [self.statusBtn setTitle:[_order getStatusName] forState:UIControlStateNormal];
+//    [self.statusBtn setTitle:[_order getStatusName] forState:UIControlStateNormal];
     //根据状态添加按钮
     NSInteger status = [_order.status integerValue];
     

@@ -11,7 +11,7 @@
 typedef NS_ENUM(NSUInteger, HTMLType) {
     HTMLTypeAboutUs = 0,    //关于我们
     HTMLTypeRegProtocol,    //注册协议
-    
+    HTMLTypeIntregalRule,   //积分规则
 };
 
 @interface HTMLStrVC : BaseViewController

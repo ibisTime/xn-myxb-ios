@@ -28,6 +28,8 @@
 @property (nonatomic, copy) NSString *photo;
 //昵称
 @property (nonatomic, copy) NSString *nickname;
+//性别
+@property (nonatomic, copy) NSString *gender;
 //登录名
 @property (nonatomic, copy) NSString *loginName;
 //用户名

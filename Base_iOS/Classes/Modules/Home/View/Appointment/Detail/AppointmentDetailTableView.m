@@ -8,7 +8,6 @@
 
 #import "AppointmentDetailTableView.h"
 //V
-#import "AppointmentContentCell.h"
 #import "AppointmentCommentCell.h"
 #import "AppointmentTripCell.h"
 #import "AppointmentCalendarCell.h"
@@ -18,8 +17,6 @@
 @end
 
 @implementation AppointmentDetailTableView
-//
-static NSString *contentCellID = @"AppointmentContentCell";
 //
 static NSString *commentCellID = @"AppointmentCommentCell";
 //
@@ -33,8 +30,6 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
         
         self.dataSource = self;
         self.delegate = self;
-        //图文详情
-        [self registerClass:[AppointmentContentCell class] forCellReuseIdentifier:contentCellID];
         //评论
         [self registerClass:[AppointmentCommentCell class] forCellReuseIdentifier:commentCellID];
         //行程
@@ -90,16 +85,6 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
-        }break;
-            
-        case 1:
-        {
-            AppointmentContentCell *cell = [tableView dequeueReusableCellWithIdentifier:contentCellID forIndexPath:indexPath];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            return cell;
-            
         }break;
             
         case 2:

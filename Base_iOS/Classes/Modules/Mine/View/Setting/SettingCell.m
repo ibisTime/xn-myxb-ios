@@ -50,7 +50,9 @@
         }];
         self.accessoryImageView.image = [UIImage imageNamed:@"更多-灰色"];
         
-        self.rightLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+        self.rightLabel = [UILabel labelWithBackgroundColor:kClearColor
+                                                  textColor:kTextColor
+                                                       font:14.0];
         
         self.rightLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.rightLabel];
@@ -62,7 +64,9 @@
         }];
         
         //
-        self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
+        self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                textColor:kTextColor
+                                                     font:14.0];
         
         [self.contentView addSubview:self.titleLbl];
         [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {

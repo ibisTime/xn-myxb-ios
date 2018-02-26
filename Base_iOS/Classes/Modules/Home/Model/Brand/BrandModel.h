@@ -9,21 +9,35 @@
 #import "BaseModel.h"
 
 @interface BrandModel : BaseModel
-//头像
-@property (nonatomic, copy) NSString *photo;
-//昵称
-@property (nonatomic, copy) NSString *nickName;
-//评分
-@property (nonatomic, assign) NSInteger score;
-//个人简介
-@property (nonatomic, copy) NSString *introduce;
-//评论内容
-@property (nonatomic, copy) NSString *content;
-//时间
-@property (nonatomic, copy) NSString *time;
+
+//广告语
+@property (nonatomic, copy) NSString *slogan;
+//手机号
+@property (nonatomic, copy) NSString *mobile;
+//缩略图
+@property (nonatomic, copy) NSString *advPic;
+//编号
+@property (nonatomic, copy) NSString *code;
+//名称
+@property (nonatomic, copy) NSString *name;
+//价格
+@property (nonatomic, copy) NSString *price;
+//已售数量
+@property (nonatomic, assign) NSInteger soldOutCount;
+//轮播图
+@property (nonatomic, copy) NSString *pic;
+//品牌编号
+@property (nonatomic, copy) NSString *brandCode;
+//图文详情
+@property (nonatomic, copy) NSString *desc;
+//由pic 转化成的 数组
+@property (nonatomic,copy) NSArray *pics;
+
+//总条数
+@property (nonatomic, assign) NSInteger totalCount;
+//平均分
+@property (nonatomic, assign) CGFloat average;
 //
 @property (nonatomic, assign) CGFloat commentHeight;
-//
-@property (nonatomic, assign) CGFloat contentHeight;
 
 @end

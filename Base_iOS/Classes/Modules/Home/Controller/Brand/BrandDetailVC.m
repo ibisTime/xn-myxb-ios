@@ -7,16 +7,17 @@
 //
 
 #import "BrandDetailVC.h"
-//Macro
-//Framework
 //Category
 #import "UIControl+Block.h"
 //Extension
+#import "TLProgressHUD.h"
 //M
 #import "BrandModel.h"
+#import "CommentModel.h"
 //V
 #import "BrandDetailTableView.h"
 #import "BrandDetailHeaderView.h"
+#import "TLPlaceholderView.h"
 //C
 #import "BrandBuyVC.h"
 
@@ -27,6 +28,10 @@
 @property (nonatomic, strong) BrandDetailHeaderView *headerView;
 //
 @property (nonatomic, strong) UIView *bottomView;
+//
+@property (nonatomic, strong) BrandModel *good;
+//
+@property (nonatomic, strong) NSArray <CommentModel *>*commentList;
 
 @end
 
@@ -37,8 +42,18 @@
     // Do any additional setup after loading the view.
     //
     [self initTableView];
-    //底部按钮
-    [self initBottomView];
+
+    //获取产品详情
+    [self requestGoodDetail];
+    //
+    [self addNotification];
+}
+
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    //获取产品详情
+    [self requestGoodDetail];
+
 }
 
 #pragma mark - Init
@@ -46,33 +61,20 @@
     
     self.tableView = [[BrandDetailTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
+    self.tableView.code = self.code;
+    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无评论" topMargin:140];
+
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.right.mas_equalTo(0);
         make.bottom.equalTo(@(-(50 + kBottomInsetHeight)));
     }];
-    
-    //
-    BrandModel *detailModel = [BrandModel new];
-    
-    detailModel.photo = @"";
-    detailModel.nickName = @"CzyGod";
-    detailModel.score = 3;
-    detailModel.content = @"18年经典菜肴, 原料选用优质鸡中翅, 红心有机咸鸭蛋, 经大厨秘制配方匠心制作18年经典菜肴";
-    detailModel.time = @"2018-2-22";
-    detailModel.introduce = @"18年经典菜肴, 原料选用优质鸡中翅, 红心有机咸鸭蛋, 经大厨秘制配方匠心制作18年经典菜肴, 原料选用优质鸡中翅, 红心有机咸鸭蛋, 经大厨秘制配方匠心制作18年经典菜肴, 原料选用优质鸡中翅, 红心有机咸鸭蛋, 经大厨秘制配方匠心制作18年经典菜肴, 原料选用优质鸡中翅, 红心有机咸鸭蛋, 经大厨秘制配方匠心制作";
-    
-    self.tableView.detailModel = detailModel;
-    
-    [self.tableView reloadData];
-    
+
     //HeaderView
     self.headerView = [[BrandDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 300)];
     
-    self.headerView.detailModel = detailModel;
-    
-    self.tableView.tableHeaderView = self.headerView;
 }
 
 - (void)initBottomView {
@@ -118,6 +120,8 @@
         
         BrandBuyVC *buyVC = [BrandBuyVC new];
         
+        buyVC.code = weakSelf.code;
+        
         [weakSelf.navigationController pushViewController:buyVC animated:YES];
         
     } forControlEvents:UIControlEventTouchUpInside];
@@ -130,6 +134,127 @@
         make.width.equalTo(@(kWidth(250)));
     }];
     
+}
+
+- (void)addNotification {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHeaderView) name:@"HeaderViewDidLayout" object:nil];
+}
+
+/**
+ 刷新headerView
+ */
+- (void)reloadHeaderView {
+    
+    self.tableView.tableHeaderView = self.headerView;
+    
+    [self.tableView reloadData_tl];
+
+    //底部按钮
+    [self initBottomView];
+    
+    [TLProgressHUD dismiss];
+}
+
+#pragma mark - Data
+- (void)requestGoodDetail {
+    
+    [TLProgressHUD show];
+    
+    BaseWeakSelf;
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805267";
+    http.parameters[@"code"] = self.code;
+    [http postWithSuccess:^(id responseObject) {
+        
+        [self removePlaceholderView];
+        
+        weakSelf.good = [BrandModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        //计算总条数和评分
+        [self requestCommentInfo];
+        
+    } failure:^(NSError *error) {
+        
+        [self addPlaceholderView];
+        
+        [TLProgressHUD dismiss];
+
+    }];
+}
+
+- (void)requestCommentList {
+    
+    BaseWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"805425";
+    helper.limit = 10;
+    helper.parameters[@"entityCode"] = self.code;
+    helper.parameters[@"status"] = @"AB";
+    helper.parameters[@"orderColumn"] = @"update_datetime";
+    helper.parameters[@"orderDir"] = @"desc";
+    
+    helper.tableView = self.tableView;
+    
+    [helper modelClass:[CommentModel class]];
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        [weakSelf removePlaceholderView];
+        
+        weakSelf.tableView.detailModel = weakSelf.good;
+        weakSelf.headerView.detailModel = weakSelf.good;
+        weakSelf.tableView.commentList = objs;
+        
+    } failure:^(NSError *error) {
+        
+        [weakSelf addPlaceholderView];
+        
+        [TLProgressHUD dismiss];
+    }];
+    
+    [self.tableView endRefreshingWithNoMoreData_tl];
+
+}
+
+/**
+ 计算总条数和评分
+ */
+- (void)requestCommentInfo {
+    
+    BaseWeakSelf;
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805423";
+    http.parameters[@"entityCode"] = self.code;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [self removePlaceholderView];
+        
+        _good.totalCount = [[NSString stringWithFormat:@"%@", responseObject[@"data"][@"totalCount"]] integerValue];
+        _good.average = [[NSString stringWithFormat:@"%@", responseObject[@"data"][@"average"]] doubleValue];
+        
+        //获取评论列表
+        [weakSelf requestCommentList];
+        
+    } failure:^(NSError *error) {
+        
+        [self addPlaceholderView];
+        
+        [TLProgressHUD dismiss];
+
+    }];
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -91,7 +91,7 @@ NSString *const kUserInfoChange = @"kUserInfoChange";
         self.userId = responseObject[@"data"][@"userId"];
         
         [self updateUserInfo];
-        [self requestQiniuDomain];
+//        [self requestQiniuDomain];
         
     } failure:^(NSError *error) {
         

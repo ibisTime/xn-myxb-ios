@@ -27,6 +27,7 @@
 //C
 #import "SettingVC.h"
 #import "IntegralMallVC.h"
+#import "BrandOrderVC.h"
 
 @interface MineVC ()<MineHeaderSeletedDelegate>
 //模型
@@ -107,6 +108,9 @@
     order.imgName = @"成果订单";
     order.action = ^{
         
+        BrandOrderVC *orderVC = [BrandOrderVC new];
+        
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     
     //我的资料
@@ -172,7 +176,10 @@
     order.text = @"成果订单";
     order.imgName = @"成果订单";
     order.action = ^{
+      
+        BrandOrderVC *orderVC = [BrandOrderVC new];
         
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     
     //我的资料

@@ -10,7 +10,7 @@
 #define APICodeMacro_h
 
 //验证码
-#define CAPTCHA_CODE @"805950"
+#define CAPTCHA_CODE @"625917"
 
 //用户
 #define USER_REG_CODE @"805041"//注册
@@ -26,7 +26,7 @@
 #define USER_CHANGE_USER_INFO @"805074" //修改用户资料
 
 //根据ckey查询系统参数
-#define USER_CKEY_CVALUE    @"625917"
+#define USER_CKEY_CVALUE    @"805915"
 
 //七牛图片上传
 #define IMG_UPLOAD_CODE @"805951"

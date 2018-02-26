@@ -11,18 +11,23 @@
 //Category
 #import "NSString+Extension.h"
 #import <UIImageView+WebCache.h>
+#import "NSNumber+Extension.h"
+#import "UILabel+Extension.h"
+#import "NSString+Date.h"
 
 @interface IntegralOrderGoodCell()
 
-@property (nonatomic,strong) UIImageView *coverIV;
+@property (nonatomic, strong) UIImageView *coverIV;
 
-@property (nonatomic,strong) UILabel *nameLbl;
+@property (nonatomic, strong) UILabel *nameLbl;
 //商品价格
-@property (nonatomic,strong) UILabel *priceLbl;
+@property (nonatomic, strong) UILabel *priceLbl;
 //数目
-@property (nonatomic,strong) UILabel *numLbl;
+@property (nonatomic, strong) UILabel *numLbl;
 //总价
 @property (nonatomic, strong) UILabel *totalAmountLbl;
+//下单时间
+@property (nonatomic, strong) UILabel *timeLbl;
 
 @end
 
@@ -86,7 +91,12 @@
                                         textColor:kTextColor];
     
     [self addSubview:self.totalAmountLbl];
+    //下单时间
+    self.timeLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                           textColor:kTextColor2
+                                                font:12.0];
     
+    [self addSubview:self.timeLbl];
     //
     UIView *line = [[UIView alloc] init];
     line.backgroundColor = kLineColor;
@@ -106,17 +116,8 @@
         
         make.left.equalTo(@15);
         make.top.equalTo(@10);
-        make.width.equalTo(@80);
+        make.width.equalTo(@90);
         make.bottom.equalTo(@(-10));
-    }];
-    //名称
-    [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.coverIV.mas_right).offset(10);
-        make.right.equalTo(@(-15));
-        make.top.equalTo(@15);
-        make.height.lessThanOrEqualTo(@(MAXFLOAT));
-        
     }];
     //价格
     [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -125,6 +126,15 @@
         make.top.equalTo(@15);
         make.width.lessThanOrEqualTo(@150);
         make.height.equalTo(@(kFontHeight(13.0)));
+    }];
+    //名称
+    [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.coverIV.mas_right).offset(10);
+        make.right.equalTo(self.priceLbl.mas_left).offset(-15);
+        make.top.equalTo(@15);
+        make.height.lessThanOrEqualTo(@(60));
+        
     }];
     //数量
     [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -142,36 +152,35 @@
         make.height.equalTo(@(kFontHeight(14.0)));
         make.bottom.equalTo(@(-15));
     }];
+    //下单时间
+    [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.nameLbl.mas_left);
+        make.bottom.equalTo(self.coverIV.mas_bottom);
+    }];
+    
 }
 
 - (void)setOrder:(IntegralOrderModel *)order {
     
     _order = order;
     
-    IntegralOrderDetailModel *product = _order.productOrderList[0];
+//    IntegralOrderDetailModel *product = _order.productOrderList[0];
 //
-//    NSString *urlStr = [product.productPic componentsSeparatedByString:@"||"][0];
-//
-//    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[urlStr convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
-//
-//    //
-//    self.nameLbl.text = product.productName;
-//
-//    //
-//    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.amount1 convertToSimpleRealMoney]];
-//
-//    //
-//    self.numLbl.text = [NSString stringWithFormat:@"X %@",[product.quantity stringValue]];
-//
-//    //
-//
-//    //总计=(商品总额+运费)*折扣
-//
-//    CGFloat totalAmount = [_order.amount1 doubleValue] + [_order.yunfei doubleValue];
-//
-//    NSString *amountStr = [NSString stringWithFormat:@"￥%@", [@(totalAmount) convertToSimpleRealMoney]];
-//
-//    [_totalAmountLbl labelWithString:[NSString stringWithFormat:@"总计: %@", amountStr] title:amountStr font:Font(15.0) color:kThemeColor];
+    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.productPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    //
+    self.nameLbl.text = order.productName;
+    //
+    self.priceLbl.text = [NSString stringWithFormat:@"%@", [_order.amount convertToSimpleRealMoney]];
+    //
+    self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.quantity stringValue]];
+    //
+    self.timeLbl.text = [order.applyDatetime convertDate];
+    //总计=(商品总额+运费)*折扣
+    // + [_order.yunfei doubleValue]
+    CGFloat totalAmount = [_order.amount doubleValue];
+    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToSimpleRealMoney]];
+    [_totalAmountLbl labelWithString:[NSString stringWithFormat:@"总计: %@", amountStr] title:amountStr font:Font(15.0) color:kThemeColor];
 }
 
 @end

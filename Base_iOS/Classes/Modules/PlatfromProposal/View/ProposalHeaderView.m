@@ -115,7 +115,10 @@
         }
     }
     //查看全部
-    UIButton *lookAllBtn = [UIButton buttonWithTitle:@"查看全部" titleColor:kAppCustomMainColor backgroundColor:kClearColor titleFont:12.0];
+    UIButton *lookAllBtn = [UIButton buttonWithTitle:@"查看全部"
+                                          titleColor:kAppCustomMainColor
+                                     backgroundColor:kClearColor
+                                           titleFont:12.0];
     [lookAllBtn bk_addEventHandler:^(id sender) {
         
         
@@ -140,7 +143,9 @@
     
     [self addSubview:whiteView];
     //轻点评分
-    UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:15.0];
+    UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                 textColor:kTextColor2
+                                                      font:15.0];
     
     promptLbl.text = @"轻点评分";
     [whiteView addSubview:promptLbl];

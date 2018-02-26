@@ -8,10 +8,10 @@
 
 #import "BaseTableViewCell.h"
 //M
-#import "BrandModel.h"
+#import "CommentModel.h"
 
 @interface BrandCommentCell : BaseTableViewCell
 //
-@property (nonatomic, strong) BrandModel *detailModel;
+@property (nonatomic, strong) CommentModel *comment;
 
 @end

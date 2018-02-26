@@ -16,12 +16,16 @@
 //评论时间
 @property (nonatomic, copy) NSString *commentDatetime;
 @property (nonatomic, copy) NSString *content;
-@property (nonatomic, copy) NSString *commenter; //userId
+//userId
+@property (nonatomic, copy) NSString *commenter;
 
 @property (nonatomic, copy) NSString *photo;
 @property (nonatomic, copy) NSString *entityCode;
 @property (nonatomic, copy) NSString *nickname;
 
-@property (nonatomic, strong) NSNumber *score;
+@property (nonatomic, assign) NSInteger score;
+
+//
+@property (nonatomic, assign) CGFloat commentHeight;
 
 @end

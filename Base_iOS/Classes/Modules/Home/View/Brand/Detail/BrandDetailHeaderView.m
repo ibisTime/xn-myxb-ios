@@ -15,10 +15,12 @@
 #import "NSString+Extension.h"
 #import "UILabel+Extension.h"
 #import <UIImageView+WebCache.h>
+#import "NSNumber+Extension.h"
 //M
 #import "BannerModel.h"
 //V
 #import "TLBannerView.h"
+#import "DetailWebView.h"
 
 @interface BrandDetailHeaderView()
 //轮播图
@@ -33,6 +35,10 @@
 @property (nonatomic, strong) UILabel *priceLbl;
 //产品销量
 @property (nonatomic, strong) UILabel *numLbl;
+//
+@property (nonatomic, strong) UIView *whiteView;
+//图文详情
+@property (nonatomic, strong) DetailWebView *detailWebView;
 
 @end
 
@@ -47,6 +53,8 @@
         [self initBannerView];
         //产品
         [self initGoodView];
+        //图文详情
+        [self initWebView];
     }
     return self;
 }
@@ -54,10 +62,8 @@
 #pragma mark - Init
 - (void)initBannerView {
     
-    BaseWeakSelf;
-    
     //顶部轮播
-    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(185))];
+    TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(375))];
     
     [self addSubview:bannerView];
     
@@ -103,6 +109,71 @@
     
 }
 
+- (void)initWebView {
+    
+    BaseWeakSelf;
+    
+    UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 42)];
+    
+    whiteView.backgroundColor = kWhiteColor;
+    
+    [self addSubview:whiteView];
+    
+    self.whiteView = whiteView;
+    
+    //line
+    UIView *line = [[UIView alloc] init];
+    
+    line.backgroundColor = kThemeColor;
+    
+    [whiteView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@15);
+        make.centerY.equalTo(@0);
+        make.width.equalTo(@3);
+        make.height.equalTo(@13.5);
+    }];
+    //text
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
+                        
+                                               textColor:kTextColor
+                                                    font:14.0];
+    
+    textLbl.text = @"商品详情";
+    [whiteView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(line.mas_centerY);
+        make.left.equalTo(line.mas_right).offset(10);
+    }];
+    
+    //bottomLine
+    UIView *bottomLine = [[UIView alloc] init];
+    
+    bottomLine.backgroundColor = kLineColor;
+    
+    [whiteView addSubview:bottomLine];
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.bottom.equalTo(@0);
+        make.height.equalTo(@0.5);
+        
+    }];
+
+    
+    //图文详情
+    self.detailWebView = [[DetailWebView alloc] initWithFrame:CGRectMake(0, whiteView.yy + 90, kScreenWidth, 40)];
+    
+    self.detailWebView.webViewBlock = ^(CGFloat height) {
+        
+        [weakSelf setSubViewLayoutWithHeight:height];
+    };
+    
+    [self addSubview:self.detailWebView];
+    
+}
+
 - (void)setSubviewLayout {
     
     CGFloat leftMargin = 15;
@@ -131,9 +202,29 @@
     //产品销量
     [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.priceLbl.mas_right).offset(60);
+        make.right.equalTo(self.mas_right).offset(-15);
         make.centerY.equalTo(self.priceLbl.mas_centerY);
     }];
+}
+
+/**
+ 调整视图高度
+ */
+- (void)setSubViewLayoutWithHeight:(CGFloat)height {
+    
+    //
+    [self layoutIfNeeded];
+    
+    self.goodView.height = _priceLbl.yy + 15;
+    
+    self.whiteView.y = self.goodView.yy + 10;
+    
+    self.detailWebView.webView.scrollView.height = height;
+    self.detailWebView.frame = CGRectMake(0, self.whiteView.yy, kScreenWidth, height);
+    
+    self.height = self.detailWebView.yy;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HeaderViewDidLayout" object:nil];
 }
 
 #pragma mark - Setting
@@ -141,19 +232,19 @@
     
     _detailModel = detailModel;
     
-    _bannerView.imgUrls = @[@"健康专家"];
-    _nameLbl.text = @"欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅";
-    _descLbl.text = @"绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美";
-    _priceLbl.text = [NSString stringWithFormat:@"￥%@", @"1999.00"];
-    _numLbl.text = [NSString stringWithFormat:@"已售: %@", @"999"];
+    _bannerView.imgUrls = detailModel.pics;
+    
+    _nameLbl.text = detailModel.name;
+    _descLbl.text = detailModel.slogan;
+    
+    _priceLbl.text = [NSString stringWithFormat:@"￥%@", [detailModel.price convertToSimpleRealMoney]];
+    
+    _numLbl.text = [NSString stringWithFormat:@"已售: %ld", detailModel.soldOutCount];
+    [_detailWebView loadWebWithString:detailModel.desc];
+
     //布局
     [self setSubviewLayout];
-    //
-    [self layoutIfNeeded];
     
-    self.goodView.height = _priceLbl.yy + 15;
-    
-    self.height = self.goodView.yy;
 }
 
 @end

@@ -7,7 +7,14 @@
 //
 
 #import "BaseViewController.h"
+#import "IntegralOrderModel.h"
 
 @interface IntegralOrderDetailVC : BaseViewController
+//
+@property (nonatomic, strong) IntegralOrderModel *order;
+//评价
+@property (nonatomic,copy) void(^commentSuccess)(void);
+//收货
+@property (nonatomic,copy) void(^receiveSuccess)(void);
 
 @end

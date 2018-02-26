@@ -7,14 +7,20 @@
 //
 
 #import "BaseModel.h"
-#import "IntegralOrderDetailModel.h"
 
 @interface IntegralOrderModel : BaseModel
 
 @property (nonatomic,copy) NSString *code;
-
 //产品名称
-@property (nonatomic, copy, readonly) NSString *productName;
+@property (nonatomic, copy) NSString *productName;
+//广告语
+@property (nonatomic, copy) NSString *productSlogan;
+//产品图片
+@property (nonatomic, copy) NSString *productPic;
+//总价
+@property (nonatomic, strong) NSNumber *amount;
+//单价
+@property (nonatomic, strong) NSNumber *price;
 //收货人
 @property (nonatomic,copy) NSString *receiver;
 //电话
@@ -26,10 +32,7 @@
 //商家嘱托
 @property (nonatomic,copy) NSString *applyNote;
 
-//物品数组 <OrderDetailModel *>
-@property (nonatomic,copy) NSArray <IntegralOrderDetailModel *> *productOrderList;
-
-//0全部 1待支付 2 待发货 3 待收货 4 已收货 91用户取消 92 商户取消 93 快递异常
+//0全部 1 待发货 2 待收货 3 待评价 4 已完成 92 商户取消 93 快递异常
 @property (nonatomic,copy) NSString *status; //状态
 
 @property (nonatomic,copy) NSString *deliveryDatetime; //发货时间
@@ -43,4 +46,11 @@
 
 - (NSString *)getStatusName;
 
+- (NSString *)getExpressName;
+
 @end
+
+FOUNDATION_EXTERN NSString *const kOrderStatusWillSendGood;
+FOUNDATION_EXTERN NSString *const kOrderStatusWillReceiveGood;
+FOUNDATION_EXTERN NSString *const kOrderStatusWillComment;
+FOUNDATION_EXTERN NSString *const kOrderStatusDidComplete;

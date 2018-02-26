@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface BrandDetailVC : BaseViewController
+//
+@property (nonatomic, copy) NSString *code;
 
 @end

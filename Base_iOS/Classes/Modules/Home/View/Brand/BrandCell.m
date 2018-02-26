@@ -68,11 +68,9 @@
     
     _brandModel = brandModel;
     
-    _goodIV.image = kImage(@"健康专家");
-    _nameLbl.text = @"欧莱雅";
-//    [_goodIV sd_setImageWithURL:[NSURL URLWithString:brandModel.pics[0]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [_goodIV sd_setImageWithURL:[NSURL URLWithString:brandModel.advPic] placeholderImage:GOOD_PLACEHOLDER_SMALL];
 
-//    _nameLbl.text = brandModel.name;
+    _nameLbl.text = brandModel.name;
 
 }
 

@@ -12,5 +12,7 @@
  品牌列表
  */
 @interface BrandListVC : BaseViewController
+//
+@property (nonatomic, copy) NSString *brandCode;
 
 @end

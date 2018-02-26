@@ -70,18 +70,16 @@
     
     //scrollview
     [self initScrollView];
-    //banner图
-//    [self initBannerView];
     //
     [self initSubviews];
     //获取banner图
     [self getBanner];
     //获取活动规则
-    [self requestActivityRule];
+//    [self requestActivityRule];
     //获取邀请人数和收益
     [self requestInviteNumber];
     //获取分享链接
-    [self getShareUrl];
+//    [self getShareUrl];
     
 }
 #pragma mark - Init
@@ -482,17 +480,17 @@
 - (void)requestActivityRule {
     
     TLNetworking *http = [TLNetworking new];
-    
+
     http.code = USER_CKEY_CVALUE;
     http.parameters[@"key"] = @"activity_rule";
-    
+
     [http postWithSuccess:^(id responseObject) {
-        
+
         self.remark = responseObject[@"data"][@"cvalue"];
-        
+
     } failure:^(NSError *error) {
-        
-        
+
+
     }];
 }
 
@@ -504,7 +502,7 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"625917";
+    http.code = USER_CKEY_CVALUE;
     http.parameters[@"key"] = @"reg_url";
     
     [http postWithSuccess:^(id responseObject) {

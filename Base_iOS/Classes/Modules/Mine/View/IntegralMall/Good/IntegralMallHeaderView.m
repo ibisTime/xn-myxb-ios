@@ -70,7 +70,7 @@
     UIButton *integralBtn = [UIButton buttonWithTitle:@"赚积分"
                                            titleColor:kWhiteColor
                                       backgroundColor:kAppCustomMainColor
-                                            titleFont:13.0
+                                            titleFont:12.0
                                          cornerRadius:btnHeight/2.0];
     
     [integralBtn addTarget:self action:@selector(getIntegral) forControlEvents:UIControlEventTouchUpInside];
@@ -81,7 +81,6 @@
         make.width.equalTo(@50);
         make.centerY.equalTo(@(-22.5));
         make.height.equalTo(@25);
-        
     }];
     //昵称
     self.nameLbl = [UILabel labelWithBackgroundColor:kClearColor
@@ -91,11 +90,11 @@
     self.nameLbl.numberOfLines = 0;
     [self addSubview:self.nameLbl];
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).offset(15);
+        
+        make.top.equalTo(self.photoIV).offset(5);
         make.left.equalTo(self.photoIV.mas_right).offset(15);
         make.height.lessThanOrEqualTo(@(40));
         make.right.equalTo(integralBtn.mas_left).offset(-15);
-        
     }];
     
     //性别
@@ -104,9 +103,8 @@
     [self addSubview:self.genderImg];
     [self.genderImg mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerY.equalTo(self.photoIV.mas_bottom).offset(-(photoW/4.0));
-        make.centerX.equalTo(self.photoIV.mas_right).offset(-(photoW/4.0));
-        
+        make.centerY.equalTo(self.photoIV.mas_bottom).offset(-(photoW/4.0-3.5));
+        make.centerX.equalTo(self.photoIV.mas_right).offset(-(photoW/4.0-3.5));
     }];
     //积分数量
     self.amountLbl = [UILabel labelWithBackgroundColor:kClearColor
@@ -119,10 +117,7 @@
     [self.amountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.photoIV.mas_right).offset(15);
-        make.height.lessThanOrEqualTo(@15);
-        make.width.lessThanOrEqualTo(@150);
-        make.bottom.equalTo(@(-10));
-        
+        make.bottom.equalTo(self.photoIV.mas_bottom).offset(-5);
     }];
     
     UIView *line = [[UIView alloc] init];
@@ -220,11 +215,9 @@
     
     self.nameLbl.text = [TLUser user].nickname;
     
-    //    NSString *img = [[TLUser user].userExt.gender isEqualToString:@"1"] ? @"男": @"女生";
+    NSString *img = [[TLUser user].gender isEqualToString:@"1"] ? @"男士": @"女生";
     
-    //    [self.genderImg setImage:[UIImage imageNamed:img]];
-    
-    
+    [self.genderImg setImage:kImage(img)];
 }
 
 - (void)logout {

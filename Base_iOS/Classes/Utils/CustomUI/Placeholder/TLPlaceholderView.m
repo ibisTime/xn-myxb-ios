@@ -40,7 +40,7 @@
     [_placholderView addSubview:lbl];
     [lbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(_placholderView);
-        make.top.equalTo(_placholderView.mas_top).offset(20);
+        make.centerY.equalTo(_placholderView.mas_centerY).offset(0);
     }];
     lbl.numberOfLines = 0;
     lbl.text = text;

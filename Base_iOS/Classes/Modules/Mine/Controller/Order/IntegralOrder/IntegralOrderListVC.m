@@ -8,11 +8,8 @@
 
 #import "IntegralOrderListVC.h"
 
-//Macro
-//Framework
 //Category
 #import "NSString+Date.h"
-//Extension
 //M
 #import "IntegralOrderModel.h"
 //V
@@ -21,7 +18,7 @@
 //C
 #import "IntegralOrderDetailVC.h"
 #import "NavigationController.h"
-//#import "SendCommentVC.h"
+#import "SendCommentVC.h"
 
 @interface IntegralOrderListVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -101,6 +98,8 @@
     
     helper.parameters[@"token"] = [TLUser user].token;
     helper.parameters[@"applyUser"] = [TLUser user].userId;
+    helper.parameters[@"orderColumn"] = @"update_datetime";
+    helper.parameters[@"orderDir"] = @"desc";
     
     if (self.status == IntegralOrderStatusWillSend) {
         
@@ -123,9 +122,6 @@
         helper.parameters[@"status"] = @"4";
         
     } else {//全部
-        
-        helper.parameters[@"orderColumn"] = @"update_datetime";
-        helper.parameters[@"orderDir"] = @"desc";
         
     }
     
@@ -187,11 +183,9 @@
             TLNetworking *http = [TLNetworking new];
             
             http.showView = self.view;
-            http.code = @"808057";
-            http.parameters[@"code"] = order.code;
+            http.code = @"805296";
+            http.parameters[@"orderCode"] = order.code;
             http.parameters[@"updater"] = [TLUser user].userId;
-            http.parameters[@"remark"] = @"确认收货";
-            http.parameters[@"token"] = [TLUser user].token;
             
             [http postWithSuccess:^(id responseObject) {
                 
@@ -201,29 +195,24 @@
                 
             } failure:^(NSError *error) {
                 
-                
             }];
         }break;
             
         case IntegralOrderEventsTypeComment:
         {
             //对宝贝进行评价
-//            SendCommentVC *sendCommentVC = [[SendCommentVC alloc] init];
-//
-//            sendCommentVC.type =  SendCommentActionTypeComment;
-//            sendCommentVC.toObjCode = order.code;
-//
-//            sendCommentVC.titleStr = @"评价";
-//
-//            [sendCommentVC setCommentSuccess:^(CommentModel *model){
-//
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
-//
-//            }];
-//
-//            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:sendCommentVC];
-//
-//            [self presentViewController:nav animated:YES completion:nil];
+            SendCommentVC *sendCommentVC = [[SendCommentVC alloc] init];
+
+            sendCommentVC.code = order.code;
+            
+            [sendCommentVC setCommentSuccess:^(){
+
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
+            }];
+
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:sendCommentVC];
+
+            [self presentViewController:nav animated:YES completion:nil];
 
         }break;
 
@@ -240,13 +229,13 @@
     
     IntegralOrderDetailVC *vc = [[IntegralOrderDetailVC alloc] init];
     
-//    vc.order = self.orderGroups[indexPath.section];
-//
-//    //评价
-//    vc.commentSuccess = ^{
-//
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
-//    };
+    vc.order = self.orderGroups[indexPath.section];
+
+    //评价
+    vc.commentSuccess = ^{
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
+    };
     
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -257,7 +246,7 @@
     
     IntegralOrderModel *model = self.orderGroups[section];
     
-    return [self headerViewWithOrderNum:model.code date:model.applyDatetime];
+    return [self headerViewWithOrder:model];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -284,7 +273,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 98;
+    return 110;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -294,7 +283,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 50;
+    IntegralOrderModel *order = self.orderGroups[section];
+    
+    if ([order.status isEqualToString:kOrderStatusWillReceiveGood] || [order.status isEqualToString:kOrderStatusWillComment]) {
+        
+        return 50;
+    }
+    return 0.00001;
 }
 
 #pragma mark- datasourece
@@ -326,11 +321,12 @@
     
 }
 
-- (UIView *)headerViewWithOrderNum:(NSString *)num date:(NSString *)date {
+- (UIView *)headerViewWithOrder:(IntegralOrderModel *)order {
     
     UIView *headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 40)];
     
-    headerV.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
+    headerV.backgroundColor = kBackgroundColor;
+    
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 30)];
     v.backgroundColor = [UIColor whiteColor];
     [headerV addSubview:v];
@@ -346,14 +342,16 @@
         make.top.equalTo(headerV.mas_top).offset(10);
         make.bottom.equalTo(headerV.mas_bottom);
     }];
-    lbl1.text = [NSString stringWithFormat:@"订单编号: %@", num];
+    lbl1.text = [NSString stringWithFormat:@"订单编号: %@", order.code];
     
     //
     UILabel *lbl2 = [UILabel labelWithFrame:CGRectZero
                                textAligment:NSTextAlignmentLeft
                             backgroundColor:[UIColor whiteColor]
-                                       font:Font(11)
-                                  textColor:kTextColor2];;
+                                       font:Font(12)
+                                  textColor:kThemeColor];
+    lbl2.text = [order getStatusName];
+
     [headerV addSubview:lbl2];
     [lbl2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(lbl1.mas_right).offset(-15);
@@ -361,10 +359,8 @@
         make.bottom.equalTo(headerV.mas_bottom);
         make.right.equalTo(headerV.mas_right).offset(-15);
     }];
-    lbl2.text = [date convertDate];
     
     //
-    
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, headerV.height - 0.7, kScreenWidth, 0.7)];
     line.backgroundColor = kLineColor;
     [headerV addSubview:line];

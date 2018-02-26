@@ -12,15 +12,16 @@
 #import "UIControl+Block.h"
 //V
 #import "BrandCommentCell.h"
-#import "AppointmentContentCell.h"
+#import "UIView+Responder.h"
+//C
+#import "BrandCommentListVC.h"
 
 @interface BrandDetailTableView()<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation BrandDetailTableView
-//
-static NSString *contentCellID = @"AppointmentContentCell";
+
 //
 static NSString *commentCellID = @"BrandCommentCell";
 
@@ -30,11 +31,8 @@ static NSString *commentCellID = @"BrandCommentCell";
         
         self.dataSource = self;
         self.delegate = self;
-        //图文详情
-        [self registerClass:[AppointmentContentCell class] forCellReuseIdentifier:contentCellID];
         //评论
         [self registerClass:[BrandCommentCell class] forCellReuseIdentifier:commentCellID];
-        
     }
     
     return self;
@@ -44,53 +42,21 @@ static NSString *commentCellID = @"BrandCommentCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == 0) {
-        
-        return 1;
-    }
-    return 5;
+    return self.commentList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    switch (indexPath.section) {
-        
-        case 0:
-        {
-            AppointmentContentCell *cell = [tableView dequeueReusableCellWithIdentifier:contentCellID forIndexPath:indexPath];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            cell.brandModel = self.detailModel;
-            
-            return cell;
-            
-        }break;
-            
-        case 1:
-        {
-            BrandCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellID forIndexPath:indexPath];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            cell.detailModel = self.detailModel;
-
-            return cell;
-            
-        }break;
-            
-        default:
-            break;
-    }
-    
     BrandCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellID forIndexPath:indexPath];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.comment = self.commentList[indexPath.row];
     
     return cell;
 }
@@ -101,16 +67,13 @@ static NSString *commentCellID = @"BrandCommentCell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        
-        return self.detailModel.contentHeight;
-    }
-    return self.detailModel.commentHeight;
+    CommentModel *comment = self.commentList[indexPath.row];
+    
+    return comment.commentHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -120,7 +83,14 @@ static NSString *commentCellID = @"BrandCommentCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
+    BaseWeakSelf;
+    
     UIView *headerSectionView = [[UIView alloc] init];
+    
+    if (!_detailModel) {
+        
+        return headerSectionView;
+    }
     
     //topLine
     UIView *topLine = [[UIView alloc] init];
@@ -148,50 +118,7 @@ static NSString *commentCellID = @"BrandCommentCell";
         make.width.equalTo(@(kScreenWidth));
         make.height.equalTo(@42);
     }];
-    
-    if (section == 0) {
-        
-        //line
-        UIView *line = [[UIView alloc] init];
-        
-        line.backgroundColor = kThemeColor;
-        
-        [whiteView addSubview:line];
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(@15);
-            make.centerY.equalTo(@0);
-            make.width.equalTo(@3);
-            make.height.equalTo(@13.5);
-        }];
-        //text
-        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                   textColor:kTextColor
-                                                        font:14.0];
-        
-        textLbl.text = @"商品详情";
-        [whiteView addSubview:textLbl];
-        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerY.equalTo(line.mas_centerY);
-            make.left.equalTo(line.mas_right).offset(10);
-        }];
-        
-        //bottomLine
-        UIView *bottomLine = [[UIView alloc] init];
-        
-        bottomLine.backgroundColor = kLineColor;
-        
-        [whiteView addSubview:bottomLine];
-        [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.right.bottom.equalTo(@0);
-            make.height.equalTo(@0.5);
-            
-        }];
-        
-        return headerSectionView;
-    }
+
     //评分
     UIView *starView = [[UIView alloc] init];
     
@@ -210,7 +137,7 @@ static NSString *commentCellID = @"BrandCommentCell";
         
         UIImageView *iv = [[UIImageView alloc] init];
         
-        iv.image = i < _detailModel.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+        iv.image = i < _detailModel.average ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
         
         [starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -225,7 +152,8 @@ static NSString *commentCellID = @"BrandCommentCell";
                                                textColor:[UIColor colorWithHexString:@"#ffbe00"]
                                                     font:14.0];
     
-    textLbl.text = [NSString stringWithFormat:@"%ld 星", _detailModel.score];
+    textLbl.text = [NSString stringWithFormat:@"%.1lf 星", _detailModel.average];
+    
     [whiteView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -242,14 +170,21 @@ static NSString *commentCellID = @"BrandCommentCell";
         make.centerY.equalTo(@0);
     }];
     //评论
-    UIButton *commentBtn = [UIButton buttonWithTitle:[NSString stringWithFormat:@"%@条评论", @"99"]
+    UIButton *commentBtn = [UIButton buttonWithTitle:@""
                                           titleColor:kTextColor
                                      backgroundColor:kClearColor
                                            titleFont:12.0];
     
+    [commentBtn setTitle:[NSString stringWithFormat:@"%ld条评论",_detailModel.totalCount] forState:UIControlStateNormal];
+    
     [commentBtn setEnlargeEdge:10];
     [commentBtn bk_addEventHandler:^(id sender) {
         
+        BrandCommentListVC *commentListVC = [BrandCommentListVC new];
+        
+        commentListVC.code = self.code;
+        
+        [weakSelf.viewController.navigationController pushViewController:commentListVC animated:YES];
         
     } forControlEvents:UIControlEventTouchUpInside];
     

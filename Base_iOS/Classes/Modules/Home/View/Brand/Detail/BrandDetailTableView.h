@@ -9,9 +9,14 @@
 #import "TLTableView.h"
 //M
 #import "BrandModel.h"
+#import "CommentModel.h"
 
 @interface BrandDetailTableView : TLTableView
 //
 @property (nonatomic, strong) BrandModel *detailModel;
+//
+@property (nonatomic, strong) NSMutableArray <CommentModel *>*commentList;
+//code
+@property (nonatomic, copy) NSString *code;
 
 @end

@@ -29,6 +29,7 @@
 #import "SystemNoticeVC.h"
 #import "AppointmentListVC.h"
 #import "BrandVC.h"
+#import "BrandListVC.h"
 
 @interface HomeVC ()<UIScrollViewDelegate>
 //
@@ -56,7 +57,7 @@
     //系统消息
 //    [self requestNoticeList];
 //    //获取商品列表
-//    [self requestBrandList];
+    [self requestBrandList];
 }
 
 - (void)viewDidLoad {
@@ -109,13 +110,12 @@
         
         BrandModel *good = weakSelf.brands[indexPath.row];
         
-//        GoodDetailVC *detailVC = [[GoodDetailVC alloc] init];
-//
-//        detailVC.code = good.code;
-//
-//        detailVC.userId = weakSelf.userId;
-//
-//        [weakSelf.navigationController pushViewController:detailVC animated:YES];
+        BrandListVC *listVC = [BrandListVC new];
+        
+        listVC.title = good.name;
+        listVC.brandCode = good.code;
+        
+        [weakSelf.navigationController pushViewController:listVC animated:YES];
     };
     
     [self.view addSubview:self.collectionView];
@@ -179,22 +179,16 @@
     
     BaseWeakSelf;
     //location： 0 普通列表 1 推荐列表
+    //status:TO_Shelf("1", "未上架"), Shelf_YES("2", "已上架"), Shelf_NO("3", "已下架");
+    
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"808021";
+    helper.code = @"805256";
     
-    //    helper.parameters[@"statusList"] = @[@"3"];
-    
-    //    helper.parameters[@"statusList"] = @[@"4", @"5", @"6"];
-    
-    helper.parameters[@"start"] = @"1";
-    helper.parameters[@"limit"] = @"10";
-    if ([TLUser user].userId) {
-        
-        helper.parameters[@"userId"] = [TLUser user].userId;
-    }
-    helper.parameters[@"orderColumn"] = @"update_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
+    helper.parameters[@"location"] = @"1";
+    helper.parameters[@"status"] = @"2";
+//    helper.parameters[@"orderColumn"] = @"update_datetime";
+//    helper.parameters[@"orderDir"] = @"desc";
     
     [helper modelClass:[BrandModel class]];
     

@@ -55,6 +55,11 @@ static const float kAnimationdDuration = 0.3;
 
 - (void)initSubViews {
     
+    if (self.sortNames.count == 0) {
+        
+        return ;
+    }
+    
     [self createItems];
     
     [self changeItemTitleColorWithIndex:0];

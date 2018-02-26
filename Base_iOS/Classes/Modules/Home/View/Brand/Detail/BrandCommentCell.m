@@ -12,6 +12,7 @@
 //Category
 #import <UIImageView+WebCache.h>
 #import "NSString+Extension.h"
+#import "NSString+Date.h"
 //Extension
 //M
 //V
@@ -141,7 +142,7 @@
 
         UIImageView *iv = [[UIImageView alloc] init];
 
-        iv.image = i < _detailModel.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+        iv.image = i < _comment.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
 
         [self.starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -154,23 +155,24 @@
 }
 
 #pragma mark - Setting
-- (void)setDetailModel:(BrandModel *)detailModel {
+- (void)setComment:(CommentModel *)comment {
     
-    _detailModel = detailModel;
+    _comment = comment;
     
-    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[detailModel.photo convertImageUrl]]
+    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[comment.photo convertImageUrl]]
                     placeholderImage:USER_PLACEHOLDER_SMALL];
     
-    self.nameLbl.text = detailModel.nickName;
+    self.nameLbl.text = comment.nickname;
     
-    self.timeLbl.text = detailModel.time;
+    self.timeLbl.text = [comment.commentDatetime convertToDetailDate];
     
-    self.contentLbl.text = detailModel.content;
+    self.contentLbl.text = comment.content;
     //
     [self setSubviewLayout];
     //
     [self layoutSubviews];
     
-    detailModel.commentHeight = self.contentLbl.yy + 10;
+    comment.commentHeight = self.contentLbl.yy + 10;
 }
+
 @end

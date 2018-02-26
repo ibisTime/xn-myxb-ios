@@ -261,7 +261,9 @@ _Pragma("clang diagnostic pop") \
             frame.origin.y = self.tableHeaderView.frame.size.height;
             self.placeHolderView.frame = frame;
         }
-        [self addSubview:self.placeHolderView];
+        self.tableFooterView = self.placeHolderView;
+        
+//        [self addSubview:self.placeHolderView];
 
         
     }else{

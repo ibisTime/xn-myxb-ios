@@ -12,6 +12,8 @@
 #import "AppColorMacro.h"
 //Framework
 //Category
+#import "NSString+Extension.h"
+#import "NSNumber+Extension.h"
 //Extension
 #import <UIImageView+WebCache.h>
 //M
@@ -95,6 +97,9 @@
         make.left.right.bottom.equalTo(@0);
         make.height.equalTo(@0.5);
     }];
+    //布局
+    [self setSubviewLayout];
+    
 }
 
 - (void)setSubviewLayout {
@@ -142,14 +147,13 @@
     
     _brandModel = brandModel;
     
-    _goodIV.image = kImage(@"健康专家");
-    _nameLbl.text = @"欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅欧莱雅";
-    _descLbl.text = @"绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美绽放你的美";
-    _priceLbl.text = [NSString stringWithFormat:@"￥%@", @"1999.00"];
-    _numLbl.text = [NSString stringWithFormat:@"已售: %@", @"999"];
-    //    [_goodIV sd_setImageWithURL:[NSURL URLWithString:brandModel.pics[0]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [_goodIV sd_setImageWithURL:[NSURL URLWithString:[brandModel.advPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     
-    //    _nameLbl.text = brandModel.name;
-    [self setSubviewLayout];
+    _nameLbl.text = brandModel.name;
+    _descLbl.text = brandModel.slogan;
+    
+    _priceLbl.text = [NSString stringWithFormat:@"￥%@", [brandModel.price convertToSimpleRealMoney]];
+    _numLbl.text = [NSString stringWithFormat:@"已售: %ld", brandModel.soldOutCount];
+    
 }
 @end

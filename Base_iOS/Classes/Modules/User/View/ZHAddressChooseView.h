@@ -12,15 +12,13 @@ typedef NS_ENUM(NSInteger,ZHAddressChooseType) {
 
     ZHAddressChooseTypeDisplay = 0,
     ZHAddressChooseTypeChoose
-    
-
 };
 
 @interface ZHAddressChooseView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame ;
 
-@property (nonatomic,copy)  void(^chooseAddress)();
+@property (nonatomic,copy)  void(^chooseAddress)(void);
 
 @property (nonatomic,assign) ZHAddressChooseType type;
 

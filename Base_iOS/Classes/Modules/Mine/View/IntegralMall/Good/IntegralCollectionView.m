@@ -87,6 +87,8 @@ static NSString *headerViewID = @"IntegralMallHeaderViewID";
     
     IntegralMallHeaderView *cell = (IntegralMallHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewID forIndexPath:indexPath];
     
+    [cell changeInfo];
+
     self.headerView = cell;
     
     return cell;

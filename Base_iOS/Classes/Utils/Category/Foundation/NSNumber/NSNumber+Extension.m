@@ -12,6 +12,7 @@
 
 - (NSString *)convertToRealMoney {
     
+    
     if (!self) {
         
         NSLog(@"金额不能为空");
@@ -19,7 +20,7 @@
     }
     
     long long m = [self longLongValue];
-    double value = m/1.0;
+    double value = m/1000.0;
     
     NSString *tempStr =  [NSString stringWithFormat:@"%.3f",value];
     NSString *subStr = [tempStr substringWithRange:NSMakeRange(0, tempStr.length - 1)];
@@ -29,30 +30,6 @@
     
 }
 
-- (NSString *)convertToSimpleRealCoin {
-    
-    if (!self) {
-        
-        NSLog(@"金额不能为空");
-        return nil;
-        
-    }
-    
-    //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
-    
-    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
-    
-    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[@(1.0e+18) stringValue]];
-    
-    NSDecimalNumber *o = [m decimalNumberByDividingBy:n];
-    
-    NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
-    
-    return [NSString stringWithFormat:@"%@",p];
-}
-
-//能去掉小数点的尽量去掉小数点
 - (NSString *)convertToSimpleRealMoney {
     
     if (!self) {
@@ -62,31 +39,28 @@
         
     }
     
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:2 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
-
-    NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
+    long long m = [self longLongValue];
     
-    NSDecimalNumber *result = [price decimalNumberByRoundingAccordingToBehavior:handler];
-
-    return [result stringValue];
-
-}
-
-- (NSString *)convertToRealMoneyWithNum:(NSInteger)num {
-    
-    if (!self) {
+    if (m%10 > 0) { //有厘
         
-        NSLog(@"金额不能为空");
-        return nil;
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.2f",value];
+        
+    } else if (m%100 > 0) {//有分
+        
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.2f",value];
+        
+    } else if(m%1000 > 0) { //有角
+        
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.1f",value];
+        
+    } else {//元
+        
+        double value = m/1000.0;
+        return [NSString stringWithFormat:@"%.0f",value];
     }
-    
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:num raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
-    
-    NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
-    
-    NSDecimalNumber *result = [price decimalNumberByRoundingAccordingToBehavior:handler];
-    
-    return [result stringValue];
     
 }
 
@@ -97,6 +71,7 @@
         
         NSLog(@"金额不能为空");
         return nil;
+        
     }
     
     long long m = [self doubleValue]*10000;
@@ -119,25 +94,6 @@
         
         return [NSString stringWithFormat:@"%.0f",value];
     }
-    
-    
-}
-
-//减法
-- (NSString *)subNumber:(NSNumber *)number {
-    
-    //保留8位小数,第九位舍去
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:8 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
-    
-    NSDecimalNumber *m = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
-    
-    NSDecimalNumber *n = [NSDecimalNumber decimalNumberWithString:[number stringValue]];
-    
-    NSDecimalNumber *o = [m decimalNumberBySubtracting:n];
-    
-    NSDecimalNumber *p = [o decimalNumberByRoundingAccordingToBehavior:handler];
-    
-    return [NSString stringWithFormat:@"%@",p];
 }
 
 @end

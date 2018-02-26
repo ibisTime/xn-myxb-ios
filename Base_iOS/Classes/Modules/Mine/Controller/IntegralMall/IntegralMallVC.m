@@ -12,11 +12,15 @@
 //Category
 //Extension
 //M
+#import "CurrencyModel.h"
 //V
 #import "IntegralCollectionView.h"
 //C
 #import "IntegralGoodDetailVC.h"
 #import "IntegralOrderVC.h"
+#import "IntregalFlowVC.h"
+#import "IntegralTaskListVC.h"
+#import "HTMLStrVC.h"
 
 @interface IntegralMallVC ()<RefreshCollectionViewDelegate>
 //
@@ -28,6 +32,13 @@
 
 @implementation IntegralMallVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self requestUserInfo];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -36,8 +47,6 @@
     
     //添加下拉刷新
     [self addDownRefresh];
-    //商品
-    [self initCollectionView];
     //获取商品列表
     [self requestGoodList];
 }
@@ -55,6 +64,10 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(clickRefresh)];
     
     self.collectionView.mj_header = header;
+}
+
+- (void)clickRefresh {
+    
 }
 
 - (void)initCollectionView {
@@ -79,8 +92,10 @@
     
     [self.view addSubview:self.collectionView];
     
-    [self.collectionView.headerView changeInfo];
-
+    self.collectionView.integralGoods = self.goods;
+    
+    [self.collectionView reloadData];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         if (self.collectionView.headerView) {
@@ -98,10 +113,18 @@
 #pragma mark - Events
 - (void)integralEventsWithType:(IntegralType)integralType {
     
+    BaseWeakSelf;
+    
     switch (integralType) {
         case IntegralTypeGetIntegral:
         {
-                
+            
+            HTMLStrVC *htmlVC = [HTMLStrVC new];
+            
+            htmlVC.type = HTMLTypeIntregalRule;
+            
+            [self.navigationController pushViewController:htmlVC animated:YES];
+            
         }break;
             
         case IntegralTypeIntegralOrder:
@@ -113,7 +136,11 @@
             
         case IntegralTypeIntegralRecord:
         {
+            IntregalFlowVC *flowVC = [IntregalFlowVC new];
             
+            flowVC.accountNumber = [TLUser user].jfAccountNumber;
+            
+            [self.navigationController pushViewController:flowVC animated:YES];
         }break;
             
         default:
@@ -140,12 +167,39 @@
         
         weakSelf.goods = objs;
         
-        weakSelf.collectionView.integralGoods = objs;
-        
-        [weakSelf.collectionView reloadData];
+        //商品
+        [self initCollectionView];
         
     } failure:^(NSError *error) {
         
+        
+    }];
+}
+
+- (void)requestUserInfo {
+    
+    BaseWeakSelf;
+
+    //刷新rmb和积分
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"805353";
+    http.parameters[@"currency"] = kJF;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSArray <CurrencyModel *> *arr = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        [arr enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([obj.currency isEqualToString:kJF]) {
+                
+                weakSelf.collectionView.headerView.jfNum = [obj.amount convertToRealMoney];
+                [TLUser user].jfAccountNumber = obj.accountNumber;
+            }
+        }];
+        
+    } failure:^(NSError *error) {
         
     }];
 }

@@ -58,7 +58,7 @@
             
             make.left.equalTo(self.nameLbl.mas_right).offset(5);
             make.top.equalTo(self.nameLbl.mas_top);
-            make.right.equalTo(self.mas_right).offset(-50);
+            make.right.equalTo(self.mas_right).offset(-15);
         }];
         
         //地址
@@ -77,24 +77,23 @@
             make.top.equalTo(self.nameLbl.mas_bottom).offset(11);
         }];
         
-        UIImageView *imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bbcx_更多"]];
-        self.moreImgV = imgV;
-        [self addSubview:imgV];
-        [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.right.equalTo(self.mas_right).offset(-15);
-            make.height.mas_equalTo(@17);
-            make.width.mas_equalTo(@10);
-            make.centerY.equalTo(self.mas_centerY);
-            
-        }];
-        
+//        UIImageView *imgV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bbcx_更多"]];
+//        self.moreImgV = imgV;
+//        [self addSubview:imgV];
+//        [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.right.equalTo(self.mas_right).offset(-15);
+//            make.height.mas_equalTo(@17);
+//            make.width.mas_equalTo(@10);
+//            make.centerY.equalTo(self.mas_centerY);
+//
+//        }];
         
         UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, 2)];
         line.backgroundColor = kLineColor;
         
         [self addSubview:line];
-        line.image = [UIImage imageNamed:@"address_line"];
+        line.image = [UIImage imageNamed:@""];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.width.equalTo(self.mas_width);

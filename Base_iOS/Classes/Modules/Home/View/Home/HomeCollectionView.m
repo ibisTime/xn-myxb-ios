@@ -58,8 +58,7 @@
     
     BrandCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BrandCell" forIndexPath:indexPath];
     
-//    cell.brandModel  = self.brands[indexPath.row];
-    cell.brandModel = nil;
+    cell.brandModel = self.brands[indexPath.row];
     
     return cell;
 }

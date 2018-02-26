@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"积分订单";
+    self.title = @"我的积分订单";
     //
     [self initSelectScrollView];
     //
@@ -51,7 +51,7 @@
         
         IntegralOrderListVC *childVC = [[IntegralOrderListVC alloc] init];
         
-        childVC.status = i;
+        childVC.status = i-1;
         
         childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
         
