@@ -77,7 +77,7 @@
     //获取活动规则
 //    [self requestActivityRule];
     //获取邀请人数和收益
-    [self requestInviteNumber];
+//    [self requestInviteNumber];
     //获取分享链接
 //    [self getShareUrl];
     

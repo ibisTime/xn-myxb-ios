@@ -62,6 +62,8 @@
     //ScrollView
     self.bgSV.frame = CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - (60 + kBottomInsetHeight));
     
+    self.bgSV.hidden = YES;
+    
     [self.view addSubview:self.bgSV];
     //Header
     self.headerView = [[IntegralGoodHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 300)];
@@ -77,7 +79,7 @@
     
     CGFloat leftMargin = 15;
     //
-    self.contentView = [[UIView alloc] init];
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headerView.yy, kScreenWidth, 200)];
     
     self.contentView.backgroundColor = kWhiteColor;
     
@@ -175,6 +177,10 @@
     
     self.contentView.frame = CGRectMake(0, self.headerView.yy, kScreenWidth, self.detailWebView.yy + 24);
     self.bgSV.contentSize = CGSizeMake(kScreenWidth, self.contentView.yy);
+    
+    self.bgSV.hidden = NO;
+    //
+    [self initBottomView];
 }
 
 - (IntegralExchangeView *)exchangeView {
@@ -270,6 +276,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"805286";
+    http.showView = self.view;
     http.parameters[@"code"] = self.code;
     
     [http postWithSuccess:^(id responseObject) {
@@ -279,8 +286,6 @@
         [self initHeaderView];
         //图文详情
         [self initContentView];
-        //
-        [self initBottomView];
         
     } failure:^(NSError *error) {
         

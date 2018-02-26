@@ -9,9 +9,13 @@
 //Category
 #import "NSDate+Extend.h"
 #import "UIColor+Extend.h"
+#import "NSString+Date.h"
+
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+//V
+#import "TripListView.h"
 
 #define UNIT_WIDTH  35 * SCREEN_RAT
 
@@ -32,19 +36,42 @@ static const NSInteger kBtnStartTag = 100;
 @property (nonatomic, assign) CGRect         touchRect;//可操作区域
 //当月的天数
 @property (nonatomic, assign) NSInteger kTotalNum;
+//行程
+@property (nonatomic, strong) TripListView *tripView;
+//
+@property (nonatomic, weak) UIButton *preBtn;
+//
+@property (nonatomic, weak) UIButton *nextBtn;
+//
+@property (nonatomic, strong) NSDate *currentDate;
 
 @end
 
 @implementation LDCalendarView
 
+#pragma mark - LazyLoad
+- (TripListView *)tripView {
+    
+    if (!_tripView) {
+        
+        _tripView = [[TripListView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        [self addSubview:_tripView];
+    }
+    return _tripView;
+}
+
 - (NSDate *)today {
+    
     if (!_today) {
         NSDate *currentDate = [NSDate date];
 
         //字符串转换为日期,今天0点的时间
         NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-MM-dd"];
-        _today = [dateFormat dateFromString:[NSString stringWithFormat:@"%@-%@-%@",@(currentDate.year),@(currentDate.month),@(currentDate.day)]];
+        _today = [dateFormat dateFromString:self.todayDate];
+
+//        _today = [dateFormat dateFromString:[NSString stringWithFormat:@"%@-%@-%@",@(currentDate.year),@(currentDate.month),@(currentDate.day)]];
     }
     return _today;
 }
@@ -59,10 +86,9 @@ static const NSInteger kBtnStartTag = 100;
 - (NSInteger)getNumberOfDaysInMonth
 {
     NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian]; // 指定日历的算法 NSGregorianCalendar - ios 8
-    NSDate * currentDate = [NSDate date];
     NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay  //NSDayCalendarUnit - ios 8
                                    inUnit: NSCalendarUnitMonth //NSMonthCalendarUnit - ios 8
-                                  forDate:currentDate];
+                                  forDate:_currentDate];
     return range.length;
 }
 
@@ -72,8 +98,6 @@ static const NSInteger kBtnStartTag = 100;
     if (self)
     {
         
-        self.kTotalNum = [self getNumberOfDaysInMonth];
-
         self.dateBgView = ({
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 
@@ -138,38 +162,50 @@ static const NSInteger kBtnStartTag = 100;
             
             [_contentBgView addSubview:view];
             
-//            ({
-//                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-//                [view addGestureRecognizer:tap];
-//            });
+            ({
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+                [view addGestureRecognizer:tap];
+            });
             view;
         });
 
-        self.doneBtn = ({
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn setFrame:CGRectMake((CGRectGetWidth(_contentBgView.frame) - 150) / 2.0, CGRectGetHeight(_contentBgView.frame) - 40, 150, 30)];
-            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [btn.titleLabel setFont:[UIFont systemFontOfSize:14]];
-            [btn setBackgroundImage:[[UIImage imageNamed:@"b_com_bt_blue_normal"] stretchableImageWithLeftCapWidth:15 topCapHeight:10] forState:UIControlStateNormal];
-            [btn setBackgroundImage:[[UIImage imageNamed:@"b_com_bt_blue_normal"] stretchableImageWithLeftCapWidth:15 topCapHeight:10] forState:UIControlStateSelected];
-            [btn setBackgroundImage:[[UIImage imageNamed:@"com_bt_gray_normal"] stretchableImageWithLeftCapWidth:15 topCapHeight:10] forState:UIControlStateDisabled];
-            [btn addTarget:self action:@selector(doneBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            [btn setTitle:@"确定" forState:UIControlStateNormal];
-            [_contentBgView addSubview:btn];
-            
-            btn;
-        });
+//        self.doneBtn = ({
+//            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//            [btn setFrame:CGRectMake((CGRectGetWidth(_contentBgView.frame) - 150) / 2.0, CGRectGetHeight(_contentBgView.frame) - 40, 150, 30)];
+//            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            [btn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+//            [btn setBackgroundImage:[[UIImage imageNamed:@"b_com_bt_blue_normal"] stretchableImageWithLeftCapWidth:15 topCapHeight:10] forState:UIControlStateNormal];
+//            [btn setBackgroundImage:[[UIImage imageNamed:@"b_com_bt_blue_normal"] stretchableImageWithLeftCapWidth:15 topCapHeight:10] forState:UIControlStateSelected];
+//            [btn setBackgroundImage:[[UIImage imageNamed:@"com_bt_gray_normal"] stretchableImageWithLeftCapWidth:15 topCapHeight:10] forState:UIControlStateDisabled];
+//            [btn addTarget:self action:@selector(doneBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//            [btn setTitle:@"确定" forState:UIControlStateNormal];
+//            [_contentBgView addSubview:btn];
+//
+//            btn;
+//        });
         
-        [self initData];
+        [self initArrowView];
     }
     return self;
 }
 
-- (void)initData {
-    _selectArray        = @[].mutableCopy;
+- (void)setTodayDate:(NSString *)todayDate {
+    
+    _todayDate = todayDate;
+    
+    _currentDate = [NSString dateFromString:todayDate formatter:@"yyyy-MM-dd"];
+    
+    [self initData];
 
+}
+
+- (void)initData {
+    
+    _selectArray        = @[].mutableCopy;
+    //当月天数
+    self.kTotalNum = [self getNumberOfDaysInMonth];
     //获取当前年月
-    NSDate *currentDate = [NSDate date];
+    NSDate *currentDate = [NSString dateFromString:_todayDate formatter:@"yyyy-MM-dd"];
     self.month          = (int32_t)currentDate.month;
     self.year           = (int32_t)currentDate.year;
     [self refreshDateTitle];
@@ -289,15 +325,15 @@ static const NSInteger kBtnStartTag = 100;
     [_dateBgView addSubview:btn];
 
     //添加小图标
-    UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"签到-打勾")];
-    
-    iconIV.tag = 2000 + i;
-    
-    iconIV.frame = CGRectMake(btn.xx - 7, btn.y, 10, 10);
-    
-    iconIV.hidden = YES;
-    
-    [_dateBgView addSubview:iconIV];
+//    UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"签到-打勾")];
+//
+//    iconIV.tag = 2000 + i;
+//
+//    iconIV.frame = CGRectMake(btn.xx - 7, btn.y, 10, 10);
+//
+//    iconIV.hidden = YES;
+//
+//    [_dateBgView addSubview:iconIV];
 
 }
 
@@ -352,6 +388,7 @@ static const NSInteger kBtnStartTag = 100;
 }
 
 - (void)refreshDateView {
+    
     for(int i = 0; i < self.kTotalNum; i++) {
         UIButton *btn = (UIButton *)[_dateBgView viewWithTag:kBtnStartTag + i];
         NSNumber *interval = [_currentMonthDaysArray objectAtIndex:i];
@@ -382,20 +419,34 @@ static const NSInteger kBtnStartTag = 100;
 //点击查看行程
 - (void)lookTripForIndex:(NSInteger)index {
     
+    NSMutableArray <TripInfoModel *>*arr = [NSMutableArray array];
     
+    [self.dateArr enumerateObjectsUsingBlock:^(TripInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSDate *startDate = [NSString dateFromString:obj.startDatetime formatter:kDateFormmatter];
+        
+        NSDate *endDate = [NSString dateFromString:obj.endDatetime formatter:kDateFormmatter];
+        
+        if (index >= startDate.day && index <= endDate.day) {
+            
+            [arr addObject:obj];
+        }
+    }];
+    //展示行程
+    self.tripView.trips = arr.copy;
+    
+    [self.tripView show];
 }
 
 - (void)clickForIndex:(NSInteger)index
 {
     UIButton *btn = (UIButton *)[_dateBgView viewWithTag:kBtnStartTag + index];
     
-    //未选中,想选择
-    [btn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+    //已安排行程的日期
+    [btn setTitleColor:kWhiteColor forState:UIControlStateNormal];
     btn.layer.cornerRadius = btn.width/2.0;
     btn.clipsToBounds = YES;
-    
-    btn.layer.borderWidth = 1;
-    btn.layer.borderColor = kAppCustomMainColor.CGColor;
+    btn.backgroundColor = kAppCustomMainColor;
     
     UIImageView *iconIV = [_dateBgView viewWithTag:2000 + index];
     
@@ -404,19 +455,102 @@ static const NSInteger kBtnStartTag = 100;
 }
 
 - (void)show {
+    
     self.hidden = NO;
 }
 
+#pragma mark - Setting
 - (void)setDateArr:(NSArray *)dateArr {
     
     _dateArr = dateArr;
     
-    CGFloat startDayIndex       = [self calculateStartIndex:self.firstDay];
+    [self loadDataArr];
+}
 
-    [dateArr enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+- (void)loadDataArr {
+    
+    CGFloat startDayIndex       = [self calculateStartIndex:self.firstDay];
+    
+    [_dateArr enumerateObjectsUsingBlock:^(TripInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        [self clickForIndex:[obj integerValue] - 1 + startDayIndex];
+        
+        NSDate *startDate = [NSString dateFromString:obj.startDatetime formatter:kDateFormmatter];
+        
+        NSDate *endDate = [NSString dateFromString:obj.endDatetime formatter:kDateFormmatter];
+        
+        for (int i = 1; i < self.kTotalNum+1; i++) {
+            
+            if (i >= startDate.day && i <= endDate.day) {
+                
+                [self clickForIndex:i - 1 + startDayIndex];
+            }
+        }
     }];
+}
+
+#pragma mark -
+// 上个月
+- (NSDate *)lastMonth:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.month = -1;
+    NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return newDate;
+}
+
+// 下个月
+- (NSDate *)nextMonth:(NSDate *)date {
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.month = +1;
+    NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:date options:0];
+    return newDate;
+}
+
+#pragma mark - Events
+- (void)preBtnClick {
+    
+    NSDate *preDate = [self lastMonth:_currentDate];
+    
+    self.todayDate = [NSString stringFromDate:preDate formatter:@"yyyy-MM-dd"];
+    
+    [self setNeedsLayout];
+    
+}
+
+- (void)nextBtnClick {
+    
+    NSDate *nextDate = [self nextMonth:_currentDate];
+    
+    self.todayDate = [NSString stringFromDate:nextDate formatter:@"yyyy-MM-dd"];
+
+    [self setNeedsLayout];
+}
+
+- (void)initArrowView {
+    
+    CGFloat arrowW = 40;
+    CGFloat arrowH = 40;
+    
+    //左箭头
+    UIButton *leftArrowBtn = [UIButton buttonWithImageName:@"更多-灰色"];
+    
+    leftArrowBtn.frame = CGRectMake(kScreenWidth/2.0 - arrowW - 25, 15, arrowW, arrowH);
+    
+    leftArrowBtn.centerY = self.titleLab.centerY;
+    
+    [leftArrowBtn addTarget:self action:@selector(preBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    leftArrowBtn.transform = CGAffineTransformMakeRotation(M_PI);
+    
+    [self addSubview:leftArrowBtn];
+    //右箭头
+    UIButton *rightArrowBtn = [UIButton buttonWithImageName:@"更多-灰色"];
+    
+    rightArrowBtn.frame = CGRectMake(kScreenWidth/2.0 + 25, 15, arrowW, arrowH);
+    
+    rightArrowBtn.centerY = self.titleLab.centerY;
+
+    [rightArrowBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:rightArrowBtn];
 }
 
 @end

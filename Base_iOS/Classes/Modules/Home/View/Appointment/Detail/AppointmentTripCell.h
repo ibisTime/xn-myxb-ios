@@ -7,7 +7,7 @@
 //
 
 #import "BaseTableViewCell.h"
-#import "AppointmentDetailModel.h"
+#import "AppointmentListModel.h"
 
 @interface AppointmentTripCell : BaseTableViewCell
 
@@ -16,5 +16,5 @@
 //arrow
 @property (nonatomic, strong) UIImageView *arrowIV;
 //
-@property (nonatomic, strong) AppointmentDetailModel *detailModel;
+@property (nonatomic, strong) AppointmentListModel *detailModel;
 @end

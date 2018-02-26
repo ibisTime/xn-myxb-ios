@@ -10,14 +10,10 @@
 
 //Manager
 #import "AppConfig.h"
-//Macro
-//Framework
 //Category
 #import "UIButton+EnLargeEdge.h"
 #import "UIView+Extension.h"
 #import "NSString+Check.h"
-//Extension
-//M
 //V
 #import "TLTextField.h"
 #import "TLTextView.h"
@@ -25,6 +21,7 @@
 //C
 #import "ZHAddressChooseVC.h"
 #import "ZHAddAddressVC.h"
+#import "BrandOrderVC.h"
 
 @interface BrandBuyVC ()
 
@@ -181,6 +178,8 @@
 #pragma mark - Events
 - (void)confirmBuy {
     
+    BaseWeakSelf;
+    
     if (!self.currentAddress) {
         
         [TLAlert alertWithInfo:@"请选择收货地址"];
@@ -210,9 +209,13 @@
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:@"预约成功, 平台将对你的订单进行审核"];
-        //订单编号
-        NSString *orderCode = responseObject[@"data"];
         
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            BrandOrderVC *orderVC = [BrandOrderVC new];
+            
+            [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        });
         
     } failure:^(NSError *error) {
         

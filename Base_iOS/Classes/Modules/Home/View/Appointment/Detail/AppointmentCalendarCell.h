@@ -8,6 +8,13 @@
 
 #import "BaseTableViewCell.h"
 
+#import "AppointmentListModel.h"
+#import "TripInfoModel.h"
+
 @interface AppointmentCalendarCell : BaseTableViewCell
+//
+@property (nonatomic, strong) AppointmentListModel *appointment;
+//
+@property (nonatomic, strong) NSArray <TripInfoModel *>*trips;
 
 @end

@@ -22,6 +22,8 @@
 @interface AppointmentListVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) AppointmentListTableView *tableView;
+//用户列表
+@property (nonatomic, strong) NSMutableArray <AppointmentListModel *>*appointmentList;
 
 @end
 
@@ -34,7 +36,18 @@
     [self setSearchItem];
     //
     [self initTableView];
+    //获取用户列表
+    [self requestUserList];
+    //刷新列表
+    [self.tableView beginRefreshing];
     
+}
+
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    
+    //刷新列表
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -58,31 +71,6 @@
         
         make.edges.mas_equalTo(0);
     }];
-    
-    //
-    NSMutableArray *arr = [NSMutableArray array];
-    
-    for (int i = 0; i < 4; i++) {
-        
-        AppointmentListModel *appointment = [AppointmentListModel new];
-        
-        appointment.photo = @"";
-        appointment.nickName = @"CzyGod";
-        appointment.gender = 1;
-        appointment.job = @"美导";
-        appointment.expertise = @"打游戏";
-        appointment.style = @[@"幽默", @"和谐", @"牛掰"];
-        appointment.score = 3;
-        appointment.introduce = @"我们有什么优势呢？我们有什么优势呢？我们有什么优势呢？我们有什么优势呢？我们有什么优势呢？我们有什么优势呢？我们有什么优势呢？";
-        appointment.status = @"0";
-        
-        [arr addObject:appointment];
-        
-    }
-    
-    self.tableView.appointmentList = arr;
-    
-    [self.tableView reloadData];
 }
 
 #pragma mark - Events
@@ -91,12 +79,65 @@
     
 }
 
+#pragma mark - Data
+- (void)requestUserList {
+    //0 可预约
+    BaseWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"805120";
+    helper.parameters[@"kind"] = self.userType;
+    helper.parameters[@"status"] = @"0";
+    
+    helper.tableView = self.tableView;
+    
+    [helper modelClass:[AppointmentListModel class]];
+    
+    [self.tableView addRefreshAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.appointmentList = objs;
+            
+            weakSelf.tableView.appointmentList = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+    }];
+    
+    [self.tableView addLoadMoreAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.appointmentList = objs;
+            
+            weakSelf.tableView.appointmentList = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+    }];
+    
+    [self.tableView endRefreshingWithNoMoreData_tl];
+}
+
 #pragma mark - RefreshDelegate
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    AppointmentListModel *appointment = self.appointmentList[indexPath.row];
     
     AppointmentDetailVC *detailVC = [AppointmentDetailVC new];
     
     detailVC.title = self.titleStr;
+    detailVC.appomintment = appointment;
     
     [self.navigationController pushViewController:detailVC animated:YES];
 }

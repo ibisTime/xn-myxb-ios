@@ -16,6 +16,7 @@
 #import "NSString+Extension.h"
 #import "UILabel+Extension.h"
 #import <UIImageView+WebCache.h>
+#import "NSString+Check.h"
 
 #define kHeadIconWidth 80
 
@@ -149,11 +150,18 @@
     
     __block CGFloat x = kHeadIconWidth + 30;
     //风格
-    [_detailModel.style enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_detailModel.styles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        CGFloat w = [NSString getWidthWithString:_detailModel.style[idx] font:11.0] + 10;
+        NSString *title = _detailModel.styles[idx];
         
-        UIButton *btn = [UIButton buttonWithTitle:_detailModel.style[idx]
+        if (![title valid]) {
+            
+            *stop = YES;
+        }
+        
+        CGFloat w = [NSString getWidthWithString:title font:11.0] + 10;
+        
+        UIButton *btn = [UIButton buttonWithTitle:title
                                        titleColor:_detailModel.styleColor[idx]
                                   backgroundColor:kWhiteColor
                                         titleFont:11.0
@@ -181,7 +189,7 @@
         
         UIImageView *iv = [[UIImageView alloc] init];
         
-        iv.image = i < _detailModel.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+        iv.image = i < [_detailModel.level integerValue] ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
         
         [self.starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -196,21 +204,21 @@
 }
 
 #pragma mark - Setting
-- (void)setDetailModel:(AppointmentDetailModel *)detailModel {
+- (void)setDetailModel:(AppointmentListModel *)detailModel {
     
     _detailModel = detailModel;
     
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[detailModel.photo convertImageUrl]]
                     placeholderImage:USER_PLACEHOLDER_SMALL];
     
-    self.nickNameLbl.text = detailModel.nickName;
+    self.nickNameLbl.text = detailModel.nickname;
     
-    self.genderIV.image = detailModel.gender == 0 ? kImage(@"女生"): kImage(@"男士");
+    self.genderIV.image = [detailModel.gender isEqualToString:@"0"] ? kImage(@"女生"): kImage(@"男士");
+
+    self.jobLbl.text = [detailModel getUserType];
     
-    self.jobLbl.text = detailModel.job;
-    
-    self.expertiseLbl.text = [NSString stringWithFormat:@"专长: %@", detailModel.expertise];
-    
+    self.expertiseLbl.text = [detailModel.speciality valid] ?
+    [NSString stringWithFormat:@"专长: %@", detailModel.speciality]: @"";
     //布局
     [self setSubviewLayout];
     

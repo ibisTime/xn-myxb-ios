@@ -14,6 +14,7 @@
 //Category
 #import "NSString+CGSize.h"
 #import "NSString+Extension.h"
+#import "NSString+Check.h"
 #import "UILabel+Extension.h"
 #import <UIImageView+WebCache.h>
 
@@ -102,7 +103,7 @@
     
     [self addSubview:self.introduceLbl];
     //状态
-    self.statusBtn = [UIButton buttonWithTitle:@""
+    self.statusBtn = [UIButton buttonWithTitle:@"可预约"
                                     titleColor:kWhiteColor
                                backgroundColor:kAppCustomMainColor
                                      titleFont:12.0
@@ -196,11 +197,18 @@
     
     __block CGFloat x = kHeadIconWidth + 30;
     //风格
-    [_appointmentModel.style enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_appointmentModel.styles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        CGFloat w = [NSString getWidthWithString:_appointmentModel.style[idx] font:11.0] + 10;
+        NSString *title = _appointmentModel.styles[idx];
         
-        UIButton *btn = [UIButton buttonWithTitle:_appointmentModel.style[idx]
+        if (![title valid]) {
+            
+            *stop = YES;
+        }
+        
+        CGFloat w = [NSString getWidthWithString:title font:11.0] + 10;
+        
+        UIButton *btn = [UIButton buttonWithTitle:title
                                        titleColor:_appointmentModel.styleColor[idx]
                                   backgroundColor:kWhiteColor
                                         titleFont:11.0
@@ -228,7 +236,7 @@
         
         UIImageView *iv = [[UIImageView alloc] init];
         
-        iv.image = i < _appointmentModel.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+        iv.image = i < [_appointmentModel.level integerValue] ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
         
         [self.starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -250,26 +258,16 @@
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[appointmentModel.photo convertImageUrl]]
                     placeholderImage:USER_PLACEHOLDER_SMALL];
     
-    self.nickNameLbl.text = appointmentModel.nickName;
+    self.nickNameLbl.text = appointmentModel.nickname;
     
-    self.genderIV.image = appointmentModel.gender == 0 ? kImage(@"女生"): kImage(@"男士");
+    self.genderIV.image = [appointmentModel.gender isEqualToString:@"0"] ? kImage(@"女生"): kImage(@"男士");
     
-    if ([appointmentModel.status isEqualToString:@"0"]) {
-        
-        [self.statusBtn setTitle:@"可预约" forState:UIControlStateNormal];
-        [self.statusBtn setBackgroundColor:kAppCustomMainColor forState:UIControlStateNormal];
-        
-    } else if ([appointmentModel.status isEqualToString:@"1"]) {
-        
-        [self.statusBtn setTitle:@"不可预约" forState:UIControlStateNormal];
-        [self.statusBtn setBackgroundColor:kPaleGreyColor forState:UIControlStateNormal];
-    }
+    self.jobLbl.text = [appointmentModel getUserType];
     
-    self.jobLbl.text = appointmentModel.job;
+    self.expertiseLbl.text = [appointmentModel.speciality valid] ?
+    [NSString stringWithFormat:@"专长: %@", appointmentModel.speciality]: @"";
     
-    self.expertiseLbl.text = [NSString stringWithFormat:@"专长: %@", appointmentModel.expertise];
-    
-    [self.introduceLbl labelWithTextString:appointmentModel.introduce lineSpace:5];
+    [self.introduceLbl labelWithTextString:appointmentModel.slogin lineSpace:5];
     //布局
     [self setSubviewLayout];
     //

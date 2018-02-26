@@ -32,7 +32,6 @@
 @property (nonatomic, copy) NSString *desc;
 //由pic 转化成的 数组
 @property (nonatomic,copy) NSArray *pics;
-
 //总条数
 @property (nonatomic, assign) NSInteger totalCount;
 //平均分

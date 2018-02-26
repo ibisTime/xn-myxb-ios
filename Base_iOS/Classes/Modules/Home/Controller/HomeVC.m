@@ -10,9 +10,6 @@
 
 //Manager
 #import "AppConfig.h"
-//Macro
-//Framework
-//Category
 //Extension
 #import "MJRefresh.h"
 //M
@@ -97,7 +94,7 @@
     
     //
     CGFloat itemWidth = (kScreenWidth - 10)/2.0;
-    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 98);
+    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 68);
     flowLayout.minimumLineSpacing = 10;
     flowLayout.minimumInteritemSpacing = 10;
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 0, 0);
@@ -133,6 +130,13 @@
         }
     });
     
+}
+
+#pragma mark - Events
+- (void)clickRefresh {
+    
+    //获取商品列表
+    [self requestBrandList];
 }
 
 #pragma mark - Data
@@ -201,12 +205,6 @@
         
         [weakSelf.collectionView reloadData];
         
-        //加载headerView
-//        weakSelf.collectionView.headerView.headerBlock = ^(HomePageType type) {
-//
-//            [weakSelf headerViewEventsWithType:type];
-//        };
-        
     } failure:^(NSError *error) {
         
         
@@ -241,6 +239,7 @@
         case HomeEventsTypeCategory:
         {
             NSString *title = @"";
+            NSString *type = @"";
             
             switch (index) {
                 case 0:
@@ -251,16 +250,19 @@
                 case 1:
                 {
                     title = @"美导预约";
+                    type = @"T";
                 }break;
                     
                 case 2:
                 {
                     title = @"讲师预约";
+                    type = @"L";
                 }break;
                     
                 case 3:
                 {
                     title = @"专家预约";
+                    type = @"S";
                 }break;
                     
                 default:
@@ -272,6 +274,7 @@
                 AppointmentListVC *appointmentListVC = [AppointmentListVC new];
                 
                 appointmentListVC.title = title;
+                appointmentListVC.userType = type;
                 
                 [self.navigationController pushViewController:appointmentListVC animated:YES];
                 

@@ -108,6 +108,8 @@
 		212ECE812043A3CE0091E543 /* KeyValueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE7F2043A3CD0091E543 /* KeyValueModel.m */; };
 		212ECE842043B4600091E543 /* BrandCommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE832043B4600091E543 /* BrandCommentListVC.m */; };
 		212ECE872043B50E0091E543 /* BrandCommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE862043B50E0091E543 /* BrandCommentTableView.m */; };
+		212ECE8A204402120091E543 /* AppointmentStartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE89204402120091E543 /* AppointmentStartVC.m */; };
+		212ECE8D204427930091E543 /* TripInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE8C204427930091E543 /* TripInfoModel.m */; };
 		21302323202D49C400A954E7 /* CustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2130231F202D49C300A954E7 /* CustomShareView.m */; };
 		21302324202D49C400A954E7 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302322202D49C400A954E7 /* ShareView.m */; };
 		2130232C202D49FC00A954E7 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21302328202D49FC00A954E7 /* README.txt */; };
@@ -126,7 +128,6 @@
 		21302356202EC4A500A954E7 /* AppointmentDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302355202EC4A500A954E7 /* AppointmentDetailVC.m */; };
 		2130235E202EC98200A954E7 /* AppointmentCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2130235D202EC98200A954E7 /* AppointmentCommentCell.m */; };
 		21302364202ECB1900A954E7 /* AppointmentDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302363202ECB1900A954E7 /* AppointmentDetailHeaderView.m */; };
-		21302367202ECB4500A954E7 /* AppointmentDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302366202ECB4500A954E7 /* AppointmentDetailModel.m */; };
 		2130236A202ECE4700A954E7 /* PhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302368202ECE4600A954E7 /* PhotosView.m */; };
 		2130236E202ECEAB00A954E7 /* LinkLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2130236D202ECEAB00A954E7 /* LinkLabel.m */; };
 		21302371202EE4ED00A954E7 /* AppointmentDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302370202EE4ED00A954E7 /* AppointmentDetailTableView.m */; };
@@ -436,6 +437,10 @@
 		212ECE832043B4600091E543 /* BrandCommentListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandCommentListVC.m; sourceTree = "<group>"; };
 		212ECE852043B50E0091E543 /* BrandCommentTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandCommentTableView.h; sourceTree = "<group>"; };
 		212ECE862043B50E0091E543 /* BrandCommentTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandCommentTableView.m; sourceTree = "<group>"; };
+		212ECE88204402120091E543 /* AppointmentStartVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentStartVC.h; sourceTree = "<group>"; };
+		212ECE89204402120091E543 /* AppointmentStartVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentStartVC.m; sourceTree = "<group>"; };
+		212ECE8B204427930091E543 /* TripInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripInfoModel.h; sourceTree = "<group>"; };
+		212ECE8C204427930091E543 /* TripInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripInfoModel.m; sourceTree = "<group>"; };
 		2130231F202D49C300A954E7 /* CustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomShareView.m; sourceTree = "<group>"; };
 		21302320202D49C300A954E7 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		21302321202D49C400A954E7 /* CustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShareView.h; sourceTree = "<group>"; };
@@ -472,8 +477,6 @@
 		2130235D202EC98200A954E7 /* AppointmentCommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentCommentCell.m; sourceTree = "<group>"; };
 		21302362202ECB1900A954E7 /* AppointmentDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentDetailHeaderView.h; sourceTree = "<group>"; };
 		21302363202ECB1900A954E7 /* AppointmentDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentDetailHeaderView.m; sourceTree = "<group>"; };
-		21302365202ECB4500A954E7 /* AppointmentDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentDetailModel.h; sourceTree = "<group>"; };
-		21302366202ECB4500A954E7 /* AppointmentDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentDetailModel.m; sourceTree = "<group>"; };
 		21302368202ECE4600A954E7 /* PhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosView.m; sourceTree = "<group>"; };
 		21302369202ECE4700A954E7 /* PhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosView.h; sourceTree = "<group>"; };
 		2130236C202ECEAA00A954E7 /* LinkLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkLabel.h; sourceTree = "<group>"; };
@@ -1597,6 +1600,8 @@
 				21302344202DA4E400A954E7 /* AppointmentListVC.m */,
 				21302354202EC4A500A954E7 /* AppointmentDetailVC.h */,
 				21302355202EC4A500A954E7 /* AppointmentDetailVC.m */,
+				212ECE88204402120091E543 /* AppointmentStartVC.h */,
+				212ECE89204402120091E543 /* AppointmentStartVC.m */,
 			);
 			path = Appointment;
 			sourceTree = "<group>";
@@ -1615,8 +1620,8 @@
 			children = (
 				2130234E202DA64400A954E7 /* AppointmentListModel.h */,
 				2130234F202DA64400A954E7 /* AppointmentListModel.m */,
-				21302365202ECB4500A954E7 /* AppointmentDetailModel.h */,
-				21302366202ECB4500A954E7 /* AppointmentDetailModel.m */,
+				212ECE8B204427930091E543 /* TripInfoModel.h */,
+				212ECE8C204427930091E543 /* TripInfoModel.m */,
 			);
 			path = Appointment;
 			sourceTree = "<group>";
@@ -2424,6 +2429,7 @@
 				21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */,
 				21A1EA5120402DE400A8AD34 /* UIView+XMGExtension.m in Sources */,
 				212BE482202C3115000BCC66 /* MineHeaderView.m in Sources */,
+				212ECE8A204402120091E543 /* AppointmentStartVC.m in Sources */,
 				212ECE59204143670091E543 /* IntregalTaskCell.m in Sources */,
 				212ECE5E204145A00091E543 /* IntregalFlowVC.m in Sources */,
 				212ECE842043B4600091E543 /* BrandCommentListVC.m in Sources */,
@@ -2526,6 +2532,7 @@
 				212BE478202BF741000BCC66 /* BrandCell.m in Sources */,
 				21AC597D1FDE823C00F19DE8 /* NSString+CGSize.m in Sources */,
 				21F82C9D1F17719D0019B176 /* BaseWKWebViewController.m in Sources */,
+				212ECE8D204427930091E543 /* TripInfoModel.m in Sources */,
 				21AC597F1FDE823C00F19DE8 /* NSString+Check.m in Sources */,
 				21AC59731FDE820600F19DE8 /* NSDictionary+Extension.m in Sources */,
 				21158E431F1C4F4D00A07266 /* CustomTabBar.m in Sources */,
@@ -2563,7 +2570,6 @@
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
 				21302324202D49C400A954E7 /* ShareView.m in Sources */,
 				21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */,
-				21302367202ECB4500A954E7 /* AppointmentDetailModel.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
 				212ECE4A20413BCF0091E543 /* CurrencyModel.m in Sources */,

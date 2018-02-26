@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TripInfoModel.h"
 
 typedef void(^TripListBlock)(void);
 
 @interface TripListView : UIView
 
 @property (nonatomic, copy) TripListBlock tripBlock;
+//
+@property (nonatomic, strong) NSArray <TripInfoModel *>*trips;
 //显示
 - (void)show;
 //隐藏

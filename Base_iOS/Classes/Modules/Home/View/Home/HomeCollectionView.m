@@ -11,10 +11,6 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-//Framework
-//Category
-//Extension
-//M
 //V
 #import "BrandCell.h"
 //C
@@ -50,8 +46,7 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //--//
-//    return self.brands.count;
-    return 4;
+    return self.brands.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

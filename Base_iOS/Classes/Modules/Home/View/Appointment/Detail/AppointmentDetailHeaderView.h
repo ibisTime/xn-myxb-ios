@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppointmentDetailModel.h"
+#import "AppointmentListModel.h"
 
 @interface AppointmentDetailHeaderView : UIView
 //
-@property (nonatomic, strong) AppointmentDetailModel *detailModel;
+@property (nonatomic, strong) AppointmentListModel *detailModel;
 
 @end

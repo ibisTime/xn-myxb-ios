@@ -25,4 +25,27 @@
     return @[kAppCustomMainColor, color2, color3];
 }
 
+- (NSArray<NSString *> *)styles {
+    
+//    NSMutableArray *arr = [NSMutableArray array];
+    
+    NSArray *styleArr = [self.style componentsSeparatedByString:@","];
+    
+//    [styleArr enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//
+//    }];
+    
+    return styleArr;
+}
+
+- (NSString *)getUserType {
+    
+    NSDictionary *dic = @{
+                          @"T": @"美导",
+                          @"S": @"专家",
+                          @"L": @"讲师",
+                          };
+    
+    return dic[self.kind];
+}
 @end

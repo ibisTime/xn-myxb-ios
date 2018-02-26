@@ -7,10 +7,11 @@
 //
 
 #import "BaseViewController.h"
-
 /**
  预约列表
  */
 @interface AppointmentListVC : BaseViewController
+//类型
+@property (nonatomic, copy) NSString *userType;
 
 @end

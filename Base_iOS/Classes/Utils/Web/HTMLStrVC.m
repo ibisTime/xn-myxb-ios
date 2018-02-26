@@ -9,6 +9,8 @@
 #import "HTMLStrVC.h"
 #import <WebKit/WebKit.h>
 
+#import "APICodeMacro.h"
+
 @interface HTMLStrVC ()<WKNavigationDelegate>
 
 @property (nonatomic, copy) NSString *htmlStr;
@@ -48,23 +50,30 @@
             
             ckey = @"reg_protocol";
             
-            name = @"健康e购用户协议";
+            name = @"美业销帮用户协议";
             
         } break;
+        
+        case HTMLTypeIntregalRule: {
             
+            ckey = @"JF_RULE";
+            
+            name = @"积分规则";
+            
+        } break;
     }
 
     self.navigationItem.titleView = [UILabel labelWithTitle:name frame:CGRectMake(0, 0, 200, 44)];
     
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
-    http.code = @"807717";
+    http.code = USER_CKEY_CVALUE;
     
     http.parameters[@"ckey"] = ckey;
     
     [http postWithSuccess:^(id responseObject) {
         
-        self.htmlStr = responseObject[@"data"][@"note"];
+        self.htmlStr = responseObject[@"data"][@"cvalue"];
         
         [self initWebView];
         

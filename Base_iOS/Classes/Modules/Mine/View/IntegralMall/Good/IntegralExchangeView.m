@@ -8,14 +8,6 @@
 
 #import "IntegralExchangeView.h"
 
-//Macro
-//Category
-//Extension
-//M
-//V
-//地址
-//姓名
-//手机号
 @interface IntegralExchangeView()
 
 //背景
@@ -153,8 +145,6 @@
     
     self.exchangeBtn = exchangeBtn;
 }
-
-#pragma mark - Setting
 
 #pragma mark - Events
 - (void)exchange {

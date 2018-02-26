@@ -8,10 +8,16 @@
 
 #import "TLTableView.h"
 //M
-#import "AppointmentDetailModel.h"
+#import "AppointmentListModel.h"
+#import "CommentModel.h"
+#import "TripInfoModel.h"
 
 @interface AppointmentDetailTableView : TLTableView
 //
-@property (nonatomic, strong) AppointmentDetailModel *detailModel;
+@property (nonatomic, strong) AppointmentListModel *detailModel;
+//
+@property (nonatomic, strong) NSMutableArray <CommentModel *>*commentList;
+//行程列表
+@property (nonatomic, strong) NSArray <TripInfoModel *>*trips;
 
 @end

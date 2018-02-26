@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LDCalendarConst.h"
+#import "TripInfoModel.h"
 
 typedef void(^DaysSelectedBlock)(NSArray *result);
 
@@ -15,8 +16,10 @@ typedef void(^DaysSelectedBlock)(NSArray *result);
 @property (nonatomic, strong) NSArray *defaultDays;
 
 @property (nonatomic, copy) DaysSelectedBlock complete;
-//签到日期
-@property (nonatomic, strong) NSArray <NSString *>*dateArr;
+//行程列表
+@property (nonatomic, strong) NSArray <TripInfoModel *>*dateArr;
+//今天的日期
+@property (nonatomic, copy) NSString *todayDate;
 
 - (id)initWithFrame:(CGRect)frame;
 

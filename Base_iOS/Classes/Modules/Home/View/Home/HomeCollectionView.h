@@ -10,7 +10,6 @@
 //V
 #import "BaseCollectionView.h"
 #import "HomeHeaderView.h"
-
 //M
 #import "BrandModel.h"
 

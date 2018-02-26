@@ -7,7 +7,11 @@
 //
 
 #import "BaseViewController.h"
+//M
+#import "AppointmentListModel.h"
 
 @interface AppointmentDetailVC : BaseViewController
+//
+@property (nonatomic, strong) AppointmentListModel *appomintment;
 
 @end

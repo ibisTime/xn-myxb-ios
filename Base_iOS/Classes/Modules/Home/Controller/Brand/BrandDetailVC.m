@@ -149,7 +149,6 @@
     self.tableView.tableHeaderView = self.headerView;
     
     [self.tableView reloadData_tl];
-
     //底部按钮
     [self initBottomView];
     
@@ -197,7 +196,8 @@
     helper.parameters[@"status"] = @"AB";
     helper.parameters[@"orderColumn"] = @"update_datetime";
     helper.parameters[@"orderDir"] = @"desc";
-    
+    helper.parameters[@"type"] = @"P";
+
     helper.tableView = self.tableView;
     
     [helper modelClass:[CommentModel class]];

@@ -152,6 +152,8 @@
         tabBar.selectedIdx = 0;
     });
     
+    [self.navigationController popViewControllerAnimated:YES];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
     
 }

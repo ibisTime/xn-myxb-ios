@@ -9,6 +9,7 @@
 #import "TripListView.h"
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "NSString+Date.h"
 
 @interface TripListView()
 
@@ -35,7 +36,8 @@
     
     self.alpha = 0;
     
-    self.backgroundColor = [UIColor colorWithUIColor:kBlackColor alpha:0.6];
+    self.backgroundColor = [UIColor colorWithUIColor:kBlackColor
+                                               alpha:0.6];
     
     self.bgView = [[UIView alloc] initWithFrame:CGRectZero];
     
@@ -47,23 +49,20 @@
     [self addSubview:self.bgView];
     
     //档期时间
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:16.0];
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kThemeColor
+                                                    font:16.0];
+    textLbl.text = @"档期时间";
+    textLbl.frame = CGRectMake(0, 35, 70, 16);
+    textLbl.tag = 2000;
     
     [self.bgView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@35);
-    }];
+    
     //icon
     UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"时间")];
     
+    iconIV.tag = 2001;
     [self.bgView addSubview:iconIV];
-    [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.right.equalTo(textLbl.mas_left).offset(-15);
-        make.centerY.equalTo(textLbl.mas_centerY);
-    }];
     
     //我知道了
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"我知道了"
@@ -79,43 +78,49 @@
     self.confirmBtn = confirmBtn;
 }
 
-- (void)setSubviewLayout {
-    
-    //我知道了
-//    [self.confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.right.equalTo(@(-kWidth(30)));
-//        make.top.equalTo(promptLbl.mas_bottom).offset(35);
-//        make.width.equalTo(@(kWidth(110)));
-//        make.height.equalTo(@35);
-//    }];
-//
-    [self layoutSubviews];
-    
+#pragma mark - Setting
+- (void)setTrips:(NSArray<TripInfoModel *> *)trips {
+
+    _trips = trips;
+
     //背景
     CGFloat bgW = kScreenWidth - 2*kWidth(35);
+    
+    UILabel *textLbl = [self viewWithTag:2000];
+    UIImageView *iconIV = [self viewWithTag:2001];
+    
+    __block CGFloat y = textLbl.yy + 25;
+    
+    [trips enumerateObjectsUsingBlock:^(TripInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        UILabel *timeLbl = [UILabel labelWithFrame:CGRectMake(0, y, bgW, kFontHeight(12.0))
+                                      textAligment:NSTextAlignmentCenter
+                                   backgroundColor:kClearColor
+                                              font:Font(12.0)
+                                         textColor:kTextColor];
+        //开始时间
+        NSString *startTime = [obj.startDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
+        //结束时间
+        NSString *endTime = [obj.endDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
+
+        timeLbl.text = [NSString stringWithFormat:@"%@ - %@", startTime, endTime];
+        
+        [self.bgView addSubview:timeLbl];
+        y += 32;
+    }];
+    
+    _confirmBtn.frame = CGRectMake((bgW - kWidth(250))/2.0, y + 40, kWidth(250), 35);
+    
     CGFloat bgH = self.confirmBtn.yy + 35;
     
-    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.center.equalTo(@0);
-        make.height.equalTo(@(bgH));
-        make.width.equalTo(@(bgW));
-    }];
+    self.bgView.frame = CGRectMake(0, 0, bgW, bgH);
+    self.bgView.center = self.center;
+    
+    textLbl.centerX = self.bgView.centerX - 10;
+    iconIV.frame = CGRectMake(textLbl.x - 28, 0, 18, 18);
+    iconIV.centerY = textLbl.centerY;
+    
 }
-
-#pragma mark - Setting
-//- (void)setPriceModel:(OrderPriceModel *)priceModel {
-//
-//    _priceModel = priceModel;
-//
-//    self.priceLbl.text = [NSString stringWithFormat:@"%@ CNY", priceModel.price];
-//
-//    self.amountLbl.text = [NSString stringWithFormat:@"%@ CNY", priceModel.amount];
-//
-//    self.numLbl.text = [NSString stringWithFormat:@"%@ ETH", priceModel.num];
-//
-//}
 
 #pragma mark - Events
 - (void)confirm {

@@ -38,9 +38,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"评论";
     //
     [self initTableView];
-    
     //获取评论列表
     [self requestCommentList];
 }

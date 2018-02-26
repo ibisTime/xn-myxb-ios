@@ -87,8 +87,8 @@
         
         make.top.equalTo(self.nameLbl.mas_bottom).offset(8);
         make.height.equalTo(@25);
-        make.left.equalTo(@0);
-        make.right.equalTo(@(-0));
+        make.left.equalTo(@15);
+        make.right.equalTo(@(-15));
     }];
 }
 

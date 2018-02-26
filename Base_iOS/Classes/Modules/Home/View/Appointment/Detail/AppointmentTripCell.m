@@ -60,8 +60,8 @@
     self.iconIV.contentMode = UIViewContentModeScaleAspectFit;
     [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.width.equalTo(@20);
-        make.height.equalTo(@20);
+        make.width.equalTo(@3);
+        make.height.equalTo(@13.5);
         make.centerY.equalTo(self.contentView.mas_centerY);
         make.left.equalTo(self.contentView.mas_left).offset(15);
         
@@ -99,7 +99,7 @@
     
 }
 
-- (void)setDetailModel:(AppointmentDetailModel *)detailModel {
+- (void)setDetailModel:(AppointmentListModel *)detailModel {
     
     _detailModel = detailModel;
     

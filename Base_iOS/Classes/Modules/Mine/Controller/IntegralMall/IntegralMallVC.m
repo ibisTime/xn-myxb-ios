@@ -68,6 +68,8 @@
 
 - (void)clickRefresh {
     
+    //获取商品列表
+    [self requestGoodList];
 }
 
 - (void)initCollectionView {
@@ -79,7 +81,7 @@
     
     //
     CGFloat itemWidth = (kScreenWidth - 30)/2.0;
-    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 60);
+    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 75);
     flowLayout.minimumLineSpacing = 10;
     flowLayout.minimumInteritemSpacing = 10;
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 0, 10);
