@@ -10,12 +10,9 @@
 
 //Macro
 #import "AppMacro.h"
-//Framework
 //Category
 #import "NSString+Date.h"
 #import "NSString+Check.h"
-//Extension
-//M
 //V
 #import "ZHAddressChooseView.h"
 #import "IntegralOrderDetailCell.h"
@@ -147,24 +144,29 @@
 //收货
 - (void)confirmReceive {
     
-    TLNetworking *http = [TLNetworking new];
-    http.showView = self.view;
-    http.code = @"805296";
-    http.parameters[@"orderCode"] = self.order.code;
-    http.parameters[@"updater"] = [TLUser user].userId;
-//    http.parameters[@"token"] = [TLUser user].token;
-    
-    [http postWithSuccess:^(id responseObject) {
+    [TLAlert alertWithTitle:@"" msg:@"确认已收货?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
         
-        [TLAlert alertWithSucces:@"收货成功"];
+    } confirm:^(UIAlertAction *action) {
         
-        if (self.receiveSuccess) {
+        TLNetworking *http = [TLNetworking new];
+        http.showView = self.view;
+        http.code = @"805296";
+        http.parameters[@"orderCode"] = self.order.code;
+        http.parameters[@"updater"] = [TLUser user].userId;
+        
+        [http postWithSuccess:^(id responseObject) {
             
-            self.receiveSuccess();
-        }
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    } failure:^(NSError *error) {
+            [TLAlert alertWithSucces:@"收货成功"];
+            
+            if (self.receiveSuccess) {
+                
+                self.receiveSuccess();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        } failure:^(NSError *error) {
+            
+        }];
         
     }];
     

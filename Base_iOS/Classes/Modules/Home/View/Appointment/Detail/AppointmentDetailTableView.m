@@ -246,7 +246,7 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
         
         UIImageView *iv = [[UIImageView alloc] init];
         
-        iv.image = i < [_detailModel.level integerValue] ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+        iv.image = i < _detailModel.average ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
         
         [starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -261,7 +261,7 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
                                                textColor:[UIColor colorWithHexString:@"#ffbe00"]
                                                     font:14.0];
     
-    textLbl.text = [NSString stringWithFormat:@"%@ 星", _detailModel.level];
+    textLbl.text = [NSString stringWithFormat:@"%.1lf 星", _detailModel.average];
     
     [whiteView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -292,6 +292,7 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
         BrandCommentListVC *commentListVC = [BrandCommentListVC new];
         
         commentListVC.code = _detailModel.userId;
+        commentListVC.kind = _detailModel.kind;
         
         [weakSelf.viewController.navigationController pushViewController:commentListVC animated:YES];
         
@@ -342,7 +343,7 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
 
     self.footerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:footerId];
     
-    self.backgroundColor = kBackgroundColor;
+    self.footerView.contentView.backgroundColor = kBackgroundColor;
     
     UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 42)];
     

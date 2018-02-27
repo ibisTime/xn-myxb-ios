@@ -73,3 +73,9 @@
 FOUNDATION_EXTERN  NSString *const kUserLoginNotification;
 FOUNDATION_EXTERN  NSString *const kUserLoginOutNotification;
 FOUNDATION_EXTERN  NSString *const kUserInfoChange;
+//角色类型
+FOUNDATION_EXTERN  NSString *const kUserTypeSalon;
+FOUNDATION_EXTERN  NSString *const kUserTypeBeautyGuide;
+FOUNDATION_EXTERN  NSString *const kUserTypeLecturer;
+FOUNDATION_EXTERN  NSString *const kUserTypeExpert;
+

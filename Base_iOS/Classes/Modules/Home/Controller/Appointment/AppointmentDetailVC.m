@@ -48,16 +48,14 @@
     [self initTableView];
     //获取服务器当前时间
     [self getServiceCurrentTime];
-    //计算总条数和评分
-    [self requestCommentInfo];
     //
     [self addNotification];
 }
 
 #pragma mark - 断网操作
 - (void)placeholderOperation {
-    //获取行程
-    [self requestTrip];
+    //获取服务器当前时间
+    [self getServiceCurrentTime];
     
 }
 
@@ -177,6 +175,8 @@
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
+        [TLProgressHUD dismiss];
+
         [weakSelf removePlaceholderView];
         
         weakSelf.tableView.commentList = objs;
@@ -246,13 +246,20 @@
         
         weakSelf.tableView.trips = weakSelf.trips;
         
+        //计算总条数和评分
+        [self requestCommentInfo];
+        
     } failure:^(NSError *error) {
         
+        [TLProgressHUD dismiss];
+
     }];
     
 }
 
 - (void)getServiceCurrentTime {
+    
+    [TLProgressHUD show];
     
     TLNetworking *http = [TLNetworking new];
     
@@ -266,6 +273,7 @@
         
     } failure:^(NSError *error) {
         
+        [TLProgressHUD dismiss];
     }];
 }
 

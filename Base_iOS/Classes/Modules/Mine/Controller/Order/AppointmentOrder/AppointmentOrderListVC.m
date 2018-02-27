@@ -1,30 +1,29 @@
 //
-//  BrandOrderListVC.m
+//  AppointmentOrderListVC.m
 //  Base_iOS
 //
-//  Created by 蔡卓越 on 2018/2/25.
+//  Created by 蔡卓越 on 2018/2/27.
 //  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
-#import "BrandOrderListVC.h"
-
+#import "AppointmentOrderListVC.h"
 //Category
 #import "NSString+Date.h"
 //M
-#import "BrandOrderModel.h"
+#import "AppointmentOrderModel.h"
 //V
-#import "BrandOrderGoodCell.h"
-#import "BrandOrderFooterView.h"
+#import "AppointmentOrderCell.h"
+#import "OrderFooterView.h"
 //C
-#import "BrandOrderDetailVC.h"
+#import "AppointmentOrderDetailVC.h"
 #import "NavigationController.h"
 #import "BrandCommentVC.h"
 
-@interface BrandOrderListVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface AppointmentOrderListVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) TLTableView *tableView;
 
-@property (nonatomic,strong) NSMutableArray <BrandOrderModel *>*orderGroups;
+@property (nonatomic,strong) NSMutableArray <AppointmentOrderModel *>*orderGroups;
 //暂无订单
 @property (nonatomic, strong) UIView *placeHolderView;
 
@@ -32,7 +31,7 @@
 
 @end
 
-@implementation BrandOrderListVC
+@implementation AppointmentOrderListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,7 +47,7 @@
     [self.tableView beginRefreshing];
     //通知
     [self addNotification];
-
+    
 }
 
 #pragma mark - Init
@@ -102,21 +101,21 @@
 }
 
 #pragma mark - Events
-- (void)orderEventsWithType:(BrandOrderEventsType)type order:(BrandOrderModel *)order {
+- (void)orderEventsWithType:(OrderEventsType)type order:(AppointmentOrderModel *)order {
     
     BaseWeakSelf;
     
     switch (type) {
             
-        case BrandOrderEventsTypeComment:
+        case OrderEventsTypeComment:
         {
             //对宝贝进行评价
             BrandCommentVC *commentVC = [[BrandCommentVC alloc] init];
             
             commentVC.code = order.code;
-            commentVC.commentKind = @"P";
-            commentVC.placeholder = @"宝贝满足你的期待吗? 说是它的优点吧";
-            
+            commentVC.commentKind = order.type;
+            commentVC.placeholder = [NSString stringWithFormat:@"请对%@进行评论", [order getUserType]];
+
             [commentVC setCommentSuccess:^(){
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
@@ -126,6 +125,59 @@
             
             [self presentViewController:nav animated:YES completion:nil];
             
+        }break;
+            
+        case OrderEventsTypeVisit:
+        {
+            [TLAlert alertWithTitle:@"" msg:@"确认已上门?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+                
+            } confirm:^(UIAlertAction *action) {
+                
+                TLNetworking *http = [TLNetworking new];
+                http.showView = self.view;
+                http.code = @"805512";
+                http.parameters[@"code"] = order.code;
+                http.parameters[@"updater"] = [TLUser user].userId;
+                //    http.parameters[@"token"] = [TLUser user].token;
+                
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:@"上门成功"];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+            }];
+        }break;
+            
+        case OrderEventsTypeOverClass:
+        {
+            [TLAlert alertWithTitle:@"" msg:@"确认已下课?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+                
+            } confirm:^(UIAlertAction *action) {
+                
+                TLNetworking *http = [TLNetworking new];
+                
+                http.code = @"805513";
+                http.parameters[@"code"] = order.code;
+                http.parameters[@"updater"] = [TLUser user].userId;
+                
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:@"下课成功"];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
+            }];
         }break;
             
         default:
@@ -141,27 +193,32 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"805273";
+    helper.code = @"805520";
     
     helper.parameters[@"applyUser"] = [TLUser user].userId;
     helper.parameters[@"orderColumn"] = @"apply_datetime";
     helper.parameters[@"orderDir"] = @"desc";
+    helper.parameters[@"type"] = self.kind;
     
-    if (self.status == BrandOrderStatusWillCheck) {
+    if (self.status == AppointmentOrderStatusWillCheck) {
         
-        helper.parameters[@"status"] = @"0";
+        helper.parameters[@"status"] = @"1";
         
-    }else if (self.status == BrandOrderStatusWillSend) {
+    }else if (self.status == AppointmentOrderStatusWillVisit) {
         
         helper.parameters[@"status"] = @"2";
         
-    }else if (self.status == BrandOrderStatusWillComment)  {
-        
-        helper.parameters[@"status"] = @"3";
-        
-    } else if(self.status == BrandOrderStatusDidComplete) {
+    }else if (self.status == AppointmentOrderStatusWillOverClass)  {
         
         helper.parameters[@"status"] = @"4";
+        
+    }else if (self.status == AppointmentOrderStatusDidOverClass)  {
+        
+        helper.parameters[@"status"] = @"5";
+        
+    }else if(self.status == AppointmentOrderStatusDidComplete) {
+        
+        helper.parameters[@"status"] = @"6";
         
     } else {//全部
         
@@ -169,7 +226,7 @@
     
     helper.tableView = self.tableView;
     
-    [helper modelClass:[BrandOrderModel class]];
+    [helper modelClass:[AppointmentOrderModel class]];
     
     //-----//
     __weak typeof(self) weakSelf = self;
@@ -178,6 +235,7 @@
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.orderGroups = objs;
+            
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
@@ -207,12 +265,17 @@
     
     BaseWeakSelf;
     
-    BrandOrderDetailVC *vc = [[BrandOrderDetailVC alloc] init];
+    AppointmentOrderDetailVC *vc = [[AppointmentOrderDetailVC alloc] init];
     
     vc.order = self.orderGroups[indexPath.section];
-    
-    //评价
-    vc.commentSuccess = ^{
+
+    //上门
+    vc.visitSuccess = ^{
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
+    };
+    //下课
+    vc.overClassSuccess = ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
     };
@@ -224,7 +287,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    BrandOrderModel *model = self.orderGroups[section];
+    AppointmentOrderModel *model = self.orderGroups[section];
     
     return [self headerViewWithOrder:model];
 }
@@ -235,17 +298,17 @@
     
     static NSString * footerId = @"OrderFooterViewId";
     
-    BrandOrderFooterView *footerView = [[BrandOrderFooterView alloc] initWithReuseIdentifier:footerId];
+    OrderFooterView *footerView = [[OrderFooterView alloc] initWithReuseIdentifier:footerId];
     
-    BrandOrderModel *order = self.orderGroups[section];
+    AppointmentOrderModel *order = self.orderGroups[section];
     
-    footerView.orderBlock = ^(BrandOrderEventsType type) {
+    footerView.orderBlock = ^(OrderEventsType type) {
         
         [weakSelf orderEventsWithType:type order:order];
         
     };
     
-    footerView.order = self.orderGroups[section];
+    footerView.appointmentOrder = self.orderGroups[section];
     
     return footerView;
 }
@@ -253,7 +316,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 110;
+    return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -263,10 +326,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    BrandOrderModel *order = self.orderGroups[section];
-    
-    if ([order.status isEqualToString:kBrandOrderStatusWillComment]) {
-        
+    AppointmentOrderModel *order = self.orderGroups[section];
+
+    //上门、下课和评价
+    if ([order.status isEqualToString:kAppointmentOrderStatusWillVisit] || [order.status isEqualToString:kAppointmentOrderStatusWillOverClass] || [order.isComment isEqualToString:@"0"]) {
+
         return 50;
     }
     return 0.00001;
@@ -286,11 +350,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *OrderGoodsCellId = @"BrandOrderGoodCell";
-    BrandOrderGoodCell *cell = [tableView dequeueReusableCellWithIdentifier:OrderGoodsCellId];
+    static NSString *OrderGoodsCellId = @"AppointmentOrderCell";
+    AppointmentOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:OrderGoodsCellId];
     if (!cell) {
         
-        cell = [[BrandOrderGoodCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:OrderGoodsCellId];
+        cell = [[AppointmentOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:OrderGoodsCellId];
     }
     
     cell.order = self.orderGroups[indexPath.section];
@@ -299,7 +363,7 @@
     
 }
 
-- (UIView *)headerViewWithOrder:(BrandOrderModel *)order {
+- (UIView *)headerViewWithOrder:(AppointmentOrderModel *)order {
     
     UIView *headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 40)];
     

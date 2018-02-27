@@ -11,5 +11,7 @@
 @interface BrandCommentListVC : BaseViewController
 //
 @property (nonatomic, copy) NSString *code;
+//评论类型
+@property (nonatomic, copy) NSString *kind;
 
 @end

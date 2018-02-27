@@ -110,6 +110,9 @@
 		212ECE872043B50E0091E543 /* BrandCommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE862043B50E0091E543 /* BrandCommentTableView.m */; };
 		212ECE8A204402120091E543 /* AppointmentStartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE89204402120091E543 /* AppointmentStartVC.m */; };
 		212ECE8D204427930091E543 /* TripInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE8C204427930091E543 /* TripInfoModel.m */; };
+		212ECE922044FD8C0091E543 /* AppointmentOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE912044FD8C0091E543 /* AppointmentOrderVC.m */; };
+		212ECE952044FDA60091E543 /* AppointmentOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE942044FDA60091E543 /* AppointmentOrderListVC.m */; };
+		212ECE982044FDD00091E543 /* AppointmentOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE972044FDD00091E543 /* AppointmentOrderDetailVC.m */; };
 		21302323202D49C400A954E7 /* CustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2130231F202D49C300A954E7 /* CustomShareView.m */; };
 		21302324202D49C400A954E7 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302322202D49C400A954E7 /* ShareView.m */; };
 		2130232C202D49FC00A954E7 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21302328202D49FC00A954E7 /* README.txt */; };
@@ -141,6 +144,10 @@
 		216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */; };
 		216AB7F21F189F30006C26A1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7F11F189F30006C26A1 /* libc++.tbd */; };
 		216AB7F41F189F39006C26A1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 216AB7F31F189F39006C26A1 /* libz.tbd */; };
+		2182D23E204536C3003215DA /* AppointmentOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D23D204536C3003215DA /* AppointmentOrderModel.m */; };
+		2182D24220453711003215DA /* AppointmentOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D24120453711003215DA /* AppointmentOrderCell.m */; };
+		2182D24520453940003215DA /* OrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D24420453940003215DA /* OrderFooterView.m */; };
+		2182D24820459729003215DA /* CommentListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D24720459729003215DA /* CommentListHeaderView.m */; };
 		21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F0203E598700A8AD34 /* TripListView.m */; };
 		21A1E9F5203E68C300A8AD34 /* BrandListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F4203E68C300A8AD34 /* BrandListVC.m */; };
 		21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F7203E695500A8AD34 /* BrandVC.m */; };
@@ -441,6 +448,12 @@
 		212ECE89204402120091E543 /* AppointmentStartVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentStartVC.m; sourceTree = "<group>"; };
 		212ECE8B204427930091E543 /* TripInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripInfoModel.h; sourceTree = "<group>"; };
 		212ECE8C204427930091E543 /* TripInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripInfoModel.m; sourceTree = "<group>"; };
+		212ECE902044FD8C0091E543 /* AppointmentOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentOrderVC.h; sourceTree = "<group>"; };
+		212ECE912044FD8C0091E543 /* AppointmentOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentOrderVC.m; sourceTree = "<group>"; };
+		212ECE932044FDA60091E543 /* AppointmentOrderListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentOrderListVC.h; sourceTree = "<group>"; };
+		212ECE942044FDA60091E543 /* AppointmentOrderListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentOrderListVC.m; sourceTree = "<group>"; };
+		212ECE962044FDD00091E543 /* AppointmentOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentOrderDetailVC.h; sourceTree = "<group>"; };
+		212ECE972044FDD00091E543 /* AppointmentOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentOrderDetailVC.m; sourceTree = "<group>"; };
 		2130231F202D49C300A954E7 /* CustomShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomShareView.m; sourceTree = "<group>"; };
 		21302320202D49C300A954E7 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		21302321202D49C400A954E7 /* CustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShareView.h; sourceTree = "<group>"; };
@@ -499,6 +512,14 @@
 		216AB7EF1F189F22006C26A1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		216AB7F11F189F30006C26A1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		216AB7F31F189F39006C26A1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2182D23C204536C3003215DA /* AppointmentOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentOrderModel.h; sourceTree = "<group>"; };
+		2182D23D204536C3003215DA /* AppointmentOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentOrderModel.m; sourceTree = "<group>"; };
+		2182D24020453711003215DA /* AppointmentOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppointmentOrderCell.h; sourceTree = "<group>"; };
+		2182D24120453711003215DA /* AppointmentOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppointmentOrderCell.m; sourceTree = "<group>"; };
+		2182D24320453940003215DA /* OrderFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderFooterView.h; sourceTree = "<group>"; };
+		2182D24420453940003215DA /* OrderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderFooterView.m; sourceTree = "<group>"; };
+		2182D24620459729003215DA /* CommentListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListHeaderView.h; sourceTree = "<group>"; };
+		2182D24720459729003215DA /* CommentListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListHeaderView.m; sourceTree = "<group>"; };
 		21A1E9EF203E598700A8AD34 /* TripListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListView.h; sourceTree = "<group>"; };
 		21A1E9F0203E598700A8AD34 /* TripListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListView.m; sourceTree = "<group>"; };
 		21A1E9F3203E68C300A8AD34 /* BrandListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandListVC.h; sourceTree = "<group>"; };
@@ -1439,6 +1460,7 @@
 		212ECDC220403A8D0091E543 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				212ECE8F2044FD4B0091E543 /* AppointmentOrder */,
 				212ECDC420403A9E0091E543 /* BrandOrder */,
 				212ECDC320403A940091E543 /* IntegralOrder */,
 			);
@@ -1476,6 +1498,9 @@
 		212ECDCE20403D7A0091E543 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				2182D24320453940003215DA /* OrderFooterView.h */,
+				2182D24420453940003215DA /* OrderFooterView.m */,
+				2182D23F204536E6003215DA /* AppointmentOrder */,
 				212ECDD020403D910091E543 /* BrandOrder */,
 				212ECDCF20403D810091E543 /* IntegralOrder */,
 			);
@@ -1515,6 +1540,7 @@
 		212ECDD120403D9B0091E543 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				2182D23B204536A9003215DA /* Appointment */,
 				212ECE75204309EA0091E543 /* Brand */,
 				212ECE74204309CF0091E543 /* Integral */,
 			);
@@ -1569,6 +1595,19 @@
 				212ECE7720430A020091E543 /* BrandOrderModel.m */,
 			);
 			path = Brand;
+			sourceTree = "<group>";
+		};
+		212ECE8F2044FD4B0091E543 /* AppointmentOrder */ = {
+			isa = PBXGroup;
+			children = (
+				212ECE902044FD8C0091E543 /* AppointmentOrderVC.h */,
+				212ECE912044FD8C0091E543 /* AppointmentOrderVC.m */,
+				212ECE932044FDA60091E543 /* AppointmentOrderListVC.h */,
+				212ECE942044FDA60091E543 /* AppointmentOrderListVC.m */,
+				212ECE962044FDD00091E543 /* AppointmentOrderDetailVC.h */,
+				212ECE972044FDD00091E543 /* AppointmentOrderDetailVC.m */,
+			);
+			path = AppointmentOrder;
 			sourceTree = "<group>";
 		};
 		21302325202D49FC00A954E7 /* WeChat */ = {
@@ -1681,6 +1720,24 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		2182D23B204536A9003215DA /* Appointment */ = {
+			isa = PBXGroup;
+			children = (
+				2182D23C204536C3003215DA /* AppointmentOrderModel.h */,
+				2182D23D204536C3003215DA /* AppointmentOrderModel.m */,
+			);
+			path = Appointment;
+			sourceTree = "<group>";
+		};
+		2182D23F204536E6003215DA /* AppointmentOrder */ = {
+			isa = PBXGroup;
+			children = (
+				2182D24020453711003215DA /* AppointmentOrderCell.h */,
+				2182D24120453711003215DA /* AppointmentOrderCell.m */,
+			);
+			path = AppointmentOrder;
+			sourceTree = "<group>";
+		};
 		21A1E9F2203E68AB00A8AD34 /* Brand */ = {
 			isa = PBXGroup;
 			children = (
@@ -1720,6 +1777,8 @@
 				21A1EA08203E8E5A00A8AD34 /* BrandCommentCell.m */,
 				212ECE852043B50E0091E543 /* BrandCommentTableView.h */,
 				212ECE862043B50E0091E543 /* BrandCommentTableView.m */,
+				2182D24620459729003215DA /* CommentListHeaderView.h */,
+				2182D24720459729003215DA /* CommentListHeaderView.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -2366,12 +2425,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2182D24520453940003215DA /* OrderFooterView.m in Sources */,
 				21AC58AE1FDE75AA00F19DE8 /* HttpSign.m in Sources */,
 				21AC58951FDE741A00F19DE8 /* CaptchaView.m in Sources */,
 				2130235E202EC98200A954E7 /* AppointmentCommentCell.m in Sources */,
 				21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */,
 				21A1EA2B203FBD7400A8AD34 /* IntegralGoodDetailVC.m in Sources */,
 				212BE46A202BEB32000BCC66 /* CategoryItem.m in Sources */,
+				2182D23E204536C3003215DA /* AppointmentOrderModel.m in Sources */,
 				212BE442202A9F37000BCC66 /* PlatfromProposalVC.m in Sources */,
 				212ECE472041156C0091E543 /* OrderParamCell.m in Sources */,
 				212BE491202C3735000BCC66 /* SettingGroup.m in Sources */,
@@ -2399,14 +2460,17 @@
 				21A1EA4A20402AA700A8AD34 /* Province.m in Sources */,
 				21AC59881FDE891B00F19DE8 /* SegmentUnil.m in Sources */,
 				212BE4A4202C4009000BCC66 /* SettingTableView.m in Sources */,
+				212ECE952044FDA60091E543 /* AppointmentOrderListVC.m in Sources */,
 				21111BB71F8B5F2C0021B3FE /* WTReTextField.m in Sources */,
 				21111BB81F8B5F2C0021B3FE /* WTReParser.m in Sources */,
 				21AC596D1FDE814C00F19DE8 /* UIView+Responder.m in Sources */,
 				2130234C202DA5FC00A954E7 /* AppointmentListCell.m in Sources */,
 				212BE460202B04CC000BCC66 /* SystemNoticeVC.m in Sources */,
+				2182D24820459729003215DA /* CommentListHeaderView.m in Sources */,
 				21A1EA00203E71F600A8AD34 /* BrandListTableView.m in Sources */,
 				21A1EA06203E8DE600A8AD34 /* BrandDetailTableView.m in Sources */,
 				21111BB91F8B5F2C0021B3FE /* TLDisplayPhotoVC.m in Sources */,
+				212ECE922044FD8C0091E543 /* AppointmentOrderVC.m in Sources */,
 				21111BBA1F8B5F2C0021B3FE /* TLImagePickerController.m in Sources */,
 				21AC59611FDE80A300F19DE8 /* UIButton+EnLargeEdge.m in Sources */,
 				212ECDE32040474B0091E543 /* CommentModel.m in Sources */,
@@ -2415,6 +2479,7 @@
 				212ECE872043B50E0091E543 /* BrandCommentTableView.m in Sources */,
 				212BE4AB202C4FA1000BCC66 /* HelpCenterTableView.m in Sources */,
 				21A1EA16203EC4F900A8AD34 /* IntegralMallVC.m in Sources */,
+				2182D24220453711003215DA /* AppointmentOrderCell.m in Sources */,
 				212ECE73204308230091E543 /* BrandOrderDetailCell.m in Sources */,
 				212BE472202BF677000BCC66 /* BrandModel.m in Sources */,
 				21A1EA21203FAAB600A8AD34 /* IntegralCollectionView.m in Sources */,
@@ -2525,6 +2590,7 @@
 				21AC587B1FDE737200F19DE8 /* TLUserForgetPwdVC.m in Sources */,
 				21302335202D6F4D00A954E7 /* ProposalHeaderView.m in Sources */,
 				212BE45C202B031F000BCC66 /* NSTimer+Loop.m in Sources */,
+				212ECE982044FDD00091E543 /* AppointmentOrderDetailVC.m in Sources */,
 				21AC59551FDE7F1500F19DE8 /* WebVC.m in Sources */,
 				21302371202EE4ED00A954E7 /* AppointmentDetailTableView.m in Sources */,
 				21302353202E8AB200A954E7 /* BaseTableViewCell.m in Sources */,
@@ -2716,7 +2782,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/WeChat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cdkj.myxb-dev";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2754,7 +2820,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/WeChat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cdkj.myxb-dev";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

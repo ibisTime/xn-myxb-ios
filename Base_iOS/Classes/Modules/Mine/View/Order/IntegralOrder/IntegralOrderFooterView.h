@@ -22,8 +22,6 @@ typedef void(^IntegralOrderBlock)(IntegralOrderEventsType type);
 
 @property (nonatomic,strong) IntegralOrderModel *order;
 
-@property (nonatomic, assign) IntegralOrderEventsType eventsType;
-
 @property (nonatomic, copy) IntegralOrderBlock orderBlock;
 
 @end

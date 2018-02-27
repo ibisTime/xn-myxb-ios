@@ -61,7 +61,7 @@ void TLLog(NSString *format, ...) {
         case RunEnvTest: {
             
             self.qiniuDomain = @"http://otoieuivb.bkt.clouddn.com";
-            self.addr = @"http://47.96.161.183:4001";
+            self.addr = @"http://47.96.161.183:4401";
 
         }break;
             

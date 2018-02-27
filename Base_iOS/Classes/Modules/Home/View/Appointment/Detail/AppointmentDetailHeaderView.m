@@ -156,7 +156,7 @@
         
         if (![title valid]) {
             
-            *stop = YES;
+            return ;
         }
         
         CGFloat w = [NSString getWidthWithString:title font:11.0] + 10;

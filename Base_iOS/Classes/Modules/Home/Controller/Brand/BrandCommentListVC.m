@@ -43,13 +43,15 @@
     [self initTableView];
     //获取评论列表
     [self requestCommentList];
+    
+    [self.tableView beginRefreshing];
 }
 
 
 #pragma mark - 断网操作
 - (void)placeholderOperation {
-    //获取评论列表
-    [self requestCommentList];
+    
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -82,24 +84,47 @@
     helper.parameters[@"status"] = @"AB";
     helper.parameters[@"orderColumn"] = @"update_datetime";
     helper.parameters[@"orderDir"] = @"desc";
+    helper.parameters[@"type"] = self.kind;
     
     helper.tableView = self.tableView;
     
     [helper modelClass:[CommentModel class]];
     
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+    [self.tableView addRefreshAction:^{
         
-        [weakSelf removePlaceholderView];
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            [weakSelf removePlaceholderView];
+            
+            weakSelf.tableView.commentList = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+            [TLProgressHUD dismiss];
+        }];
         
-        weakSelf.tableView.commentList = objs;
+    }];
+    
+    [self.tableView addLoadMoreAction:^{
         
-        [weakSelf.tableView reloadData_tl];
-        
-    } failure:^(NSError *error) {
-        
-        [weakSelf addPlaceholderView];
-        
-        [TLProgressHUD dismiss];
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            [weakSelf removePlaceholderView];
+            
+            weakSelf.tableView.commentList = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+            [TLProgressHUD dismiss];
+        }];
     }];
     
     [self.tableView endRefreshingWithNoMoreData_tl];

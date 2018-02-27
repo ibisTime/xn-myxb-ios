@@ -21,10 +21,6 @@
 @property (nonatomic, strong) BaseView *topView;
 //评论
 @property (nonatomic, strong) TLTextView *commentTV;
-//使用效果
-@property (nonatomic, strong) MovieAddComment *effectCommentView;
-//物流服务
-@property (nonatomic, strong) MovieAddComment *serviceCommentView;
 //
 @property (nonatomic, strong) NSArray <KeyValueModel *>*models;
 //
@@ -89,7 +85,7 @@
     self.commentTV.placeholderLbl.origin = CGPointMake(15, 15);
     self.commentTV.placeholderLbl.font = Font(13.0);
     self.commentTV.textContainerInset = UIEdgeInsetsMake(17, 10, 0, 0);
-    self.commentTV.placholder = @"宝贝满足你的期待吗? 说是它的优点吧";
+    self.commentTV.placholder = self.placeholder;
     
     [self.view addSubview:self.commentTV];
     
@@ -142,13 +138,13 @@
         [TLAlert alertWithInfo:[NSString stringWithFormat:@"请输入评论内容"]];
         return ;
     }
-    
+        
     TLNetworking *http = [TLNetworking new];
     
     http.showView = self.view;
     http.code = @"805420";
     http.parameters[@"commenter"] = [TLUser user].userId;
-    http.parameters[@"type"] = @"P";
+    http.parameters[@"type"] = self.commentKind;
     http.parameters[@"content"] = self.commentTV.text;
     http.parameters[@"orderCode"] = self.code;
     NSMutableArray *reqArr = [NSMutableArray array];
@@ -202,10 +198,12 @@
 #pragma mark - Data
 - (void)requestScoreKeyValue {
     
+    NSString *type = self.type == OrderCommentTypePerson ? @"ISR": @"ISW";
+    
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"805914";
-    http.parameters[@"type"] = @"ISW";
+    http.parameters[@"type"] = type;
     
     [http postWithSuccess:^(id responseObject) {
         

@@ -21,6 +21,11 @@
 NSString *const kUserLoginNotification = @"kUserLoginNotification";
 NSString *const kUserLoginOutNotification = @"kUserLoginOutNotification";
 NSString *const kUserInfoChange = @"kUserInfoChange";
+//角色类型
+NSString *const kUserTypeSalon = @"C";      //美容院
+NSString *const kUserTypeBeautyGuide = @"T";//美导
+NSString *const kUserTypeLecturer = @"L";   //讲师
+NSString *const kUserTypeExpert = @"S";     //专家
 
 @implementation TLUser
 

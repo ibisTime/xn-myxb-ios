@@ -183,6 +183,7 @@ static NSString *commentCellID = @"BrandCommentCell";
         BrandCommentListVC *commentListVC = [BrandCommentListVC new];
         
         commentListVC.code = self.code;
+        commentListVC.kind = @"P";
         
         [weakSelf.viewController.navigationController pushViewController:commentListVC animated:YES];
         

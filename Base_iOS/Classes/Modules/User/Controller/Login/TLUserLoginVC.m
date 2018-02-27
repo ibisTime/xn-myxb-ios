@@ -213,25 +213,22 @@
     switch (_userTypeTf.selectIndex) {
         case 0:
         {
-            kind = @"C";
+            kind = kUserTypeSalon;
         }break;
             
         case 1:
         {
-            kind = @"L";
-
+            kind = kUserTypeLecturer;
         }break;
             
         case 2:
         {
-            kind = @"S";
-            
+            kind = kUserTypeExpert;
         }break;
             
         case 3:
         {
-            kind = @"T";
-            
+            kind = kUserTypeBeautyGuide;
         }break;
             
         default:

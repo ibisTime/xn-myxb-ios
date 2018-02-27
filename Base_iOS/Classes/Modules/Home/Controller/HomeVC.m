@@ -250,19 +250,19 @@
                 case 1:
                 {
                     title = @"美导预约";
-                    type = @"T";
+                    type = kUserTypeBeautyGuide;
                 }break;
                     
                 case 2:
                 {
                     title = @"讲师预约";
-                    type = @"L";
+                    type = kUserTypeLecturer;
                 }break;
                     
                 case 3:
                 {
                     title = @"专家预约";
-                    type = @"S";
+                    type = kUserTypeExpert;
                 }break;
                     
                 default:

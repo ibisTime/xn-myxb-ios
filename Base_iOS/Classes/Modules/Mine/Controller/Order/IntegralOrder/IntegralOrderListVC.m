@@ -174,28 +174,32 @@
 #pragma mark - Events
 - (void)orderEventsWithType:(IntegralOrderEventsType)type order:(IntegralOrderModel *)order {
 
-    BaseWeakSelf;
-
     switch (type) {
 
         case IntegralOrderEventsTypeReceiptGood:
         {
-            TLNetworking *http = [TLNetworking new];
-            
-            http.showView = self.view;
-            http.code = @"805296";
-            http.parameters[@"orderCode"] = order.code;
-            http.parameters[@"updater"] = [TLUser user].userId;
-            
-            [http postWithSuccess:^(id responseObject) {
+            [TLAlert alertWithTitle:@"" msg:@"确认已收货?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
                 
-                [TLAlert alertWithSucces:@"收货成功"];
+            } confirm:^(UIAlertAction *action) {
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
+                TLNetworking *http = [TLNetworking new];
                 
-            } failure:^(NSError *error) {
+                http.showView = self.view;
+                http.code = @"805296";
+                http.parameters[@"orderCode"] = order.code;
+                http.parameters[@"updater"] = [TLUser user].userId;
                 
+                [http postWithSuccess:^(id responseObject) {
+                    
+                    [TLAlert alertWithSucces:@"收货成功"];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
+                    
+                } failure:^(NSError *error) {
+                    
+                }];
             }];
+            
         }break;
             
         case IntegralOrderEventsTypeComment:
@@ -224,8 +228,6 @@
 
 #pragma mark- delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    BaseWeakSelf;
     
     IntegralOrderDetailVC *vc = [[IntegralOrderDetailVC alloc] init];
     

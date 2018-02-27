@@ -38,12 +38,14 @@ static const NSInteger kBtnStartTag = 100;
 @property (nonatomic, assign) NSInteger kTotalNum;
 //行程
 @property (nonatomic, strong) TripListView *tripView;
-//
-@property (nonatomic, weak) UIButton *preBtn;
-//
-@property (nonatomic, weak) UIButton *nextBtn;
-//
+//向前
+@property (nonatomic, weak) UIButton *leftArrowBtn;
+//向后
+@property (nonatomic, weak) UIButton *rightArrowBtn;
+//目前显示的月份
 @property (nonatomic, strong) NSDate *currentDate;
+//服务器的月份
+@property (nonatomic, strong) NSDate *serviceDate;
 
 @end
 
@@ -192,9 +194,16 @@ static const NSInteger kBtnStartTag = 100;
 - (void)setTodayDate:(NSString *)todayDate {
     
     _todayDate = todayDate;
+    //服务器显示的月份
+    if (!_serviceDate) {
+        
+        _serviceDate = [NSString dateFromString:todayDate formatter:@"yyyy-MM-dd"];
+    }
     
     _currentDate = [NSString dateFromString:todayDate formatter:@"yyyy-MM-dd"];
-    
+    //判断是不是当前月份
+    self.leftArrowBtn.hidden = _serviceDate.month == _currentDate.month ? YES: NO;
+
     [self initData];
 
 }
@@ -419,6 +428,10 @@ static const NSInteger kBtnStartTag = 100;
 //点击查看行程
 - (void)lookTripForIndex:(NSInteger)index {
     
+    CGFloat startDayIndex       = [self calculateStartIndex:self.firstDay];
+
+    NSInteger day = index + 1 - startDayIndex;
+    
     NSMutableArray <TripInfoModel *>*arr = [NSMutableArray array];
     
     [self.dateArr enumerateObjectsUsingBlock:^(TripInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -427,11 +440,16 @@ static const NSInteger kBtnStartTag = 100;
         
         NSDate *endDate = [NSString dateFromString:obj.endDatetime formatter:kDateFormmatter];
         
-        if (index >= startDate.day && index <= endDate.day) {
+        if (day >= startDate.day && day <= endDate.day) {
             
             [arr addObject:obj];
         }
     }];
+    //如果没有行程就结束
+    if (arr.count == 0) {
+        
+        return ;
+    }
     //展示行程
     self.tripView.trips = arr.copy;
     
@@ -541,6 +559,8 @@ static const NSInteger kBtnStartTag = 100;
     leftArrowBtn.transform = CGAffineTransformMakeRotation(M_PI);
     
     [self addSubview:leftArrowBtn];
+    
+    self.leftArrowBtn = leftArrowBtn;
     //右箭头
     UIButton *rightArrowBtn = [UIButton buttonWithImageName:@"更多-灰色"];
     
@@ -551,6 +571,8 @@ static const NSInteger kBtnStartTag = 100;
     [rightArrowBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:rightArrowBtn];
+    
+    self.rightArrowBtn = rightArrowBtn;
 }
 
 @end

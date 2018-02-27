@@ -28,6 +28,7 @@
 #import "SettingVC.h"
 #import "IntegralMallVC.h"
 #import "BrandOrderVC.h"
+#import "AppointmentOrderVC.h"
 
 @interface MineVC ()<MineHeaderSeletedDelegate>
 //模型
@@ -92,42 +93,45 @@
         [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
     };
     
-    //行程列表
-    MineModel *travelList = [MineModel new];
+    //品牌订单
+    MineModel *brandOrder = [MineModel new];
     
-    travelList.text = @"行程列表";
-    travelList.imgName = @"行程列表";
-    travelList.action = ^{
-        
-    };
-    
-    //成果订单
-    MineModel *order = [MineModel new];
-    
-    order.text = @"成果订单";
-    order.imgName = @"成果订单";
-    order.action = ^{
+    brandOrder.text = @"品牌订单";
+    brandOrder.imgName = @"行程列表";
+    brandOrder.action = ^{
         
         BrandOrderVC *orderVC = [BrandOrderVC new];
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     
-    //我的资料
-    MineModel *information = [MineModel new];
+    //预约
+    MineModel *appointmnet = [MineModel new];
     
-    information.text = @"我的资料";
-    information.imgName = @"我的资料";
-    information.action = ^{
+    appointmnet.text = @"预约";
+    appointmnet.imgName = @"预约";
+    appointmnet.action = ^{
+        
+        AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
+        
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+    };
+    
+    //我的评论
+    MineModel *myComment = [MineModel new];
+    
+    myComment.text = @"我的评论";
+    myComment.imgName = @"我的评论";
+    myComment.action = ^{
         
     };
     
-    //我的排名
-    MineModel *ranking = [MineModel new];
+    //团队顾问
+    MineModel *teamAdvisor = [MineModel new];
     
-    ranking.text = @"我的排名";
-    ranking.imgName = @"我的排名";
-    ranking.action = ^{
+    teamAdvisor.text = @"团队顾问";
+    teamAdvisor.imgName = @"团队顾问";
+    teamAdvisor.action = ^{
         
     };
     
@@ -142,7 +146,7 @@
     
     self.group = [MineGroup new];
     
-    self.group.sections = @[@[jfBalance, travelList, order, information], @[ranking], @[helpCenter]];
+    self.group.sections = @[@[jfBalance, brandOrder, appointmnet, myComment], @[teamAdvisor], @[helpCenter]];
 }
 
 - (void)initGroup {
@@ -210,8 +214,10 @@
     };
     
     self.group = [MineGroup new];
+    //成果订单只有专家才有
+    NSArray *arr = [[TLUser user].kind isEqualToString:kUserTypeExpert] ? @[jfBalance, travelList, order, information]: @[jfBalance, travelList, information];
     
-    self.group.sections = @[@[jfBalance, travelList, order, information], @[ranking], @[helpCenter]];
+    self.group.sections = @[arr, @[ranking], @[helpCenter]];
     
 }
 

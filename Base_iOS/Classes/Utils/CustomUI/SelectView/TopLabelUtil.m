@@ -42,13 +42,6 @@
 
 @implementation TopLabelUtil
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -86,6 +79,7 @@
     if (!_bgScrollView){
         _bgScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.segmentWidth, self.frame.size.height)];
         _bgScrollView.showsHorizontalScrollIndicator = NO;
+        _bgScrollView.showsVerticalScrollIndicator = NO;
     }
     return _bgScrollView;
 }
@@ -130,8 +124,10 @@
     [self setNeedsLayout];//标记需要刷新
     [self layoutIfNeeded];//刷新界面
 }
--(void)updateSegmentViewUI:(void(^)(UIButton *btn))complete{
+-(void)updateSegmentViewUI:(void(^)(UIButton *btn))complete {
+    
     for (UIButton *btn in self.btnArray) {
+        
         [btn setTitleColor:self.titleNormalColor forState:UIControlStateNormal];
         [btn setTitleColor:self.titleSelectColor forState:UIControlStateSelected];
         btn.titleLabel.font = self.titleFont;
@@ -149,25 +145,34 @@
 
     _titleArray = titleArray;
     
+    NSInteger count = titleArray.count;
+    
     CGFloat lineW = [NSString getWidthWithString:self.titleArray[0] font:self.titleFont.lineHeight];
     
-    self.lineWidth = _lineType == LineTypeTitleLength ? lineW: 80;
+    self.lineWidth = _lineType == LineTypeTitleLength ? lineW: kWidth(60);
     
-    self.bottomLine = [[UIView alloc]initWithFrame:CGRectMake(self.segmentWidth/4.0-BTN_LINE_WIDTH/2.0+(self.defaultSelectIndex-1)*(BTN_LINE_WIDTH+self.segmentWidth/2.0), self.segmentHeight-4, BTN_LINE_WIDTH, 2)];
-    self.bottomLine.backgroundColor = [UIColor redColor];
+    self.bottomLine = [[UIView alloc]initWithFrame:CGRectMake(self.segmentWidth/(2.0*count)-BTN_LINE_WIDTH/(1.0*count)+(self.defaultSelectIndex-1)*(BTN_LINE_WIDTH+self.segmentWidth/(1.0*count)), self.segmentHeight-4, BTN_LINE_WIDTH, 2)];
+    self.bottomLine.backgroundColor = kClearColor;
     [self.bgScrollView addSubview:self.bottomLine];
     
     self.bgScrollView.contentSize = CGSizeMake(BTN_LINE_WIDTH*_titleArray.count, self.segmentHeight);
     
     for (int i = 0; i<_titleArray.count; i++) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(self.segmentWidth/4.0-BTN_LINE_WIDTH/2.0+self.segmentWidth/2.0*i, 0, BTN_LINE_WIDTH, self.segmentHeight-2);
+        
+        CGFloat btnX = _lineType == LineTypeTitleLength ? self.segmentWidth/(2.0*count)-BTN_LINE_WIDTH/(1.0*count)+self.segmentWidth/(1.0*count)*i: i*(BTN_LINE_WIDTH-0.5);
+
+        UIButton *btn = [UIButton buttonWithTitle:_titleArray[i]
+                                       titleColor:_titleNormalColor
+                                  backgroundColor:kClearColor
+                                        titleFont:16.0];
+        
+        btn.frame = CGRectMake(btnX, 0, BTN_LINE_WIDTH, self.segmentHeight);
         btn.tag = i+1000;
-        [btn setTitle:_titleArray[i] forState:UIControlStateNormal];
-        [btn setTitleColor:_titleNormalColor forState:UIControlStateNormal];
+        btn.layer.borderWidth = 1;
+        btn.layer.borderColor = kWhiteColor.CGColor;
         [btn setTitleColor:_titleSelectColor forState:UIControlStateSelected];
+        [btn setBackgroundColor:kWhiteColor forState:UIControlStateSelected];
         [btn addTarget:self action:@selector(btnIndexClick:) forControlEvents:UIControlEventTouchUpInside];
-        btn.backgroundColor = [UIColor clearColor];
         btn.titleLabel.font = self.titleFont;
         [self.bgScrollView addSubview:btn];
         

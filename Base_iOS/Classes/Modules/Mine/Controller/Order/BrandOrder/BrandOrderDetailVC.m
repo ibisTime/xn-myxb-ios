@@ -139,6 +139,8 @@
     BrandCommentVC *commentVC = [[BrandCommentVC alloc] init];
     
     commentVC.code = self.order.code;
+    commentVC.commentKind = @"P";
+    commentVC.placeholder = @"宝贝满足你的期待吗? 说是它的优点吧";
     
     [commentVC setCommentSuccess:^(){
         

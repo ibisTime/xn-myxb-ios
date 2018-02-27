@@ -11,6 +11,7 @@
 #import "UIColor+Extension.h"
 //Macro
 #import "AppColorMacro.h"
+#import "TLUser.h"
 
 @implementation AppointmentListModel
 
@@ -41,9 +42,9 @@
 - (NSString *)getUserType {
     
     NSDictionary *dic = @{
-                          @"T": @"美导",
-                          @"S": @"专家",
-                          @"L": @"讲师",
+                          kUserTypeBeautyGuide: @"美导",
+                          kUserTypeLecturer: @"讲师",
+                          kUserTypeExpert: @"专家",
                           };
     
     return dic[self.kind];

@@ -69,7 +69,7 @@
     //title
     self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor
                                             textColor:kTextColor
-                                                 font:16.0];
+                                                 font:14.0];
     self.titleLbl.text = @"行程档期";
     self.titleLbl.numberOfLines = 0;
     self.titleLbl.adjustsFontSizeToFitWidth = YES;
@@ -77,7 +77,7 @@
     [self.contentView addSubview:self.titleLbl];
     [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_left).offset(45);
+        make.left.equalTo(self.iconIV.mas_left).offset(10);
         make.right.equalTo(arrowIV.mas_left).offset(-15);
         make.centerY.equalTo(@0);
         
