@@ -100,6 +100,12 @@
     
     [chatBtn bk_addEventHandler:^(id sender) {
         
+        //
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", weakSelf.good.mobile];
+
+        NSURL *url = [NSURL URLWithString:mobile];
+
+        [[UIApplication sharedApplication] openURL:url];
         
     } forControlEvents:UIControlEventTouchUpInside];
     

@@ -15,21 +15,29 @@
 //M
 #import "BrandModel.h"
 #import "CommentModel.h"
+#import "CommentKeywordModel.h"
 //V
 #import "BrandCommentTableView.h"
 #import "TLPlaceholderView.h"
+#import "AutoresizeLabelFlow.h"
 //C
 #import "BrandBuyVC.h"
 
 @interface BrandCommentListVC ()
 //
 @property (nonatomic, strong) BrandCommentTableView *tableView;
+//评论标签
+@property (nonatomic, strong) AutoresizeLabelFlow *headerView;
 //
 @property (nonatomic, strong) UIView *bottomView;
 //
 @property (nonatomic, strong) BrandModel *good;
 //
 @property (nonatomic, strong) NSArray <CommentModel *>*commentList;
+//当前选择的关键字
+@property (nonatomic, copy) NSString *currentKeyWord;
+//关键字列表
+@property (nonatomic, strong) NSMutableArray <AutoresizeLabelModel *>*keywords;
 
 @end
 
@@ -41,12 +49,12 @@
     self.title = @"评论";
     //
     [self initTableView];
+    //获取关键字列表
+    [self requestKeywordList];
     //获取评论列表
     [self requestCommentList];
     
-    [self.tableView beginRefreshing];
 }
-
 
 #pragma mark - 断网操作
 - (void)placeholderOperation {
@@ -57,20 +65,71 @@
 #pragma mark - Init
 - (void)initTableView {
     
-    self.tableView = [[BrandCommentTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.currentKeyWord = @"全部";
+    
+    self.tableView = [[BrandCommentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无评论" topMargin:140];
     
     [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.right.mas_equalTo(0);
-        make.bottom.equalTo(@(-(50 + kBottomInsetHeight)));
-    }];
     
 }
 
+- (AutoresizeLabelFlow *)headerView {
+    
+    if (!_headerView) {
+        
+        BaseWeakSelf;
+        
+        _headerView = [[AutoresizeLabelFlow alloc]initWithFrame:CGRectMake(0, 220, kScreenWidth, 100) selectedHandler:^(NSUInteger index, NSString *title) {
+            
+            weakSelf.currentKeyWord = title;
+            
+            [weakSelf.tableView beginRefreshing];
+        }];
+        
+        _headerView.data = self.keywords.copy;
+    }
+    return _headerView;
+}
+
 #pragma mark - Data
+- (void)requestKeywordList {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805414";
+    http.parameters[@"kind"] = self.kind;
+
+    [http postWithSuccess:^(id responseObject) {
+        
+        AutoresizeLabelModel *model = [AutoresizeLabelModel new];
+        
+        model.title = @"全部";
+        model.isSelected = YES;
+        
+        self.keywords = [NSMutableArray arrayWithObject:model];
+        
+        NSArray <CommentKeywordModel *>*keywords = [CommentKeywordModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        [keywords enumerateObjectsUsingBlock:^(CommentKeywordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            AutoresizeLabelModel *model = [AutoresizeLabelModel new];
+            
+            model.title = [NSString stringWithFormat:@"%@(%ld)", obj.word, obj.count];
+            model.isSelected = NO;
+            
+            [self.keywords addObject:model];
+        }];
+        
+        self.tableView.tableHeaderView = self.headerView;
+        
+        [self.tableView beginRefreshing];
+
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 - (void)requestCommentList {
     
@@ -78,13 +137,14 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"805425";
+    helper.code = @"805428";
     helper.limit = 20;
     helper.parameters[@"entityCode"] = self.code;
     helper.parameters[@"status"] = @"AB";
-    helper.parameters[@"orderColumn"] = @"update_datetime";
+    helper.parameters[@"orderColumn"] = @"comment_datetime";
     helper.parameters[@"orderDir"] = @"desc";
     helper.parameters[@"type"] = self.kind;
+    helper.parameters[@"keyWord"] = self.currentKeyWord;
     
     helper.tableView = self.tableView;
     

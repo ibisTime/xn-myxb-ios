@@ -27,7 +27,7 @@
 @property (nonatomic,strong) TLBannerView *bannerView;
 //头条
 @property (nonatomic, strong) UIView *headLineView;
-@property (nonatomic, strong) UIButton *headBtn;
+@property (nonatomic, strong) LoopScrollView *loopView;
 //分类
 @property (nonatomic, strong) UIView *categoryView;
 //推荐品牌
@@ -84,17 +84,18 @@
     
     self.headLineView.backgroundColor = kWhiteColor;
     
+    [self addSubview:self.headLineView];
     //背景
-    LoopScrollView *loopView = [LoopScrollView loopTitleViewWithFrame:CGRectMake(15, 0, kScreenWidth - 15, 50) titleImgArr:nil];
+    LoopScrollView *loopView = [LoopScrollView loopTitleViewWithFrame:CGRectMake(0, 0, kScreenWidth, 50)
+                                                          titleImgArr:nil];
     
     loopView.timeinterval = 3.f;
-    loopView.titlesArr = @[@"我淘网上线啦！！！", @"倍可盈上线啦！！！", @"九州宝上线啦！！！", @"健康e购上线啦！！！"];
-    loopView.leftImage = kImage(@"我淘头条");
+    loopView.leftImage = kImage(@"msg_logo");
     loopView.loopBlock = ^{
         
         if (weakSelf.headerBlock) {
             
-            weakSelf.headerBlock(HomeEventsTypeBanner, 0);
+            weakSelf.headerBlock(HomeEventsTypeNotice, 0);
         }
     };
     
@@ -102,23 +103,17 @@
     loopView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6"].CGColor;
     
     [self.headLineView addSubview:loopView];
-    
+    self.loopView = loopView;
+
     //更多
     UIImageView *moreIV = [[UIImageView alloc] init];
     
-    moreIV.image = kImage(@"更多");
+    moreIV.image = kImage(@"更多-灰色");
     moreIV.frame = CGRectMake(loopView.width - 17, 0, 7, 12);
     moreIV.centerY = loopView.centerY;
     
     [loopView addSubview:moreIV];
-    
-    UIButton *contentBtn = [UIButton buttonWithTitle:@"" titleColor:kTextColor backgroundColor:kClearColor titleFont:14.0];
-    
-    [loopView addSubview:contentBtn];
-    
-    self.headBtn = contentBtn;
-    
-    [self addSubview:self.headLineView];
+
 }
 
 - (void)initCategoryView {
@@ -169,7 +164,6 @@
         
         make.centerX.equalTo(@10);
         make.centerY.equalTo(@0);
-        
     }];
     //
     UIView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"推荐品牌")];
@@ -183,22 +177,23 @@
 }
 
 #pragma mark - Setting
-- (void)setNotices:(NSMutableArray *)notices {
+- (void)setNotices:(NSMutableArray<NoticeModel *> *)notices {
     
     _notices = notices;
     
-    if (self.notices.count > 0) {
-        
-        NoticeModel *notice = self.notices[0];
-        
-        [self.headBtn setTitle:notice.smsTitle forState:UIControlStateNormal];
-        
-    } else {
-        
-        [self.headBtn setTitle:@"无" forState:UIControlStateNormal];
-    }
+    NSMutableArray *titleArr = [NSMutableArray array];
     
-    [self.headBtn setTitleLeft];
+    if (notices.count == 0) {
+        
+        [titleArr addObject:@"无"];
+    }
+    [notices enumerateObjectsUsingBlock:^(NoticeModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [titleArr addObject:obj.smsTitle];
+    }];
+    
+    self.loopView.titlesArr = titleArr;
+
 }
 
 #pragma mark - Events

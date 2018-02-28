@@ -103,8 +103,6 @@
 #pragma mark - Events
 - (void)orderEventsWithType:(OrderEventsType)type order:(AppointmentOrderModel *)order {
     
-    BaseWeakSelf;
-    
     switch (type) {
             
         case OrderEventsTypeComment:
@@ -262,8 +260,6 @@
 
 #pragma mark - Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    BaseWeakSelf;
     
     AppointmentOrderDetailVC *vc = [[AppointmentOrderDetailVC alloc] init];
     

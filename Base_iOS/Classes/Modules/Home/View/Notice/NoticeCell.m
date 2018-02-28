@@ -11,18 +11,21 @@
 #import "AppColorMacro.h"
 #import "TLUIHeader.h"
 #import "NSString+Date.h"
+#import "NSAttributedString+add.h"
 
 @interface NoticeCell ()
 
 @property (nonatomic,strong) UIImageView *iconIV;
-//标题
-@property (nonatomic,strong) UILabel *titleLbl;
-//时间
-@property (nonatomic,strong) UILabel *timeLbl;
-//内容
-@property (nonatomic,strong) UILabel *contentLbl;
+
+@property (nonatomic, strong) UILabel *titleLabel;
+
+@property (nonatomic, strong) UILabel *timeLabel;
+
+@property (nonatomic, strong) UILabel *contentLabel;
 
 @property (nonatomic, strong) UIView *bgView;
+
+@property (nonatomic, strong) UIView *bottomView;
 
 @end
 
@@ -32,88 +35,88 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.backgroundColor = kWhiteColor;
+        self.backgroundColor = kClearColor;
         
-        //icon
-        self.iconIV = [[UIImageView alloc] initWithImage:kImage(@"消息")];
-
-        [self addSubview:self.iconIV];
-        [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        CGFloat x = 15;
+        CGFloat w = kScreenWidth - 2*x;
+        CGFloat topH = 45;
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(x, 0, w, 125)];
+        
+        bgView.backgroundColor = kWhiteColor;
+        bgView.layer.cornerRadius = 10;
+        bgView.clipsToBounds = YES;
+        
+        [self.contentView addSubview:bgView];
+        
+        self.bgView = bgView;
+        
+        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, w, topH)];
+        
+        topView.backgroundColor = kAppCustomMainColor;
+        [bgView addSubview:topView];
+        //标题
+        self.titleLabel = [UILabel labelWithBackgroundColor:kClearColor
+                                                  textColor:kWhiteColor
+                                                       font:15.0];
+        
+        self.titleLabel.backgroundColor = kClearColor;
+        
+        [topView addSubview:self.titleLabel];
+        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(@15);
-            make.top.equalTo(@25);
-            make.width.height.equalTo(@32);
-            
-        }];
-        
-        //消息标题
-        self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor font:14.0];
-        
-        self.titleLbl.numberOfLines = 0;
-        
-        [self addSubview:self.titleLbl];
-        [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.iconIV.mas_right).offset(10);
-            make.right.equalTo(self.mas_right).offset(-15);
-            make.top.equalTo(self.iconIV.mas_top);
-            
-        }];
-        
-        //时间
-        self.timeLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
-        
-        [self addSubview:self.timeLbl];
-        [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.equalTo(self.titleLbl.mas_left);
-            make.top.equalTo(self.titleLbl.mas_bottom).offset(5);
+            make.left.equalTo(@(x));
+            make.centerY.equalTo(@0);
+            make.right.equalTo(@(-x));
+            make.height.equalTo(@20);
             
         }];
         
-        //
-        self.bgView = [[UIView alloc] init];
+        self.contentLabel = [UILabel labelWithBackgroundColor:kClearColor
+                                                    textColor:kTextColor
+                                                         font:15.0];
         
-        self.bgView.layer.cornerRadius = 5;
-        self.bgView.layer.masksToBounds = YES;
-
-        self.bgView.backgroundColor = kBackgroundColor;
+        self.contentLabel.numberOfLines = 0;
         
-        [self addSubview:self.bgView];
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [bgView addSubview:self.contentLabel];
+        [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.equalTo(self.titleLbl.mas_left);
-            make.top.equalTo(self.timeLbl.mas_bottom).offset(15);
-            make.right.equalTo(self.mas_right).offset(-15);
-            
+            make.left.equalTo(@(x));
+            make.top.equalTo(self.mas_top).offset(topH + 10);
+            make.right.equalTo(@(-x));
         }];
         
-        //消息内容
-        self.contentLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:12.0];
+        self.bottomView = [[UIView alloc] init];
         
-        self.contentLbl.numberOfLines = 0;
-        
-        [self.bgView addSubview:self.contentLbl];
-        [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        [bgView addSubview:self.bottomView];
+        [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.edges.mas_equalTo(UIEdgeInsetsMake(13, 12, 13, 12));
-            
-            make.top.equalTo(self.bgView.mas_top).offset(13);
-            
+            make.top.equalTo(self.contentLabel.mas_bottom).offset(10);
+            make.width.equalTo(@(w));
+            make.left.equalTo(@0);
+            make.height.equalTo(@(40));
         }];
         
-        UIView *line = [[UIView alloc] init];
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, w, kLineHeight)];
         
-        line.backgroundColor = kLineColor;
+        lineView.backgroundColor = kLineColor;
         
-        [self addSubview:line];
+        [self.bottomView addSubview:lineView];
         
-        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.timeLabel = [UILabel labelWithBackgroundColor:kClearColor
+                                                 textColor:kTextColor2
+                                                      font:13.0];
+        
+        self.timeLabel.frame = CGRectMake(x, 0, self.bottomView.width - 2*x, 15.0);
+        
+        self.timeLabel.centerY = self.bottomView.height/2.0;
+        
+        [self.bottomView addSubview:self.timeLabel];
+        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.right.equalTo(@0);
-            make.height.equalTo(@0.5);
-            make.top.equalTo(self.bgView.mas_bottom).offset(15);
-            
+            make.left.equalTo(@(x));
+            make.centerY.equalTo(@0);
+            make.height.equalTo(@15);
         }];
         
     }
@@ -125,13 +128,21 @@
     
     _notice = notice;
     
-    self.titleLbl.text = _notice.smsTitle; //名称
-    self.timeLbl.text = [_notice.pushedDatetime convertToDetailDate];//更新时间
-    self.contentLbl.text = _notice.smsContent; //消息内容
+    self.titleLabel.text = _notice.smsTitle;
     
-    [self layoutSubviews];
+    self.contentLabel.text = _notice.smsContent;
     
-    _notice.cellHeight = self.bgView.yy + 15.5;
+    NSString *date = [_notice.pushedDatetime convertToDetailDate];
+    
+    NSAttributedString *timeAttr = [NSAttributedString getAttributedStringWithImgStr:@"消息时间" index:0 string:[NSString stringWithFormat:@"  %@", date] labelHeight:self.timeLabel.height];
+    
+    self.timeLabel.attributedText = timeAttr;
+    
+    [self layoutIfNeeded];
+
+    self.bgView.height = self.bottomView.yy;
+    
+    notice.cellHeight = self.bottomView.yy;
     
 }
 

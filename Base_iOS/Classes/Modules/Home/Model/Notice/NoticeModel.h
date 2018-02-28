@@ -25,8 +25,6 @@
 @property (nonatomic, copy) NSString *toKind;
 @property (nonatomic, copy) NSString *toSystemCode;
 
-@property (nonatomic, assign) CGFloat contentHeight;
-
 @property (nonatomic, assign) CGFloat cellHeight;
 
 @end

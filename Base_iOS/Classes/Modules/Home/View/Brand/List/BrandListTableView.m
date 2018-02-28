@@ -7,11 +7,7 @@
 //
 
 #import "BrandListTableView.h"
-//Macro
-//Framework
-//Category
-//Extension
-//M
+
 //V
 #import "BrandListCell.h"
 //C

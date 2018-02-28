@@ -12,6 +12,6 @@
 //产品编号
 @property (nonatomic, copy) NSString *code;
 //
-@property (nonatomic,copy) void(^paySuccess)();
+@property (nonatomic,copy) void(^paySuccess)(void);
 
 @end

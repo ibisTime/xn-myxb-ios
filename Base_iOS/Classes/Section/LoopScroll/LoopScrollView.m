@@ -97,7 +97,7 @@
     [super layoutSubviews];
     
     //
-    _leftIconIV.frame = CGRectMake(10, 0, self.leftImage.size.width, self.leftImage.size.height);
+    _leftIconIV.frame = CGRectMake(15, 0, self.leftImage.size.width, self.leftImage.size.height);
     
     _leftIconIV.centerY = self.centerY;
     

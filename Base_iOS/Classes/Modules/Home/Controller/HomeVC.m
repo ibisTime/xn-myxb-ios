@@ -52,8 +52,8 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     //系统消息
-//    [self requestNoticeList];
-//    //获取商品列表
+    [self requestNoticeList];
+    //获取商品列表
     [self requestBrandList];
 }
 

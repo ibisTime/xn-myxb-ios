@@ -7,9 +7,8 @@
 //
 
 #import "TLBaseModel.h"
-#import "TLUserExt.h"
 
-@class TLUserExt;
+@class AdviserUser;
 
 @interface TLUser : TLBaseModel
 
@@ -49,7 +48,8 @@
 @property (nonatomic, copy) NSString *inviteCode;
 //邀请人个数
 @property (nonatomic, copy) NSString *referrerNum;
-
+//经纪人信息
+@property (nonatomic, strong) AdviserUser *adviserUser;
 
 + (instancetype)user;
 
@@ -67,6 +67,13 @@
 - (void)setUserInfoWithDict:(NSDictionary *)dict;
 //异步更新用户信息
 - (void)updateUserInfo;
+
+@end
+
+@interface AdviserUser: NSObject
+
+//经纪人手机号
+@property (nonatomic, copy) NSString *mobile;
 
 @end
 

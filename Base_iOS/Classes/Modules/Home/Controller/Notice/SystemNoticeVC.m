@@ -157,16 +157,21 @@ static NSString *identifier = @"NoticeCellId";
 }
 
 #pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return self.notices.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NoticeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    cell.notice = self.notices[indexPath.row];
+    cell.notice = self.notices[indexPath.section];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -178,8 +183,17 @@ static NSString *identifier = @"NoticeCellId";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.notices[indexPath.row].cellHeight;
+    return self.notices[indexPath.section].cellHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    return [UIView new];
 }
 
 - (void)didReceiveMemoryWarning {

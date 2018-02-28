@@ -24,6 +24,8 @@
 #import "AppointmentDetailHeaderView.h"
 //C
 #import "AppointmentStartVC.h"
+#import "TLUserLoginVC.h"
+#import "NavigationController.h"
 
 @interface AppointmentDetailVC ()
 //
@@ -46,6 +48,8 @@
     // Do any additional setup after loading the view.
     //
     [self initTableView];
+    //底部按钮
+    [self initBottomView];
     //获取服务器当前时间
     [self getServiceCurrentTime];
     //
@@ -101,6 +105,12 @@
     
     [agentBtn bk_addEventHandler:^(id sender) {
         
+        //
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", weakSelf.appomintment.mobile];
+        
+        NSURL *url = [NSURL URLWithString:mobile];
+        
+        [[UIApplication sharedApplication] openURL:url];
         
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -117,16 +127,7 @@
                                  backgroundColor:kThemeColor
                                        titleFont:16.0];
     
-    [appointmentBtn bk_addEventHandler:^(id sender) {
-        
-        AppointmentStartVC *startVC = [AppointmentStartVC new];
-        
-        startVC.title = weakSelf.titleStr;
-        startVC.code = weakSelf.appomintment.userId;
-        
-        [weakSelf.navigationController pushViewController:startVC animated:YES];
-        
-    } forControlEvents:UIControlEventTouchUpInside];
+    [appointmentBtn addTarget:self action:@selector(appointment) forControlEvents:UIControlEventTouchUpInside];
     
     [self.bottomView addSubview:appointmentBtn];
     [appointmentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -148,10 +149,36 @@
  */
 - (void)reloadHeaderView {
     
-    //底部按钮
-    [self initBottomView];
-    
     [TLProgressHUD dismiss];
+}
+
+#pragma mark - Events
+- (void)appointment {
+    
+    BaseWeakSelf;
+    
+    if (![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+        
+        loginVC.loginSuccess = ^{
+            
+            [weakSelf appointment];
+        };
+        
+        NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+        return;
+    }
+    
+    AppointmentStartVC *startVC = [AppointmentStartVC new];
+    
+    startVC.title = weakSelf.titleStr;
+    startVC.code = weakSelf.appomintment.userId;
+    
+    [weakSelf.navigationController pushViewController:startVC animated:YES];
 }
 
 #pragma mark - Data

@@ -15,6 +15,8 @@
 #import "TLTextView.h"
 #import "TLTextField.h"
 #import "TLDatePicker.h"
+//C
+#import "AppointmentOrderVC.h"
 
 @interface AppointmentStartVC ()
 //预约时间
@@ -150,6 +152,10 @@
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:[NSString stringWithFormat:@"%@成功", self.titleStr]];
+        
+        AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
+        
+        [self.navigationController pushViewController:orderVC animated:YES];
         
     } failure:^(NSError *error) {
         

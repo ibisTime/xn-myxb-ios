@@ -148,6 +148,22 @@
 		2182D24220453711003215DA /* AppointmentOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D24120453711003215DA /* AppointmentOrderCell.m */; };
 		2182D24520453940003215DA /* OrderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D24420453940003215DA /* OrderFooterView.m */; };
 		2182D24820459729003215DA /* CommentListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D24720459729003215DA /* CommentListHeaderView.m */; };
+		2182D24B20464795003215DA /* CommentKeywordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D24A20464795003215DA /* CommentKeywordModel.m */; };
+		2182D253204659B4003215DA /* AutoresizeLabelFlow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D252204659B4003215DA /* AutoresizeLabelFlow.m */; };
+		2182D25920465A67003215DA /* AutoresizeLabelFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D25820465A67003215DA /* AutoresizeLabelFlowCell.m */; };
+		2182D25C20465A84003215DA /* AutoresizeLabelFlowConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D25B20465A84003215DA /* AutoresizeLabelFlowConfig.m */; };
+		2182D25F20465A9E003215DA /* AutoresizeLabelFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D25E20465A9E003215DA /* AutoresizeLabelFlowLayout.m */; };
+		2182D2622046787F003215DA /* AutoresizeLabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D2612046787F003215DA /* AutoresizeLabelModel.m */; };
+		2182D26520468B82003215DA /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D26420468B82003215DA /* SearchVC.m */; };
+		2182D2692046B596003215DA /* NSAttributedString+add.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D2682046B596003215DA /* NSAttributedString+add.m */; };
+		2182D26D2046CFBD003215DA /* TripListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D26C2046CFBD003215DA /* TripListVC.m */; };
+		2182D2742046D0B3003215DA /* TripListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D2732046D0B3003215DA /* TripListTableView.m */; };
+		2182D2782046D113003215DA /* TripListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D2772046D113003215DA /* TripListModel.m */; };
+		2182D27B2046D1A1003215DA /* TripListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D27A2046D1A1003215DA /* TripListCell.m */; };
+		2182D27F2046DF11003215DA /* MyRankVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D27E2046DF11003215DA /* MyRankVC.m */; };
+		2182D2832046DF65003215DA /* MyRankTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D2822046DF65003215DA /* MyRankTableView.m */; };
+		2182D2862046DF86003215DA /* MyRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D2852046DF86003215DA /* MyRankCell.m */; };
+		2182D28A2046DFA9003215DA /* MyRankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2182D2892046DFA9003215DA /* MyRankModel.m */; };
 		21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F0203E598700A8AD34 /* TripListView.m */; };
 		21A1E9F5203E68C300A8AD34 /* BrandListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F4203E68C300A8AD34 /* BrandListVC.m */; };
 		21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F7203E695500A8AD34 /* BrandVC.m */; };
@@ -520,6 +536,38 @@
 		2182D24420453940003215DA /* OrderFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderFooterView.m; sourceTree = "<group>"; };
 		2182D24620459729003215DA /* CommentListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListHeaderView.h; sourceTree = "<group>"; };
 		2182D24720459729003215DA /* CommentListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListHeaderView.m; sourceTree = "<group>"; };
+		2182D24920464795003215DA /* CommentKeywordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentKeywordModel.h; sourceTree = "<group>"; };
+		2182D24A20464795003215DA /* CommentKeywordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentKeywordModel.m; sourceTree = "<group>"; };
+		2182D251204659B4003215DA /* AutoresizeLabelFlow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoresizeLabelFlow.h; sourceTree = "<group>"; };
+		2182D252204659B4003215DA /* AutoresizeLabelFlow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoresizeLabelFlow.m; sourceTree = "<group>"; };
+		2182D25720465A67003215DA /* AutoresizeLabelFlowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoresizeLabelFlowCell.h; sourceTree = "<group>"; };
+		2182D25820465A67003215DA /* AutoresizeLabelFlowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoresizeLabelFlowCell.m; sourceTree = "<group>"; };
+		2182D25A20465A84003215DA /* AutoresizeLabelFlowConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoresizeLabelFlowConfig.h; sourceTree = "<group>"; };
+		2182D25B20465A84003215DA /* AutoresizeLabelFlowConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoresizeLabelFlowConfig.m; sourceTree = "<group>"; };
+		2182D25D20465A9E003215DA /* AutoresizeLabelFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoresizeLabelFlowLayout.h; sourceTree = "<group>"; };
+		2182D25E20465A9E003215DA /* AutoresizeLabelFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoresizeLabelFlowLayout.m; sourceTree = "<group>"; };
+		2182D2602046787F003215DA /* AutoresizeLabelModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoresizeLabelModel.h; sourceTree = "<group>"; };
+		2182D2612046787F003215DA /* AutoresizeLabelModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoresizeLabelModel.m; sourceTree = "<group>"; };
+		2182D26320468B82003215DA /* SearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
+		2182D26420468B82003215DA /* SearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
+		2182D2672046B596003215DA /* NSAttributedString+add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+add.h"; sourceTree = "<group>"; };
+		2182D2682046B596003215DA /* NSAttributedString+add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+add.m"; sourceTree = "<group>"; };
+		2182D26B2046CFBD003215DA /* TripListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListVC.h; sourceTree = "<group>"; };
+		2182D26C2046CFBD003215DA /* TripListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListVC.m; sourceTree = "<group>"; };
+		2182D2722046D0B3003215DA /* TripListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListTableView.h; sourceTree = "<group>"; };
+		2182D2732046D0B3003215DA /* TripListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListTableView.m; sourceTree = "<group>"; };
+		2182D2762046D113003215DA /* TripListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListModel.h; sourceTree = "<group>"; };
+		2182D2772046D113003215DA /* TripListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListModel.m; sourceTree = "<group>"; };
+		2182D2792046D1A1003215DA /* TripListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListCell.h; sourceTree = "<group>"; };
+		2182D27A2046D1A1003215DA /* TripListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListCell.m; sourceTree = "<group>"; };
+		2182D27D2046DF11003215DA /* MyRankVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRankVC.h; sourceTree = "<group>"; };
+		2182D27E2046DF11003215DA /* MyRankVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRankVC.m; sourceTree = "<group>"; };
+		2182D2812046DF65003215DA /* MyRankTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRankTableView.h; sourceTree = "<group>"; };
+		2182D2822046DF65003215DA /* MyRankTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRankTableView.m; sourceTree = "<group>"; };
+		2182D2842046DF86003215DA /* MyRankCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRankCell.h; sourceTree = "<group>"; };
+		2182D2852046DF86003215DA /* MyRankCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRankCell.m; sourceTree = "<group>"; };
+		2182D2882046DFA9003215DA /* MyRankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRankModel.h; sourceTree = "<group>"; };
+		2182D2892046DFA9003215DA /* MyRankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRankModel.m; sourceTree = "<group>"; };
 		21A1E9EF203E598700A8AD34 /* TripListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListView.h; sourceTree = "<group>"; };
 		21A1E9F0203E598700A8AD34 /* TripListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListView.m; sourceTree = "<group>"; };
 		21A1E9F3203E68C300A8AD34 /* BrandListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandListVC.h; sourceTree = "<group>"; };
@@ -921,6 +969,7 @@
 			isa = PBXGroup;
 			children = (
 				21111B951F8B5EFF0021B3FE /* Foundation+Log.m */,
+				2182D2662046B58B003215DA /* NSAttributedString */,
 				212BE459202B031F000BCC66 /* NSTimer */,
 				212BE4242029AE21000BCC66 /* NSNull */,
 				21111B891F8B5EFF0021B3FE /* NSDictionary */,
@@ -1120,6 +1169,8 @@
 			children = (
 				212BE41520285DF8000BCC66 /* HomeVC.h */,
 				212BE41620285DF8000BCC66 /* HomeVC.m */,
+				2182D26320468B82003215DA /* SearchVC.h */,
+				2182D26420468B82003215DA /* SearchVC.m */,
 				21A1E9F2203E68AB00A8AD34 /* Brand */,
 				21302342202DA43600A954E7 /* Appointment */,
 				212BE45D202B04B3000BCC66 /* Notice */,
@@ -1233,6 +1284,8 @@
 		212BE436202A9E44000BCC66 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2182D2872046DF91003215DA /* MyRank */,
+				2182D2752046D0FC003215DA /* TripList */,
 				212ECDD120403D9B0091E543 /* Order */,
 				21A1EA25203FAD7000A8AD34 /* Integral */,
 				212BE48B202C3735000BCC66 /* Setting */,
@@ -1244,6 +1297,8 @@
 		212BE437202A9E4B000BCC66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2182D2802046DF4F003215DA /* MyRank */,
+				2182D26E2046D07F003215DA /* TripList */,
 				212ECDCE20403D7A0091E543 /* Order */,
 				21A1EA17203EC56200A8AD34 /* IntegralMall */,
 				212BE49F202C4009000BCC66 /* Setting */,
@@ -1257,6 +1312,8 @@
 			children = (
 				212BE439202A9EC4000BCC66 /* MineVC.h */,
 				212BE43A202A9EC4000BCC66 /* MineVC.m */,
+				2182D27C2046DEE7003215DA /* MyRank */,
+				2182D26A2046CF97003215DA /* TripList */,
 				212ECDC220403A8D0091E543 /* Order */,
 				21A1EA13203EC4B100A8AD34 /* IntegralMall */,
 				212BE49B202C3D82000BCC66 /* ImageClip */,
@@ -1584,6 +1641,8 @@
 				212ECDD320403DD80091E543 /* IntegralOrderModel.m */,
 				212ECDE12040474A0091E543 /* CommentModel.h */,
 				212ECDE22040474A0091E543 /* CommentModel.m */,
+				2182D24920464795003215DA /* CommentKeywordModel.h */,
+				2182D24A20464795003215DA /* CommentKeywordModel.m */,
 			);
 			path = Integral;
 			sourceTree = "<group>";
@@ -1738,6 +1797,90 @@
 			path = AppointmentOrder;
 			sourceTree = "<group>";
 		};
+		2182D24D20464FDE003215DA /* SearchHistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				2182D251204659B4003215DA /* AutoresizeLabelFlow.h */,
+				2182D252204659B4003215DA /* AutoresizeLabelFlow.m */,
+				2182D25720465A67003215DA /* AutoresizeLabelFlowCell.h */,
+				2182D25820465A67003215DA /* AutoresizeLabelFlowCell.m */,
+				2182D25A20465A84003215DA /* AutoresizeLabelFlowConfig.h */,
+				2182D25B20465A84003215DA /* AutoresizeLabelFlowConfig.m */,
+				2182D25D20465A9E003215DA /* AutoresizeLabelFlowLayout.h */,
+				2182D25E20465A9E003215DA /* AutoresizeLabelFlowLayout.m */,
+				2182D2602046787F003215DA /* AutoresizeLabelModel.h */,
+				2182D2612046787F003215DA /* AutoresizeLabelModel.m */,
+			);
+			path = SearchHistoryView;
+			sourceTree = "<group>";
+		};
+		2182D2662046B58B003215DA /* NSAttributedString */ = {
+			isa = PBXGroup;
+			children = (
+				2182D2672046B596003215DA /* NSAttributedString+add.h */,
+				2182D2682046B596003215DA /* NSAttributedString+add.m */,
+			);
+			path = NSAttributedString;
+			sourceTree = "<group>";
+		};
+		2182D26A2046CF97003215DA /* TripList */ = {
+			isa = PBXGroup;
+			children = (
+				2182D26B2046CFBD003215DA /* TripListVC.h */,
+				2182D26C2046CFBD003215DA /* TripListVC.m */,
+			);
+			path = TripList;
+			sourceTree = "<group>";
+		};
+		2182D26E2046D07F003215DA /* TripList */ = {
+			isa = PBXGroup;
+			children = (
+				2182D2722046D0B3003215DA /* TripListTableView.h */,
+				2182D2732046D0B3003215DA /* TripListTableView.m */,
+				2182D2792046D1A1003215DA /* TripListCell.h */,
+				2182D27A2046D1A1003215DA /* TripListCell.m */,
+			);
+			path = TripList;
+			sourceTree = "<group>";
+		};
+		2182D2752046D0FC003215DA /* TripList */ = {
+			isa = PBXGroup;
+			children = (
+				2182D2762046D113003215DA /* TripListModel.h */,
+				2182D2772046D113003215DA /* TripListModel.m */,
+			);
+			path = TripList;
+			sourceTree = "<group>";
+		};
+		2182D27C2046DEE7003215DA /* MyRank */ = {
+			isa = PBXGroup;
+			children = (
+				2182D27D2046DF11003215DA /* MyRankVC.h */,
+				2182D27E2046DF11003215DA /* MyRankVC.m */,
+			);
+			path = MyRank;
+			sourceTree = "<group>";
+		};
+		2182D2802046DF4F003215DA /* MyRank */ = {
+			isa = PBXGroup;
+			children = (
+				2182D2812046DF65003215DA /* MyRankTableView.h */,
+				2182D2822046DF65003215DA /* MyRankTableView.m */,
+				2182D2842046DF86003215DA /* MyRankCell.h */,
+				2182D2852046DF86003215DA /* MyRankCell.m */,
+			);
+			path = MyRank;
+			sourceTree = "<group>";
+		};
+		2182D2872046DF91003215DA /* MyRank */ = {
+			isa = PBXGroup;
+			children = (
+				2182D2882046DFA9003215DA /* MyRankModel.h */,
+				2182D2892046DFA9003215DA /* MyRankModel.m */,
+			);
+			path = MyRank;
+			sourceTree = "<group>";
+		};
 		21A1E9F2203E68AB00A8AD34 /* Brand */ = {
 			isa = PBXGroup;
 			children = (
@@ -1861,6 +2004,7 @@
 		21AC59051FDE7A1B00F19DE8 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				2182D24D20464FDE003215DA /* SearchHistoryView */,
 				21AC59521FDE7CA500F19DE8 /* SegmentView */,
 				21AC59061FDE7A1B00F19DE8 /* TableView */,
 				21AC59091FDE7A1B00F19DE8 /* TextView */,
@@ -2373,6 +2517,7 @@
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PYPhotoBrowser/PYPhotoBrowser/PYPhotosView.bundle",
+				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
@@ -2435,13 +2580,17 @@
 				2182D23E204536C3003215DA /* AppointmentOrderModel.m in Sources */,
 				212BE442202A9F37000BCC66 /* PlatfromProposalVC.m in Sources */,
 				212ECE472041156C0091E543 /* OrderParamCell.m in Sources */,
+				2182D2782046D113003215DA /* TripListModel.m in Sources */,
+				2182D28A2046DFA9003215DA /* MyRankModel.m in Sources */,
 				212BE491202C3735000BCC66 /* SettingGroup.m in Sources */,
 				21111BA21F8B5F2C0021B3FE /* CircleGuideView.m in Sources */,
 				21AC58851FDE73B200F19DE8 /* TLChangeMobileVC.m in Sources */,
+				2182D2622046787F003215DA /* AutoresizeLabelModel.m in Sources */,
 				212ECE3E2041026D0091E543 /* IntegralOrderDetailCell.m in Sources */,
 				21AC589F1FDE754400F19DE8 /* AppConfig.m in Sources */,
 				212ECE70204307E00091E543 /* BrandOrderGoodCell.m in Sources */,
 				21111BA91F8B5F2C0021B3FE /* TLBannerView.m in Sources */,
+				2182D24B20464795003215DA /* CommentKeywordModel.m in Sources */,
 				21302381202EEFF600A954E7 /* LDCalendarView.m in Sources */,
 				212ECDDA204043740091E543 /* IntegralOrderGoodCell.m in Sources */,
 				21A1EA4B20402AA700A8AD34 /* AddressPickerView.m in Sources */,
@@ -2450,6 +2599,7 @@
 				21A1EA1E203EC6C600A8AD34 /* BaseView.m in Sources */,
 				212BE489202C371D000BCC66 /* MineModel.m in Sources */,
 				21A1E9F5203E68C300A8AD34 /* BrandListVC.m in Sources */,
+				2182D26D2046CFBD003215DA /* TripListVC.m in Sources */,
 				21302349202DA5E000A954E7 /* AppointmentListTableView.m in Sources */,
 				21302377202EEDB700A954E7 /* AppointmentCalendarCell.m in Sources */,
 				21111BAF1F8B5F2C0021B3FE /* BannerCell.m in Sources */,
@@ -2479,13 +2629,16 @@
 				212ECE872043B50E0091E543 /* BrandCommentTableView.m in Sources */,
 				212BE4AB202C4FA1000BCC66 /* HelpCenterTableView.m in Sources */,
 				21A1EA16203EC4F900A8AD34 /* IntegralMallVC.m in Sources */,
+				2182D25F20465A9E003215DA /* AutoresizeLabelFlowLayout.m in Sources */,
 				2182D24220453711003215DA /* AppointmentOrderCell.m in Sources */,
 				212ECE73204308230091E543 /* BrandOrderDetailCell.m in Sources */,
 				212BE472202BF677000BCC66 /* BrandModel.m in Sources */,
 				21A1EA21203FAAB600A8AD34 /* IntegralCollectionView.m in Sources */,
 				21111BBB1F8B5F2C0021B3FE /* TLPhotoChooseItem.m in Sources */,
+				2182D253204659B4003215DA /* AutoresizeLabelFlow.m in Sources */,
 				212ECDCD20403B3E0091E543 /* IntegralOrderDetailVC.m in Sources */,
 				21111BBC1F8B5F2C0021B3FE /* TLChooseResultManager.m in Sources */,
+				2182D27B2046D1A1003215DA /* TripListCell.m in Sources */,
 				21111BBD1F8B5F2C0021B3FE /* TLPhotoCell.m in Sources */,
 				21AC588F1FDE73FE00F19DE8 /* TLUserExt.m in Sources */,
 				21A1E9FD203E6CA500A8AD34 /* BrandListCell.m in Sources */,
@@ -2559,15 +2712,20 @@
 				21111BEC1F8B5F2C0021B3FE /* Foundation+Log.m in Sources */,
 				212BE41F202862E8000BCC66 /* UIImage+Tint.m in Sources */,
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
+				2182D2742046D0B3003215DA /* TripListTableView.m in Sources */,
 				212ECE4D204142540091E543 /* IntegralTaskListVC.m in Sources */,
 				21AC59421FDE7A1B00F19DE8 /* TLDatePicker.m in Sources */,
 				21302374202EEB9800A954E7 /* AppointmentTripCell.m in Sources */,
 				21A1EA12203EBBC800A8AD34 /* BrandBuyVC.m in Sources */,
 				212ECE6D2043079B0091E543 /* BrandOrderDetailVC.m in Sources */,
+				2182D2692046B596003215DA /* NSAttributedString+add.m in Sources */,
+				2182D2832046DF65003215DA /* MyRankTableView.m in Sources */,
 				21A1EA24203FAC7300A8AD34 /* IntegralGoodCell.m in Sources */,
 				2121702B1F384216007C9855 /* ZHReceivingAddress.m in Sources */,
 				212ECE812043A3CE0091E543 /* KeyValueModel.m in Sources */,
 				21302323202D49C400A954E7 /* CustomShareView.m in Sources */,
+				2182D2862046DF86003215DA /* MyRankCell.m in Sources */,
+				2182D27F2046DF11003215DA /* MyRankVC.m in Sources */,
 				212BE46E202BF649000BCC66 /* HomeCollectionView.m in Sources */,
 				21AC59851FDE828500F19DE8 /* NSObject+Extension.m in Sources */,
 				21AC59471FDE7A1B00F19DE8 /* TLAlert.m in Sources */,
@@ -2602,6 +2760,7 @@
 				21AC597F1FDE823C00F19DE8 /* NSString+Check.m in Sources */,
 				21AC59731FDE820600F19DE8 /* NSDictionary+Extension.m in Sources */,
 				21158E431F1C4F4D00A07266 /* CustomTabBar.m in Sources */,
+				2182D25C20465A84003215DA /* AutoresizeLabelFlowConfig.m in Sources */,
 				21F82C9C1F17719D0019B176 /* BaseViewController.m in Sources */,
 				212BE47E202C0023000BCC66 /* HomeHeaderView.m in Sources */,
 				21FB30CB1F26E9EF0028ADEE /* UINavigationController+MethodSwizzling.m in Sources */,
@@ -2616,6 +2775,7 @@
 				21AC587A1FDE737200F19DE8 /* TLUserRegisterVC.m in Sources */,
 				212ECE61204145E50091E543 /* IntregalRecordModel.m in Sources */,
 				21F82C9F1F17719D0019B176 /* TabbarViewController.m in Sources */,
+				2182D26520468B82003215DA /* SearchVC.m in Sources */,
 				21A1EA28203FAD9800A8AD34 /* IntegralModel.m in Sources */,
 				212ECE50204142CA0091E543 /* IntregalTaskModel.m in Sources */,
 				212170291F384216007C9855 /* ZHAddAddressVC.m in Sources */,
@@ -2640,6 +2800,7 @@
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
 				212ECE4A20413BCF0091E543 /* CurrencyModel.m in Sources */,
 				21302356202EC4A500A954E7 /* AppointmentDetailVC.m in Sources */,
+				2182D25920465A67003215DA /* AutoresizeLabelFlowCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

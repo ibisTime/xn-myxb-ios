@@ -12,7 +12,7 @@
 
 //广告语
 @property (nonatomic, copy) NSString *slogan;
-//手机号
+//顾问手机号
 @property (nonatomic, copy) NSString *mobile;
 //缩略图
 @property (nonatomic, copy) NSString *advPic;

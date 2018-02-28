@@ -19,7 +19,6 @@
 
 @implementation BrandCommentTableView
 
-
 //
 static NSString *commentCellID = @"BrandCommentCell";
 

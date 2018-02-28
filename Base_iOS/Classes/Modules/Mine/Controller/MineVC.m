@@ -29,6 +29,8 @@
 #import "IntegralMallVC.h"
 #import "BrandOrderVC.h"
 #import "AppointmentOrderVC.h"
+#import "TripListVC.h"
+#import "MyRankVC.h"
 
 @interface MineVC ()<MineHeaderSeletedDelegate>
 //模型
@@ -81,6 +83,8 @@
     
     BaseWeakSelf;
     
+    AdviserUser *user = [TLUser user].adviserUser;
+    ;
     //积分余额
     MineModel *jfBalance = [MineModel new];
     
@@ -133,6 +137,12 @@
     teamAdvisor.imgName = @"团队顾问";
     teamAdvisor.action = ^{
         
+        //
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", user.mobile];
+        
+        NSURL *url = [NSURL URLWithString:mobile];
+        
+        [[UIApplication sharedApplication] openURL:url];
     };
     
     //帮助中心
@@ -171,7 +181,10 @@
     travelList.text = @"行程列表";
     travelList.imgName = @"行程列表";
     travelList.action = ^{
+      
+        TripListVC *tripListVC = [TripListVC new];
         
+        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
     };
     
     //成果订单
@@ -202,6 +215,9 @@
     ranking.imgName = @"我的排名";
     ranking.action = ^{
         
+        MyRankVC *rankVC = [MyRankVC new];
+        
+        [weakSelf.navigationController pushViewController:rankVC animated:YES];
     };
     
     //帮助中心
@@ -214,10 +230,15 @@
     };
     
     self.group = [MineGroup new];
-    //成果订单只有专家才有
-    NSArray *arr = [[TLUser user].kind isEqualToString:kUserTypeExpert] ? @[jfBalance, travelList, order, information]: @[jfBalance, travelList, information];
-    
-    self.group.sections = @[arr, @[ranking], @[helpCenter]];
+    //排行只有专家才有
+    if ([[TLUser user].kind isEqualToString:kUserTypeExpert]) {
+        
+        self.group.sections = @[@[jfBalance, travelList, order, information], @[ranking], @[helpCenter]];
+
+    } else {
+        
+        self.group.sections = @[@[jfBalance, travelList, order, information], @[helpCenter]];
+    }
     
 }
 

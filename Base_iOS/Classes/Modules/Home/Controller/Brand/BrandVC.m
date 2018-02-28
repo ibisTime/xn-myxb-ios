@@ -7,19 +7,21 @@
 //
 
 #import "BrandVC.h"
-//Macro
-//Framework
 //Category
 #import "UIBarButtonItem+convience.h"
+#import "UIView+Extension.h"
 //Extension
+#import <PYSearch.h>
 //M
 #import "BrandListModel.h"
 //V
 #import "SelectScrollView.h"
 //C
 #import "BrandListVC.h"
+#import "NavigationController.h"
+#import "SearchVC.h"
 
-@interface BrandVC ()
+@interface BrandVC ()<PYSearchViewControllerDelegate>
 
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
 
@@ -82,10 +84,54 @@
  搜索品牌
  */
 - (void)searchBrand {
+
+    PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+        
+        SearchVC *searchVC = [SearchVC new];
+        
+        searchVC.searchText = searchText;
+        searchVC.searchType = SearchTypeGood;
+        
+        [searchViewController.navigationController pushViewController:searchVC animated:YES];
+    }];
     
+    // 3. Set style for popular search and search history
+    searchViewController.showHotSearch = NO;
     
+    searchViewController.searchHistoryStyle = PYSearchHistoryStyleARCBorderTag;
+    
+    searchViewController.searchBarBackgroundColor = [UIColor colorWithUIColor:kWhiteColor alpha:0.4];
+    
+    UIButton *cancelBtn = [UIButton buttonWithTitle:@"取消"
+                                                titleColor:kWhiteColor
+                                           backgroundColor:kClearColor
+                                                 titleFont:16.0];
+
+    [cancelBtn addTarget:self action:@selector(clickCancel:) forControlEvents:UIControlEventTouchUpInside];
+
+    cancelBtn.frame = CGRectMake(0, 0, 60, 44);
+
+    searchViewController.cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];;
+    
+    UIView* backgroundView = [searchViewController.searchBar subViewOfClassName:@"_UISearchBarSearchFieldBackgroundView"];
+    
+    backgroundView.layer.cornerRadius = 22;
+    backgroundView.clipsToBounds = YES;
+    
+    // 4. Set delegate
+    searchViewController.delegate = self;
+    // 5. Present a navigation controller
+    NavigationController *navi = [[NavigationController alloc] initWithRootViewController:searchViewController];
+    [self presentViewController:navi animated:YES completion:nil];
+    
+    [UINavigationBar appearance].barTintColor = kAppCustomMainColor;
+
 }
 
+- (void)clickCancel:(UIButton *)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark - Data
 - (void)requestBrandList {
     //1 未上架 2已上架 3已下架
