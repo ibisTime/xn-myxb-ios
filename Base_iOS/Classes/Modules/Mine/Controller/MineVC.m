@@ -12,12 +12,13 @@
 #import "TLUploadManager.h"
 //Macro
 #import "APICodeMacro.h"
-//Framework
+#import "AppMacro.h"
 //Category
 #import "NSString+Extension.h"
 //Extension
 #import <UIImageView+WebCache.h>
 #import "TLProgressHUD.h"
+#import "NSString+Check.h"
 //M
 #import "MineGroup.h"
 //V
@@ -27,10 +28,15 @@
 //C
 #import "SettingVC.h"
 #import "IntegralMallVC.h"
-#import "BrandOrderVC.h"
-#import "AppointmentOrderVC.h"
+//专家
 #import "TripListVC.h"
 #import "MyRankVC.h"
+#import "MyInfomationVC.h"
+
+//美容院
+#import "BrandOrderVC.h"
+#import "AppointmentOrderVC.h"
+#import "MyCommentVC.h"
 
 @interface MineVC ()<MineHeaderSeletedDelegate>
 //模型
@@ -53,21 +59,25 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.title = @"我的";
     
     //模型
-    if ([[TLUser user].kind isEqualToString:@"C"]) {
+    if ([[TLUser user].kind isEqualToString:kUserTypeSalon]) {
         //美容院
         [self initSclonGroup];
     } else {
         
         [self initGroup];
     }
+    
+    self.tableView.mineGroup = self.group;
+
+    [self.tableView reloadData];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title = @"我的";
     //通知
     [self addNotification];
     //
@@ -128,6 +138,9 @@
     myComment.imgName = @"我的评论";
     myComment.action = ^{
         
+        MyCommentVC *myCommentVC = [MyCommentVC new];
+        
+        [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
     };
     
     //团队顾问
@@ -194,9 +207,7 @@
     order.imgName = @"成果订单";
     order.action = ^{
       
-        BrandOrderVC *orderVC = [BrandOrderVC new];
         
-        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     
     //我的资料
@@ -206,6 +217,9 @@
     information.imgName = @"我的资料";
     information.action = ^{
         
+        MyInfomationVC *infoVC = [MyInfomationVC new];
+        
+        [weakSelf.navigationController pushViewController:infoVC animated:YES];
     };
     
     //我的排名
@@ -254,8 +268,6 @@
     [self.view addSubview:imageView];
     
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStyleGrouped];
-    
-    self.tableView.mineGroup = self.group;
     
     [self.view addSubview:self.tableView];
     
@@ -319,10 +331,13 @@
     //
     [self.headerView.userPhoto sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
     
-//    self.headerView.nameLbl.text = [TLUser user].mobile;
-    self.headerView.nameLbl.text = @"CzyGod";
-    self.headerView.genderIV.image = kImage(@"男");
-    self.headerView.infoLbl.text = @"专家 · 养生";
+    self.headerView.nameLbl.text = [TLUser user].realName;
+    NSString *genderImg = [[TLUser user].gender isEqualToString:@"0"] ? @"女生": @"男士";
+    self.headerView.genderIV.image =  kImage(genderImg);
+    
+    NSString *speciality = ![[TLUser user].speciality valid] ? @"": [NSString stringWithFormat:@" · %@", [TLUser user].speciality];
+    
+    self.headerView.infoLbl.text = [NSString stringWithFormat:@"%@%@", [[TLUser user] getUserType], speciality];
 }
 
 - (void)loginOut {
@@ -370,11 +385,11 @@
             
         }break;
             
-        case MineHeaderSeletedTypeSelectPhoto:
-        {
-            [self.imagePicker picker];
-            
-        }break;
+//        case MineHeaderSeletedTypeSelectPhoto:
+//        {
+//            [self.imagePicker picker];
+//
+//        }break;
             
         default:
             break;

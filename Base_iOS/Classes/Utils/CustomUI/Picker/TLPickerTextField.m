@@ -23,7 +23,6 @@
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
-
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -35,12 +34,11 @@
 {
     
    return  self.tagNames[row];
-
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView
             viewForRow:(NSInteger)row forComponent:(NSInteger)component
-           reusingView:(UIView *)view{
+           reusingView:(UIView *)view {
     
     UILabel* pickerLabel = (UILabel*)view;
     
@@ -62,11 +60,11 @@
     return pickerLabel;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component
 {
     if (_tagNames.count) {
-        
-        self.text = self.tagNames[row];
         
         self.selectIndex = row;
         
@@ -74,11 +72,8 @@
             
             self.didSelectBlock(row);
         }
-        
     }
 }
-
-
 
 - (void)setTagNames:(NSArray *)tagNames
 {
@@ -108,19 +103,15 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField;
-{
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
     if (_tagNames.count) {
-        
-      self.text = _tagNames[self.selectIndex];
         
         if (self.didSelectBlock) {
             
             self.didSelectBlock(self.selectIndex);
         }
     }
-    
-    return YES;
 }
 
 @end

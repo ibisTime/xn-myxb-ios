@@ -19,13 +19,13 @@
 
 //#import "CurrencyModel.h"
 
-#import "AccountTf.h"
+#import "TLTextField.h"
 #import "TLPickerTextField.h"
 
 @interface TLUserLoginVC ()
 
-@property (nonatomic, strong) AccountTf *phoneTf;
-@property (nonatomic, strong) AccountTf *pwdTf;
+@property (nonatomic, strong) TLTextField *phoneTf;
+@property (nonatomic, strong) TLTextField *pwdTf;
 //角色类型
 @property (nonatomic, strong) TLPickerTextField *userTypeTf;
 //kind
@@ -62,6 +62,8 @@
 
 - (void)setUpUI {
     
+    BaseWeakSelf;
+    
     self.view.backgroundColor = kBackgroundColor;
     
     CGFloat w = kScreenWidth;
@@ -82,31 +84,36 @@
     }];
     
     //账号
-    AccountTf *phoneTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, 0, w, h)];
-    phoneTf.leftIconView.image = [UIImage imageNamed:@"手机"];
-    phoneTf.placeHolder = @"请输入手机号码";
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0, w, h)
+                                                     leftIcon:@"手机"
+                                                  placeholder:@"请输入手机号码"];
     [bgView addSubview:phoneTf];
     self.phoneTf = phoneTf;
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     
     //密码
-    AccountTf *pwdTf = [[AccountTf alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, w, h)];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, w, h)
+                                                   leftIcon:@"密码"
+                                                placeholder:@"请输入密码"];
     pwdTf.secureTextEntry = YES;
-    pwdTf.leftIconView.image = [UIImage imageNamed:@"密码"];
-    pwdTf.placeHolder = @"请输入密码";
     [bgView addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
-    NSArray *typeArr = @[@"美容院", @"讲师", @"专家", @"美导"];
+    NSArray *typeArr = @[@"美容院",
+                         @"讲师",
+                         @"专家",
+                         @"美导"];
     
     //角色类型
-    TLPickerTextField *userTypeTf = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, pwdTf.yy + 1, w, h)];
-    
-    userTypeTf.placeHolder = @"请选择角色";
-    userTypeTf.leftIconView.image = [UIImage imageNamed:@"手机"];
-    
+    TLPickerTextField *userTypeTf = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, pwdTf.yy + 1, w, h)
+                                                                    leftIcon:@"手机"
+                                                                 placeholder:@"请选择角色"];
     userTypeTf.tagNames = typeArr;
-
+    userTypeTf.didSelectBlock = ^(NSInteger index) {
+        
+        weakSelf.userTypeTf.text = typeArr[index];
+    };
+    
     [bgView addSubview:userTypeTf];
     self.userTypeTf = userTypeTf;
     

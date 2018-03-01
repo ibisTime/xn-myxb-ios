@@ -7,19 +7,23 @@
 //
 
 #import "SettingVC.h"
-
+//Macro
 #import "AppMacro.h"
 #import "APICodeMacro.h"
-
+//Category
 #import "TLAlert.h"
 #import "NSString+Check.h"
+#import "NSString+Extension.h"
+#import <UIImageView+WebCache.h>
 //M
 #import "SettingGroup.h"
 #import "SettingModel.h"
+#import "PictureModel.h"
 //V
 #import "SettingTableView.h"
 #import "SettingCell.h"
 #import "CustomTabBar.h"
+#import "PictureLibraryView.h"
 //C
 #import "TLChangeMobileVC.h"
 #import "TLPwdRelatedVC.h"
@@ -34,6 +38,18 @@
 @property (nonatomic, strong) UIButton *loginOutBtn;
 
 @property (nonatomic, strong) SettingTableView *tableView;
+//
+@property (nonatomic, strong) BaseView *headerView;
+//头像
+@property (nonatomic,strong) UIImageView *photoIV;
+//
+@property (nonatomic, strong) UILabel *textLbl;
+//右箭头
+@property (nonatomic, strong) UIImageView *rightArrowIV;
+//
+@property (nonatomic, strong) PictureLibraryView *libraryView;
+//头像库
+@property (nonatomic, strong) NSArray <PictureModel *>*photos;
 
 @end
 
@@ -44,14 +60,19 @@
     // Do any additional setup after loading the view.
     
     self.title = @"个人设置";
-    
+    //
     [self setGroup];
-    
+    //
     [self initTableView];
+    //
+    [self initHeaderView];
+    //获取图片库
+    [self requestPhotoLibrary];
+    
+    
 }
 
 #pragma mark - Init
-
 - (void)initTableView {
     
     self.tableView = [[SettingTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStyleGrouped];
@@ -66,9 +87,96 @@
     
     self.tableView.tableFooterView = footerView;
     
+}
+
+- (void)initHeaderView {
+    
+    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 88)];
+    
+    self.headerView.userInteractionEnabled = YES;
+    self.headerView.backgroundColor = kWhiteColor;
+    //头像
+    [self.headerView addSubview:self.photoIV];
+    //text
+    [self.headerView addSubview:self.textLbl];
+    //右箭头
+    [self.headerView addSubview:self.rightArrowIV];
+    
+    self.tableView.tableHeaderView = self.headerView;
+
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectHeadIcon:)];
+    
+    [self.headerView addGestureRecognizer:tapGR];
     
 }
 
+- (UIImageView *)photoIV {
+    
+    if (!_photoIV) {
+        _photoIV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 19, 50, 50)];
+        _photoIV.layer.cornerRadius = 25;
+        [_photoIV sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
+        
+        _photoIV.contentMode = UIViewContentModeScaleAspectFill;
+        _photoIV.clipsToBounds = YES;
+    }
+    
+    return _photoIV;
+}
+
+- (UILabel *)textLbl {
+    
+    if (!_textLbl) {
+        _textLbl = [UILabel labelWithFrame:CGRectMake(self.photoIV.xx + 20, self.photoIV.y, kScreenWidth - self.photoIV.xx - 20 - 20 - 30, 25)
+                               textAligment:NSTextAlignmentLeft
+                            backgroundColor:kWhiteColor
+                                       font:Font(14.0)
+                                  textColor:kTextColor];
+        _textLbl.text = @"按照等级从图片库中选择";
+        _textLbl.centerY = self.photoIV.centerY;
+    }
+    return _textLbl;
+    
+}
+
+- (UIImageView *)rightArrowIV {
+    
+    if (!_rightArrowIV) {
+        
+        CGFloat arrowW = 7;
+        CGFloat arrowH = 12;
+        CGFloat rightMargin = 15;
+        
+        _rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
+        
+        _rightArrowIV.frame = CGRectMake(kScreenWidth - arrowW - rightMargin, 0, arrowW, arrowH);
+        _rightArrowIV.contentMode = UIViewContentModeScaleAspectFit;
+        _rightArrowIV.centerY = self.photoIV.centerY;
+    }
+    return _rightArrowIV;
+}
+
+- (PictureLibraryView *)libraryView {
+    
+    if (!_libraryView) {
+        
+        BaseWeakSelf;
+        
+        _libraryView = [[PictureLibraryView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+        _libraryView.pictureBlock = ^(NSIndexPath *indexPath) {
+            
+            [weakSelf changePhotoWithIndex:indexPath.row];
+
+        };
+        
+        [self.view addSubview:_libraryView];
+
+    }
+    return _libraryView;
+}
+
+#pragma mark - Group
 - (void)setGroup {
     
     BaseWeakSelf;
@@ -81,7 +189,6 @@
         TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
         
         [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
-        
     }];
     
     //修改登录密码
@@ -127,17 +234,16 @@
     
     if (!_loginOutBtn) {
         
-        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 55, kScreenWidth - 30, 45)];
-        _loginOutBtn.backgroundColor = kAppCustomMainColor;
+        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 55, kScreenWidth, 45)];
+        _loginOutBtn.backgroundColor = kWhiteColor;
         [_loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [_loginOutBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        [_loginOutBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
         _loginOutBtn.layer.cornerRadius = 5;
         _loginOutBtn.clipsToBounds = YES;
         _loginOutBtn.titleLabel.font = FONT(15);
         [_loginOutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginOutBtn;
-    
 }
 
 - (void)logout {
@@ -155,7 +261,84 @@
     [self.navigationController popViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+}
+
+#pragma mark - 选择头像
+- (void)selectHeadIcon:(UITapGestureRecognizer *)tapGR {
+
+    [self.libraryView show];
+}
+
+#pragma mark - Data
+- (void)requestPhotoLibrary {
     
+    BaseWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"805443";
+    helper.parameters[@"kind"] = [TLUser user].kind;
+    helper.parameters[@"level"] = [TLUser user].level;
+    helper.limit = 2;
+    
+    [helper modelClass:[PictureModel class]];
+    
+    helper.collectionView = self.libraryView.collectionView;
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        weakSelf.photos = objs;
+        
+        weakSelf.libraryView.collectionView.photos = objs;
+        
+        [weakSelf.libraryView.collectionView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    [self.libraryView.collectionView addLoadMoreAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.photos = objs;
+            
+            weakSelf.libraryView.collectionView.photos = objs;
+
+            [weakSelf.libraryView.collectionView reloadData_tl];
+
+        } failure:^(NSError *error) {
+            
+            
+        }];
+    }];
+    
+    [self.libraryView.collectionView endRefreshingWithNoMoreData_tl];
+}
+
+- (void)changePhotoWithIndex:(NSInteger)index {
+    
+    PictureModel *photo = self.photos[index];
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805080";
+    http.parameters[@"photo"] = photo.url;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"选择成功"];
+        
+        [TLUser user].photo = photo.url;
+        
+        [_photoIV sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
+
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

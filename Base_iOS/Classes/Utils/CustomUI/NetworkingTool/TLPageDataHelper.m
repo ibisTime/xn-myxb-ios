@@ -65,7 +65,6 @@
         } else {
             
             newObjs = _isCurrency == YES ? responseObject[@"data"][@"accountList"]: responseObject[@"data"];
-        
         }
         
         NSMutableArray *objs = [_className mj_objectArrayWithKeyValuesArray:newObjs];
@@ -84,7 +83,6 @@
         } else {
             
             self.objs = objs;
-            
         }
         
         //防止刚进入没刷新，就上拉
@@ -92,6 +90,11 @@
         if (self.tableView) {
             [self.tableView resetNoMoreData_tl];
             [self.tableView endRefreshHeader];
+        }
+        
+        if (self.collectionView) {
+            [self.collectionView resetNoMoreData_tl];
+            [self.collectionView endRefreshHeader];
         }
         
         BOOL stillHave = YES;
@@ -139,11 +142,18 @@
             [self.tableView endRefreshingWithNoMoreData_tl];
         }
         
+        if (!stillHave && self.collectionView) {
+            [self.collectionView endRefreshingWithNoMoreData_tl];
+        }
         
     } failure:^(NSError *error) {
         
         if (self.tableView) {
             [self.tableView endRefreshHeader];
+        }
+        
+        if (self.collectionView) {
+            [self.collectionView endRefreshHeader];
         }
         
         if (failure) {
@@ -176,7 +186,11 @@
         if (self.tableView) {
             
             [self.tableView endRefreshFooter];
+        }
+        
+        if (self.collectionView) {
             
+            [self.collectionView endRefreshFooter];
         }
         
         //拼接数据
@@ -220,7 +234,6 @@
                 loadMore(self.objs,stillHave);
             }
             self.start += 1;
-            
         }
         
         //简便方法
@@ -228,10 +241,18 @@
             [self.tableView endRefreshingWithNoMoreData_tl];
         }
         
+        if (!stillHave && self.collectionView) {
+            [self.collectionView endRefreshingWithNoMoreData_tl];
+        }
+        
     } failure:^(NSError *error) {
         
         if (self.tableView) {
             [self.tableView endRefreshHeader];
+        }
+        
+        if (self.collectionView) {
+            [self.collectionView endRefreshHeader];
         }
         
         if (failure) {

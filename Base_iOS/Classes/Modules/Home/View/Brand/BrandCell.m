@@ -11,13 +11,9 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-//Framework
-//Category
 //Extension
 #import <UIImageView+WebCache.h>
-//M
-//V
-//C
+
 @interface BrandCell()
 
 //image

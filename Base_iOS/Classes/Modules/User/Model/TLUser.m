@@ -157,11 +157,13 @@ NSString *const kUserTypeExpert = @"S";     //专家
     self.token = nil;
     self.photo = nil;
     self.mobile = nil;
-    self.nickname = nil;
-    self.email = nil;
     self.level = nil;
     self.jfAccountNumber = nil;
-    
+    self.realName = nil;
+    self.speciality = nil;
+    self.slogan = nil;
+    self.introduce = nil;
+
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:TOKEN_ID_KEY];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_INFO_DICT_KEY];
@@ -206,10 +208,13 @@ NSString *const kUserTypeExpert = @"S";     //专家
 - (void)setUserInfoWithDict:(NSDictionary *)dict {
     
     self.mobile = dict[@"mobile"];
-    self.nickname = dict[@"nickname"];
+    self.realName = dict[@"realName"];
     self.level = dict[@"level"];
     self.photo = dict[@"photo"];
-    self.email = dict[@"email"];
+    self.speciality = dict[@"speciality"];
+    self.gender = dict[@"gender"];
+    self.slogan = dict[@"slogan"];
+    self.introduce = dict[@"introduce"];
 }
 
 - (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {
@@ -220,6 +225,19 @@ NSString *const kUserTypeExpert = @"S";     //专家
     [UserDefaultsUtil setUserDefaultName:userName];
     [UserDefaultsUtil setUserDefaultPassword:pwd];
     [UserDefaultsUtil setUserDefaultKind:self.kind];
+}
+
+- (NSString *)getUserType {
+    
+    NSDictionary *dic = @{
+                          kUserTypeSalon        : @"美容院",
+                          kUserTypeBeautyGuide  : @"美导",
+                          kUserTypeLecturer     : @"讲师",
+                          kUserTypeExpert       : @"专家",
+                          };
+    
+    return dic[self.kind];
+    
 }
 
 @end

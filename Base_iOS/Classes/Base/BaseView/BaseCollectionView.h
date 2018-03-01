@@ -14,7 +14,6 @@
 
 @class BaseCollectionView;
 
-
 @protocol RefreshCollectionViewDelegate <NSObject>
 
 @optional
@@ -37,49 +36,47 @@
 
 @interface BaseCollectionView : UICollectionView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) NSMutableArray *datas;  //数据源
-@property (nonatomic, strong) NSMutableArray *dataArrays;  //数据源2
-@property (nonatomic, strong) NSMutableArray *selectGoods;  //数据源3
-
 @property (nonatomic, weak)   id<RefreshCollectionViewDelegate> refreshDelegate;  //代理
-
-@property (nonatomic, assign) BOOL refreshHeadEnable;  //上拉刷新开关
-
-@property (nonatomic, assign) BOOL refreshFootEnable;  //下拉刷新开关
-
-
+//- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 /**
- *  设置collectionView刷新属性
- *
- *  @param refreshDelegate 刷新代理
- *  @param headEnable      是否开启下拉刷新
- *  @param footEnable      是否开启上拉加载
- *  @param autoRefresh     是否自动刷新
+ * 添加下拉事件
  */
+- (void)addRefreshAction:(void(^)(void))refresh;
+/**
+ * 添加上拉事件
+ */
+- (void)addLoadMoreAction:(void(^)(void))loadMore;
 
-- (void)setRefreshDelegate:(id<RefreshCollectionViewDelegate> _Nullable)refreshDelegate refreshHeadEnable:(BOOL)headEnable refreshFootEnable:(BOOL)footEnable autoRefresh:(BOOL)autoRefresh;
+/*开始刷新,刷新只能是下拉刷新*/
+- (void)beginRefreshing;
 
-/**
- *  自动下拉刷新
- */
-- (void)autoRefreshHead;
-/**
- *  下拉刷新完成
- */
-- (void)refreshHeadCompelete;
-/**
- *  下拉刷新完成
- */
-- (void)refreshFootCompelete;
-/**
- *  上拉加载完成设置无数据状态
- */
-- (void)noDataTips;
+/*头部——停止刷新*/
+- (void)endRefreshHeader;
 
-/**
- *  消除无数据状态
- */
-- (void)resetDataTips;
+/* 尾部——停止刷新 */
+- (void)endRefreshFooter;
 
+/* 上拉加载更多，提示没有更多数据*/
+- (void)endRefreshingWithNoMoreData_tl;
+
+
+/* 重置更多数据的状态*/
+- (void)resetNoMoreData_tl;
+
+@property (nonatomic, assign) BOOL hiddenFooter;
+@property (nonatomic, assign) BOOL hiddenHeader;
+
+@property (nonatomic,strong) UIView *placeHolderView;
+
+
+//****************************数据刷新   站位图相关**********************//
+/*可以检测是否有数据，没有的话显示站位图，但是有个缺点，比如说第一个Cell显示固定的东西,像搜索框*/
+- (void)reloadData_tl;
+
+/*弥补上述缺点，*/
+@property (nonatomic, assign) NSInteger minDisplayRowCount;
+
+/*scrollEnabled 有数据时是否可以滑动  scrollWasEnabled无数据是是否 可以滑动  default is yes*/
+//- (void)placeholderView:(UIView*(^)())placeHolder scrollEnabled:(BOOL(^)())scrollEnabled scrollWasEnabled:(BOOL(^)())scrollWasEnabled;
 
 @end

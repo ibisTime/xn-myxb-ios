@@ -213,7 +213,7 @@
     
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:userPhotoStr] placeholderImage:USER_PLACEHOLDER_SMALL];
     
-    self.nameLbl.text = [TLUser user].nickname;
+    self.nameLbl.text = [TLUser user].realName;
     
     NSString *img = [[TLUser user].gender isEqualToString:@"1"] ? @"男士": @"女生";
     

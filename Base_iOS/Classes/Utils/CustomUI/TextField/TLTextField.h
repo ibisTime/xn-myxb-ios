@@ -12,9 +12,15 @@
 
 @property (nonatomic, strong) UILabel *leftLbl;
 
+@property (nonatomic,strong) UIImageView *leftIconView;
+
 - (instancetype)initWithFrame:(CGRect)frame
                     leftTitle:(NSString *)leftTitle
                    titleWidth:(CGFloat)titleWidth
+                  placeholder:(NSString *)placeholder;
+
+- (instancetype)initWithFrame:(CGRect)frame
+                     leftIcon:(NSString *)leftIcon
                   placeholder:(NSString *)placeholder;
 
 //禁止复制粘贴等功能

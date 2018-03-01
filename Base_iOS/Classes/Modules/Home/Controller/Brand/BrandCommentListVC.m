@@ -138,7 +138,6 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"805428";
-    helper.limit = 20;
     helper.parameters[@"entityCode"] = self.code;
     helper.parameters[@"status"] = @"AB";
     helper.parameters[@"orderColumn"] = @"comment_datetime";

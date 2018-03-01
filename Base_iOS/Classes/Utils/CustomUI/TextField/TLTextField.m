@@ -8,6 +8,7 @@
 
 #import "TLTextField.h"
 #import "AppColorMacro.h"
+#import "TLUIHeader.h"
 #import "UIColor+Extension.h"
 
 @implementation TLTextField
@@ -33,7 +34,6 @@
         
         self.leftView = leftBgView;
 
-        
         self.frame = frame;
         self.backgroundColor = [UIColor whiteColor];
         self.leftViewMode = UITextFieldViewModeAlways;
@@ -62,6 +62,42 @@
 
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+                     leftIcon:(NSString *)leftIcon
+                  placeholder:(NSString *)placeholder {
+    
+    if (self = [super initWithFrame:frame]) {
+    
+        UIView *leftBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 46, frame.size.height)];
+        
+        _leftIconView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 0, 16, 16)];
+        _leftIconView.contentMode = UIViewContentModeCenter;
+        _leftIconView.centerY = leftBgView.height/2.0;
+        _leftIconView.contentMode = UIViewContentModeScaleAspectFit;
+        _leftIconView.image = kImage(leftIcon);
+        
+        [leftBgView addSubview:_leftIconView];
+        
+        self.leftView = leftBgView;
+        self.leftViewMode = UITextFieldViewModeAlways;
+        
+        self.font = [UIFont systemFontOfSize:14];
+        self.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.backgroundColor = [UIColor whiteColor];
+        self.placeholder = placeholder;
+        //白色边界线
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0.7, 18)];
+        
+        lineView.backgroundColor = [UIColor whiteColor];
+        lineView.centerY = frame.size.height/2.0;
+        lineView.centerX = leftBgView.width;
+        
+        [leftBgView addSubview:lineView];
+        //        self.tintColor = kAppCustomMainColor;
+        lineView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    }
+    return self;
+}
 #pragma mark --处理复制粘贴事件
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {

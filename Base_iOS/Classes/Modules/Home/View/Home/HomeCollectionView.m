@@ -13,7 +13,6 @@
 #import "AppColorMacro.h"
 //V
 #import "BrandCell.h"
-//C
 
 @interface HomeCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -29,16 +28,10 @@
         self.backgroundColor = kWhiteColor;
         self.delegate = self;
         self.dataSource = self;
-        self.showsVerticalScrollIndicator = NO;
-        self.showsHorizontalScrollIndicator = NO;
         
         [self registerClass:[BrandCell class] forCellWithReuseIdentifier:@"BrandCell"];
         
         [self registerClass:[HomeHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCellId"];
-        
-        if (@available(iOS 11.0, *)) {
-            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        }
     }
     return self;
 }

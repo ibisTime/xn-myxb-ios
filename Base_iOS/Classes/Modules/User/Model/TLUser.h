@@ -38,20 +38,28 @@
 /*
  业务需求
  */
+//真实姓名
+@property (nonatomic, copy) NSString *realName;
+//个人简介
+@property (nonatomic, copy) NSString *introduce;
+//广告语
+@property (nonatomic, copy) NSString *slogan;
+//擅长领域
+@property (nonatomic, copy) NSString *speciality;
 //等级
 @property (nonatomic, copy) NSString *level;
-//邮箱
-@property (nonatomic, copy) NSString *email;
+//经纪人信息
+@property (nonatomic, strong) AdviserUser *adviserUser;
 //积分账户
 @property (nonatomic, copy) NSString *jfAccountNumber;
 //邀请码
 @property (nonatomic, copy) NSString *inviteCode;
 //邀请人个数
 @property (nonatomic, copy) NSString *referrerNum;
-//经纪人信息
-@property (nonatomic, strong) AdviserUser *adviserUser;
 
 + (instancetype)user;
+//获取角色
+- (NSString *)getUserType;
 
 //是否为需要登录，如果已登录，取出用户信息
 - (BOOL)isLogin;

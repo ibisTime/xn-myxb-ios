@@ -87,34 +87,19 @@
         
     }];
     //性别
-    CGFloat gengderViewW = 16;
-    
-    UIView *genderView = [[UIView alloc] init];
-    
-    genderView.backgroundColor = kWhiteColor;
-    genderView.layer.cornerRadius = gengderViewW/2.0;
-    genderView.clipsToBounds = YES;
-    
-    [self addSubview:genderView];
-    [genderView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.nameLbl.mas_right).offset(6);
-        make.centerY.equalTo(self.nameLbl.mas_centerY).offset(0);
-        make.width.height.equalTo(@(gengderViewW));
-    }];
-    
-    CGFloat genderW = 9;
-    
     self.genderIV = [[UIImageView alloc] init];
     
-    self.genderIV.backgroundColor = kWhiteColor;
     self.genderIV.contentMode = UIViewContentModeScaleAspectFill;
+    self.genderIV.layer.borderWidth = 1;
+    self.genderIV.layer.borderColor = kWhiteColor.CGColor;
+    self.genderIV.layer.cornerRadius = 7;
+    self.genderIV.clipsToBounds = YES;
     
-    [genderView addSubview:self.genderIV];
+    [self addSubview:self.genderIV];
     [self.genderIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.center.equalTo(@0);
-        make.width.height.equalTo(@(genderW));
+        make.centerY.equalTo(self.userPhoto.mas_bottom).offset(-(imgWidth/4.0-3.5));
+        make.centerX.equalTo(self.userPhoto.mas_right).offset(-(imgWidth/4.0-3.5));
     }];
     
     //角色

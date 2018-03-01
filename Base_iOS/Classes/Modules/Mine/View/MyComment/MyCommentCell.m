@@ -1,23 +1,19 @@
 //
-//  BrandCommentCell.m
+//  MyCommentCell.m
 //  Base_iOS
 //
-//  Created by 蔡卓越 on 2018/2/22.
+//  Created by 蔡卓越 on 2018/3/1.
 //  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
-#import "BrandCommentCell.h"
-
+#import "MyCommentCell.h"
 //Category
-#import <UIImageView+WebCache.h>
 #import "NSString+Extension.h"
 #import "NSString+Date.h"
 //V
 #import "LinkLabel.h"
 
-@interface BrandCommentCell()
-//头像
-@property (nonatomic, strong) UIImageView *photoIV;
+@interface MyCommentCell()
 //昵称
 @property (nonatomic, strong) UILabel *nameLbl;
 //评分
@@ -29,7 +25,7 @@
 
 @end
 
-@implementation BrandCommentCell
+@implementation MyCommentCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
@@ -44,17 +40,7 @@
 
 #pragma mark - Init
 - (void)initSubviews {
-    
-    //头像
-    CGFloat photoW = 32;
-    
-    self.photoIV = [[UIImageView alloc] init];
-    self.photoIV.layer.cornerRadius = photoW/2.0;
-    self.photoIV.layer.masksToBounds = YES;
-    self.photoIV.backgroundColor = kClearColor;
-    self.photoIV.contentMode = UIViewContentModeScaleAspectFill;
-    [self addSubview:self.photoIV];
-
+ 
     //昵称
     self.nameLbl = [UILabel labelWithFrame:CGRectZero
                               textAligment:NSTextAlignmentLeft
@@ -95,30 +81,23 @@
 
 - (void)setSubviewLayout {
     
-    CGFloat photoW = 32;
     CGFloat leftMargin = 15;
-    //头像
-    [self.photoIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.equalTo(@(leftMargin));
-        make.width.height.equalTo(@(photoW));
-    }];
     //昵称
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.photoIV.mas_top).offset(6);
-        make.left.equalTo(self.photoIV.mas_right).offset(leftMargin);
+        make.top.equalTo(self.mas_top).offset(leftMargin);
+        make.left.equalTo(self.mas_left).offset(leftMargin);
     }];
     //评分
     [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.nameLbl.mas_left);
-        make.bottom.equalTo(self.photoIV.mas_bottom).offset(0);
+        make.bottom.equalTo(self.nameLbl.mas_bottom).offset(6);
     }];
     //时间
     [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.photoIV.mas_centerY).offset(5);
+        make.top.equalTo(self.nameLbl.mas_top);
         make.right.equalTo(@(-leftMargin));
     }];
     //评论
@@ -126,23 +105,23 @@
         
         make.left.equalTo(self.nameLbl.mas_left);
         make.height.lessThanOrEqualTo(@(MAXFLOAT));
-        make.width.equalTo(@(kScreenWidth - 3*15 - photoW));
-        make.top.equalTo(self.timeLbl.mas_bottom).offset(10);
+        make.width.equalTo(@(kScreenWidth - 2*15));
+        make.top.equalTo(self.starView.mas_bottom).offset(10);
     }];
     
     //星星
     for (int i = 0; i < 5; i++) {
-
+        
         CGFloat x = i*15;
         CGFloat w = 10;
-
+        
         UIImageView *iv = [[UIImageView alloc] init];
-
+        
         iv.image = i < _comment.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
-
+        
         [self.starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
-
+            
             make.left.equalTo(@(x));
             make.width.height.equalTo(@(w));
             make.centerY.equalTo(@0);
@@ -154,9 +133,6 @@
 - (void)setComment:(CommentModel *)comment {
     
     _comment = comment;
-    
-    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[comment.photo convertImageUrl]]
-                    placeholderImage:USER_PLACEHOLDER_SMALL];
     
     self.nameLbl.text = comment.nickname;
     

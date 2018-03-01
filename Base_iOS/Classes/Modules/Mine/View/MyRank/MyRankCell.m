@@ -17,10 +17,7 @@
 #define kHeadIconWidth 60
 
 @interface MyRankCell()
-//排名
-//头像
-//昵称
-//金额
+
 //排名
 @property (nonatomic, strong) UIButton *rankBtn;
 //头像

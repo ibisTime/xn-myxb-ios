@@ -8,6 +8,9 @@
 
 #import "BaseModel.h"
 
+/**
+ 系统参数
+ */
 @interface KeyValueModel : BaseModel
 
 @property (nonatomic, copy) NSString *cvalue;

@@ -42,11 +42,11 @@
 /**
  * 添加下拉事件
  */
-- (void)addRefreshAction:(void(^)())refresh;
+- (void)addRefreshAction:(void(^)(void))refresh;
 /**
  * 添加上拉事件
  */
-- (void)addLoadMoreAction:(void(^)())loadMore;
+- (void)addLoadMoreAction:(void(^)(void))loadMore;
 
 /*开始刷新,刷新只能是下拉刷新*/
 - (void)beginRefreshing;

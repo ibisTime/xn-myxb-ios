@@ -10,154 +10,195 @@
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import <UIScrollView+TLAdd.h>
 
-#define identifierDeafaultCollect @"identifierDeafaultCollect"
+#define  adjustsContentInsets(scrollView)\
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+if ([UIScrollView instancesRespondToSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:")]) {\
+[scrollView   performSelector:NSSelectorFromString(@"setContentInsetAdjustmentBehavior:") withObject:@(2)];\
+}\
+_Pragma("clang diagnostic pop") \
+} while (0)
+
+@interface BaseCollectionView()
+
+@property (nonatomic, copy) void(^refresh)();
+/**
+ * 上拉加载更多
+ */
+@property (nonatomic, copy) void(^loadMore)();
+
+@end
 
 @implementation BaseCollectionView
+{
+    UIView *_placeholderV;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
         
-        [self _initWithCollectionView];
+        [self initWithCollectionView];
     }
     return self;
-}
-
-- (void)awakeFromNib{
-    [super awakeFromNib];
-    [self _initWithCollectionView];
 }
 
 /**
  *  初始化 collectionview
  */
-- (void)_initWithCollectionView {
+- (void)initWithCollectionView {
     
-    self.datas = [NSMutableArray array];
-    self.dataArrays = [NSMutableArray array];
-    self.selectGoods = [NSMutableArray array];
     self.dataSource = self;
     self.delegate = self;
+    self.showsVerticalScrollIndicator = NO;
+    self.showsHorizontalScrollIndicator = NO;
     self.backgroundColor = kWhiteColor;
-    [self registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:identifierDeafaultCollect];
+    if (@available(iOS 11.0, *)) {
+        self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
 }
 
 - (void)setRefreshDelegate:(id<RefreshCollectionViewDelegate>)refreshDelegate refreshHeadEnable:(BOOL)headEnable refreshFootEnable:(BOOL)footEnable autoRefresh:(BOOL)autoRefresh {
     
     self.refreshDelegate = refreshDelegate;
-    self.refreshHeadEnable = headEnable;
-    self.refreshFootEnable = footEnable;
-    if (autoRefresh) {
-        [self autoRefreshHead];
-    }
+    
 }
 
-- (void)setRefreshHeadEnable:(BOOL)refreshHeadEnable {
-    _refreshHeadEnable = refreshHeadEnable;
-    if (self.refreshHeadEnable) {
-        __weak typeof(self) weakSelf = self;
-        // 添加传统的下拉刷新
-        // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-        self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [weakSelf refreshHeadCompelete];
-        }];
-        
-    } else {
-        if ([self.mj_header superview] != nil) {
-            [self.mj_header removeFromSuperview];
-        }
-    }
+//刷新
+- (void)addRefreshAction:(void (^)())refresh
+{
+    self.refresh = refresh;
+    
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:self.refresh];
+    self.mj_header = header;
 }
 
-- (void)setRefreshFootEnable:(BOOL)refreshFootEnable {
-    _refreshFootEnable = refreshFootEnable;
-    if (self.refreshFootEnable) {
-        __weak typeof(self) weakSelf = self;
-        
-        self.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            [weakSelf refreshFootCompelete];
-        }];
-
-
-//        self.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//            [weakSelf refreshFootCompelete];
-//        }];
-        
-        MJRefreshAutoFooter *autoFooter = (MJRefreshAutoFooter*)(self.mj_footer);
-        autoFooter.automaticallyHidden = YES;
-        
-        
-        MJRefreshBackNormalFooter *footer = (MJRefreshBackNormalFooter*)self.mj_footer;
-        [footer setTitle:@"哎呀~~\n下面没有了" forState:MJRefreshStateNoMoreData];
-        footer.stateLabel.numberOfLines = 0;
-
-    }
-    else {
-        if ([self.mj_footer superview] != nil) {
-            [self.mj_footer removeFromSuperview];
-        }
-    }
+- (void)addLoadMoreAction:(void (^)())loadMore
+{
+    
+    self.loadMore = loadMore;
+    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:loadMore];
+    
+    UIImageView *logo = [[UIImageView  alloc] initWithFrame:footer.bounds];
+    logo.image = [UIImage imageNamed:@"logo_small"];
+    [footer addSubview:logo];
+    footer.arrowView.hidden = YES;
+    self.mj_footer = footer;
+    
 }
 
-/**
- *  自动下拉刷新
- */
-- (void)autoRefreshHead {
+
+- (void)beginRefreshing
+{
+    if (self.mj_header == nil) {
+        return;
+    }
     [self.mj_header beginRefreshing];
+    
 }
 
-/**
- *  下拉刷新完成
- */
-- (void)refreshHeadCompelete {
-    [self.mj_header endRefreshing];
-    if ([self.refreshDelegate respondsToSelector:@selector(refreshCollectionViewPullDown:)]) {
-        [self.refreshDelegate refreshCollectionViewPullDown:self];
+- (void)endRefreshHeader
+{
+    
+    if (self.mj_header == nil) {
+        
+    }else{
+        
+        [self.mj_header endRefreshing];
     }
+    
 }
 
-/**
- *  上拉加载完成
- */
-- (void)refreshFootCompelete {
+- (void)endRefreshFooter
+{
+    if (!self.mj_footer) {
+        NSLog(@"刷新尾部组件不存在");
+        return;
+    }
     [self.mj_footer endRefreshing];
-    if ([self.refreshDelegate respondsToSelector:@selector(refreshCollectionViewPullUp:)]) {
-        [self.refreshDelegate refreshCollectionViewPullUp:self];
+}
+
+- (void)endRefreshingWithNoMoreData_tl
+{
+    if (self.mj_footer) {
+        [self.mj_footer endRefreshingWithNoMoreData];
     }
 }
 
-/**
- * 上拉加载完成设置无数据的状态
- */
-- (void)noDataTips {
-    [self.mj_footer endRefreshingWithNoMoreData];
-}
-
-/**
- *  消除无数据的状态
- */
-- (void)resetDataTips {
+- (void)resetNoMoreData_tl
+{
+    if (self.mj_footer) {
+        [self.mj_footer resetNoMoreData];
+    }
     
-    [self.mj_footer resetNoMoreData];
 }
 
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
-   return self.datas.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"" forIndexPath:indexPath];
-    return cell;
-}
-
-#pragma mark - UITableViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.refreshDelegate respondsToSelector:@selector(refreshCollectionView:didSelectRowAtIndexPath:)]) {
-        [self.refreshDelegate refreshCollectionView:self didSelectRowAtIndexPath:indexPath];
+- (void)setHiddenFooter:(BOOL)hiddenFooter
+{
+    _hiddenFooter = hiddenFooter;
+    if (self.mj_footer) {
+        self.mj_footer.hidden = hiddenFooter;
+    }else{
+        NSLog(@"footer不存在");
     }
 }
 
+- (void)setHiddenHeader:(BOOL)hiddenHeader
+{
+    _hiddenHeader = hiddenHeader;
+    if (self.mj_header) {
+        
+        self.mj_header.hidden = hiddenHeader;
+        
+    }else{
+        NSLog(@"header不存在");
+    }
+}
+
+- (void)reloadData_tl {
+    
+    [super reloadData];
+
+    long sections = 1;//默认为1组
+    BOOL isEmpty = YES; //判断数据是否为空
+    
+    //1.多少分组
+    if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]){
+        
+        sections = [self.dataSource numberOfSectionsInCollectionView:self];
+    }
+    
+    //2.每组多少Row，进儿判断数据是否为空
+    for ( int i = 0; i < sections; i++) {
+        long numOfRow = 0;
+        
+        if ([self.dataSource respondsToSelector:@selector(collectionView:numberOfItemsInSection:)]){
+            
+            numOfRow = [self.dataSource collectionView:self numberOfItemsInSection:i];
+        }
+        
+        if (numOfRow > 0) { //只要有一组有数据就不为空
+            isEmpty = NO;
+        }
+    }
+    
+//    if (isEmpty == YES) {
+//
+//        if ( ABS((CGRectGetMinY(self.placeHolderView.frame) - CGRectGetHeight(self.tableHeaderView.frame))) > 1 ) {
+//
+//            CGRect frame = self.placeHolderView.frame;
+//            frame.origin.y = self.tableHeaderView.frame.size.height;
+//            self.placeHolderView.frame = frame;
+//        }
+//        self.tableFooterView = self.placeHolderView;
+//
+//    }else{
+//
+//        [self.placeHolderView removeFromSuperview];
+//
+//    }
+}
 @end
