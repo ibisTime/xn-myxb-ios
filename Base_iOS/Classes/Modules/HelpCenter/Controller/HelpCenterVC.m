@@ -44,8 +44,7 @@
     [self initItem];
     //
     [self requestContent];
-    //获取客服电话
-    [self requestServiceMobile];
+
     //    //问题列表
     //    [self initTableView];
     //    //获取问题列表
@@ -73,11 +72,9 @@
 #pragma mark - Events
 - (void)linkService {
 
-    NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", self.mobile];
-    
-    NSURL *url = [NSURL URLWithString:mobile];
-    
-    [[UIApplication sharedApplication] openURL:url];
+    //获取客服电话
+    [self requestServiceMobile];
+
 }
 //
 //#pragma mark - Data
@@ -140,6 +137,12 @@
         
         self.mobile = responseObject[@"data"][@"cvalue"];
 
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", self.mobile];
+        
+        NSURL *url = [NSURL URLWithString:mobile];
+        
+        [[UIApplication sharedApplication] openURL:url];
+        
     } failure:^(NSError *error) {
         
     }];

@@ -55,8 +55,6 @@
     [self requestNoticeList];
     //获取商品列表
     [self requestBrandList];
-    //获取banner列表
-    [self requestBannerList];
 }
 
 - (void)viewDidLoad {
@@ -64,10 +62,10 @@
     // Do any additional setup after loading the view.
     self.title = @"首页";
     
-    //添加下拉刷新
-    [self addDownRefresh];
     //品牌列表
     [self initCollectionView];
+    //获取banner列表
+    [self requestBannerList];
 }
 
 #pragma mark - 断网操作
@@ -223,6 +221,8 @@
     helper.isList = YES;
     helper.parameters[@"location"] = @"index_banner";
     helper.parameters[@"type"] = @"2";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     
     [helper modelClass:[BannerModel class]];
     
@@ -249,6 +249,12 @@
                 case 1:
                 {
                     if (!(banner.url && banner.url.length > 0)) {
+                        
+                        return ;
+                    }
+                    
+                    if (!([banner.url hasPrefix:@"http:"] || [banner.url hasPrefix:@"https:"])) {
+                        
                         return ;
                     }
                     

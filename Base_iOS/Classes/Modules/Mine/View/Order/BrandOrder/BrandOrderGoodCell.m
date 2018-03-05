@@ -124,7 +124,7 @@
         
         make.right.equalTo(@(-15));
         make.top.equalTo(@15);
-        make.width.lessThanOrEqualTo(@150);
+        make.width.lessThanOrEqualTo(@(kWidth(130)));
         make.height.equalTo(@(kFontHeight(13.0)));
     }];
     //名称
@@ -148,7 +148,7 @@
     [self.totalAmountLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(@(-15));
-        make.width.lessThanOrEqualTo(@250);
+        make.width.lessThanOrEqualTo(@(kWidth(150)));
         make.height.equalTo(@(kFontHeight(14.0)));
         make.bottom.equalTo(@(-15));
     }];

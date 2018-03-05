@@ -153,7 +153,7 @@
     helper.code = @"805285";
     
     helper.parameters[@"status"] = @"2";
-    helper.parameters[@"faceKind"] = [TLUser user].userId;
+    helper.parameters[@"faceKind"] = [TLUser user].kind;
     
     helper.parameters[@"orderColumn"] = @"order_no";
     helper.parameters[@"orderDir"] = @"asc";

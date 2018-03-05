@@ -165,6 +165,8 @@
 - (void)setSubViewLayoutWithHeight:(CGFloat)height {
     
     self.detailWebView.webView.scrollView.height = height;
+    self.detailWebView.webView.height = height;
+
     [self.detailWebView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@0);

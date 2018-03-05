@@ -25,6 +25,7 @@
 #import "ShareView.h"
 #import "TLBannerView.h"
 #import "QRCodeView.h"
+#import "DetailWebView.h"
 //C
 #import "TLUserLoginVC.h"
 #import "NavigationController.h"
@@ -44,7 +45,8 @@
 //分享链接
 @property (nonatomic, copy) NSString *shareUrl;
 //活动规则
-@property (nonatomic, strong) UILabel *activityRuleLbl;
+@property (nonatomic, strong) DetailWebView *activityRuleView;
+
 //滚动图
 @property (nonatomic, strong) UIScrollView *scrollView;
 //邀请人数
@@ -62,6 +64,13 @@
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    //获取活动规则
+    [self requestActivityRule];
+    //获取邀请人数和收益
+    [self requestInviteNumber];
+    //获取分享链接
+    [self getShareUrl];
+    
 }
 
 - (void)viewDidLoad {
@@ -75,12 +84,6 @@
     [self initSubviews];
     //获取banner图
     [self getBanner];
-    //获取活动规则
-    [self requestActivityRule];
-//    获取邀请人数和收益
-    [self requestInviteNumber];
-//    获取分享链接
-    [self getShareUrl];
     
 }
 #pragma mark - Init
@@ -92,6 +95,25 @@
         [self.view addSubview:_qrCodeView];
     }
     return _qrCodeView;
+}
+
+- (DetailWebView *)activityRuleView {
+
+    if (!_activityRuleView) {
+
+        BaseWeakSelf;
+        
+        _activityRuleView = [[DetailWebView alloc] initWithFrame:CGRectMake(10, 10, kScreenWidth - 50, 80)];
+        
+        [_activityRuleView setOpaque:NO];
+        
+        _activityRuleView.webViewBlock = ^(CGFloat height) {
+            
+            [weakSelf setSubViewLayoutWithHeight:height];
+        };
+        
+    }
+    return _activityRuleView;
 }
 
 - (void)initScrollView {
@@ -256,6 +278,7 @@
     UIView *blueView = [[UIView alloc] initWithFrame:CGRectMake(0, textLbl.yy + kHeight(24), kScreenWidth, 100)];
     
     blueView.tag = 2200;
+    blueView.hidden = YES;
     
     [self.scrollView addSubview:blueView];
     
@@ -269,43 +292,36 @@
     bgView.layer.shadowColor = kBackgroundColor.CGColor;
     
     [blueView addSubview:bgView];
-    
-    UILabel *promptLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                 textColor:kThemeColor
-                                                      font:13.0];
-    
-    promptLbl.backgroundColor = kClearColor;
-    promptLbl.numberOfLines = 0;
-    promptLbl.frame = CGRectMake(leftMargin + 3, 10, bgView.width - 2*leftMargin, 70);
-    
-    [bgView addSubview:promptLbl];
-    
-    self.activityRuleLbl = promptLbl;
+    //
+    [bgView addSubview:self.activityRuleView];
     
 }
 
+#pragma mark - Setting
 - (void)setRemark:(NSString *)remark {
     
     _remark = remark;
     
-    //注意事项
-    //
-    CGFloat height = ([_remark componentsSeparatedByString:@"\n"].count+1)*25;
-    
-    [self.activityRuleLbl labelWithTextString:_remark lineSpace:10];
-    
-    self.activityRuleLbl.height = height;
+    [self.activityRuleView loadWebWithString:remark];
+}
+
+/**
+ 调整视图高度
+ */
+- (void)setSubViewLayoutWithHeight:(CGFloat)height {
     
     UIView *blueView = [self.scrollView viewWithTag:2200];
-    
-    blueView.height = height + 40;
-    
     UIView *bgView = [blueView viewWithTag:1200];
-    
+
+    self.activityRuleView.webView.scrollView.height = height;
+    self.activityRuleView.webView.height = height;
+    self.activityRuleView.height = height;
+
+    blueView.height = height + 20;
     bgView.height = height + 20;
+    blueView.hidden = NO;
     
     self.scrollView.contentSize = CGSizeMake(kScreenWidth, blueView.yy);
-    
 }
 
 #pragma mark - Events
@@ -449,7 +465,6 @@
         
     } failure:^(NSError *error) {
         
-        
     }];
 }
 
@@ -465,7 +480,6 @@
         self.remark = responseObject[@"data"][@"cvalue"];
 
     } failure:^(NSError *error) {
-
 
     }];
 }
