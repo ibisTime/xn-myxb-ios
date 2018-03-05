@@ -125,7 +125,7 @@
     //取消
     UIButton *cancelBtn = [UIButton buttonWithTitle:@"取消" titleColor:kTextColor backgroundColor:kPaleGreyColor titleFont:16.0 cornerRadius:5];
     
-    [cancelBtn addTarget:self action:@selector(exchange) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBtn addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     
     cancelBtn.frame = CGRectMake(leftMargin, self.mobileTF.yy + 20, kWidth(125), 35);
     

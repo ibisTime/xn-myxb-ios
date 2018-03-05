@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+//M
+#import "ProposalInfoModel.h"
+//V
+#import "MovieAddComment.h"
 
 @interface ProposalHeaderView : UIView
+//星星
+@property (nonatomic, strong) MovieAddComment *starView;
+//
+@property (nonatomic, strong) ProposalInfoModel *info;
 
 @end

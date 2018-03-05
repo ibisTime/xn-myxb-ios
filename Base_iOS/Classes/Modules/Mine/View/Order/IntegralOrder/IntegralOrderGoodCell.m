@@ -171,7 +171,7 @@
     //
     self.nameLbl.text = order.productName;
     //
-    self.priceLbl.text = [NSString stringWithFormat:@"%@", [_order.amount convertToSimpleRealMoney]];
+    self.priceLbl.text = [NSString stringWithFormat:@"%@", [_order.price convertToSimpleRealMoney]];
     //
     self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.quantity stringValue]];
     //

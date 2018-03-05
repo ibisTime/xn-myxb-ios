@@ -28,11 +28,12 @@
 //C
 #import "SettingVC.h"
 #import "IntegralMallVC.h"
+#import "HTMLStrVC.h"
 //专家
 #import "TripListVC.h"
 #import "MyRankVC.h"
 #import "MyInfomationVC.h"
-
+#import "AchievementOrderVC.h"
 //美容院
 #import "BrandOrderVC.h"
 #import "AppointmentOrderVC.h"
@@ -164,7 +165,12 @@
     helpCenter.text = @"帮助中心";
     helpCenter.imgName = @"帮助中心";
     helpCenter.action = ^{
+      
+        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
         
+        htmlVC.type = HTMLTypeHelpCenter;
+        
+        [self.navigationController pushViewController:htmlVC animated:YES];
     };
     
     self.group = [MineGroup new];
@@ -207,7 +213,9 @@
     order.imgName = @"成果订单";
     order.action = ^{
       
+        AchievementOrderVC *orderVC = [AchievementOrderVC new];
         
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     
     //我的资料
@@ -241,6 +249,11 @@
     helpCenter.imgName = @"帮助中心";
     helpCenter.action = ^{
         
+        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+        
+        htmlVC.type = HTMLTypeHelpCenter;
+        
+        [self.navigationController pushViewController:htmlVC animated:YES];
     };
     
     self.group = [MineGroup new];

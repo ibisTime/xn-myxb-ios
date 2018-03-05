@@ -8,12 +8,8 @@
 
 #import "IntegralCollectionView.h"
 
-//Macro
-//Framework
 //Category
 #import "UIControl+Block.h"
-//Extension
-//M
 //V
 #import "IntegralGoodCell.h"
 

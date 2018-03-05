@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"预约";
+    self.title = @"下单";
     
     //根据有无地址创建UI
     [self getAddress];

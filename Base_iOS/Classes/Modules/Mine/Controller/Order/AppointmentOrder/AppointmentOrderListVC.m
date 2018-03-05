@@ -125,59 +125,6 @@
             
         }break;
             
-        case OrderEventsTypeVisit:
-        {
-            [TLAlert alertWithTitle:@"" msg:@"确认已上门?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-                
-            } confirm:^(UIAlertAction *action) {
-                
-                TLNetworking *http = [TLNetworking new];
-                http.showView = self.view;
-                http.code = @"805512";
-                http.parameters[@"code"] = order.code;
-                http.parameters[@"updater"] = [TLUser user].userId;
-                //    http.parameters[@"token"] = [TLUser user].token;
-                
-                [http postWithSuccess:^(id responseObject) {
-                    
-                    [TLAlert alertWithSucces:@"上门成功"];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
-                    
-                    [self.navigationController popViewControllerAnimated:YES];
-                    
-                } failure:^(NSError *error) {
-                    
-                }];
-            }];
-        }break;
-            
-        case OrderEventsTypeOverClass:
-        {
-            [TLAlert alertWithTitle:@"" msg:@"确认已下课?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-                
-            } confirm:^(UIAlertAction *action) {
-                
-                TLNetworking *http = [TLNetworking new];
-                
-                http.code = @"805513";
-                http.parameters[@"code"] = order.code;
-                http.parameters[@"updater"] = [TLUser user].userId;
-                
-                [http postWithSuccess:^(id responseObject) {
-                    
-                    [TLAlert alertWithSucces:@"下课成功"];
-                    
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
-                    
-                    [self.navigationController popViewControllerAnimated:YES];
-                    
-                } failure:^(NSError *error) {
-                    
-                }];
-            }];
-        }break;
-            
         default:
             break;
     }
@@ -264,17 +211,6 @@
     AppointmentOrderDetailVC *vc = [[AppointmentOrderDetailVC alloc] init];
     
     vc.order = self.orderGroups[indexPath.section];
-
-    //上门
-    vc.visitSuccess = ^{
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
-    };
-    //下课
-    vc.overClassSuccess = ^{
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshOrderList" object:nil];
-    };
     
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -325,7 +261,7 @@
     AppointmentOrderModel *order = self.orderGroups[section];
 
     //上门、下课和评价
-    if ([order.status isEqualToString:kAppointmentOrderStatusWillVisit] || [order.status isEqualToString:kAppointmentOrderStatusWillOverClass] || [order.isComment isEqualToString:@"0"]) {
+    if ([order.isComment isEqualToString:@"0"] && [order.status integerValue] > [kAppointmentOrderStatusWillOverClass integerValue]) {
 
         return 50;
     }

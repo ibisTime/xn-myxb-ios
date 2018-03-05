@@ -129,11 +129,26 @@
     //
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[user.photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
     //
-    self.nickNameLbl.text = user.nickname;
+    self.nickNameLbl.text = user.realName;
     //
     self.startDateLbl.text = [order.appointDatetime convertDate];
     //
     self.dayLbl.text = [NSString stringWithFormat:@"%ld天",order.appointDays];
 }
 
+- (void)setAchievementOrder:(AchievementOrderModel *)achievementOrder {
+    
+    _achievementOrder = achievementOrder;
+    
+    MryUser *user = achievementOrder.mryUser;
+    //
+    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[user.photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
+    //
+    self.nickNameLbl.text = user.realname;
+    //
+    self.startDateLbl.text = [achievementOrder.appointDatetime convertDate];
+    //
+    self.dayLbl.text = [NSString stringWithFormat:@"%ld天",achievementOrder.appointDays];
+    
+}
 @end

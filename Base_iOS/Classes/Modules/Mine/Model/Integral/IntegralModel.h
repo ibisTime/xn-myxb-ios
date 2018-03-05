@@ -17,9 +17,9 @@
 @property (nonatomic, copy) NSString *faceKind;
 //广告语
 @property (nonatomic, copy) NSString *slogan;
-//缩略图
-@property (nonatomic, copy) NSString *advPic;
 //产品图片
+@property (nonatomic, copy) NSString *advPic;
+//缩略图
 @property (nonatomic, copy) NSString *pic;
 //由pic 转化成的 数组,eg: http://wwwa.dfdsf.dcom
 @property (nonatomic,copy) NSArray *pics;

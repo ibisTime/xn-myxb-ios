@@ -9,6 +9,7 @@
 #import "BannerCell.h"
 
 #import "UIImageView+WebCache.h"
+#import "AppColorMacro.h"
 
 @interface BannerCell ()
 
@@ -36,25 +37,23 @@
 - (void)setUrlString:(NSString *)urlString
 {
     _urlString = [urlString copy];
+    
     if ([_urlString hasPrefix:@"http:"]) { //网络图片
         
         NSURL *url = [NSURL URLWithString:urlString];
+        
         if ([urlString containsString:@".gif"]) {
             
-            [_imageIV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""]];
+            [_imageIV sd_setImageWithURL:url placeholderImage:GOOD_PLACEHOLDER_SMALL];
             
-        } else {
-            
-            [_imageIV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""]];
-            
+            return ;
         }
         
-    } else { //本地图片
-        
-        self.imageIV.image = [UIImage imageWithContentsOfFile:_urlString];
-        
+        [_imageIV sd_setImageWithURL:url placeholderImage:GOOD_PLACEHOLDER_SMALL];
+        return ;
     }
-    
+    //本地图片
+    self.imageIV.image = [UIImage imageWithContentsOfFile:_urlString];
 }
 
 @end

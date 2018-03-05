@@ -15,13 +15,15 @@
 //头像
 @property (nonatomic, copy) NSString *photo;
 //昵称
-@property (nonatomic, copy) NSString *nickName;
+@property (nonatomic, copy) NSString *realName;
 //日期
-@property (nonatomic, copy) NSString *createTime;
+@property (nonatomic, copy) NSString *commentDatetime;
 //评分
-@property (nonatomic, copy) NSString *score;
+@property (nonatomic, assign) NSInteger score;
 //内容
-@property (nonatomic, copy) NSString *comment;
+@property (nonatomic, copy) NSString *content;
+//是否被采纳
+@property (nonatomic, copy) NSString *isAccept;
 
 //cellHeight
 @property (nonatomic, assign) CGFloat cellHeight;

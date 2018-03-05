@@ -12,9 +12,5 @@
 @interface AppointmentOrderDetailVC : BaseViewController
 //
 @property (nonatomic, strong) AppointmentOrderModel *order;
-//上门
-@property (nonatomic,copy) void(^visitSuccess)(void);
-//下课
-@property (nonatomic,copy) void(^overClassSuccess)(void);
 
 @end

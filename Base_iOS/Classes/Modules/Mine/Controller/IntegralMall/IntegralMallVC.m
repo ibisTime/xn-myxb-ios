@@ -7,10 +7,6 @@
 //
 
 #import "IntegralMallVC.h"
-//Macro
-//Framework
-//Category
-//Extension
 //M
 #import "CurrencyModel.h"
 //V
@@ -78,23 +74,20 @@
     
     //布局对象
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    
     //
     CGFloat itemWidth = (kScreenWidth - 30)/2.0;
     flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 75);
     flowLayout.minimumLineSpacing = 10;
     flowLayout.minimumInteritemSpacing = 10;
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 0, 10);
-    
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     self.collectionView = [[IntegralCollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) collectionViewLayout:flowLayout];
     
     self.collectionView.refreshDelegate = self;
-    
-    [self.view addSubview:self.collectionView];
-    
     self.collectionView.integralGoods = self.goods;
+
+    [self.view addSubview:self.collectionView];
     
     [self.collectionView reloadData];
     
@@ -160,17 +153,18 @@
     helper.code = @"805285";
     
     helper.parameters[@"status"] = @"2";
-//    helper.parameters[@"orderColumn"] = @"update_datetime";
-//    helper.parameters[@"orderDir"] = @"asc";
+    helper.parameters[@"faceKind"] = [TLUser user].userId;
+    
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     
     [helper modelClass:[IntegralModel class]];
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
         weakSelf.goods = objs;
-        
-        //商品
-        [self initCollectionView];
+                //商品
+        [weakSelf initCollectionView];
         
     } failure:^(NSError *error) {
         

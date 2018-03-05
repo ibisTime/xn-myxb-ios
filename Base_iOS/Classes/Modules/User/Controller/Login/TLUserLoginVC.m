@@ -106,7 +106,7 @@
     
     //角色类型
     TLPickerTextField *userTypeTf = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, pwdTf.yy + 1, w, h)
-                                                                    leftIcon:@"手机"
+                                                                    leftIcon:@"角色"
                                                                  placeholder:@"请选择角色"];
     userTypeTf.tagNames = typeArr;
     userTypeTf.didSelectBlock = ^(NSInteger index) {

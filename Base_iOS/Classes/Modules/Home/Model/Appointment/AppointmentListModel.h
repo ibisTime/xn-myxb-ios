@@ -15,6 +15,8 @@
 @property (nonatomic, copy) NSString *photo;
 //昵称
 @property (nonatomic, copy) NSString *nickname;
+//真实姓名
+@property (nonatomic, copy) NSString *realName;
 //经纪人手机号
 @property (nonatomic, copy) NSString *mobile;
 //性别

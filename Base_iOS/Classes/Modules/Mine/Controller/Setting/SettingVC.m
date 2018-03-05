@@ -266,6 +266,12 @@
 #pragma mark - 选择头像
 - (void)selectHeadIcon:(UITapGestureRecognizer *)tapGR {
 
+    if (self.photos.count == 0) {
+        
+        [TLAlert alertWithInfo:@"暂无可选择的头像"];
+        return;
+    }
+    
     [self.libraryView show];
 }
 

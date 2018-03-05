@@ -10,7 +10,6 @@
 
 //V
 #import "BrandListCell.h"
-//C
 
 @interface BrandListTableView()<UITableViewDelegate, UITableViewDataSource>
 

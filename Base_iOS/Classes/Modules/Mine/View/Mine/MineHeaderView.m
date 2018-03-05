@@ -98,8 +98,8 @@
     [self addSubview:self.genderIV];
     [self.genderIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerY.equalTo(self.userPhoto.mas_bottom).offset(-(imgWidth/4.0-3.5));
-        make.centerX.equalTo(self.userPhoto.mas_right).offset(-(imgWidth/4.0-3.5));
+        make.centerY.equalTo(self.userPhoto.mas_bottom).offset(-(imgWidth/4.0 - 5));
+        make.centerX.equalTo(self.userPhoto.mas_right).offset(-(imgWidth/4.0 - 5));
     }];
     
     //角色

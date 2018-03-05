@@ -205,6 +205,9 @@
     }
 }
 
+/**
+ 预约
+ */
 - (void)setAppointmentOrder:(AppointmentOrderModel *)appointmentOrder {
     
     _appointmentOrder = appointmentOrder;
@@ -212,8 +215,28 @@
     //根据状态添加按钮
     NSInteger status = [appointmentOrder.status integerValue];
     
-    switch (status) {
+    if (status > [kAppointmentOrderStatusWillOverClass integerValue] && [appointmentOrder.isComment isEqualToString:@"0"]) {
 
+        self.commentBtn.hidden = NO;
+
+    }else {
+
+        self.commentBtn.hidden = YES;
+    }
+}
+
+/**
+ 成果
+ */
+- (void)setAchievementOrder:(AchievementOrderModel *)achievementOrder {
+    
+    _achievementOrder = achievementOrder;
+    
+    //根据状态添加按钮
+    NSInteger status = [achievementOrder.status integerValue];
+    
+    switch (status) {
+            
         case 2:
         {
             self.visitBtn.hidden = NO;
@@ -227,21 +250,6 @@
             break;
     }
     
-    if ([appointmentOrder.status integerValue] > [kAppointmentOrderStatusWillVisit integerValue] && [appointmentOrder.isComment isEqualToString:@"0"]) {
-
-        self.commentBtn.hidden = NO;
-
-        if ([appointmentOrder.status isEqualToString:kAppointmentOrderStatusWillOverClass] ) {
-
-            [_commentBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self.mas_right).offset(-100);
-            }];
-        }
-
-    }else {
-
-        self.commentBtn.hidden = YES;
-    }
 }
 
 #pragma mark - Events

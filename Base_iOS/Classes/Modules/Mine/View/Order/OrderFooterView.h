@@ -11,6 +11,7 @@
 #import "BrandOrderModel.h"
 #import "IntegralOrderModel.h"
 #import "AppointmentOrderModel.h"
+#import "AchievementOrderModel.h"
 
 typedef NS_ENUM(NSInteger, OrderEventsType) {
     
@@ -29,6 +30,8 @@ typedef void(^OrderBlock)(OrderEventsType type);
 @property (nonatomic, strong) IntegralOrderModel *integralOrder;
 //预约
 @property (nonatomic, strong) AppointmentOrderModel *appointmentOrder;
+//成果
+@property (nonatomic, strong) AchievementOrderModel *achievementOrder;
 
 @property (nonatomic, copy) OrderBlock orderBlock;
 

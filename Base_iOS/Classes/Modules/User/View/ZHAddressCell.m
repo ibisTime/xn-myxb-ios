@@ -245,11 +245,15 @@
     
     [self.addressLbl labelWithTextString:[NSString stringWithFormat:@"%@ %@ %@ %@",_address.province,_address.city,_address.district, _address.detailAddress] lineSpace:5];
     
-    if (address.isDefault) {
+    if ([address.isDefault isEqualToString:@"1"]) {
         
         [self.selectedBtn setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateNormal];
         
         [self.selectedBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+    } else {
+        
+        [self.selectedBtn setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];
+        [self.selectedBtn setTitleColor:kTextColor forState:UIControlStateNormal];
     }
     
     [self.contentView layoutIfNeeded];

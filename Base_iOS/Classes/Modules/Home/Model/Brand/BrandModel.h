@@ -14,17 +14,17 @@
 @property (nonatomic, copy) NSString *slogan;
 //顾问手机号
 @property (nonatomic, copy) NSString *mobile;
-//缩略图
+//轮播图
 @property (nonatomic, copy) NSString *advPic;
 //编号
 @property (nonatomic, copy) NSString *code;
 //名称
 @property (nonatomic, copy) NSString *name;
 //价格
-@property (nonatomic, copy) NSString *price;
+@property (nonatomic, strong) NSNumber *price;
 //已售数量
 @property (nonatomic, assign) NSInteger soldOutCount;
-//轮播图
+//缩略图
 @property (nonatomic, copy) NSString *pic;
 //品牌编号
 @property (nonatomic, copy) NSString *brandCode;

@@ -25,8 +25,8 @@
     NSString *tempStr =  [NSString stringWithFormat:@"%.3f",value];
     NSString *subStr = [tempStr substringWithRange:NSMakeRange(0, tempStr.length - 1)];
     
-    //  return [NSString stringWithFormat:@"%.2f",value];
-    return subStr;
+      return [NSString stringWithFormat:@"%.2f",value];
+//    return subStr;
     
 }
 

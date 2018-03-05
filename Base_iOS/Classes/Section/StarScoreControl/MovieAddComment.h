@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^SelectStarBlock)(NSInteger count);
+
 @interface MovieAddComment : UIView
 
 @property (strong,nonatomic) UIView *v_addcomment;
@@ -27,8 +29,10 @@
 
 @property BOOL canAddStar;
 
+@property (nonatomic, copy) SelectStarBlock starBlock;
+
 - (instancetype)init;
--(void)cleamCount;
+- (void)cleamCount;
 
 //设置选择的星星数
 

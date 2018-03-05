@@ -109,8 +109,8 @@
     
     helper.parameters[@"brandCode"] = self.brandCode;
     helper.parameters[@"status"] = @"2";
-    helper.parameters[@"orderColumn"] = @"update_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     
     helper.tableView = self.tableView;
     

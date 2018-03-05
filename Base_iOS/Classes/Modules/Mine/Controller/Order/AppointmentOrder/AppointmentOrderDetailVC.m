@@ -52,14 +52,14 @@
 
 - (void)initEventsButton {
     
-    if ([self.order.isComment isEqualToString:@"0"] && [self.order.status integerValue] > [kAppointmentOrderStatusWillVisit integerValue]) {
+    if ([self.order.isComment isEqualToString:@"0"] && [self.order.status integerValue] > [kAppointmentOrderStatusWillOverClass integerValue]) {
         
         //评价
         self.tableView.height = kSuperViewHeight - kTabBarHeight;
         
-        CGFloat w = [self.order.status isEqualToString:kAppointmentOrderStatusWillOverClass] ? kScreenWidth/2.0: kScreenWidth;
-        UIColor *bgColor = [self.order.status isEqualToString:kAppointmentOrderStatusWillOverClass] ? kWhiteColor: kAppCustomMainColor;
-        UIColor *titleColor = [self.order.status isEqualToString:kAppointmentOrderStatusWillOverClass] ? kTextColor: kWhiteColor;
+        CGFloat w = kScreenWidth;
+        UIColor *bgColor = kAppCustomMainColor;
+        UIColor *titleColor =  kWhiteColor;
         
         UIButton *commentBtn = [UIButton buttonWithTitle:@"前往评论"
                                               titleColor:titleColor
@@ -71,78 +71,9 @@
         
         [self.view addSubview:commentBtn];
     }
-    
-    if ([self.order.status isEqualToString:kAppointmentOrderStatusWillVisit]) {
-        
-        //确认上门
-        self.tableView.height = kSuperViewHeight - kTabBarHeight;
-        
-        UIButton *visitBtn = [UIButton buttonWithTitle:@"确认上门"
-                                            titleColor:kWhiteColor
-                                       backgroundColor:kAppCustomMainColor
-                                             titleFont:18.0];
-        
-        visitBtn.frame = CGRectMake(0, self.tableView.yy, kScreenWidth, 49);
-        
-        [visitBtn addTarget:self action:@selector(confirmVisit) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:visitBtn];
-        
-    } else if ([self.order.status isEqualToString:kAppointmentOrderStatusWillOverClass]) {
-        
-        //培训结束
-        self.tableView.height = kSuperViewHeight - kTabBarHeight;
-        
-        CGFloat w = [self.order.isComment isEqualToString:@"0"] ? kScreenWidth/2.0: kScreenWidth;
-        CGFloat x = [self.order.isComment isEqualToString:@"0"] ? kScreenWidth/2.0: 0;
-        
-        UIButton *overClassBtn = [UIButton buttonWithTitle:@"培训结束"
-                                                titleColor:kWhiteColor
-                                           backgroundColor:kAppCustomMainColor
-                                                 titleFont:18.0];
-        overClassBtn.frame = CGRectMake(x, self.tableView.yy, w, 49);
-        
-        [overClassBtn addTarget:self action:@selector(overClass) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:overClassBtn];
-        
-    }
-    
 }
 
 #pragma mark - Events
-//上门
-- (void)confirmVisit {
-    
-    [TLAlert alertWithTitle:@"" msg:@"确认已上门?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-        
-    } confirm:^(UIAlertAction *action) {
-       
-        TLNetworking *http = [TLNetworking new];
-        http.showView = self.view;
-        http.code = @"805512";
-        http.parameters[@"code"] = self.order.code;
-        http.parameters[@"updater"] = [TLUser user].userId;
-        //    http.parameters[@"token"] = [TLUser user].token;
-        
-        [http postWithSuccess:^(id responseObject) {
-            
-            [TLAlert alertWithSucces:@"上门成功"];
-            
-            if (_overClassSuccess) {
-                
-                _overClassSuccess();
-            }
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        } failure:^(NSError *error) {
-            
-        }];
-    }];
-    
-}
-
 //评价
 - (void)comment {
     
@@ -156,35 +87,6 @@
     NavigationController *nav = [[NavigationController alloc] initWithRootViewController:commentVC];
     
     [self presentViewController:nav animated:YES completion:nil];
-}
-
-- (void)overClass {
-    
-    [TLAlert alertWithTitle:@"" msg:@"确认已下课?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
-        
-    } confirm:^(UIAlertAction *action) {
-        
-        TLNetworking *http = [TLNetworking new];
-        
-        http.code = @"805513";
-        http.parameters[@"code"] = self.order.code;
-        http.parameters[@"updater"] = [TLUser user].userId;
-        
-        [http postWithSuccess:^(id responseObject) {
-            
-            [TLAlert alertWithSucces:@"下课成功"];
-            
-            if (_visitSuccess) {
-                
-                _visitSuccess();
-            }
-            
-            [self.navigationController popViewControllerAnimated:YES];
-
-        } failure:^(NSError *error) {
-            
-        }];
-    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -214,7 +116,7 @@
     
     AppointmentUser *user = self.order.user;
     //
-    NSString *name = user.nickname;
+    NSString *name = user.realName;
     STRING_NIL_NULL(name);
     //
     NSString *startDate = [self.order.appointDatetime convertDate];
@@ -237,7 +139,7 @@
     
     if ([self.order.status isEqualToString:kAppointmentOrderStatusWillCheck]) {
         
-        textArr = @[@"预约美导", @"预约开始时间", @"预约天数", @"状态"];
+        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", @"状态"];
         contentArr = @[name, startDate, day, status];
 
         if (indexPath.row == 3) {
@@ -247,7 +149,7 @@
         
     } else {
         
-        textArr = @[@"预约美导", @"预约开始时间", @"预约天数", @"预约排班时间", @"预约排班天数", @"状态"];
+        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", @"预约排班时间", @"预约排班天数", @"状态"];
         contentArr = @[name, startDate, day, planDate, planDay, status];
         
         if (indexPath.row == 5) {

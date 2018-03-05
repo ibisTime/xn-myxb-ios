@@ -11,20 +11,15 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-//Framework
 //Category
 #import "UIButton+EnLargeEdge.h"
-//Extension
-//M
-#import "BannerModel.h"
+
 //V
-#import "TLBannerView.h"
 #import "LoopScrollView.h"
 #import "CategoryItem.h"
+#import "TLBannerView.h"
 
 @interface HomeHeaderView()
-//轮播图
-@property (nonatomic,strong) TLBannerView *bannerView;
 //头条
 @property (nonatomic, strong) UIView *headLineView;
 @property (nonatomic, strong) LoopScrollView *loopView;
@@ -32,6 +27,8 @@
 @property (nonatomic, strong) UIView *categoryView;
 //推荐品牌
 @property (nonatomic, strong) UIView *titleView;
+//轮播图
+@property (nonatomic,strong) TLBannerView *bannerView;
 
 @end
 
@@ -69,7 +66,6 @@
             weakSelf.headerBlock(HomeEventsTypeBanner, index);
         }
     };
-    bannerView.imgUrls = @[@"健康专家"];
     
     [self addSubview:bannerView];
     
@@ -194,6 +190,19 @@
     
     self.loopView.titlesArr = titleArr;
 
+}
+
+- (void)setBanners:(NSMutableArray<BannerModel *> *)banners {
+    
+    _banners = banners;
+    
+    NSMutableArray *imgUrls = [NSMutableArray array];
+    [banners enumerateObjectsUsingBlock:^(BannerModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [imgUrls addObject:obj.pic];
+    }];
+    self.bannerView.imgUrls = imgUrls;
+    
 }
 
 #pragma mark - Events

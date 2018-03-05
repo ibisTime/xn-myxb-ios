@@ -140,6 +140,8 @@
     helper.code = @"805120";
     helper.parameters[@"kind"] = self.userType;
     helper.parameters[@"status"] = @"0";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     
     helper.tableView = self.tableView;
     

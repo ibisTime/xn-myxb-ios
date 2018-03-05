@@ -8,9 +8,12 @@
 
 #import "BaseTableViewCell.h"
 #import "AppointmentOrderModel.h"
+#import "AchievementOrderModel.h"
 
 @interface AppointmentOrderCell : BaseTableViewCell
 //
 @property (nonatomic, strong) AppointmentOrderModel *order;
+//
+@property (nonatomic, strong) AchievementOrderModel *achievementOrder;
 
 @end

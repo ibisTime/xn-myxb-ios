@@ -48,3 +48,4 @@ NSString *const kAppointmentOrderStatusDidComplete = @"6";  //已完成
 @implementation AppointmentUser
 
 @end
+

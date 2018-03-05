@@ -12,7 +12,9 @@
 #import "AppConfig.h"
 //Extension
 #import "IQKeyboardManager.h"
-//#import "WXApi.h"
+#import "TLWXManager.h"
+#import "WXApi.h"
+
 //M
 #import "TLUser.h"
 //C
@@ -32,6 +34,8 @@
     
     //服务器环境
     [self configServiceAddress];
+    //配置微信
+    [self configWeChat];
     //键盘
     [self configIQKeyboard];
     //配置根控制器
@@ -43,37 +47,21 @@
 // iOS9 NS_AVAILABLE_IOS
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     
-//    if ([url.host isEqualToString:@"safepay"]) {
-//
-//        [TLAlipayManager hadleCallBackWithUrl:url];
-//        return YES;
-//
-//    } else {
-//
-//        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-//
-//    }
-    
-    return YES;
+    return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
 }
 
 // iOS9 NS_DEPRECATED_IOS
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-//    if ([url.host isEqualToString:@"safepay"]) {
-//
-//        [TLAlipayManager hadleCallBackWithUrl:url];
-//        return YES;
-//
-//    } else {
-//
-//        return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
-//
-//    }
-    return YES;
+    return [WXApi handleOpenURL:url delegate:[TLWXManager manager]];
 }
 
 #pragma mark - Config
+- (void)configWeChat {
+    
+    [[TLWXManager manager] registerApp];
+}
+
 - (void)configServiceAddress {
     
     //配置环境
@@ -126,15 +114,5 @@
 - (void)userLogin {
     
 }
-
-#pragma mark 微信回调
-//- (void)onResp:(BaseResp *)resp {
-//
-//    if ([resp isKindOfClass:[PayResp class]]) {
-//        //支付返回结果
-//        NSNotification *notification = [NSNotification notificationWithName:ORDER_PAY_NOTIFICATION object:[NSNumber numberWithInt:resp.errCode]];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-//    }
-//}
 
 @end

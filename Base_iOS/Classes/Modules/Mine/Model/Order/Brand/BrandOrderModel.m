@@ -21,7 +21,7 @@ NSString *const kBrandOrderStatusDidComplete = @"4";
     //0 待审核 1 审核未通过 2待发货 3待评价 4已完成
     
     NSDictionary *dict = @{
-                           kBrandOrderStatusWillCheck : @"待发货",
+                           kBrandOrderStatusWillCheck : @"待审核",
                            kBrandOrderStatusCheckFailed : @"审核未通过",
                            kBrandOrderStatusWillSendGood : @"待发货",
                            kBrandOrderStatusWillComment : @"待评价",

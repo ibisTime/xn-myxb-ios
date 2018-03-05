@@ -23,7 +23,7 @@
     
     if (!_pics) {
         
-        NSArray *imgs = [self.pic componentsSeparatedByString:@"||"];
+        NSArray *imgs = [self.advPic componentsSeparatedByString:@"||"];
         NSMutableArray *newImgs = [NSMutableArray arrayWithCapacity:imgs.count];
         [imgs enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             

@@ -10,9 +10,12 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "AppMacro.h"
 //Category
 #import "NSString+Extension.h"
 #import "NSString+CGSize.h"
+#import "NSString+Date.h"
+#import "NSString+Check.h"
 #import <UIImageView+WebCache.h>
 #import "UILabel+Extension.h"
 
@@ -140,10 +143,10 @@
     _proposal = proposal;
     
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[proposal.photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
-    self.nickNameLbl.text = proposal.nickName;
-    self.dateLbl.text = proposal.createTime;
+    self.nickNameLbl.text = proposal.realName;
+    self.dateLbl.text = [proposal.commentDatetime convertToDetailDate];
     //
-    NSInteger index = [proposal.score integerValue];
+    NSInteger index = proposal.score;
     
     for (int i = 0; i < 5; i++) {
         
@@ -163,14 +166,16 @@
         }];
     }
     
-    [self.contentLbl labelWithTextString:proposal.comment lineSpace:5];
+    STRING_NIL_NULL(proposal.content);
+    [self.contentLbl labelWithTextString:proposal.content lineSpace:5];
     
     [self setSubViewLayout];
-
     //
     [self layoutSubviews];
     
-    proposal.cellHeight = self.contentLbl.yy + 15;
+    CGFloat h = [proposal.content valid] ? 15: 5;
+    
+    proposal.cellHeight = self.contentLbl.yy + h;
 
 }
 

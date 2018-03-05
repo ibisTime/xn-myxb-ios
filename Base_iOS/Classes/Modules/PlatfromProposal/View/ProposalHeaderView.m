@@ -11,23 +11,22 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-//Framework
 //Category
 #import "UIControl+Block.h"
-//Extension
-//M
-//V
-#import "MovieAddComment.h"
+#import "UIView+Responder.h"
+//C
+#import "ProposalListVC.h"
 
 @interface ProposalHeaderView()
 
 //平均分
 @property (nonatomic, strong) UILabel *averageLbl;
-//比例
 //评分数量
 @property (nonatomic, strong) UILabel *commentNumLbl;
-//星星
-@property (nonatomic, strong) MovieAddComment *starView;
+//
+@property (nonatomic, assign) BOOL isFirst;
+//
+@property (nonatomic, strong) NSMutableArray *proportionArr;
 
 @end
 
@@ -38,13 +37,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self initSubviews];
+        self.proportionArr = [NSMutableArray array];
     }
     return self;
 }
 
 #pragma mark - Init
 - (void)initSubviews {
+    
+    _isFirst = YES;
+    
+    BaseWeakSelf;
     
     self.backgroundColor = kWhiteColor;
     
@@ -90,15 +93,12 @@
         
         UIView *proportionView = [[UIView alloc] init];
         
-        proportionView.tag = 1305-i;
+        proportionView.tag = 1300+i;
         proportionView.backgroundColor = [UIColor colorWithHexString:@"#bdbdbd"];
         
         [proportionBgView addSubview:proportionView];
-        [proportionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.top.bottom.equalTo(@0);
-            make.width.equalTo(@((i-1)*lineW/10.0));
-        }];
+        
+        [self.proportionArr addObject:proportionView];
         
         for (int j = 0; j < i; j++) {
             //小星星
@@ -121,6 +121,9 @@
                                            titleFont:12.0];
     [lookAllBtn bk_addEventHandler:^(id sender) {
         
+        ProposalListVC *listVC = [ProposalListVC new];
+        
+        [weakSelf.viewController.navigationController pushViewController:listVC animated:YES];
         
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -214,14 +217,73 @@
         make.width.equalTo(@130);
         make.centerY.equalTo(@0);
     }];
-    //数据
-    self.averageLbl.text = @"4.7";
-    self.commentNumLbl.text = [NSString stringWithFormat:@"%@个评分", @"666"];
+    
 }
 
 - (void)setSubviewLayout {
     
     
+}
+
+#pragma mark - Setting
+- (void)setInfo:(ProposalInfoModel *)info {
+    
+    _info = info;
+    
+    if (!_isFirst) {
+        
+        [self initSubviews];
+    }
+
+    //数据
+    self.averageLbl.text = [NSString stringWithFormat:@"%.1lf", info.average];
+    self.commentNumLbl.text = [NSString stringWithFormat:@"%ld个评分", info.totalCount];
+    
+    __block CGFloat proportionW = 0.0;
+
+    __block CGFloat lineW = kWidth(150.0);
+    
+    [self.proportionArr enumerateObjectsUsingBlock:^(UIView  *_Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSInteger index = obj.tag - 1300;
+        
+        switch (index) {
+                
+            case 1:
+            {
+                proportionW = _info.yfCount*lineW/(_info.totalCount);
+            }break;
+                
+            case 2:
+            {
+                proportionW = _info.lfCount*lineW/(_info.totalCount);
+            }break;
+                
+            case 3:
+            {
+                proportionW = _info.sfCount*lineW/(_info.totalCount);
+            }break;
+                
+            case 4:
+            {
+                proportionW = _info.siCount*lineW/(_info.totalCount);
+            }break;
+                
+            case 5:
+            {
+                proportionW = _info.wfCount*lineW/(_info.totalCount);
+            }break;
+                
+            default:
+                break;
+        }
+        
+        [obj mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.top.bottom.equalTo(@0);
+            make.width.equalTo(@(proportionW));
+        }];
+    }];
 }
 
 @end

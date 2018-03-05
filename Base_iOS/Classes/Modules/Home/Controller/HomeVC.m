@@ -27,6 +27,8 @@
 #import "AppointmentListVC.h"
 #import "BrandVC.h"
 #import "BrandListVC.h"
+#import "GoodNewsVC.h"
+#import "RankingListVC.h"
 
 @interface HomeVC ()<UIScrollViewDelegate>
 //
@@ -37,8 +39,6 @@
 @property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
 //系统消息
 @property (nonatomic,strong) NSMutableArray <NoticeModel *>*notices;
-//图片
-@property (nonatomic,strong) NSMutableArray *bannerPics;
 
 @end
 
@@ -55,6 +55,8 @@
     [self requestNoticeList];
     //获取商品列表
     [self requestBrandList];
+    //获取banner列表
+    [self requestBannerList];
 }
 
 - (void)viewDidLoad {
@@ -191,8 +193,8 @@
     
     helper.parameters[@"location"] = @"1";
     helper.parameters[@"status"] = @"2";
-//    helper.parameters[@"orderColumn"] = @"update_datetime";
-//    helper.parameters[@"orderDir"] = @"desc";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     
     [helper modelClass:[BrandModel class]];
     
@@ -206,10 +208,33 @@
         [weakSelf.collectionView reloadData];
         
     } failure:^(NSError *error) {
-        
-        
+    
     }];
     
+}
+
+- (void)requestBannerList {
+    
+    BaseWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"805806";
+    helper.isList = YES;
+    helper.parameters[@"location"] = @"index_banner";
+    helper.parameters[@"type"] = @"2";
+    
+    [helper modelClass:[BannerModel class]];
+    
+    //店铺数据
+    [helper refresh:^(NSMutableArray <BannerModel *>*objs, BOOL stillHave) {
+        
+        weakSelf.bannerRoom = objs;
+        weakSelf.collectionView.headerView.banners = objs;
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - HeaderEvents
@@ -218,13 +243,47 @@
     switch (type) {
         case HomeEventsTypeBanner:
         {
-            if (!(self.bannerRoom[index].url && self.bannerRoom[index].url.length > 0)) {
-                return ;
-            }
+            BannerModel *banner = self.bannerRoom[index];
             
-            WebVC *webVC = [WebVC new];
-            webVC.url = self.bannerRoom[index].url;
-            [self.navigationController pushViewController:webVC animated:YES];
+            switch ([banner.kind integerValue]) {
+                case 1:
+                {
+                    if (!(banner.url && banner.url.length > 0)) {
+                        return ;
+                    }
+                    
+                    WebVC *webVC = [WebVC new];
+                    webVC.url = banner.url;
+                    [self.navigationController pushViewController:webVC animated:YES];
+                    
+                }break;
+                    
+                case 2:
+                case 3:
+                {
+                    GoodNewsVC *newsVC = [GoodNewsVC new];
+                    
+                    newsVC.type = banner.kind;
+                    
+                    [self.navigationController pushViewController:newsVC animated:YES];
+                }break;
+                    
+                case 4:
+                case 5:
+                case 6:
+                {
+                    RankingListVC *rankVC = [RankingListVC new];
+                    
+                    rankVC.type = banner.kind;
+                    
+                    [self.navigationController pushViewController:rankVC animated:YES];
+                }break;
+                    
+                default:
+                    break;
+            }
+
+            
             
         }break;
             

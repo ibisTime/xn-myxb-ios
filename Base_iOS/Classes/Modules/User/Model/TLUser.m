@@ -107,7 +107,7 @@ NSString *const kUserTypeExpert = @"S";     //专家
     
     TLNetworking *http = [TLNetworking new];
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"qiniu_domain";
+    http.parameters[@"ckey"] = @"qiniu_domain";
     [http postWithSuccess:^(id responseObject) {
         
         [AppConfig config].qiniuDomain = [NSString stringWithFormat:@"http://%@", responseObject[@"data"][@"cvalue"]];

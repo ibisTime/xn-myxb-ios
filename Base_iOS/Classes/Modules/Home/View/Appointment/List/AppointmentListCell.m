@@ -258,7 +258,7 @@
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[appointmentModel.photo convertImageUrl]]
                     placeholderImage:USER_PLACEHOLDER_SMALL];
     
-    self.nickNameLbl.text = appointmentModel.nickname;
+    self.nickNameLbl.text = appointmentModel.realName;
     
     self.genderIV.image = [appointmentModel.gender isEqualToString:@"0"] ? kImage(@"女生"): kImage(@"男士");
     

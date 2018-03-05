@@ -60,11 +60,10 @@
     
     [addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.height.mas_equalTo(44);
-        make.left.mas_equalTo(15);
-        make.centerY.mas_equalTo(0);
-        make.right.mas_equalTo(-15);
-        
+        make.height.equalTo(@44);
+        make.left.equalTo(@15);
+        make.centerY.equalTo(@0);
+        make.right.equalTo(@(-15));
     }];
     
     self.addBtn = addBtn;
@@ -72,7 +71,9 @@
 
 - (void)initTableView {
     
-    TLTableView *addressTableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 60 - kBottomInsetHeight) delegate:self dataSource:self];
+    TLTableView *addressTableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 60 - kBottomInsetHeight)
+                                                           delegate:self
+                                                         dataSource:self];
     
     addressTableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无收货地址"];
     
@@ -219,20 +220,15 @@
             http.parameters[@"token"] = [TLUser user].token;
             [http postWithSuccess:^(id responseObject) {
                 
+                [TLAlert alertWithSucces:@"设置成功"];
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ADDRESS_CHANGE_NOTIFICATION" object:self userInfo:@{
                                                                                                                                  @"sender" : self
                                                                                                                                  }];
                 //改变数据
                 [weakSelf.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     
-                    if (idx == index) {
-                        
-                        obj.isDefault = @"1";
-                        
-                    } else {
-                        
-                        obj.isDefault = @"0";
-                    }
+                    obj.isDefault = idx == index ? @"1": @"0";
                 }];
                 
                 [weakSelf.addressTableView reloadData_tl];
@@ -241,7 +237,6 @@
                 
             }];
         };
-        
     }
     
     cell.address = self.addressRoom[indexPath.section];
@@ -263,21 +258,21 @@
     
     ZHReceivingAddress *selectedAddr = self.addressRoom[indexPath.section];
     
-    //    if (selectedAddr.isSelected == YES) {
-    //
-    //
-    //    } else {
-    //
-    //        [self.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress *addr, NSUInteger idx, BOOL * _Nonnull stop) {
-    //
-    //            if (![addr isEqual:selectedAddr]) {
-    //                addr.isSelected = NO;
-    //            }
-    //
-    //        }];
-    //        selectedAddr.isSelected = YES;
-    //
-    //    }
+        if (selectedAddr.isSelected == YES) {
+    
+    
+        } else {
+    
+            [self.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress *addr, NSUInteger idx, BOOL * _Nonnull stop) {
+    
+                if (![addr isEqual:selectedAddr]) {
+                    addr.isSelected = NO;
+                }
+    
+            }];
+            selectedAddr.isSelected = YES;
+    
+        }
     
     if (self.chooseAddress) {
         

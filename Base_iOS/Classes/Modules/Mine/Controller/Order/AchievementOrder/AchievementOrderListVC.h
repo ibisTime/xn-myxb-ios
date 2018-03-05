@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface AchievementOrderListVC : BaseViewController
+//状态
+@property (nonatomic, copy) NSString *status;
 
 @end

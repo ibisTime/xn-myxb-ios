@@ -13,6 +13,7 @@
 #import "AppColorMacro.h"
 //Extension
 #import <UIImageView+WebCache.h>
+#import "NSString+Extension.h"
 
 @interface BrandCell()
 
@@ -64,7 +65,7 @@
     
     _brandModel = brandModel;
     
-    [_goodIV sd_setImageWithURL:[NSURL URLWithString:brandModel.advPic] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [_goodIV sd_setImageWithURL:[NSURL URLWithString:[brandModel.advPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
 
     _nameLbl.text = brandModel.name;
 

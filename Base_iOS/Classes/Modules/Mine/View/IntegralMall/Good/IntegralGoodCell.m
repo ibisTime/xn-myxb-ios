@@ -10,16 +10,19 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-//Framework
 //Category
 #import "NSString+Extension.h"
 //Extension
 #import <UIImageView+WebCache.h>
+#import "NSNumber+Extension.h"
+
 @interface IntegralGoodCell()
 //image
 @property (nonatomic, strong) UIImageView *goodIV;
 //title
 @property (nonatomic, strong) UILabel *nameLbl;
+//价格
+@property (nonatomic, strong) UIButton *priceBtn;
 
 @end
 
@@ -48,7 +51,17 @@
     self.goodIV.clipsToBounds = YES;
     
     [self addSubview:self.goodIV];
+    //价格
+    self.priceBtn = [UIButton buttonWithTitle:@""
+                                   titleColor:kWhiteColor
+                              backgroundColor:kClearColor
+                                    titleFont:13.0];
     
+    [self.priceBtn setBackgroundImage:kImage(@"积分价格背景") forState:UIControlStateNormal];
+    
+    self.priceBtn.frame = CGRectMake(self.goodIV.x, self.goodIV.y + 5, 70, 21);
+    
+    [self addSubview:self.priceBtn];
     //名称
     self.nameLbl = [UILabel labelWithFrame:CGRectZero
                               textAligment:NSTextAlignmentLeft
@@ -82,6 +95,7 @@
         make.top.equalTo(self.goodIV.mas_bottom).offset(10);
         make.width.equalTo(@(imgW - 20));
     }];
+
     //兑换按钮
     [self.exchangeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -96,7 +110,11 @@
     
     _integralModel = integralModel;
     
-    [_goodIV sd_setImageWithURL:[NSURL URLWithString:[integralModel.advPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [_goodIV sd_setImageWithURL:[NSURL URLWithString:[integralModel.pic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    
+    [_priceBtn setTitle:[integralModel.price convertToRealMoney] forState:UIControlStateNormal];
+    
+    _priceBtn.width = _priceBtn.titleLabel.text.length *10 + 20;
     
     _nameLbl.text = integralModel.name;
     //布局

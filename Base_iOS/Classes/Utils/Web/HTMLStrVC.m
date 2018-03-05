@@ -14,7 +14,7 @@
 @interface HTMLStrVC ()<WKNavigationDelegate>
 
 @property (nonatomic, copy) NSString *htmlStr;
-
+//
 @property (nonatomic, strong) WKWebView *webView;
 
 @end
@@ -61,6 +61,22 @@
             name = @"积分规则";
             
         } break;
+            
+        case HTMLTypeHelpCenter: {
+            
+            ckey = @"help_center";
+            
+            name = @"帮助中心";
+            
+        } break;
+            
+        case HTMLTypeFAQ: {
+            
+            ckey = @"FAQ";
+            
+            name = @"帮助中心";
+            
+        } break;
     }
 
     self.navigationItem.titleView = [UILabel labelWithTitle:name frame:CGRectMake(0, 0, 200, 44)];
@@ -97,7 +113,7 @@
     WKWebViewConfiguration *wkConfig = [WKWebViewConfiguration new];
     
     wkConfig.userContentController = wkUCC;
-    
+        
     _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) configuration:wkConfig];
     
     _webView.backgroundColor = kWhiteColor;

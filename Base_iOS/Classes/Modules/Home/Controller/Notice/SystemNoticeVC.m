@@ -108,7 +108,11 @@ static NSString *identifier = @"NoticeCellId";
     helper.parameters[@"channelType"] = @"4";
     
     helper.parameters[@"pushType"] = @"41";
-    helper.parameters[@"toKind"] = @"C";
+    
+    if ([TLUser user].isLogin) {
+        
+        helper.parameters[@"toKind"] = [TLUser user].kind;
+    }
     //    1 立即发 2 定时发
     //    pageDataHelper.parameters[@"smsType"] = @"1";
     helper.parameters[@"start"] = @"1";

@@ -12,20 +12,19 @@
 #import "AppConfig.h"
 //Macro
 #import "APICodeMacro.h"
-//Framework
 //Category
 #import "NSString+CGSize.h"
 #import "UILabel+Extension.h"
 #import "UIBarButtonItem+convience.h"
 #import <UIScrollView+TLAdd.h>
 #import "NSString+Extension.h"
-//Extension
+#import "NSNumber+Extension.h"
 //M
 #import "BannerModel.h"
-
 //V
 #import "ShareView.h"
 #import "TLBannerView.h"
+#import "QRCodeView.h"
 //C
 #import "TLUserLoginVC.h"
 #import "NavigationController.h"
@@ -40,6 +39,8 @@
 @property (nonatomic,strong) NSMutableArray *bannerPics;
 //说明
 @property (nonatomic, copy) NSString *remark;
+//
+@property (nonatomic, strong) QRCodeView *qrCodeView;
 //分享链接
 @property (nonatomic, copy) NSString *shareUrl;
 //活动规则
@@ -75,14 +76,23 @@
     //获取banner图
     [self getBanner];
     //获取活动规则
-//    [self requestActivityRule];
-    //获取邀请人数和收益
-//    [self requestInviteNumber];
-    //获取分享链接
-//    [self getShareUrl];
+    [self requestActivityRule];
+//    获取邀请人数和收益
+    [self requestInviteNumber];
+//    获取分享链接
+    [self getShareUrl];
     
 }
 #pragma mark - Init
+- (QRCodeView *)qrCodeView {
+    
+    if (!_qrCodeView) {
+        
+        _qrCodeView = [[QRCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        [self.view addSubview:_qrCodeView];
+    }
+    return _qrCodeView;
+}
 
 - (void)initScrollView {
     
@@ -99,29 +109,12 @@
 
 - (void)initBannerView {
     
-    BaseWeakSelf;
-    
     //顶部轮播
     TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(146 + kNavigationBarHeight))];
-    
-//    bannerView.selected = ^(NSInteger index) {
-    
-//        if (!(weakSelf.bannerRoom[index].url && weakSelf.bannerRoom[index].url.length > 0)) {
-//            return ;
-//        }
-//
-//        WebVC *webVC = [WebVC new];
-//
-//        webVC.url = weakSelf.bannerRoom[index].url;
-//
-//        [weakSelf.navigationController pushViewController:webVC animated:YES];
-        
-//    };
     
     [self.scrollView addSubview:bannerView];
     
     self.bannerView = bannerView;
-    
 }
 
 - (void)initSubviews {
@@ -401,24 +394,7 @@
         return;
     }
     
-    ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) shareBlock:^(BOOL isSuccess, int errorCode) {
-        
-        if (isSuccess) {
-            
-            [TLAlert alertWithSucces:@"分享成功"];
-            
-        } else {
-            
-            [TLAlert alertWithError:@"分享失败"];
-        }
-        
-    }];
-    
-    shareView.shareTitle = @"邀请好友";
-    shareView.shareDesc = @"快邀请好友来玩吧";
-    shareView.shareURL = self.shareUrl;
-    
-    [self.view addSubview:shareView];
+    [self.qrCodeView show];
 }
 
 #pragma mark - Data
@@ -457,17 +433,17 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"805123";
+    http.code = @"805703";
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
         
         //收益
-        NSString *profit = responseObject[@"data"][@"inviteProfit"];
+        NSNumber *profit = responseObject[@"data"][@"totalAmount"];
         
-        self.profitLbl.text = [profit convertToSimpleRealCoin];
+        self.profitLbl.text = [profit convertToSimpleRealMoney];
         //邀请人数
-        NSNumber *inviteNum = responseObject[@"data"][@"inviteCount"];
+        NSNumber *inviteNum = responseObject[@"data"][@"totalUser"];
         
         self.numLbl.text = [inviteNum stringValue];
         
@@ -482,7 +458,7 @@
     TLNetworking *http = [TLNetworking new];
 
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"activity_rule";
+    http.parameters[@"ckey"] = @"ACT_RULE";
 
     [http postWithSuccess:^(id responseObject) {
 
@@ -503,15 +479,17 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = USER_CKEY_CVALUE;
-    http.parameters[@"key"] = @"reg_url";
+    http.parameters[@"ckey"] = @"SHARE_URL";
     
     [http postWithSuccess:^(id responseObject) {
         
         NSString *url = responseObject[@"data"][@"cvalue"];
         
-        NSString *shareStr = [NSString stringWithFormat:@"%@/?mobile=%@&kind=C", url, [TLUser user].mobile];
+        NSString *shareStr = [NSString stringWithFormat:@"%@/?userReferee=%@&kind=%@", url, [TLUser user].mobile, [TLUser user].kind];
         //
         self.shareUrl = shareStr;
+        
+        self.qrCodeView.url = self.shareUrl;
         
     } failure:^(NSError *error) {
         

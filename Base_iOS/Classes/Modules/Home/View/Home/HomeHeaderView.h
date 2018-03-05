@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//M
+#import "BannerModel.h"
 #import "NoticeModel.h"
 
 typedef NS_ENUM(NSInteger, HomeEventsType) {
@@ -24,5 +25,7 @@ typedef void(^HomeHeaderEventsBlock)(HomeEventsType type, NSInteger index);
 @property (nonatomic, copy) HomeHeaderEventsBlock headerBlock;
 //系统消息
 @property (nonatomic,strong) NSMutableArray <NoticeModel *>*notices;
+//
+@property (nonatomic, strong) NSMutableArray <BannerModel *>*banners;
 
 @end

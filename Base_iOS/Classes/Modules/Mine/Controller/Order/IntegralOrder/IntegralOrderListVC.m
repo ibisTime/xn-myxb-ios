@@ -94,12 +94,10 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"805294";
-    helper.isList = YES;
     
-    helper.parameters[@"token"] = [TLUser user].token;
     helper.parameters[@"applyUser"] = [TLUser user].userId;
-    helper.parameters[@"orderColumn"] = @"update_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
+//    helper.parameters[@"orderColumn"] = @"update_datetime";
+//    helper.parameters[@"orderDir"] = @"desc";
     
     if (self.status == IntegralOrderStatusWillSend) {
         

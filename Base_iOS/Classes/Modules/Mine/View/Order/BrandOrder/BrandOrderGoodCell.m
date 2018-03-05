@@ -156,7 +156,7 @@
     [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.nameLbl.mas_left);
-        make.bottom.equalTo(self.coverIV.mas_bottom);
+        make.centerY.equalTo(self.totalAmountLbl.mas_centerY);
     }];
     
 }
@@ -169,7 +169,7 @@
     //
     self.nameLbl.text = order.productName;
     //
-    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.amount convertToSimpleRealMoney]];
+    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.unitPrice convertToSimpleRealMoney]];
     //
     self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.quantity stringValue]];
     //

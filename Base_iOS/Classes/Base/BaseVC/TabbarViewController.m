@@ -145,8 +145,8 @@
 
 - (BOOL)didSelected:(NSInteger)idx tabBar:(CustomTabBar *)tabBar {
     
-    //当用户点击邀请好友、平台建议和我的模块时，判断用户是否登录
-    if ((idx == 2 || idx == 3 || idx == 4) && ![TLUser user].isLogin) {
+    //当用户点击邀请好友和我的模块时，判断用户是否登录
+    if ((idx == 2 || idx == 4) && ![TLUser user].isLogin) {
 
         TLUserLoginVC *loginVC = [TLUserLoginVC new];
         NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
@@ -157,7 +157,8 @@
 
     //
     self.selectedIndex = idx;
-    
+    self.customTabbar.selectedIdx = idx;
+
     return YES;
 }
 

@@ -10,6 +10,7 @@
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "TLUser.h"
 
 #define kStarNum 5
 
@@ -147,6 +148,15 @@
 
 - (void)changeStarForegroundViewWithPoint:(CGPoint)point {
     
+    if (![[TLUser user] isLogin]) {
+     
+        if (_starBlock) {
+            
+            _starBlock(self.count);
+        }
+        return ;
+    }
+    
     NSInteger count = 0;
     
     count = count + [self changeImg:point.x image:self.img_star1];
@@ -163,6 +173,10 @@
     
     self.count = count;
     
+    if (_starBlock) {
+        
+        _starBlock(self.count);
+    }
 }
 
 - (NSInteger)changeImg:(float)x image:(UIImageView*)img {

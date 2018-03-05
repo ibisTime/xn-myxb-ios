@@ -85,6 +85,8 @@
                                           textColor:kTextColor2
                                                font:14.0];
     
+    self.numLbl.textAlignment = NSTextAlignmentRight;
+    
     [self addSubview:self.numLbl];
     //bottomLine
     UIView *bottomLine = [[UIView alloc] init];
@@ -133,11 +135,12 @@
         
         make.left.equalTo(self.nameLbl.mas_left);
         make.bottom.equalTo(self.goodIV.mas_bottom).offset(-5);
+        make.width.lessThanOrEqualTo(@(kWidth(130)));
     }];
     //产品销量
     [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.goodIV.mas_right).offset(110);
+        make.right.equalTo(self.mas_right).offset(-(leftMargin));
         make.centerY.equalTo(self.priceLbl.mas_centerY);
     }];
 }
@@ -147,12 +150,12 @@
     
     _brandModel = brandModel;
     
-    [_goodIV sd_setImageWithURL:[NSURL URLWithString:[brandModel.advPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [_goodIV sd_setImageWithURL:[NSURL URLWithString:[brandModel.pic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     
     _nameLbl.text = brandModel.name;
     _descLbl.text = brandModel.slogan;
     
-    _priceLbl.text = [NSString stringWithFormat:@"￥%@", [brandModel.price convertToSimpleRealMoney]];
+    _priceLbl.text = [NSString stringWithFormat:@"￥%@", [brandModel.price convertToRealMoney]];
     _numLbl.text = [NSString stringWithFormat:@"已售: %ld", brandModel.soldOutCount];
     
 }
