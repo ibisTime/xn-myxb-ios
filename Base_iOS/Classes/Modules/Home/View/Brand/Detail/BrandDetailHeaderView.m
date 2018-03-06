@@ -237,7 +237,7 @@
     _nameLbl.text = detailModel.name;
     _descLbl.text = detailModel.slogan;
     
-    _priceLbl.text = [NSString stringWithFormat:@"￥%@", [detailModel.price convertToSimpleRealMoney]];
+    _priceLbl.text = [NSString stringWithFormat:@"￥%@", [detailModel.price convertToRealMoney]];
     
     _numLbl.text = [NSString stringWithFormat:@"已售: %ld", detailModel.soldOutCount];
     [_detailWebView loadWebWithString:detailModel.desc];

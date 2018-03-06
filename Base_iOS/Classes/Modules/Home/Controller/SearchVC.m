@@ -195,8 +195,8 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     helper.code = @"805266";
     
     helper.parameters[@"status"] = @"2";
-    helper.parameters[@"orderColumn"] = @"update_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     helper.parameters[@"name"] = self.searchText;
     
     helper.tableView = self.tableView;
@@ -267,14 +267,13 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     
     [self.tableView addLoadMoreAction:^{
         
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.appointmentList = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
             
         }];
     }];

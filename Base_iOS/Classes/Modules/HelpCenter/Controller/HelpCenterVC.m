@@ -14,7 +14,6 @@
 #import <WebKit/WebKit.h>
 //Category
 #import "UIBarButtonItem+convience.h"
-////Extension
 ////M
 //#import "QuestionModel.h"
 ////V
@@ -35,6 +34,13 @@
 
 @implementation HelpCenterVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    //
+    [self requestContent];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -42,8 +48,8 @@
     
     //联系客服
     [self initItem];
-    //
-    [self requestContent];
+    //webview
+    [self initWebView];
 
     //    //问题列表
     //    [self initTableView];
@@ -74,7 +80,6 @@
 
     //获取客服电话
     [self requestServiceMobile];
-
 }
 //
 //#pragma mark - Data
@@ -116,7 +121,7 @@
         
         self.htmlStr = responseObject[@"data"][@"cvalue"];
         
-        [self initWebView];
+        [self loadWebWithString:self.htmlStr];
         
     } failure:^(NSError *error) {
         
@@ -167,14 +172,11 @@
     _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight) configuration:wkConfig];
     
     _webView.backgroundColor = kWhiteColor;
-    
     _webView.navigationDelegate = self;
-    
     _webView.allowsBackForwardNavigationGestures = YES;
     
     [self.view addSubview:_webView];
     
-    [self loadWebWithString:self.htmlStr];
 }
 
 - (void)loadWebWithString:(NSString *)string {

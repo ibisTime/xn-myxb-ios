@@ -108,6 +108,7 @@
                                backgroundColor:kAppCustomMainColor
                                      titleFont:12.0
                                   cornerRadius:12.5];
+    self.statusBtn.enabled = NO;
     
     [self addSubview:self.statusBtn];
     
@@ -196,19 +197,19 @@
     }];
     
     __block CGFloat x = kHeadIconWidth + 30;
+    
     //风格
-    [_appointmentModel.styles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    
+    [self.appointmentModel.styles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        NSString *title = _appointmentModel.styles[idx];
-        
-        if (![title valid]) {
+        if (![obj valid]) {
             
             return ;
         }
         
-        CGFloat w = [NSString getWidthWithString:title font:11.0] + 10;
+        CGFloat w = [NSString getWidthWithString:obj font:11.0] + 10;
         
-        UIButton *btn = [UIButton buttonWithTitle:title
+        UIButton *btn = [UIButton buttonWithTitle:obj
                                        titleColor:_appointmentModel.styleColor[idx]
                                   backgroundColor:kWhiteColor
                                         titleFont:11.0

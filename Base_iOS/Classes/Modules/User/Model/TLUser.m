@@ -161,6 +161,7 @@ NSString *const kUserTypeExpert = @"S";     //专家
     self.jfAccountNumber = nil;
     self.realName = nil;
     self.speciality = nil;
+    self.style = nil;
     self.slogan = nil;
     self.introduce = nil;
 
@@ -212,6 +213,7 @@ NSString *const kUserTypeExpert = @"S";     //专家
     self.level = dict[@"level"];
     self.photo = dict[@"photo"];
     self.speciality = dict[@"speciality"];
+    self.style = dict[@"style"];
     self.gender = dict[@"gender"];
     self.slogan = dict[@"slogan"];
     self.introduce = dict[@"introduce"];

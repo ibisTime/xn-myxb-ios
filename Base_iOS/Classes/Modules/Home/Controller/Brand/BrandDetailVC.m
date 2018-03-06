@@ -7,8 +7,11 @@
 //
 
 #import "BrandDetailVC.h"
+//Macro
+#import "APICodeMacro.h"
 //Category
 #import "UIControl+Block.h"
+#import "NSString+Check.h"
 //Extension
 #import "TLProgressHUD.h"
 //M
@@ -99,13 +102,8 @@
                                         titleFont:16.0];
     
     [chatBtn bk_addEventHandler:^(id sender) {
-        
-        //
-        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", weakSelf.good.mobile];
-
-        NSURL *url = [NSURL URLWithString:mobile];
-
-        [[UIApplication sharedApplication] openURL:url];
+        //获取顾问手机号
+        [weakSelf requestLinkMobile];
         
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -255,6 +253,39 @@
         
         [TLProgressHUD dismiss];
 
+    }];
+}
+
+- (void)requestLinkMobile {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805267";
+    http.parameters[@"code"] = self.code;
+    [http postWithSuccess:^(id responseObject) {
+        
+        [self removePlaceholderView];
+        
+        self.good = [BrandModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        if (![self.good.mobile valid]) {
+            
+            [TLAlert alertWithInfo:@"暂无顾问手机号"];
+            return ;
+        }
+        //
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", self.good.mobile];
+        
+        NSURL *url = [NSURL URLWithString:mobile];
+        
+        [[UIApplication sharedApplication] openURL:url];
+        
+    } failure:^(NSError *error) {
+        
+        [self addPlaceholderView];
+        
+        [TLProgressHUD dismiss];
+        
     }];
 }
 

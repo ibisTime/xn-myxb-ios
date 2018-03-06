@@ -159,7 +159,7 @@
     //昵称
     self.nickNameLbl.text = ranking.name;
     //金额
-    NSString *amount = [NSString stringWithFormat:@"￥%@", [ranking.amount convertToSimpleRealMoney]];
+    NSString *amount = [NSString stringWithFormat:@"￥%@", [ranking.amount convertToRealMoney]];
 
     [self.amountBtn setTitle:amount forState:UIControlStateNormal];
     

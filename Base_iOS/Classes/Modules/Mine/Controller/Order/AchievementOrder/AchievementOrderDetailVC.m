@@ -97,7 +97,7 @@
     
     MryUser *user = self.order.mryUser;
     //美容院
-    NSString *name = user.realname;
+    NSString *name = user.realName;
     STRING_NIL_NULL(name);
     //预约开始时间
     NSString *startDate = [self.order.appointDatetime convertToDetailDate];
@@ -123,7 +123,7 @@
     NSString *subNum = [NSString stringWithFormat:@"%ld", self.order.sucNumber];
     STRING_NIL_NULL(subNum);
     //销售业绩
-    NSString *saleAmount = [self.order.saleAmount convertToSimpleRealMoney];
+    NSString *saleAmount = [self.order.saleAmount convertToRealMoney];
     STRING_NIL_NULL(saleAmount);
     //状态
     NSString *status = [self.order getStatusName];

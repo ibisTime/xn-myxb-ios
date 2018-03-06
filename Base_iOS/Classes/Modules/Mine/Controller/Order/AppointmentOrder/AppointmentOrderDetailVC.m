@@ -82,6 +82,7 @@
     
     commentVC.code = self.order.code;
     commentVC.commentKind = self.order.type;
+    commentVC.type = OrderCommentTypePerson;
     commentVC.placeholder = [NSString stringWithFormat:@"请对%@进行评论", [self.order getUserType]];
     
     NavigationController *nav = [[NavigationController alloc] initWithRootViewController:commentVC];

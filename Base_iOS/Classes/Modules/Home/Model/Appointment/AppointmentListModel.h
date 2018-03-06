@@ -19,6 +19,8 @@
 @property (nonatomic, copy) NSString *realName;
 //经纪人手机号
 @property (nonatomic, copy) NSString *mobile;
+//经纪人编号
+@property (nonatomic, copy) NSString *handler;
 //性别
 @property (nonatomic, copy) NSString *gender;
 //职业
@@ -27,6 +29,8 @@
 @property (nonatomic, copy) NSString *speciality;
 //风格
 @property (nonatomic, copy) NSString *style;
+@property (nonatomic, copy) NSString *styleName;
+
 @property (nonatomic, strong) NSArray <NSString *>*styles;
 @property (nonatomic, strong) NSArray <UIColor *>*styleColor;
 //评分

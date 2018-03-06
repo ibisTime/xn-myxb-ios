@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIView *bgView;
 //确认按钮
 @property (nonatomic, strong) UIButton *confirmBtn;
+//
+@property (nonatomic, strong) NSMutableArray <UILabel *>*tripLbls;
 
 @end
 
@@ -25,6 +27,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if (self = [super initWithFrame:frame]) {
+        
+        self.tripLbls = [NSMutableArray array];
         
         [self initSubviews];
     }
@@ -42,7 +46,6 @@
     self.bgView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.bgView.backgroundColor = kWhiteColor;
-    
     self.bgView.layer.cornerRadius = 10;
     self.bgView.clipsToBounds = YES;
     
@@ -82,17 +85,24 @@
 - (void)setTrips:(NSArray<TripInfoModel *> *)trips {
 
     _trips = trips;
-
+    //移除多余的视图
+    [self.tripLbls enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [obj removeFromSuperview];
+    }];
+    
     //背景
     CGFloat bgW = kScreenWidth - 2*kWidth(35);
     
     UILabel *textLbl = [self viewWithTag:2000];
     UIImageView *iconIV = [self viewWithTag:2001];
     
-    __block CGFloat y = textLbl.yy + 25;
+    __block CGFloat y = textLbl.yy;
     
     [trips enumerateObjectsUsingBlock:^(TripInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
+        y += 25;
+
         UILabel *timeLbl = [UILabel labelWithFrame:CGRectMake(0, y, bgW, kFontHeight(12.0))
                                       textAligment:NSTextAlignmentCenter
                                    backgroundColor:kClearColor
@@ -106,7 +116,9 @@
         timeLbl.text = [NSString stringWithFormat:@"%@ - %@", startTime, endTime];
         
         [self.bgView addSubview:timeLbl];
-        y += 32;
+        
+        [self.tripLbls addObject:timeLbl];
+        
     }];
     
     _confirmBtn.frame = CGRectMake((bgW - kWidth(250))/2.0, y + 40, kWidth(250), 35);
@@ -116,7 +128,7 @@
     self.bgView.frame = CGRectMake(0, 0, bgW, bgH);
     self.bgView.center = self.center;
     
-    textLbl.centerX = self.bgView.centerX - 10;
+    textLbl.centerX = self.bgView.centerX - kWidth(15);
     iconIV.frame = CGRectMake(textLbl.x - 28, 0, 18, 18);
     iconIV.centerY = textLbl.centerY;
     

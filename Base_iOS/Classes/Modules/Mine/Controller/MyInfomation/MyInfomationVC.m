@@ -25,11 +25,6 @@
 
 @interface MyInfomationVC ()
 //姓名
-//专长领域
-//广告语
-//授课风格
-//个人简介
-//姓名
 @property (nonatomic, strong) TLTextField *nameTF;
 //专长领域
 @property (nonatomic, strong) TLTextField *expertiseTF;
@@ -49,7 +44,6 @@
 @property (nonatomic) NSMutableString *style;
 @property (nonatomic) NSMutableString *styleID;
 
-
 @end
 
 @implementation MyInfomationVC
@@ -63,13 +57,13 @@
     self.style = [NSMutableString stringWithString:@""];
     self.styleID = [NSMutableString stringWithString:@""];
     
-    [self initSubvews];
+    [self initSubviews];
     //获取风格数据
     [self requestStyleList];
 }
 
 #pragma mark - Init
-- (void)initSubvews {
+- (void)initSubviews {
     
     BaseWeakSelf;
     
@@ -272,6 +266,13 @@
     [http postWithSuccess:^(id responseObject) {
         
         self.infomation = [MyInfomationModel mj_objectWithKeyValues:responseObject[@"data"]];
+        //姓名为空就跳过
+        if (![self.infomation.realName valid]) {
+            
+            //第一次用户未填写数据时
+            [self changeInfo];
+            return ;
+        }
         //姓名
         NSString *name = self.infomation.realName;
         STRING_NIL_NULL(name);
@@ -285,13 +286,12 @@
         STRING_NIL_NULL(slogan);
         self.sloginTF.text = slogan;
         //授课风格
-
         NSArray *arr = [self.infomation.style componentsSeparatedByString:@","];
         [arr enumerateObjectsUsingBlock:^(NSString *  _Nonnull index, NSUInteger idx, BOOL * _Nonnull stop) {
             
             [self.data enumerateObjectsUsingBlock:^(DataDictionaryModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 
-                if ([index integerValue] == obj.ID) {
+                if ([index isEqualToString:obj.dkey]) {
                     
                     [self.style appendString:[NSString stringWithFormat:@"%@  ", obj.dvalue]];
                 }
@@ -356,6 +356,44 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)changeInfo {
+    
+    //姓名
+    NSString *name = [TLUser user].realName;
+    STRING_NIL_NULL(name);
+    self.nameTF.text = name;
+    //专家领域
+    NSString *speciality = [TLUser user].speciality;
+    STRING_NIL_NULL(speciality);
+    self.expertiseTF.text = speciality;
+    //广告语
+    NSString *slogan = [TLUser user].slogan;
+    STRING_NIL_NULL(slogan);
+    self.sloginTF.text = slogan;
+    //授课风格
+    NSArray *arr = [[TLUser user].style componentsSeparatedByString:@","];
+    [arr enumerateObjectsUsingBlock:^(NSString *  _Nonnull index, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [self.data enumerateObjectsUsingBlock:^(DataDictionaryModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([index isEqualToString:obj.dkey]) {
+                
+                [self.style appendString:[NSString stringWithFormat:@"%@  ", obj.dvalue]];
+            }
+        }];
+    }];
+    
+    STRING_NIL_NULL(self.infomation.style);
+    
+    [self.styleID appendString:self.infomation.style];
+    
+    self.stylePicker.text = self.style;
+    //个人简介
+    NSString *introduce = [TLUser user].introduce;
+    STRING_NIL_NULL(introduce);
+    self.introduceTV.text = introduce;
 }
 
 - (void)didReceiveMemoryWarning {

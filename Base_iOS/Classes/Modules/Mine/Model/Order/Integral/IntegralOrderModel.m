@@ -33,26 +33,17 @@ NSString *const kOrderStatusDidComplete = @"3";
 
 - (NSString *)getExpressName {
     
-    NSString *name = @"其他";
+    __block NSString *name = @"其他";
     
-    NSDictionary *dic = @{@"EMS":   @"邮政EMS",
-                          @"STO":   @"申通快递",
-                          @"ZTO":   @"中通快递",
-                          @"YTO":   @"圆通快递",
-                          @"HTKY":  @"汇通快递",
-                          @"SF":    @"顺丰快递",
-                          @"TTKD":  @"天天快递",
-                          @"ZJS":   @"宅急送",
-                          
-                          };
-    
-    if (dic[self.logisticsCompany]) {
+    [self.expresses enumerateObjectsUsingBlock:^(ExpressModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        name = dic[self.logisticsCompany];
-    }
+        if ([self.logisticsCompany isEqualToString:obj.dkey]) {
+            
+            name = obj.dvalue;
+        }
+    }];
     
     return name;
-    
 }
 
 @end

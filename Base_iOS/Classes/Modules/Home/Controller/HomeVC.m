@@ -50,11 +50,12 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    
     //系统消息
     [self requestNoticeList];
     //获取商品列表
     [self requestBrandList];
+    //
+    [self.collectionView beginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -78,12 +79,6 @@
 }
 
 #pragma mark - Init
-- (void)addDownRefresh {
-    
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(clickRefresh)];
-    
-    self.collectionView.mj_header = header;
-}
 
 - (void)initCollectionView {
     
@@ -132,13 +127,6 @@
     
 }
 
-#pragma mark - Events
-- (void)clickRefresh {
-    
-    //获取商品列表
-    [self requestBrandList];
-}
-
 #pragma mark - Data
 - (void)requestNoticeList {
     
@@ -174,7 +162,7 @@
     } failure:^(NSError *error) {
         
         [weakSelf addPlaceholderView];
-
+        
     }];
     
 }
@@ -194,21 +182,46 @@
     helper.parameters[@"orderColumn"] = @"order_no";
     helper.parameters[@"orderDir"] = @"asc";
     
+    helper.collectionView = self.collectionView;
+    
     [helper modelClass:[BrandModel class]];
     
-    //店铺数据
-    [helper refresh:^(NSMutableArray <BrandModel *>*objs, BOOL stillHave) {
+    [self.collectionView addRefreshAction:^{
         
-        weakSelf.brands = objs;
-        
-        weakSelf.collectionView.brands = objs;
-        
-        [weakSelf.collectionView reloadData];
-        
-    } failure:^(NSError *error) {
-    
+        //店铺数据
+        [helper refresh:^(NSMutableArray <BrandModel *>*objs, BOOL stillHave) {
+            
+            weakSelf.brands = objs;
+            
+            weakSelf.collectionView.brands = objs;
+            
+            [weakSelf.collectionView reloadData];
+            //系统消息
+            [weakSelf requestNoticeList];
+            //获取banner列表
+            [weakSelf requestBannerList];
+            
+        } failure:^(NSError *error) {
+            
+        }];
     }];
     
+    [self.collectionView addLoadMoreAction:^{
+        //店铺数据
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.brands = objs;
+            
+            weakSelf.collectionView.brands = objs;
+            
+            [weakSelf.collectionView reloadData];
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }];
+    
+    [self.collectionView endRefreshingWithNoMoreData_tl];
 }
 
 - (void)requestBannerList {

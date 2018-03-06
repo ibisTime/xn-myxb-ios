@@ -169,7 +169,7 @@
     //
     self.nameLbl.text = order.productName;
     //
-    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.unitPrice convertToSimpleRealMoney]];
+    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.unitPrice convertToRealMoney]];
     //
     self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.quantity stringValue]];
     //
@@ -177,7 +177,7 @@
     //总计=(商品总额+运费)*折扣
     // + [_order.yunfei doubleValue]
     CGFloat totalAmount = [_order.amount doubleValue];
-    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToSimpleRealMoney]];
+    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
     [_totalAmountLbl labelWithString:[NSString stringWithFormat:@"总计: %@", amountStr] title:amountStr font:Font(15.0) color:kThemeColor];
 }
 

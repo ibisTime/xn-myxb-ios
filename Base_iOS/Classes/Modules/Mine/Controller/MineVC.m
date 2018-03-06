@@ -150,13 +150,9 @@
     teamAdvisor.text = @"团队顾问";
     teamAdvisor.imgName = @"团队顾问";
     teamAdvisor.action = ^{
+        //获取团队手机号
+        [weakSelf requestLinkMobile];
         
-        //
-        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", user.mobile];
-        
-        NSURL *url = [NSURL URLWithString:mobile];
-        
-        [[UIApplication sharedApplication] openURL:url];
     };
     
     //帮助中心
@@ -334,6 +330,8 @@
 #pragma mark - Notification
 - (void)addNotification {
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserLoginNotification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
@@ -381,6 +379,34 @@
         [self.headerView.userPhoto sd_setImageWithURL:[NSURL URLWithString:[key convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
         
     } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)requestLinkMobile {
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = USER_INFO;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSDictionary *userInfo = responseObject[@"data"];
+        
+        if (![userInfo[@"mobile"] valid]) {
+            
+            [TLAlert alertWithInfo:@"暂无团队顾问手机号"];
+            return ;
+        }
+        //
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", userInfo[@"mobile"]];
+        
+        NSURL *url = [NSURL URLWithString:mobile];
+        
+        [[UIApplication sharedApplication] openURL:url];
+        
+    } failure:^(NSError *error) {
+        
         
     }];
 }

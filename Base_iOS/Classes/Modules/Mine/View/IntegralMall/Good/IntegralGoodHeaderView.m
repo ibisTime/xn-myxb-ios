@@ -149,7 +149,7 @@
     
     _bannerView.imgUrls = good.pics;
     _descLbl.text = good.slogan;
-    _priceLbl.text = [NSString stringWithFormat:@"%@积分", [good.price convertToSimpleRealMoney]];
+    _priceLbl.text = [NSString stringWithFormat:@"%@积分", [good.price convertToRealMoney]];
     _numLbl.text = [NSString stringWithFormat:@"当前剩余: %ld", good.quantity];
     
     //布局

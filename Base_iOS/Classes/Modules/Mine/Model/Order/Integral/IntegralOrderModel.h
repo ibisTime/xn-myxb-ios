@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "ExpressModel.h"
 
 @interface IntegralOrderModel : BaseModel
 
@@ -41,6 +42,8 @@
 @property (nonatomic,copy) NSString *logisticsCode;
 //快递公司
 @property (nonatomic,copy) NSString *logisticsCompany;
+//快递转义
+@property (nonatomic, strong) NSArray <ExpressModel *> *expresses;
 //下单数量
 @property (nonatomic, strong) NSNumber *quantity;
 

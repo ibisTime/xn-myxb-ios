@@ -51,8 +51,10 @@
     [self initTableView];
     //获取关键字列表
     [self requestKeywordList];
-    //获取评论列表
-    [self requestCommentList];
+    //获取全部评论
+    [self requestAllCommentList];
+    //
+    [self.tableView beginRefreshing];
     
 }
 
@@ -85,6 +87,9 @@
             
             weakSelf.currentKeyWord = title;
             
+            //获取评论列表
+            [weakSelf requestCommentList];
+            //
             [weakSelf.tableView beginRefreshing];
         }];
         
@@ -103,13 +108,14 @@
 
     [http postWithSuccess:^(id responseObject) {
         
-        AutoresizeLabelModel *model = [AutoresizeLabelModel new];
+//        AutoresizeLabelModel *model = [AutoresizeLabelModel new];
+//
+//        model.title = @"全部";
+//        model.isSelected = YES;
         
-        model.title = @"全部";
-        model.isSelected = YES;
-        
-        self.keywords = [NSMutableArray arrayWithObject:model];
-        
+//        self.keywords = [NSMutableArray arrayWithObject:model];
+        self.keywords = [NSMutableArray array];
+
         NSArray <CommentKeywordModel *>*keywords = [CommentKeywordModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
         
         [keywords enumerateObjectsUsingBlock:^(CommentKeywordModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -122,7 +128,10 @@
             [self.keywords addObject:model];
         }];
         
-        self.tableView.tableHeaderView = self.headerView;
+        if (keywords.count > 0) {
+            
+            self.tableView.tableHeaderView = self.headerView;
+        }
         
         [self.tableView beginRefreshing];
 
@@ -140,8 +149,8 @@
     helper.code = @"805428";
     helper.parameters[@"entityCode"] = self.code;
     helper.parameters[@"status"] = @"AB";
-    helper.parameters[@"orderColumn"] = @"comment_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
+//    helper.parameters[@"orderColumn"] = @"comment_datetime";
+//    helper.parameters[@"orderDir"] = @"desc";
     helper.parameters[@"type"] = self.kind;
     helper.parameters[@"keyWord"] = self.currentKeyWord;
     
@@ -170,7 +179,7 @@
     
     [self.tableView addLoadMoreAction:^{
         
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
             [weakSelf removePlaceholderView];
             
@@ -188,6 +197,55 @@
     
     [self.tableView endRefreshingWithNoMoreData_tl];
     
+}
+
+- (void)requestAllCommentList {
+    
+    BaseWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"805425";
+    helper.parameters[@"entityCode"] = self.code;
+    helper.parameters[@"type"] = self.kind;
+    helper.parameters[@"status"] = @"AB";
+    //    helper.parameters[@"orderColumn"] = @"update_datetime";
+    //    helper.parameters[@"orderDir"] = @"desc";
+    
+    helper.tableView = self.tableView;
+    
+    [helper modelClass:[CommentModel class]];
+    
+    [self.tableView addRefreshAction:^{
+        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            [TLProgressHUD dismiss];
+            
+            [weakSelf removePlaceholderView];
+            
+            weakSelf.tableView.commentList = objs;
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+            [weakSelf addPlaceholderView];
+            
+            [TLProgressHUD dismiss];
+        }];
+    }];
+    
+    [self.tableView addLoadMoreAction:^{
+        
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }];
+    
+    [self.tableView endRefreshingWithNoMoreData_tl];
 }
 
 - (void)dealloc {

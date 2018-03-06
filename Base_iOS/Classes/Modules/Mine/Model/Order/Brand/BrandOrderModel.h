@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "ExpressModel.h"
 
 @interface BrandOrderModel : BaseModel
 
@@ -45,8 +46,11 @@
 @property (nonatomic,copy) NSString *logisiticsCode;
 //快递公司
 @property (nonatomic,copy) NSString *logisiticsCompany;
+//快递转义
+@property (nonatomic, strong) NSArray <ExpressModel *>*expresses;
 //下单数量
 @property (nonatomic, strong) NSNumber *quantity;
+//
 
 - (NSString *)getStatusName;
 

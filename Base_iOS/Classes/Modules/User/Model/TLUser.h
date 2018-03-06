@@ -46,6 +46,8 @@
 @property (nonatomic, copy) NSString *slogan;
 //擅长领域
 @property (nonatomic, copy) NSString *speciality;
+//授课风格
+@property (nonatomic, copy) NSString *style;
 //等级
 @property (nonatomic, copy) NSString *level;
 //经纪人信息

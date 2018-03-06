@@ -9,11 +9,12 @@
 #import "AppointmentDetailVC.h"
 
 //Macro
-//Framework
+#import "APICodeMacro.h"
 //Category
 #import "UIControl+Block.h"
 #import "NSDate+Extend.h"
 #import "NSString+Date.h"
+#import "NSString+Check.h"
 //Extension
 #import "TLProgressHUD.h"
 //M
@@ -60,7 +61,6 @@
 - (void)placeholderOperation {
     //获取服务器当前时间
     [self getServiceCurrentTime];
-    
 }
 
 #pragma mark - Init
@@ -105,12 +105,7 @@
     
     [agentBtn bk_addEventHandler:^(id sender) {
         
-        //
-        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", weakSelf.appomintment.mobile];
-        
-        NSURL *url = [NSURL URLWithString:mobile];
-        
-        [[UIApplication sharedApplication] openURL:url];
+        [weakSelf requestLinkMobile];
         
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -193,8 +188,8 @@
     helper.parameters[@"entityCode"] = self.appomintment.userId;
     helper.parameters[@"type"] = self.appomintment.kind;
     helper.parameters[@"status"] = @"AB";
-    helper.parameters[@"orderColumn"] = @"update_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
+//    helper.parameters[@"orderColumn"] = @"update_datetime";
+//    helper.parameters[@"orderDir"] = @"desc";
     
     helper.tableView = self.tableView;
     
@@ -282,6 +277,41 @@
 
     }];
     
+}
+
+- (void)requestLinkMobile {
+    
+    if (![self.appomintment.handler valid]) {
+        
+        [TLAlert alertWithInfo:@"美导暂无经纪人哦"];
+        return ;
+    }
+    
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = USER_INFO;
+    http.parameters[@"userId"] = self.appomintment.handler;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSDictionary *userInfo = responseObject[@"data"];
+        
+        if (![userInfo[@"mobile"] valid]) {
+            
+            [TLAlert alertWithInfo:@"经纪人暂无手机号哦"];
+            return ;
+        }
+        //
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", userInfo[@"mobile"]];
+        
+        NSURL *url = [NSURL URLWithString:mobile];
+        
+        [[UIApplication sharedApplication] openURL:url];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (void)getServiceCurrentTime {

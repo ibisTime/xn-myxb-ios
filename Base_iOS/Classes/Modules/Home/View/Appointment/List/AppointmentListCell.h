@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewCell.h"
+//M
+#import "DataDictionaryModel.h"
 #import "AppointmentListModel.h"
 
-@interface AppointmentListCell : UITableViewCell
+@interface AppointmentListCell : BaseTableViewCell
 
 @property (nonatomic, strong) AppointmentListModel *appointmentModel;
+//风格
+@property (nonatomic, strong) NSArray <DataDictionaryModel *>*styles;
 
 @end

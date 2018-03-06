@@ -59,7 +59,7 @@
 //角色类型
 @property (nonatomic, copy) NSString *kind;
 //真实姓名
-@property (nonatomic, copy) NSString *realname;
+@property (nonatomic, copy) NSString *realName;
 //头像
 @property (nonatomic, copy) NSString *photo;
 

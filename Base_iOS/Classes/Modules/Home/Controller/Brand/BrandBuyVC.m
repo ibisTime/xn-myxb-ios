@@ -186,6 +186,13 @@
         return;
     }
     
+    
+    if ([self.numTF.text isEqualToString:@"0"]) {
+        
+        [TLAlert alertWithInfo:@"请输入正确的下单数量"];
+        return;
+    }
+    
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = @"805270";

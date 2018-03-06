@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 //M
 #import "AppointmentListModel.h"
+#import "DataDictionaryModel.h"
 
 @interface AppointmentDetailVC : BaseViewController
 //

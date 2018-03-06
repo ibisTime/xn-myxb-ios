@@ -15,6 +15,7 @@
 #import <PYSearch.h>
 //M
 #import "AppointmentListModel.h"
+#import "DataDictionaryModel.h"
 //V
 #import "AppointmentListTableView.h"
 //C
@@ -27,6 +28,8 @@
 @property (nonatomic, strong) AppointmentListTableView *tableView;
 //用户列表
 @property (nonatomic, strong) NSMutableArray <AppointmentListModel *>*appointmentList;
+//风格列表
+@property (nonatomic, strong)  NSArray <DataDictionaryModel *>*data;
 
 @end
 
@@ -152,8 +155,8 @@
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.appointmentList = objs;
-            
-            weakSelf.tableView.appointmentList = objs;
+
+            weakSelf.tableView.appointmentList = weakSelf.appointmentList;
             
             [weakSelf.tableView reloadData_tl];
             
@@ -165,16 +168,15 @@
     
     [self.tableView addLoadMoreAction:^{
         
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.appointmentList = objs;
             
-            weakSelf.tableView.appointmentList = objs;
+            weakSelf.tableView.appointmentList = weakSelf.appointmentList;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
             
         }];
     }];

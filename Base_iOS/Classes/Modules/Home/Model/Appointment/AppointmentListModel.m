@@ -17,7 +17,6 @@
 
 - (NSArray<UIColor *> *)styleColor {
     
-    //Color1
     //Color2
     UIColor *color2 = [UIColor colorWithHexString:@"#54e662"];
     //Color3
@@ -26,17 +25,11 @@
     return @[kAppCustomMainColor, color2, color3];
 }
 
-- (NSArray<NSString *> *)styles {
+- (void)setStyleName:(NSString *)styleName {
     
-//    NSMutableArray *arr = [NSMutableArray array];
+    _styleName = styleName;
     
-    NSArray *styleArr = [self.style componentsSeparatedByString:@","];
-    
-//    [styleArr enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//    }];
-    
-    return styleArr;
+    self.styles = [styleName componentsSeparatedByString:@","];
 }
 
 - (NSString *)getUserType {

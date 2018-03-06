@@ -150,18 +150,16 @@
     
     __block CGFloat x = kHeadIconWidth + 30;
     //风格
-    [_detailModel.styles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.detailModel.styles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        NSString *title = _detailModel.styles[idx];
-        
-        if (![title valid]) {
+        if (![obj valid]) {
             
             return ;
         }
         
-        CGFloat w = [NSString getWidthWithString:title font:11.0] + 10;
+        CGFloat w = [NSString getWidthWithString:obj font:11.0] + 10;
         
-        UIButton *btn = [UIButton buttonWithTitle:title
+        UIButton *btn = [UIButton buttonWithTitle:obj
                                        titleColor:_detailModel.styleColor[idx]
                                   backgroundColor:kWhiteColor
                                         titleFont:11.0

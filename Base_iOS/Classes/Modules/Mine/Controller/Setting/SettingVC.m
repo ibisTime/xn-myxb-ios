@@ -285,7 +285,6 @@
     helper.code = @"805443";
     helper.parameters[@"kind"] = [TLUser user].kind;
     helper.parameters[@"level"] = [TLUser user].level;
-    helper.limit = 2;
     
     [helper modelClass:[PictureModel class]];
     
@@ -305,16 +304,15 @@
     
     [self.libraryView.collectionView addLoadMoreAction:^{
         
-        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.photos = objs;
             
             weakSelf.libraryView.collectionView.photos = objs;
-
-            [weakSelf.libraryView.collectionView reloadData_tl];
-
-        } failure:^(NSError *error) {
             
+            [weakSelf.libraryView.collectionView reloadData_tl];
+            
+        } failure:^(NSError *error) {
             
         }];
     }];

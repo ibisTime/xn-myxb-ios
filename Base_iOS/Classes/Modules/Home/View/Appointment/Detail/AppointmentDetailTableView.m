@@ -17,7 +17,6 @@
 #import "AppointmentTripCell.h"
 #import "AppointmentCalendarCell.h"
 #import "DetailWebView.h"
-
 //C
 #import "BrandCommentListVC.h"
 
@@ -163,6 +162,7 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    
     if (indexPath.section == 0) {
         
         if (indexPath.row == 0) {
@@ -170,10 +170,9 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
             return 42;
         }
         return 300;
-        
     }
     
-    return self.detailModel.commentHeight;
+    return self.commentList[indexPath.row].commentHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

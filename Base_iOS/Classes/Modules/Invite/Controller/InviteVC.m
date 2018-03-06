@@ -457,7 +457,7 @@
         //收益
         NSNumber *profit = responseObject[@"data"][@"totalAmount"];
         
-        self.profitLbl.text = [profit convertToSimpleRealMoney];
+        self.profitLbl.text = [profit convertToRealMoney];
         //邀请人数
         NSNumber *inviteNum = responseObject[@"data"][@"totalUser"];
         

@@ -10,6 +10,7 @@
 
 //V
 #import "AppointmentListCell.h"
+
 @interface AppointmentListTableView()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -41,8 +42,6 @@ static NSString *identifierCell = @"AppointmentListCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     AppointmentListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.appointmentModel = self.appointmentList[indexPath.row];
     

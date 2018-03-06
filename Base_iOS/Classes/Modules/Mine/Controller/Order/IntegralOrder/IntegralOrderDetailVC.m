@@ -13,6 +13,8 @@
 //Category
 #import "NSString+Date.h"
 #import "NSString+Check.h"
+//M
+#import "ExpressModel.h"
 //V
 #import "ZHAddressChooseView.h"
 #import "IntegralOrderDetailCell.h"
@@ -34,6 +36,8 @@
 @property (nonatomic,strong) UILabel *expressNameLbl;
 //物流单号
 @property (nonatomic,strong) UILabel *expressCodeLbl;
+//
+@property (nonatomic, strong) NSArray <ExpressModel *>*expresses;
 
 @end
 
@@ -45,8 +49,8 @@
     self.title = @"订单详情";
     
     [self initTableView];
-    //
-    [self initEventsButton];
+    //获取物流公司
+    [self requestExpressName];
 }
 #pragma mark - Init
 
@@ -190,6 +194,27 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+#pragma mark - Data
+- (void)requestExpressName {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805906";
+    http.parameters[@"parentKey"] = @"kd_company";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.expresses = [ExpressModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        //
+        self.order.expresses = self.expresses;
+        //
+        [self initEventsButton];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -228,7 +253,7 @@
     STRING_NIL_NULL(name);
     //
     CGFloat totalAmount = [_order.amount doubleValue];
-    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToSimpleRealMoney]];
+    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
     STRING_NIL_NULL(amountStr);
     //
     NSString *quantity = [self.order.quantity stringValue];

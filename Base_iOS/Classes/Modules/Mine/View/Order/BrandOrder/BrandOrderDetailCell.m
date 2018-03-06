@@ -150,7 +150,7 @@
     STRING_NIL_NULL(slogin)
     self.sloginLbl.text = slogin;
     //
-    self.priceLbl.text = [NSString stringWithFormat:@"%@", [_order.amount convertToSimpleRealMoney]];
+    self.priceLbl.text = [NSString stringWithFormat:@"%@", [_order.amount convertToRealMoney]];
     //
     self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.quantity stringValue]];
     

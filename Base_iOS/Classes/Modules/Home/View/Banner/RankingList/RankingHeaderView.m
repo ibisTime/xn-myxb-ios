@@ -123,7 +123,7 @@
                                               titleFont:18.0
                                            cornerRadius:kAmountBtnHeight/2.0];
         
-        NSString *amount = [NSString stringWithFormat:@"￥%@", [ranking.amount convertToSimpleRealMoney]];
+        NSString *amount = [NSString stringWithFormat:@"￥%@", [ranking.amount convertToRealMoney]];
 
         [amountBtn setTitle:amount forState:UIControlStateNormal];
         

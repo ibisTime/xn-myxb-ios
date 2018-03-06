@@ -144,7 +144,7 @@
     //
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[user.photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
     //
-    self.nickNameLbl.text = user.realname;
+    self.nickNameLbl.text = user.realName;
     //
     self.startDateLbl.text = [achievementOrder.appointDatetime convertDate];
     //

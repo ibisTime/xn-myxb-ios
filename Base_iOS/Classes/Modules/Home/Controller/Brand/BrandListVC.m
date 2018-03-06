@@ -7,10 +7,6 @@
 //
 
 #import "BrandListVC.h"
-//Macro
-//Framework
-//Category
-//Extension
 //M
 #import "BrandModel.h"
 //V

@@ -112,6 +112,7 @@
             
             commentVC.code = order.code;
             commentVC.commentKind = order.type;
+            commentVC.type = OrderCommentTypePerson;
             commentVC.placeholder = [NSString stringWithFormat:@"请对%@进行评论", [order getUserType]];
 
             [commentVC setCommentSuccess:^(){

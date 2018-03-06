@@ -115,7 +115,6 @@
                     stillHave = YES;
                     refresh(self.objs,YES);
                 }
-                
             }
             
         } else {
