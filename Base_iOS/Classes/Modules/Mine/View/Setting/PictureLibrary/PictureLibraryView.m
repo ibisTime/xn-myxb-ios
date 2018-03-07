@@ -39,19 +39,17 @@
 - (void)initSubviews {
     
     //背景
-    CGFloat bgW = kScreenWidth - 2*kWidth(35);
-    CGFloat bgH = kWidth(417);
 
     self.alpha = 0;
     
     self.backgroundColor = [UIColor colorWithUIColor:kBlackColor
                                                alpha:0.6];
     
+    CGFloat bgW = kScreenWidth - 2*kWidth(35);
+
     self.bgView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    self.bgView.frame = CGRectMake(0, 0, bgW, bgH);
-    self.bgView.center = self.center;
-    
+    self.bgView.frame = CGRectMake(0, 0, bgW, 100);
     self.bgView.backgroundColor = kWhiteColor;
     self.bgView.layer.cornerRadius = 10;
     self.bgView.clipsToBounds = YES;
@@ -80,7 +78,6 @@
     
     [confirmBtn addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
-    confirmBtn.frame = CGRectMake((bgW - kWidth(250))/2.0, self.collectionView.yy + 40, kWidth(250), 35);
     [self.bgView addSubview:confirmBtn];
 
     self.confirmBtn = confirmBtn;
@@ -95,15 +92,15 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     
     //
-    CGFloat itemWidth = 60;
+    CGFloat itemWidth = kWidth(60);
     flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth);
-    flowLayout.minimumLineSpacing = 25;
+    flowLayout.minimumLineSpacing = kWidth(25);
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
-    self.collectionView = [[PictureLibraryCollectionView alloc] initWithFrame:CGRectMake(35, 72, _bgView.width - 70, 240) collectionViewLayout:flowLayout];
+    self.collectionView = [[PictureLibraryCollectionView alloc] initWithFrame:CGRectMake(kWidth(35), kWidth(72), _bgView.width - kWidth(70), kWidth(240)) collectionViewLayout:flowLayout];
     
     self.collectionView.photoBlock = ^(NSIndexPath *indexPath) {
         
@@ -112,6 +109,27 @@
     
     [self.bgView addSubview:self.collectionView];
     
+}
+
+#pragma mark - Setting
+- (void)setPhotos:(NSArray<PictureModel *> *)photos {
+    
+    _photos = photos;
+    
+    self.collectionView.photos = photos;
+
+    [self.collectionView reloadData];
+    //设置frame
+    CGFloat bgW = kScreenWidth - 2*kWidth(35);
+    CGFloat h = photos.count <= 9 ? ((photos.count-1)/3+1)*kWidth(80): kWidth(240);
+    
+    self.collectionView.height = h;
+    
+    self.confirmBtn.frame = CGRectMake((bgW - kWidth(250))/2.0, self.collectionView.yy + 40, kWidth(250), 35);
+
+    self.bgView.frame = CGRectMake(0, 0, bgW, self.confirmBtn.yy + kWidth(20));
+    
+    self.bgView.center = self.center;
 }
 
 #pragma mark - Events

@@ -28,6 +28,7 @@ typedef void(^SelectStarBlock)(NSInteger count);
 @property NSInteger count;
 
 @property BOOL canAddStar;
+@property BOOL canRequest;
 
 @property (nonatomic, copy) SelectStarBlock starBlock;
 

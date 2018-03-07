@@ -12,6 +12,7 @@
 #import "UIButton+EnLargeEdge.h"
 #import "UIControl+Block.h"
 #import "UIView+Responder.h"
+#import "NSString+Extension.h"
 //V
 #import "BrandCommentCell.h"
 #import "AppointmentTripCell.h"
@@ -260,7 +261,9 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
                                                textColor:[UIColor colorWithHexString:@"#ffbe00"]
                                                     font:14.0];
     
-    textLbl.text = [NSString stringWithFormat:@"%.1lf 星", _detailModel.average];
+    NSString *average = [NSString stringWithFormat:@"%lf", _detailModel.average];
+    
+    textLbl.text = [NSString stringWithFormat:@"%@ 星", [average convertToRealMoneyWithNum:1]];
     
     [whiteView addSubview:textLbl];
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {

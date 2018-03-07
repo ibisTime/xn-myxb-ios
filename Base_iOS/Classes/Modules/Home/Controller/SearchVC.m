@@ -48,6 +48,23 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     
 }
 
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    
+    if (_searchType == SearchTypeGood) {
+        
+        //获取产品数据
+        [self requestGoodList];
+        
+        [self.tableView beginRefreshing];
+    } else {
+        //获取预约对象
+        [self requestUserList];
+        //
+        [self.tableView beginRefreshing];
+    }
+}
+
 - (void)setSearchType:(SearchType)searchType {
     
     _searchType = searchType;
@@ -78,7 +95,7 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     
     [self.tableView registerClass:[AppointmentListCell class] forCellReuseIdentifier:AppointmentListCellID];
 
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无结果"];
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无结果"];
     
     [self.view addSubview:self.tableView];
 }
@@ -170,8 +187,8 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     
     UIView* backgroundView = [searchViewController.searchBar subViewOfClassName:@"_UISearchBarSearchFieldBackgroundView"];
     
-    backgroundView.layer.cornerRadius = 22;
-    backgroundView.clipsToBounds = YES;
+//    backgroundView.layer.cornerRadius = 15;
+//    backgroundView.clipsToBounds = YES;
     
     // 4. Set delegate
     searchViewController.delegate = self;
@@ -206,15 +223,11 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     [self.tableView addRefreshAction:^{
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            [weakSelf removePlaceholderView];
-            
+                        
             weakSelf.brands = objs;
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
             
         }];
         

@@ -268,7 +268,7 @@
     self.expertiseLbl.text = [appointmentModel.speciality valid] ?
     [NSString stringWithFormat:@"专长: %@", appointmentModel.speciality]: @"";
     
-    [self.introduceLbl labelWithTextString:appointmentModel.slogin lineSpace:5];
+    [self.introduceLbl labelWithTextString:appointmentModel.slogan lineSpace:5];
     //布局
     [self setSubviewLayout];
     //

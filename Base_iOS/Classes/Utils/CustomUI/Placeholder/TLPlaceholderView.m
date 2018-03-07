@@ -48,13 +48,12 @@
     
 }
 
-+ (instancetype) placeholderViewWithImgAndText:(NSString *)text {
++ (instancetype)placeholderViewWithImage:(NSString *)image text:(NSString *)text {
 
-    
-    TLPlaceholderView *placeholderView = [[TLPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight)];
+    TLPlaceholderView *placeholderView = [[TLPlaceholderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
     
         UIImageView *orderIV = [[UIImageView alloc] init];
-        orderIV.image = kImage(@"暂无订单");
+        orderIV.image = kImage(image);
         orderIV.centerX = kScreenWidth/2.0;
     
         [placeholderView addSubview:orderIV];

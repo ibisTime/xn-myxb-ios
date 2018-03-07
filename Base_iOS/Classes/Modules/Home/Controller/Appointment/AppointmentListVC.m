@@ -18,10 +18,12 @@
 #import "DataDictionaryModel.h"
 //V
 #import "AppointmentListTableView.h"
+#import "TLPlaceholderView.h"
 //C
 #import "AppointmentDetailVC.h"
 #import "NavigationController.h"
 #import "SearchVC.h"
+#import "BaseSearchVC.h"
 
 @interface AppointmentListVC ()<RefreshDelegate, PYSearchViewControllerDelegate>
 //
@@ -67,11 +69,15 @@
 
 - (void)initTableView {
     
+    NSString *text = [NSString stringWithFormat:@"暂无%@", [[TLUser user] getUserTypeWithKind:self.userType]];
+    
     self.tableView = [[AppointmentListTableView alloc] initWithFrame:CGRectZero
                                                                style:UITableViewStylePlain];
     
     self.tableView.refreshDelegate = self;
     
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:text];
+
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -84,24 +90,26 @@
     
     BaseWeakSelf;
     
-    PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+    BaseSearchVC *baseSearchVC = [PYSearchViewController searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
         
         SearchVC *searchVC = [SearchVC new];
         
         searchVC.type = weakSelf.userType;
         searchVC.searchText = searchText;
         searchVC.searchType = SearchTypePerson;
+        searchVC.titleStr = self.titleStr;
         
         [searchViewController.navigationController pushViewController:searchVC animated:YES];
     }];
     
     // 3. Set style for popular search and search history
-    searchViewController.showHotSearch = NO;
+    baseSearchVC.showHotSearch = NO;
     
-    searchViewController.searchHistoryStyle = PYSearchHistoryStyleARCBorderTag;
+    baseSearchVC.searchHistoryStyle = PYSearchHistoryStyleARCBorderTag;
     
-    searchViewController.searchBarBackgroundColor = [UIColor colorWithUIColor:kWhiteColor alpha:0.4];
-
+    baseSearchVC.searchBarBackgroundColor = [UIColor colorWithUIColor:kWhiteColor alpha:0.4];
+//    searchViewController.searchBar.height = 32;
+    
     UIButton *cancelBtn = [UIButton buttonWithTitle:@"取消"
                                          titleColor:kWhiteColor
                                     backgroundColor:kClearColor
@@ -111,20 +119,20 @@
     
     cancelBtn.frame = CGRectMake(0, 0, 60, 44);
     
-    searchViewController.cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];;
+    baseSearchVC.cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];;
     
-    UIView* backgroundView = [searchViewController.searchBar subViewOfClassName:@"_UISearchBarSearchFieldBackgroundView"];
-    
-    backgroundView.layer.cornerRadius = 22;
-    backgroundView.clipsToBounds = YES;
+    UIView* backgroundView = [baseSearchVC.searchBar subViewOfClassName:@"_UISearchBarSearchFieldBackgroundView"];
+
+//    baseSearchVC.searchBar.layer.cornerRadius = 15;
+//    baseSearchVC.searchBar.layer.masksToBounds = YES;
     
     // 4. Set delegate
-    searchViewController.delegate = self;
+    baseSearchVC.delegate = self;
     // 5. Present a navigation controller
-    NavigationController *navi = [[NavigationController alloc] initWithRootViewController:searchViewController];
+    NavigationController *navi = [[NavigationController alloc] initWithRootViewController:baseSearchVC];
     [self presentViewController:navi animated:YES completion:nil];
     
-    [UINavigationBar appearance].barTintColor = kAppCustomMainColor;
+    [UINavigationBar appearance].barTintColor = kThemeColor;
 
 }
 

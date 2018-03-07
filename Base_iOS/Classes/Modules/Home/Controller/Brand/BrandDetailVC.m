@@ -66,7 +66,7 @@
     
     self.tableView.code = self.code;
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无评论" topMargin:140];
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无评论"];
 
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -172,16 +172,12 @@
     http.parameters[@"code"] = self.code;
     [http postWithSuccess:^(id responseObject) {
         
-        [self removePlaceholderView];
-        
         weakSelf.good = [BrandModel mj_objectWithKeyValues:responseObject[@"data"]];
         
         //计算总条数和评分
         [self requestCommentInfo];
         
     } failure:^(NSError *error) {
-        
-        [self addPlaceholderView];
         
         [TLProgressHUD dismiss];
 
@@ -208,15 +204,11 @@
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
-        [weakSelf removePlaceholderView];
-        
         weakSelf.tableView.detailModel = weakSelf.good;
         weakSelf.headerView.detailModel = weakSelf.good;
         weakSelf.tableView.commentList = objs;
         
     } failure:^(NSError *error) {
-        
-        [weakSelf addPlaceholderView];
         
         [TLProgressHUD dismiss];
     }];
@@ -239,8 +231,6 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [self removePlaceholderView];
-        
         _good.totalCount = [[NSString stringWithFormat:@"%@", responseObject[@"data"][@"totalCount"]] integerValue];
         _good.average = [[NSString stringWithFormat:@"%@", responseObject[@"data"][@"average"]] doubleValue];
         
@@ -248,8 +238,6 @@
         [weakSelf requestCommentList];
         
     } failure:^(NSError *error) {
-        
-        [self addPlaceholderView];
         
         [TLProgressHUD dismiss];
 
@@ -263,8 +251,6 @@
     http.code = @"805267";
     http.parameters[@"code"] = self.code;
     [http postWithSuccess:^(id responseObject) {
-        
-        [self removePlaceholderView];
         
         self.good = [BrandModel mj_objectWithKeyValues:responseObject[@"data"]];
         
@@ -281,8 +267,6 @@
         [[UIApplication sharedApplication] openURL:url];
         
     } failure:^(NSError *error) {
-        
-        [self addPlaceholderView];
         
         [TLProgressHUD dismiss];
         

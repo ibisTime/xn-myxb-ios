@@ -47,6 +47,8 @@
     if (!_bannerView) {
         
         _bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kCarouselHeight)];
+        _bannerView.imgUrls = self.news.pics;
+        
     }
     return _bannerView;
 }

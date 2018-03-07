@@ -12,6 +12,7 @@
 #import "BannerModel.h"
 //V
 #import "GoodNewsTableView.h"
+#import "TLPlaceholderView.h"
 //C
 #import "GoodNewsDetailVC.h"
 
@@ -44,33 +45,15 @@
 }
 
 #pragma mark - Init
-- (void)initPlaceHolderView {
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
-    
-    couponIV.image = kImage(@"暂无订单");
-    
-    couponIV.centerX = kScreenWidth/2.0;
-    
-    [self.placeHolderView addSubview:couponIV];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                               textColor:kTextColor
-                                                    font:15.0];
-    textLbl.text = [self.type isEqualToString:kBannerTypeGoodNews] ? @"喜报展示": @"预报展示";
-    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-}
 
 - (void)initTableView {
     
+    NSString *text = [self.type isEqualToString:kBannerTypeGoodNews] ? @"暂无喜报": @"暂无预报";
+    
     self.tableView = [[GoodNewsTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:text];
+
     self.tableView.placeHolderView = self.placeHolderView;
     self.tableView.refreshDelegate = self;
     
@@ -84,8 +67,6 @@
     _type = type;
     
     self.title = [type isEqualToString:kBannerTypeGoodNews] ? @"喜报展示": @"预报展示";
-    //
-    [self initPlaceHolderView];
 }
 
 #pragma mark - Data
@@ -109,8 +90,6 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.newsList = objs;
             
             weakSelf.tableView.newsList = objs;
@@ -118,17 +97,14 @@
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
+        
         }];
     }];
     
     [self.tableView addLoadMoreAction:^{
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            [weakSelf removePlaceholderView];
-            
+                        
             weakSelf.newsList = objs;
             
             weakSelf.tableView.newsList = objs;
@@ -137,8 +113,6 @@
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
-
         }];
     }];
     
@@ -151,6 +125,7 @@
     GoodNewsDetailVC *detailVC = [GoodNewsDetailVC new];
     
     detailVC.news = self.newsList[indexPath.row];
+    detailVC.type = self.type;
     
     [self.navigationController pushViewController:detailVC animated:YES];
 }

@@ -148,6 +148,11 @@
     //
     NSInteger index = proposal.score;
     
+    [self.starView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [obj removeFromSuperview];
+    }];
+    
     for (int i = 0; i < 5; i++) {
         
         CGFloat x = i*15;

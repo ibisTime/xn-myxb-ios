@@ -14,6 +14,7 @@
 //V
 #import "RankingListTableView.h"
 #import "RankingHeaderView.h"
+#import "TLPlaceholderView.h"
 
 //我的排行
 #define kMyRankingHeight    (60+kBottomInsetHeight)
@@ -48,6 +49,14 @@
     [self initRankingListView];
     //获取排行榜列表
     [self requestRankingList];
+    //
+    [self.tableView beginRefreshing];
+}
+
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -70,12 +79,14 @@
     
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.tag = 1500;
-    imageView.backgroundColor = kWhiteColor;
+//    imageView.backgroundColor = kWhiteColor;
     
     [self.view addSubview:imageView];
     
     self.tableView = [[RankingListTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.backgroundColor = kClearColor;
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无排名"];
+
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -84,38 +95,18 @@
     
 }
 
-- (void)setType:(NSString *)type {
+- (void)setBanner:(BannerModel *)banner {
     
-    _type = type;
+    _banner = banner;
     
-    NSString *title = @"";
-    
-    switch ([type integerValue]) {
-        case 4:
-        {
-            title = @"品牌排名";
-        }break;
-        case 5:
-        {
-            title = @"店铺排名";
-        }break;
-        case 6:
-        {
-            title = @"专家排名";
-        }break;
-            
-        default:
-            break;
-    }
-    self.title = title;
-
+    self.title = _banner.name;
 }
 
 #pragma mark - Data
 - (void)requestRankingList {
     
     NSString *code = @"";
-    switch ([self.type integerValue]) {
+    switch ([self.banner.kind integerValue]) {
         case 4:
         {
             code = @"805301";
@@ -140,27 +131,30 @@
     helper.code = code;
     helper.isList = YES;
     helper.showView = self.view;
-    
     helper.tableView = self.tableView;
     
     [helper modelClass:[RankingModel class]];
     
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+    [self.tableView addRefreshAction:^{
         
-        weakSelf.rankingList = objs;
-        
-        weakSelf.tableView.rankingList = objs;
-        
-        if (objs.count > 3) {
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            weakSelf.headerView.rankingList = objs;
-        }
-        
-        [weakSelf.tableView reloadData_tl];
-        
-    } failure:^(NSError *error) {
-        
+            weakSelf.rankingList = objs;
+            
+            weakSelf.tableView.rankingList = objs;
+            
+            if (objs.count > 3) {
+                
+                weakSelf.headerView.rankingList = objs;
+            }
+            
+            [weakSelf.tableView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+        }];
     }];
+    
     
 }
 

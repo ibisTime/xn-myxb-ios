@@ -10,24 +10,17 @@
 
 //Manager
 #import "AppConfig.h"
-//Macro
-//Framework
-//Category
-//Extension
 //M
 #import "NoticeModel.h"
 //V
 #import "NoticeCell.h"
 #import "TLPlaceholderView.h"
-//C
 
 @interface SystemNoticeVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic,strong) NSMutableArray <NoticeModel *> *notices;
 
 @property (nonatomic,strong) TLTableView *tableView;
-//暂无公告
-@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -39,47 +32,23 @@ static NSString *identifier = @"NoticeCellId";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"系统公告";
-    
-    //暂无公告
-    [self initPlaceHolderView];
-    
+
     [self initTableView];
     //获取消息列表
     [self requrstNoticeList];
+    //刷新公告
+    [self.tableView beginRefreshing];
+
+}
+
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    
+    //刷新公告
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
-
-- (void)initPlaceHolderView {
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *noticeIV = [[UIImageView alloc] init];
-    
-    noticeIV.image = kImage(@"暂无订单");
-    
-    [self.placeHolderView addSubview:noticeIV];
-    [noticeIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@90);
-        
-    }];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = @"暂无公告";
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(noticeIV.mas_bottom).offset(20);
-        make.centerX.equalTo(noticeIV.mas_centerX);
-        
-    }];
-}
 
 - (void)initTableView {
     
@@ -87,8 +56,8 @@ static NSString *identifier = @"NoticeCellId";
                                             delegate:self
                                           dataSource:self];
     
-    self.tableView.placeHolderView = self.placeHolderView;
-    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无公告"];
+
     [self.tableView registerClass:[NoticeCell class] forCellReuseIdentifier:identifier];
     
     [self.view addSubview:self.tableView];
@@ -140,8 +109,6 @@ static NSString *identifier = @"NoticeCellId";
         }];
         
     }];
-    
-    [self.tableView beginRefreshing];
     
     [self.tableView addLoadMoreAction:^{
         

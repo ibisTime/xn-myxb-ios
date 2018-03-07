@@ -199,7 +199,10 @@
     NSMutableArray *imgUrls = [NSMutableArray array];
     [banners enumerateObjectsUsingBlock:^(BannerModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        [imgUrls addObject:obj.pic];
+        if (obj.pic) {
+            
+            [imgUrls addObject:obj.pic];
+        }
     }];
     self.bannerView.imgUrls = imgUrls;
     

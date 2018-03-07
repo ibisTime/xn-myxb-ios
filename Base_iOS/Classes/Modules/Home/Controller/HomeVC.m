@@ -19,7 +19,6 @@
 //V
 #import "TLBannerView.h"
 #import "LoopScrollView.h"
-#import "CategoryItem.h"
 #import "HomeCollectionView.h"
 //C
 #import "WebVC.h"
@@ -142,7 +141,10 @@
     helper.parameters[@"channelType"] = @"4";
     
     helper.parameters[@"pushType"] = @"41";
-    helper.parameters[@"toKind"] = @"C";    //C端
+    if ([TLUser user].isLogin) {
+
+        helper.parameters[@"toKind"] = [TLUser user].kind;
+    }
     //    1 立即发 2 定时发
     //    pageDataHelper.parameters[@"smsType"] = @"1";
     helper.parameters[@"start"] = @"1";
@@ -155,13 +157,9 @@
     //消息数据
     [helper refresh:^(NSMutableArray <NoticeModel *>*objs, BOOL stillHave) {
         
-        [weakSelf removePlaceholderView];
-        
         weakSelf.collectionView.headerView.notices = objs;
         
     } failure:^(NSError *error) {
-        
-        [weakSelf addPlaceholderView];
         
     }];
     
@@ -293,7 +291,7 @@
                 {
                     RankingListVC *rankVC = [RankingListVC new];
                     
-                    rankVC.type = banner.kind;
+                    rankVC.banner = banner;
                     
                     [self.navigationController pushViewController:rankVC animated:YES];
                 }break;

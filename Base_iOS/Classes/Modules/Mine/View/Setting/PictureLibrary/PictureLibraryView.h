@@ -7,6 +7,8 @@
 //
 
 #import "BaseView.h"
+//M
+#import "PictureModel.h"
 //V
 #import "PictureLibraryCollectionView.h"
 
@@ -16,6 +18,8 @@ typedef void(^PictureLibraryBlock)(NSIndexPath *indexPath);
 //
 @property (nonatomic, strong) PictureLibraryCollectionView *collectionView;
 @property (nonatomic, copy) PictureLibraryBlock pictureBlock;
+//
+@property (nonatomic, strong) NSArray <PictureModel *>*photos;
 
 //显示
 - (void)show;

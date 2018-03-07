@@ -231,6 +231,12 @@ NSString *const kUserTypeExpert = @"S";     //专家
 
 - (NSString *)getUserType {
     
+    
+    return [self getUserTypeWithKind:self.kind];
+}
+
+- (NSString *)getUserTypeWithKind:(NSString *)kind {
+    
     NSDictionary *dic = @{
                           kUserTypeSalon        : @"美容院",
                           kUserTypeBeautyGuide  : @"美导",
@@ -238,8 +244,7 @@ NSString *const kUserTypeExpert = @"S";     //专家
                           kUserTypeExpert       : @"专家",
                           };
     
-    return dic[self.kind];
-    
+    return dic[kind];
 }
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import "BaseViewController.h"
+//M
+#import "BannerModel.h"
 
 @interface RankingListVC : BaseViewController
-//类型
-@property (nonatomic, copy) NSString *type;
+//
+@property (nonatomic, strong) BannerModel *banner;
 
 @end

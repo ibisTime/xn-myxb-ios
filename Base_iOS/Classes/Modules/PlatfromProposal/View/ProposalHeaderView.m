@@ -56,7 +56,7 @@
     UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                textColor:kTextColor
                                                     font:16.0];
-    textLbl.text = @"评分及评论";
+    textLbl.text = @"评分及建议";
     [self addSubview:textLbl];
     
     //平均分
@@ -159,37 +159,37 @@
     
     //布局
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(@(leftMargin));
         make.top.equalTo(@(leftMargin));
     }];
-    //平均分
+//    平均分
     [self.averageLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(textLbl.mas_left);
         make.top.equalTo(@(y-10));
     }];
     //满分
     [totalScoreLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.top.equalTo(self.averageLbl.mas_bottom).offset(0);
         make.centerX.equalTo(self.averageLbl.mas_centerX);
     }];
     //查看全部
     [lookAllBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.right.equalTo(@(-leftMargin));
         make.bottom.equalTo(textLbl.mas_bottom).offset(5);
     }];
     //评分数
     [self.commentNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.right.equalTo(@(-leftMargin));
         make.top.equalTo(totalScoreLbl.mas_top);
     }];
     //灰色
     [greyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(@0);
         make.height.equalTo(@10);
         make.width.equalTo(@(kScreenWidth));
@@ -197,7 +197,7 @@
     }];
     //白色
     [whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(@0);
         make.top.equalTo(greyView.mas_bottom);
         make.width.equalTo(@(kScreenWidth));
@@ -205,23 +205,18 @@
     }];
     //轻点评分
     [promptLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(@(leftMargin));
         make.centerY.equalTo(@0);
     }];
     //星星
     [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
         make.left.equalTo(promptLbl.mas_right).offset(30);
         make.height.equalTo(@40);
         make.width.equalTo(@130);
         make.centerY.equalTo(@0);
     }];
-    
-}
-
-- (void)setSubviewLayout {
-    
     
 }
 
@@ -242,7 +237,7 @@
     __block CGFloat proportionW = 0.0;
 
     __block CGFloat lineW = kWidth(150.0);
-    
+
     [self.proportionArr enumerateObjectsUsingBlock:^(UIView  *_Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         NSInteger index = obj.tag - 1300;
@@ -277,12 +272,16 @@
             default:
                 break;
         }
-        
-        [obj mas_makeConstraints:^(MASConstraintMaker *make) {
+        //判断评分数是否为0
+        if (proportionW > 0) {
             
-            make.left.top.bottom.equalTo(@0);
-            make.width.equalTo(@(proportionW));
-        }];
+            [obj mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.left.top.equalTo(@0);
+                make.width.equalTo(@(proportionW));
+                make.height.equalTo(@1.5);
+            }];
+        }
     }];
 }
 

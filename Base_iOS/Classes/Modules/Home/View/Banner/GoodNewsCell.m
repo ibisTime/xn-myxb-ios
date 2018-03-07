@@ -42,8 +42,8 @@
     //头像
     self.photoIV = [[UIImageView alloc] init];
     
-    self.photoIV.layer.cornerRadius = kHeadIconWidth/2.0;
-    self.photoIV.layer.masksToBounds = YES;
+//    self.photoIV.layer.cornerRadius = kHeadIconWidth/2.0;
+//    self.photoIV.layer.masksToBounds = YES;
     self.photoIV.backgroundColor = [UIColor clearColor];
     self.photoIV.contentMode = UIViewContentModeScaleAspectFill;
     
@@ -96,7 +96,7 @@
     
     _news = news;
     
-    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[news.pic convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
+    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[news.pic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     
      self.titleLbl.text = news.title;
     

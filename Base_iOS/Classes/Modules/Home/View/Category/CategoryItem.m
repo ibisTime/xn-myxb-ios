@@ -46,8 +46,7 @@
                                        textColor:kTextColor3];
     
     [self addSubview:self.titleLbl];
-    //布局
-    [self setSubViewLayout];
+    
 }
 
 - (void)setSubViewLayout {
@@ -59,11 +58,14 @@
         make.centerX.equalTo(@0);
     }];
     
+    CGFloat imgW = self.iconIV.image.size.width*0.9;
+    
     //
     [self.iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.equalTo(@0);
         make.bottom.equalTo(self.titleLbl.mas_top).offset(-13);
+        make.width.height.equalTo(@(imgW));
     }];
     
 }
@@ -73,6 +75,9 @@
     
     _icon = icon;
     self.iconIV.image = kImage(icon);
+    
+    //布局
+    [self setSubViewLayout];
 }
 
 - (void)setTitle:(NSString *)title {

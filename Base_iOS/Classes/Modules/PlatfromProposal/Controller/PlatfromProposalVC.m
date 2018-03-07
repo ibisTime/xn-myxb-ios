@@ -16,6 +16,7 @@
 //V
 #import "ProposalHeaderView.h"
 #import "ProposalTableView.h"
+#import "TLPlaceholderView.h"
 //C
 #import "WriteCommentVC.h"
 #import "TLUserLoginVC.h"
@@ -35,7 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"平台建议";
-    //撰写评论
+    //撰写建议
     [self initItem];
     //
     [self initTableView];
@@ -45,18 +46,26 @@
     [self.tableView beginRefreshing];
 }
 
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    
+    //重新获取建议列表
+    [self.tableView beginRefreshing];
+}
+
+
 #pragma mark - Init
 - (void)initItem {
     
-    [UIBarButtonItem addRightItemWithTitle:@"撰写评论" titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(writeComment)];
+    [UIBarButtonItem addRightItemWithTitle:@"撰写建议" titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(writeComment)];
 }
 
 - (void)initTableView {
     
-    BaseWeakSelf;
-    
     self.tableView = [[ProposalTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无建议"];
+
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -64,11 +73,6 @@
     }];
     //
     self.headerView = [[ProposalHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 180)];
-    
-    self.headerView.starView.starBlock = ^(NSInteger count) {
-        
-        [weakSelf startCommentWithCount:count];
-    };
     
 }
 
@@ -171,6 +175,8 @@
 
 - (void)requestProposalInfo {
     
+    BaseWeakSelf;
+    
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"805702";
@@ -179,6 +185,11 @@
         
         ProposalInfoModel *model = [ProposalInfoModel mj_objectWithKeyValues:responseObject[@"data"]];
         self.headerView.info = model;
+        
+        self.headerView.starView.starBlock = ^(NSInteger count) {
+            
+            [weakSelf startCommentWithCount:count];
+        };
         
         self.tableView.tableHeaderView = self.headerView;
 

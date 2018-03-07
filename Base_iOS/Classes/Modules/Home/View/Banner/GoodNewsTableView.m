@@ -61,7 +61,7 @@ static NSString *goodNewsCellID = @"GoodNewsCell";
     
     if (self.refreshDelegate && [self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
         
-        [self.refreshDelegate refreshTableView:tableView didSelectRowAtIndexPath:indexPath];
+        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
     }
 }
 

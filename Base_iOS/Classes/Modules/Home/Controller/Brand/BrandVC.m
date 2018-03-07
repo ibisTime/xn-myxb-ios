@@ -10,6 +10,7 @@
 //Category
 #import "UIBarButtonItem+convience.h"
 #import "UIView+Extension.h"
+#import "NSString+Check.h"
 //Extension
 #import <PYSearch.h>
 //M
@@ -41,6 +42,13 @@
     [self requestBrandList];
 }
 
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    
+    //获取品牌列表
+    [self requestBrandList];
+}
+
 #pragma mark - Init
 - (void)initSelectScrollView {
     
@@ -50,7 +58,10 @@
         
         BrandListModel *model = self.brandList[idx];
         
-        [titles addObject:model.name];
+        if ([model.name valid]) {
+            
+            [titles addObject:model.name];
+        }
         
     }];
     
@@ -141,8 +152,11 @@
     helper.showView = self.view;
     helper.code = @"805258";
     helper.parameters[@"status"] = @"2";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     
     [helper modelClass:[BrandListModel class]];
+    
     
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         

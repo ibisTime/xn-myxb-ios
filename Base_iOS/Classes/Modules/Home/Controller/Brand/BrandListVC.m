@@ -11,6 +11,7 @@
 #import "BrandModel.h"
 //V
 #import "BrandListTableView.h"
+#import "TLPlaceholderView.h"
 //C
 #import "BrandDetailVC.h"
 
@@ -19,8 +20,6 @@
 @property (nonatomic, strong) BrandListTableView *tableView;
 //
 @property (nonatomic, strong) NSMutableArray <BrandModel *>*brands;
-//暂无产品
-@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -29,8 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //暂无产品
-    [self initPlaceHolderView];
     //
     [self initTableView];
     //获取产品列表
@@ -47,35 +44,6 @@
 
 #pragma mark - Init
 
-- (void)initPlaceHolderView {
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *noticeIV = [[UIImageView alloc] init];
-    
-    noticeIV.image = kImage(@"暂无订单");
-    
-    [self.placeHolderView addSubview:noticeIV];
-    [noticeIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(@90);
-    }];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
-    
-    textLbl.text = @"暂无产品";
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(noticeIV.mas_bottom).offset(20);
-        make.centerX.equalTo(noticeIV.mas_centerX);
-    }];
-}
-
 - (void)initTableView {
     
     self.brands = [NSMutableArray array];
@@ -85,7 +53,7 @@
     
     self.tableView.refreshDelegate = self;
     
-    self.tableView.placeHolderView = self.placeHolderView;
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无产品"];
 
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -116,16 +84,12 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-
             weakSelf.brands = objs;
             weakSelf.tableView.brands = objs;
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
-
         }];
         
     }];

@@ -11,12 +11,11 @@
 #import "CommentModel.h"
 //V
 #import "MyCommentTableView.h"
+#import "TLPlaceholderView.h"
 
 @interface MyCommentListVC ()
 //
 @property (nonatomic, strong) MyCommentTableView *tableView;
-//暂无评论
-@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -25,8 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //
-    [self initPlaceHolderView];
+
     //
     [self initTableView];
     //获取评论列表
@@ -43,35 +41,13 @@
 }
 
 #pragma mark - Init
-- (void)initPlaceHolderView {
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
-    
-    couponIV.image = kImage(@"暂无订单");
-    
-    couponIV.centerX = kScreenWidth/2.0;
-    
-    [self.placeHolderView addSubview:couponIV];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                               textColor:kTextColor
-                                                    font:15.0];
-    textLbl.text = @"暂无评论";
-    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-}
 
 - (void)initTableView {
     
     self.tableView = [[MyCommentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = self.placeHolderView;
-    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无评论"];
+
     [self.view addSubview:self.tableView];
     
 }
@@ -97,15 +73,12 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.tableView.comments = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
         }];
     }];
     
@@ -113,15 +86,12 @@
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.tableView.comments = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
         }];
     }];
     

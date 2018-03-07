@@ -12,9 +12,11 @@
 //V
 #import "ProposalHeaderView.h"
 #import "ProposalTableView.h"
+#import "TLPlaceholderView.h"
+
 @interface ProposalListVC ()
 //
-@property (nonatomic, strong) ProposalTableView *tableView;//
+@property (nonatomic, strong) ProposalTableView *tableView;
 
 @end
 
@@ -41,6 +43,8 @@
     
     self.tableView = [[ProposalTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无评论"];
+
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -67,15 +71,11 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-
             weakSelf.tableView.proposals = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
             
         }];
         
@@ -84,17 +84,13 @@
     [self.tableView addLoadMoreAction:^{
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            [weakSelf removePlaceholderView];
-            
+                        
             weakSelf.tableView.proposals = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
-
         }];
     }];
     

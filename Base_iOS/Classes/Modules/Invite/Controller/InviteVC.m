@@ -10,6 +10,7 @@
 
 //Manager
 #import "AppConfig.h"
+#import "TLWXManager.h"
 //Macro
 #import "APICodeMacro.h"
 //Category
@@ -369,7 +370,11 @@
         
         return;
     }
-    
+    //判断是否安装微信
+    if (![TLWXManager judgeAndHintInstalllWX]) {
+        
+        return ;
+    }
     ShareView *shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) shareBlock:^(BOOL isSuccess, int errorCode) {
         
         if (isSuccess) {

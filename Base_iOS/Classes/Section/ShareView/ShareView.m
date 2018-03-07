@@ -14,14 +14,11 @@
 #import "AppMacro.h"
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-//Framework
 //Category
 #import "UIView+Responder.h"
 #import "NSString+Extension.h"
 //Extension
 #import "WXApi.h"
-//M
-//V
 
 @interface ShareView ()
 

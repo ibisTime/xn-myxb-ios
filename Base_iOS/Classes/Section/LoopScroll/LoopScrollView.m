@@ -13,6 +13,8 @@
 #import "AppColorMacro.h"
 #import "TLUIHeader.h"
 
+#define kImageScale 0.8
+
 @interface LoopScrollView ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -97,7 +99,7 @@
     [super layoutSubviews];
     
     //
-    _leftIconIV.frame = CGRectMake(15, 0, self.leftImage.size.width, self.leftImage.size.height);
+    _leftIconIV.frame = CGRectMake(15, 0, self.leftImage.size.width*kImageScale, self.leftImage.size.height*kImageScale);
     
     _leftIconIV.centerY = self.centerY;
     

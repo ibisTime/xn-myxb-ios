@@ -68,9 +68,16 @@
     [self initHeaderView];
     //获取图片库
     [self requestPhotoLibrary];
-    
-    
+
 }
+
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+
+    //获取图片库
+    [self requestPhotoLibrary];
+}
+
 
 #pragma mark - Init
 - (void)initTableView {
@@ -167,7 +174,6 @@
         _libraryView.pictureBlock = ^(NSIndexPath *indexPath) {
             
             [weakSelf changePhotoWithIndex:indexPath.row];
-
         };
         
         [self.view addSubview:_libraryView];
@@ -248,19 +254,26 @@
 
 - (void)logout {
     
-    UITabBarController *tbcController = self.tabBarController;
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [TLAlert alertWithTitle:@"" msg:@"是否确认退出" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
         
-        tbcController.selectedIndex = 0;
+    } confirm:^(UIAlertAction *action) {
         
-        CustomTabBar *tabBar = (CustomTabBar *)tbcController.tabBar;
-        tabBar.selectedIdx = 0;
-    });
+        UITabBarController *tbcController = self.tabBarController;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            tbcController.selectedIndex = 0;
+            
+            CustomTabBar *tabBar = (CustomTabBar *)tbcController.tabBar;
+            tabBar.selectedIdx = 0;
+        });
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
+    }];
     
-    [self.navigationController popViewControllerAnimated:YES];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
 }
 
 #pragma mark - 选择头像
@@ -283,6 +296,7 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"805443";
+    helper.showView = self.view;
     helper.parameters[@"kind"] = [TLUser user].kind;
     helper.parameters[@"level"] = [TLUser user].level;
     
@@ -294,9 +308,7 @@
         
         weakSelf.photos = objs;
         
-        weakSelf.libraryView.collectionView.photos = objs;
-        
-        [weakSelf.libraryView.collectionView reloadData];
+        weakSelf.libraryView.photos = objs;
         
     } failure:^(NSError *error) {
         
@@ -308,9 +320,7 @@
             
             weakSelf.photos = objs;
             
-            weakSelf.libraryView.collectionView.photos = objs;
-            
-            [weakSelf.libraryView.collectionView reloadData_tl];
+            weakSelf.libraryView.photos = objs;
             
         } failure:^(NSError *error) {
             

@@ -14,6 +14,7 @@
 #import <WebKit/WebKit.h>
 //Category
 #import "UIBarButtonItem+convience.h"
+#import "NSString+Check.h"
 ////M
 //#import "QuestionModel.h"
 ////V
@@ -142,6 +143,12 @@
         
         self.mobile = responseObject[@"data"][@"cvalue"];
 
+        if (![self.mobile valid]) {
+            
+            [TLAlert alertWithInfo:@"暂无客服联系电话"];
+            return ;
+        }
+        
         NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", self.mobile];
         
         NSURL *url = [NSURL URLWithString:mobile];

@@ -46,17 +46,19 @@
     
     self.title = @"积分记录";
     
-    [UIBarButtonItem addRightItemWithTitle:@"积分规则"
-                                titleColor:kWhiteColor
-                                     frame:CGRectMake(0, 0, 80, 20)
-                                        vc:self
-                                    action:@selector(intregalRule)];
-
     self.recodes = [NSMutableArray array];
 
     [self initHeaderView];
     
     [self initTableView];
+}
+
+#pragma mark - 断网操作
+- (void)placeholderOperation {
+    //
+    [self requestIntregalRecodeList];
+    //
+    [self requestUserInfo];
 }
 
 #pragma mark - Init
@@ -74,8 +76,8 @@
     
     self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, self.headerView.yy + 10, kScreenWidth, kScreenHeight - 64 - self.headerView.yy - 10) delegate:self dataSource:self];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无记录" topMargin:40];
-    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无记录"];
+
     [self.view addSubview:self.tableView];
 }
 
@@ -222,15 +224,6 @@
 }
 
 #pragma mark - Events
-
-- (void)intregalRule {
-    
-    HTMLStrVC *htmlVC = [HTMLStrVC new];
-    
-    htmlVC.type = HTMLTypeIntregalRule;
-    
-    [self.navigationController pushViewController:htmlVC animated:YES];
-}
 
 
 - (void)didReceiveMemoryWarning {

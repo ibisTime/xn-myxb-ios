@@ -12,12 +12,11 @@
 #import "TripListModel.h"
 //V
 #import "TripListTableView.h"
+#import "TLPlaceholderView.h"
 
 @interface TripListVC ()
 //
 @property (nonatomic, strong) TripListTableView *tableView;
-//暂无行程
-@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -27,8 +26,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"行程列表";
-    //
-    [self initPlaceHolderView];
     //
     [self initTableView];
     //获取行程列表
@@ -45,34 +42,12 @@
 }
 
 #pragma mark - Init
-- (void)initPlaceHolderView {
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
-    
-    couponIV.image = kImage(@"暂无订单");
-    
-    couponIV.centerX = kScreenWidth/2.0;
-    
-    [self.placeHolderView addSubview:couponIV];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                               textColor:kTextColor
-                                                    font:15.0];
-    textLbl.text = @"暂无行程";
-    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-}
 
 - (void)initTableView {
     
     self.tableView = [[TripListTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = self.placeHolderView;
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无行程"];
 
     [self.view addSubview:self.tableView];
     
@@ -86,18 +61,13 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"805505";
-    
     helper.parameters[@"userId"] = [TLUser user].userId;
-    
     helper.tableView = self.tableView;
-    
     [helper modelClass:[TripListModel class]];
     
     [self.tableView addRefreshAction:^{
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-            
-            [weakSelf removePlaceholderView];
             
             weakSelf.tableView.trips = objs;
             
@@ -105,7 +75,6 @@
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
         }];
     }];
     
@@ -113,15 +82,12 @@
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.tableView.trips = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
         }];
     }];
     

@@ -32,7 +32,8 @@
     
     [super viewWillAppear:animated];
     
-    [self requestUserInfo];
+    //刷新商品
+    [self.collectionView beginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -41,32 +42,21 @@
     
     self.title = @"积分商城";
     
-    //添加下拉刷新
-    [self addDownRefresh];
+    //商品
+    [self initCollectionView];
     //获取商品列表
     [self requestGoodList];
+    
 }
 
 #pragma mark - 断网操作
 - (void)placeholderOperation {
     
-    //获取商品列表
-    [self requestGoodList];
+    //刷新商品
+    [self.collectionView beginRefreshing];
 }
 
 #pragma mark - Init
-- (void)addDownRefresh {
-    
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(clickRefresh)];
-    
-    self.collectionView.mj_header = header;
-}
-
-- (void)clickRefresh {
-    
-    //获取商品列表
-    [self requestGoodList];
-}
 
 - (void)initCollectionView {
     
@@ -85,11 +75,8 @@
     self.collectionView = [[IntegralCollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) collectionViewLayout:flowLayout];
     
     self.collectionView.refreshDelegate = self;
-    self.collectionView.integralGoods = self.goods;
 
     [self.view addSubview:self.collectionView];
-    
-    [self.collectionView reloadData];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
@@ -160,16 +147,39 @@
     
     [helper modelClass:[IntegralModel class]];
     
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+    helper.collectionView = self.collectionView;
+    
+    [self.collectionView addRefreshAction:^{
         
-        weakSelf.goods = objs;
-                //商品
-        [weakSelf initCollectionView];
-        
-    } failure:^(NSError *error) {
-        
-        
+        [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.goods = objs;
+            
+            weakSelf.collectionView.integralGoods = weakSelf.goods;
+            //积分
+            [weakSelf requestUserInfo];
+            
+        } failure:^(NSError *error) {
+            
+        }];
     }];
+    
+    [self.collectionView addLoadMoreAction:^{
+        
+        [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
+            
+            weakSelf.goods = objs;
+
+            weakSelf.collectionView.integralGoods = weakSelf.goods;
+            
+            [weakSelf.collectionView reloadData_tl];
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }];
+    
+    [self.collectionView endRefreshingWithNoMoreData_tl];
 }
 
 - (void)requestUserInfo {
@@ -191,6 +201,8 @@
             if ([obj.currency isEqualToString:kJF]) {
                 
                 weakSelf.collectionView.headerView.jfNum = [obj.amount convertToRealMoney];
+                [weakSelf.collectionView reloadData_tl];
+                
                 [TLUser user].jfAccountNumber = obj.accountNumber;
             }
         }];

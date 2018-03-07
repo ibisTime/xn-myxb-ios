@@ -29,8 +29,10 @@
         NSMutableArray *newImgs = [NSMutableArray arrayWithCapacity:imgs.count];
         [imgs enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
-            [newImgs addObject:[obj convertImageUrl]];
-            
+            if ([obj convertImageUrl]) {
+                
+                [newImgs addObject:[obj convertImageUrl]];
+            }
         }];
         
         _pics = newImgs;

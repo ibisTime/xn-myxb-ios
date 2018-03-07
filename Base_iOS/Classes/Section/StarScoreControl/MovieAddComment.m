@@ -29,13 +29,13 @@
         
         _imageViewArray = @[self.img_star1, self.img_star2, self.img_star3, self.img_star4, self.img_star5];
         
-//        self.v_addcomment = [array objectAtIndex:0];
+        //        self.v_addcomment = [array objectAtIndex:0];
         
         [self cleamCount];
         [self addSubview:self.v_addcomment];
-
+        
         self.count = -1;
- 
+        
     }
     
     return self;
@@ -43,7 +43,7 @@
 
 #pragma mark - Init
 - (void)initSubviews {
- 
+    
     self.v_star = [[UIView alloc] initWithFrame:self.bounds];
     
     [self addSubview:self.v_star];
@@ -67,7 +67,7 @@
             make.width.height.equalTo(@(w));
             make.centerY.equalTo(@0);
         }];
-    
+        
         if (i == 0) {
             
             self.img_star1 = iv;
@@ -75,7 +75,7 @@
         } else if (i == 1) {
             
             self.img_star2 = iv;
-
+            
         }else if (i == 2) {
             
             self.img_star3 = iv;
@@ -94,7 +94,7 @@
 }
 
 - (void)cleamCount {
-
+    
     self.count = -1;
     
     [self.img_star1 setImage:[UIImage imageNamed:@"big_star_unselect"]];
@@ -102,7 +102,7 @@
     [self.img_star3 setImage:[UIImage imageNamed:@"big_star_unselect"]];
     [self.img_star4 setImage:[UIImage imageNamed:@"big_star_unselect"]];
     [self.img_star5 setImage:[UIImage imageNamed:@"big_star_unselect"]];
-
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -111,14 +111,15 @@
     
     CGPoint point = [touch locationInView:self.v_star];
     
-        self.canAddStar = YES;
-        
-        [self changeStarForegroundViewWithPoint:point];
-
+    self.canAddStar = YES;
+    self.canRequest = NO;
+    
+    [self changeStarForegroundViewWithPoint:point];
+    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-
+    
     if(self.canAddStar) {
         
         UITouch *touch = [touches anyObject];
@@ -126,7 +127,7 @@
         
         [self changeStarForegroundViewWithPoint:point];
     }
-   
+    
     return;
 }
 
@@ -137,11 +138,13 @@
         UITouch *touch = [touches anyObject];
         CGPoint point = [touch locationInView:self.v_star];
         
+        self.canRequest = YES;
+        
         [self changeStarForegroundViewWithPoint:point];
     }
     
     self.canAddStar = NO;
-
+    
     return;
 }
 
@@ -149,8 +152,8 @@
 - (void)changeStarForegroundViewWithPoint:(CGPoint)point {
     
     if (![[TLUser user] isLogin]) {
-     
-        if (_starBlock) {
+        
+        if (_starBlock && self.canRequest) {
             
             _starBlock(self.count);
         }
@@ -173,7 +176,7 @@
     
     self.count = count;
     
-    if (_starBlock) {
+    if (_starBlock && self.canRequest) {
         
         _starBlock(self.count);
     }
@@ -187,7 +190,7 @@
         [img setImage:[UIImage imageNamed:@"big_star_select"]];
         
         return 1;
-//        [self setImageAnimation:img];
+        //        [self setImageAnimation:img];
     }else {
         
         [img setImage:[UIImage imageNamed:@"big_star_unselect"]];
@@ -218,7 +221,7 @@
 }
 
 - (void)setSelectedStarNum:(NSInteger)starNum {
-
+    
     for (int i = 0; i < starNum; i++) {
         
         UIImageView *imageView = _imageViewArray[i];

@@ -42,7 +42,7 @@
 //类型
 @property (nonatomic, copy) NSString *kind;
 //广告语
-@property (nonatomic, copy) NSString *slogin;
+@property (nonatomic, copy) NSString *slogan;
 //
 @property (nonatomic, assign) CGFloat cellHeight;
 //是否折叠

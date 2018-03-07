@@ -23,6 +23,7 @@
 //V
 #import "AppointmentDetailTableView.h"
 #import "AppointmentDetailHeaderView.h"
+#import "TLPlaceholderView.h"
 //C
 #import "AppointmentStartVC.h"
 #import "TLUserLoginVC.h"
@@ -68,6 +69,8 @@
     
     self.tableView = [[AppointmentDetailTableView alloc] initWithFrame:CGRectZero
                                                                  style:UITableViewStylePlain];
+    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无评论"];
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -198,8 +201,6 @@
     [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
         
         [TLProgressHUD dismiss];
-
-        [weakSelf removePlaceholderView];
         
         weakSelf.tableView.commentList = objs;
         weakSelf.tableView.detailModel = weakSelf.appomintment;
@@ -207,8 +208,6 @@
         [weakSelf.tableView reloadData_tl];
 
     } failure:^(NSError *error) {
-        
-        [weakSelf addPlaceholderView];
         
         [TLProgressHUD dismiss];
     }];
@@ -230,9 +229,7 @@
     http.parameters[@"entityCode"] = self.appomintment.userId;
     
     [http postWithSuccess:^(id responseObject) {
-        
-        [self removePlaceholderView];
-        
+                
         _appomintment.totalCount = [[NSString stringWithFormat:@"%@", responseObject[@"data"][@"totalCount"]] integerValue];
         _appomintment.average = [[NSString stringWithFormat:@"%@", responseObject[@"data"][@"average"]] doubleValue];
         
@@ -240,8 +237,6 @@
         [weakSelf requestCommentList];
         
     } failure:^(NSError *error) {
-        
-        [self addPlaceholderView];
         
         [TLProgressHUD dismiss];
         
@@ -283,7 +278,7 @@
     
     if (![self.appomintment.handler valid]) {
         
-        [TLAlert alertWithInfo:@"美导暂无经纪人哦"];
+        [TLAlert alertWithInfo:[NSString stringWithFormat:@"%@暂无经纪人哦", [self.appomintment getUserType]]];
         return ;
     }
     

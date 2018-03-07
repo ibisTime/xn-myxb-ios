@@ -95,7 +95,7 @@
     BaseWeakSelf;
     
     AdviserUser *user = [TLUser user].adviserUser;
-    ;
+
     //积分余额
     MineModel *jfBalance = [MineModel new];
     

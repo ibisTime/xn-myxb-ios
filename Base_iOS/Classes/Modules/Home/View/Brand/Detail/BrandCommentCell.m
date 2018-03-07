@@ -15,6 +15,8 @@
 //V
 #import "LinkLabel.h"
 
+#define kHeadIconW 40
+
 @interface BrandCommentCell()
 //头像
 @property (nonatomic, strong) UIImageView *photoIV;
@@ -46,10 +48,9 @@
 - (void)initSubviews {
     
     //头像
-    CGFloat photoW = 32;
     
     self.photoIV = [[UIImageView alloc] init];
-    self.photoIV.layer.cornerRadius = photoW/2.0;
+    self.photoIV.layer.cornerRadius = kHeadIconW/2.0;
     self.photoIV.layer.masksToBounds = YES;
     self.photoIV.backgroundColor = kClearColor;
     self.photoIV.contentMode = UIViewContentModeScaleAspectFill;
@@ -95,13 +96,12 @@
 
 - (void)setSubviewLayout {
     
-    CGFloat photoW = 32;
     CGFloat leftMargin = 15;
     //头像
     [self.photoIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.top.equalTo(@(leftMargin));
-        make.width.height.equalTo(@(photoW));
+        make.width.height.equalTo(@(kHeadIconW));
     }];
     //昵称
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,12 +113,12 @@
     [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.nameLbl.mas_left);
-        make.bottom.equalTo(self.photoIV.mas_bottom).offset(0);
+        make.bottom.equalTo(self.photoIV.mas_bottom).offset(-5);
     }];
     //时间
     [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.photoIV.mas_centerY).offset(5);
+        make.top.equalTo(self.photoIV.mas_top).offset(6);
         make.right.equalTo(@(-leftMargin));
     }];
     //评论
@@ -126,8 +126,8 @@
         
         make.left.equalTo(self.nameLbl.mas_left);
         make.height.lessThanOrEqualTo(@(MAXFLOAT));
-        make.width.equalTo(@(kScreenWidth - 3*15 - photoW));
-        make.top.equalTo(self.timeLbl.mas_bottom).offset(10);
+        make.width.equalTo(@(kScreenWidth - 3*15 - kHeadIconW));
+        make.top.equalTo(self.starView.mas_bottom).offset(10);
     }];
     
     //星星

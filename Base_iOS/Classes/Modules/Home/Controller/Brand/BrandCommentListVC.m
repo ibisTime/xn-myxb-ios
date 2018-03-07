@@ -71,8 +71,8 @@
     
     self.tableView = [[BrandCommentTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无评论" topMargin:140];
-    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无评论"];
+
     [self.view addSubview:self.tableView];
     
 }
@@ -125,7 +125,10 @@
             model.title = [NSString stringWithFormat:@"%@(%ld)", obj.word, obj.count];
             model.isSelected = NO;
             
-            [self.keywords addObject:model];
+            if (model) {
+                
+                [self.keywords addObject:model];
+            }
         }];
         
         if (keywords.count > 0) {
@@ -162,15 +165,11 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.tableView.commentList = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
             
             [TLProgressHUD dismiss];
         }];
@@ -181,15 +180,11 @@
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.tableView.commentList = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
             
             [TLProgressHUD dismiss];
         }];
@@ -221,16 +216,12 @@
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             [TLProgressHUD dismiss];
-            
-            [weakSelf removePlaceholderView];
-            
+                        
             weakSelf.tableView.commentList = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
-            
-            [weakSelf addPlaceholderView];
             
             [TLProgressHUD dismiss];
         }];

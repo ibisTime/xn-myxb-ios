@@ -7,17 +7,37 @@
 //
 
 #import "TLNetworking.h"
-#import "SVProgressHUD.h"
+//Manager
 #import "AppConfig.h"
-#import "HttpLogger.h"
-#import "TLProgressHUD.h"
 #import "TLUser.h"
+//Category
+#import "TLProgressHUD.h"
 #import "TLAlert.h"
+#import "HttpLogger.h"
+#import "UIViewController+Extension.h"
+//Extension
+#import "SVProgressHUD.h"
+//C
+#import "BaseViewController.h"
 
 //121.43.101.148:5703/cd-qlqq-front
 
+@interface TLNetworking()
+
+@property (nonatomic, strong) BaseViewController *baseVC;
+
+@end
+
 @implementation TLNetworking
 
+- (BaseViewController *)baseVC {
+    
+    if (!_baseVC) {
+        
+        _baseVC = [[BaseViewController alloc] getCurrentVC];
+    }
+    return _baseVC;
+}
 
 + (AFHTTPSessionManager *)HTTPSessionManager
 {
@@ -104,13 +124,11 @@
         if (![_isShow isEqualToString:@"100"]) {
             
             self.parameters[@"systemCode"] = [[self class] systemCode];
-
         }
         
         if ([TLUser user].token) {
             
             self.parameters[@"token"] = [TLUser user].token;
-            
         }
         
         self.parameters[@"companyCode"] = [[self class] companyCode];
@@ -119,7 +137,6 @@
         self.parameters = [NSMutableDictionary dictionaryWithCapacity:2];
         self.parameters[@"code"] = self.code;
         self.parameters[@"json"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        
     }
     
     if (!self.url || !self.url.length) {
@@ -148,13 +165,24 @@
       
       if([responseObject[@"errorCode"] isEqual:@"0"]){ //成功
           
-          if(success){
+          if(success) {
+              
+              if (self.baseVC) {
+                  
+                  [self.baseVC removePlaceholderView];
+              }
+              
               success(responseObject);
           }
           
       } else {
           
           if (failure) {
+              
+              if (self.baseVC) {
+                  
+                  [self.baseVC addPlaceholderView];
+              }
               failure(nil);
           }
           
@@ -165,7 +193,6 @@
                   [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
               }];
               return;
-              
           }
           
           if(self.isShowMsg) { //异常也是失败
@@ -173,26 +200,27 @@
               [TLAlert alertWithInfo:responseObject[@"errorInfo"]];
 
           }
-      
-      
       }
-      
-      
-    
       
    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
        
-       if(self.showView){
+       if(self.showView) {
+           
            [TLProgressHUD dismiss];
        }
        
-       if (self.isShowMsg) {
-           
-           [TLAlert alertWithInfo:@"网络异常"];
-
-       }
+//       if (self.isShowMsg) {
+//
+//           [TLAlert alertWithInfo:@"网络异常"];
+//       }
        
-       if(failure){
+       if(failure) {
+           
+           if (self.baseVC) {
+               
+               [self.baseVC addPlaceholderView];
+           }
+
            failure(error);
        }
        

@@ -11,12 +11,11 @@
 #import "MyRankModel.h"
 //V
 #import "MyRankTableView.h"
+#import "TLPlaceholderView.h"
 
 @interface MyRankVC ()
 //
 @property (nonatomic, strong) MyRankTableView *tableView;
-//暂无行程
-@property (nonatomic, strong) UIView *placeHolderView;
 
 @end
 
@@ -26,8 +25,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"我的排行";
-    //
-    [self initPlaceHolderView];
     //
     [self initTableView];
     //获取排行列表
@@ -43,35 +40,13 @@
 }
 
 #pragma mark - Init
-- (void)initPlaceHolderView {
-    
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
-    
-    couponIV.image = kImage(@"暂无订单");
-    
-    couponIV.centerX = kScreenWidth/2.0;
-    
-    [self.placeHolderView addSubview:couponIV];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                               textColor:kTextColor
-                                                    font:15.0];
-    textLbl.text = @"暂无排行";
-    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
-}
 
 - (void)initTableView {
     
     self.tableView = [[MyRankTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = self.placeHolderView;
-    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无排行"];
+
     [self.view addSubview:self.tableView];
     
 }
@@ -84,9 +59,7 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"805123";
-    
     helper.parameters[@"refNo"] = [TLUser user].userId;
-    
     helper.tableView = self.tableView;
     
     [helper modelClass:[MyRankModel class]];
@@ -95,15 +68,12 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.tableView.ranks = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
         }];
     }];
     
@@ -111,15 +81,12 @@
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
-            [weakSelf removePlaceholderView];
-            
             weakSelf.tableView.ranks = objs;
             
             [weakSelf.tableView reloadData_tl];
             
         } failure:^(NSError *error) {
             
-            [weakSelf addPlaceholderView];
         }];
     }];
     

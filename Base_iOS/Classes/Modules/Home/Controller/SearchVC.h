@@ -17,9 +17,9 @@ typedef NS_ENUM(NSInteger, SearchType){
 @interface SearchVC : BaseViewController
 //搜索内容
 @property (nonatomic, copy) NSString *searchText;
-//
-@property (nonatomic, assign) SearchType searchType;
 //搜索类型
+@property (nonatomic, assign) SearchType searchType;
+//具体类型
 @property (nonatomic, copy) NSString *type;
 
 @end

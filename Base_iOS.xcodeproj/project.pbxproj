@@ -204,6 +204,8 @@
 		21A103A9204C62E000BF4C78 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 21A1039B204C62DF00BF4C78 /* sound.caf */; };
 		21A103AA204C62E000BF4C78 /* SGQRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1039D204C62DF00BF4C78 /* SGQRCodeTool.m */; };
 		21A103AD204E8F1100BF4C78 /* ExpressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A103AB204E8F0F00BF4C78 /* ExpressModel.m */; };
+		21A103B1204FD3AF00BF4C78 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A103B0204FD3AF00BF4C78 /* UIViewController+Extension.m */; };
+		21A103B4204FE99C00BF4C78 /* BaseSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A103B3204FE99C00BF4C78 /* BaseSearchVC.m */; };
 		21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F0203E598700A8AD34 /* TripListView.m */; };
 		21A1E9F5203E68C300A8AD34 /* BrandListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F4203E68C300A8AD34 /* BrandListVC.m */; };
 		21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1E9F7203E695500A8AD34 /* BrandVC.m */; };
@@ -681,6 +683,10 @@
 		21A1039E204C62DF00BF4C78 /* SGQRCodeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeTool.h; sourceTree = "<group>"; };
 		21A103AB204E8F0F00BF4C78 /* ExpressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressModel.m; sourceTree = "<group>"; };
 		21A103AC204E8F0F00BF4C78 /* ExpressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressModel.h; sourceTree = "<group>"; };
+		21A103AF204FD3AF00BF4C78 /* UIViewController+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
+		21A103B0204FD3AF00BF4C78 /* UIViewController+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extension.m"; sourceTree = "<group>"; };
+		21A103B2204FE99C00BF4C78 /* BaseSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseSearchVC.h; sourceTree = "<group>"; };
+		21A103B3204FE99C00BF4C78 /* BaseSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseSearchVC.m; sourceTree = "<group>"; };
 		21A1E9EF203E598700A8AD34 /* TripListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripListView.h; sourceTree = "<group>"; };
 		21A1E9F0203E598700A8AD34 /* TripListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripListView.m; sourceTree = "<group>"; };
 		21A1E9F3203E68C300A8AD34 /* BrandListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandListVC.h; sourceTree = "<group>"; };
@@ -981,6 +987,7 @@
 		21111B4C1F8B5EFF0021B3FE /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				21A103AE204FD38300BF4C78 /* UIViewController */,
 				212BE41C202862E8000BCC66 /* UIImage */,
 				21111B5A1F8B5EFF0021B3FE /* UILabel */,
 				21111B5F1F8B5EFF0021B3FE /* UIApplication */,
@@ -1281,6 +1288,8 @@
 				212BE41620285DF8000BCC66 /* HomeVC.m */,
 				2182D26320468B82003215DA /* SearchVC.h */,
 				2182D26420468B82003215DA /* SearchVC.m */,
+				21A103B2204FE99C00BF4C78 /* BaseSearchVC.h */,
+				21A103B3204FE99C00BF4C78 /* BaseSearchVC.m */,
 				2182D2C620492997003215DA /* Banner */,
 				21A1E9F2203E68AB00A8AD34 /* Brand */,
 				21302342202DA43600A954E7 /* Appointment */,
@@ -2198,6 +2207,15 @@
 			path = Tool;
 			sourceTree = "<group>";
 		};
+		21A103AE204FD38300BF4C78 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				21A103AF204FD3AF00BF4C78 /* UIViewController+Extension.h */,
+				21A103B0204FD3AF00BF4C78 /* UIViewController+Extension.m */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
 		21A1E9F2203E68AB00A8AD34 /* Brand */ = {
 			isa = PBXGroup;
 			children = (
@@ -2905,6 +2923,7 @@
 				21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */,
 				2182D2A12047CA22003215DA /* MyInfomationVC.m in Sources */,
 				21A1EA2B203FBD7400A8AD34 /* IntegralGoodDetailVC.m in Sources */,
+				21A103B4204FE99C00BF4C78 /* BaseSearchVC.m in Sources */,
 				212BE46A202BEB32000BCC66 /* CategoryItem.m in Sources */,
 				2182D23E204536C3003215DA /* AppointmentOrderModel.m in Sources */,
 				212BE442202A9F37000BCC66 /* PlatfromProposalVC.m in Sources */,
@@ -3134,6 +3153,7 @@
 				212ECE50204142CA0091E543 /* IntregalTaskModel.m in Sources */,
 				212170291F384216007C9855 /* ZHAddAddressVC.m in Sources */,
 				21FB30CC1F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m in Sources */,
+				21A103B1204FD3AF00BF4C78 /* UIViewController+Extension.m in Sources */,
 				21F82D1F1F17719D0019B176 /* main.m in Sources */,
 				21A1EA03203E731300A8AD34 /* BrandDetailVC.m in Sources */,
 				21F82C9A1F17719D0019B176 /* AppDelegate.mm in Sources */,

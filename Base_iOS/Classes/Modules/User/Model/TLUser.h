@@ -62,6 +62,8 @@
 + (instancetype)user;
 //获取角色
 - (NSString *)getUserType;
+//
+- (NSString *)getUserTypeWithKind:(NSString *)kind;
 
 //是否为需要登录，如果已登录，取出用户信息
 - (BOOL)isLogin;

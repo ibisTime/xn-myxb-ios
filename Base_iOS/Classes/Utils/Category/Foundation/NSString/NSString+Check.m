@@ -272,7 +272,6 @@
 - (BOOL)valid {
     
     return  self != nil && self.length > 0;
-    
 }
 
 - (NSString *)vaildString {

@@ -14,7 +14,7 @@
 @interface WriteCommentVC ()
 //topView
 @property (nonatomic, strong) BaseView *topView;
-//评论
+//建议
 @property (nonatomic, strong) TLTextView *commentTV;
 //
 @property (nonatomic, strong) MovieAddComment *starView;
@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"撰写评论";
+    self.title = @"撰写建议";
     //
     [self initSubview];
 }
@@ -57,13 +57,13 @@
     
     [self.topView addSubview:textLbl];
     
-    //评论
+    //建议
     self.commentTV = [[TLTextView alloc] initWithFrame:CGRectMake(0, self.topView.yy + 10, kScreenWidth, 180)];
     
     self.commentTV.placeholderLbl.origin = CGPointMake(15, 15);
     self.commentTV.placeholderLbl.font = Font(13.0);
     self.commentTV.textContainerInset = UIEdgeInsetsMake(17, 10, 0, 0);
-    self.commentTV.placholder = @"评论(选填)";
+    self.commentTV.placholder = @"建议(选填)";
     
     [self.view addSubview:self.commentTV];
     //发布按钮
@@ -101,14 +101,14 @@
         
         if ([code containsString:@"filter"]) {
             
-            [TLAlert alertWithInfo:[NSString stringWithFormat:@"评论成功, 您的评论包含敏感字符,我们将进行审核"]];
+            [TLAlert alertWithInfo:[NSString stringWithFormat:@"建议成功, 您的建议包含敏感字符,我们将进行审核"]];
             
             [self.navigationController popViewControllerAnimated:YES];
 
             return ;
         }
         
-        [TLAlert alertWithSucces:[NSString stringWithFormat:@"%@成功", @"评论"]];
+        [TLAlert alertWithSucces:[NSString stringWithFormat:@"%@成功", @"建议"]];
 
         if (_commentSuccess) {
             

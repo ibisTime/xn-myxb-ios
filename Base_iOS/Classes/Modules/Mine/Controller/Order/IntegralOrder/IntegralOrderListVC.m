@@ -15,6 +15,7 @@
 //V
 #import "IntegralOrderGoodCell.h"
 #import "IntegralOrderFooterView.h"
+#import "TLPlaceholderView.h"
 //C
 #import "IntegralOrderDetailVC.h"
 #import "NavigationController.h"
@@ -25,8 +26,6 @@
 @property (nonatomic,strong) TLTableView *tableView;
 
 @property (nonatomic,strong) NSMutableArray <IntegralOrderModel *>*orderGroups;
-//暂无订单
-@property (nonatomic, strong) UIView *placeHolderView;
 
 @property (nonatomic,assign) BOOL isFirst;
 
@@ -40,8 +39,6 @@
     
     self.isFirst = YES;
     
-    [self initPlaceHolderView];
-    
     [self initTableView];
     
     [self.tableView beginRefreshing];
@@ -49,29 +46,14 @@
     [self addNotification];
 }
 
-#pragma mark - Init
-- (void)initPlaceHolderView {
+#pragma mark - 断网操作
+- (void)placeholderOperation {
     
-    self.placeHolderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - 40)];
-    
-    UIImageView *couponIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 80, 80)];
-    
-    couponIV.image = kImage(@"暂无订单");
-    
-    couponIV.centerX = kScreenWidth/2.0;
-    
-    [self.placeHolderView addSubview:couponIV];
-    
-    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                               textColor:kTextColor
-                                                    font:15.0];
-    textLbl.text = @"暂无订单";
-    textLbl.frame = CGRectMake(0, couponIV.yy + 20, kScreenWidth, 15);
-    
-    textLbl.textAlignment = NSTextAlignmentCenter;
-    
-    [self.placeHolderView addSubview:textLbl];
+    //重新获取订单列表
+    [self.tableView beginRefreshing];
 }
+
+#pragma mark - Init
 
 - (void)initTableView {
     
@@ -81,8 +63,8 @@
     
     tableView.rowHeight = 100;
     
-    tableView.placeHolderView = self.placeHolderView;
-    
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无订单"];
+
     [self.view addSubview:tableView];
     
     self.tableView = tableView;
