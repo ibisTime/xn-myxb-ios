@@ -17,7 +17,7 @@
 
 @interface GoodNewsCell()
 
-//头像
+//缩略图
 @property (nonatomic, strong) UIImageView *photoIV;
 //标题
 @property (nonatomic, strong) UILabel *titleLbl;
@@ -39,11 +39,10 @@
 #pragma mark - Init
 - (void)initSubviews {
     
-    //头像
+    //缩略图
     self.photoIV = [[UIImageView alloc] init];
     
-//    self.photoIV.layer.cornerRadius = kHeadIconWidth/2.0;
-//    self.photoIV.layer.masksToBounds = YES;
+    self.photoIV.layer.masksToBounds = YES;
     self.photoIV.backgroundColor = [UIColor clearColor];
     self.photoIV.contentMode = UIViewContentModeScaleAspectFill;
     
@@ -75,7 +74,7 @@
 - (void)setSubviewLayout {
     
     CGFloat leftMargin = 15;
-    //头像
+    //缩略图
     [self.photoIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@(leftMargin));

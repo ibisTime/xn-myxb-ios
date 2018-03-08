@@ -242,8 +242,7 @@
                 if (![self.style containsString:obj.dvalue]) {
                     
                     [self.style appendString:[NSString stringWithFormat:@"%@  ", obj.dvalue]];
-                    [self.styleID appendString:[NSString stringWithFormat:@"%ld,", obj.ID]];
-
+                    [self.styleID appendString:[NSString stringWithFormat:@"%@,", obj.dkey]];
                 }
             }
         }];

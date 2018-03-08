@@ -8,7 +8,7 @@
 
 #import "TLBaseModel.h"
 
-@class AdviserUser;
+@class AdviserUser, HandlerUser;
 
 @interface TLUser : TLBaseModel
 
@@ -50,8 +50,10 @@
 @property (nonatomic, copy) NSString *style;
 //等级
 @property (nonatomic, copy) NSString *level;
-//经纪人信息
+//团队顾问信息
 @property (nonatomic, strong) AdviserUser *adviserUser;
+//经纪人信息
+@property (nonatomic, strong) HandlerUser *handlerUser;
 //积分账户
 @property (nonatomic, copy) NSString *jfAccountNumber;
 //邀请码
@@ -83,6 +85,13 @@
 @end
 
 @interface AdviserUser: NSObject
+
+//团队顾问手机号
+@property (nonatomic, copy) NSString *mobile;
+
+@end
+
+@interface HandlerUser: NSObject
 
 //经纪人手机号
 @property (nonatomic, copy) NSString *mobile;

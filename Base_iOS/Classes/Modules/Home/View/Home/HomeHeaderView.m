@@ -83,10 +83,11 @@
     [self addSubview:self.headLineView];
     //背景
     LoopScrollView *loopView = [LoopScrollView loopTitleViewWithFrame:CGRectMake(0, 0, kScreenWidth, 50)
-                                                          titleImgArr:nil];
+                                                          titleImgs:nil];
     
     loopView.timeinterval = 3.f;
     loopView.leftImage = kImage(@"msg_logo");
+    loopView.count = 3;
     loopView.loopBlock = ^{
         
         if (weakSelf.headerBlock) {
@@ -188,7 +189,7 @@
         [titleArr addObject:obj.smsTitle];
     }];
     
-    self.loopView.titlesArr = titleArr;
+    self.loopView.titles = titleArr;
 
 }
 

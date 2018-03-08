@@ -15,7 +15,7 @@ target ‘Base_iOS’ do
 
     pod 'MLLabel',                  '1.10.3'
 #    pod 'MBProgressHUD',            '0.9.2’
-    pod 'PYSearch',                 '0.8.4'
+    pod 'PYSearch',                 '0.8.8'
     pod 'PYPhotoBrowser',           '1.1.5'
     pod 'TZImagePickerController',  '1.8.0'
     pod 'FDFullscreenPopGesture',   '1.1'

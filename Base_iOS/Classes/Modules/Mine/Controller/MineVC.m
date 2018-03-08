@@ -166,7 +166,7 @@
         
         htmlVC.type = HTMLTypeHelpCenter;
         
-        [self.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
     };
     
     self.group = [MineGroup new];
@@ -249,7 +249,7 @@
         
         htmlVC.type = HTMLTypeHelpCenter;
         
-        [self.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
     };
     
     self.group = [MineGroup new];
@@ -391,15 +391,17 @@
     http.parameters[@"userId"] = [TLUser user].userId;
     [http postWithSuccess:^(id responseObject) {
         
-        NSDictionary *userInfo = responseObject[@"data"];
+        TLUser *user = [TLUser mj_objectWithKeyValues:responseObject[@"data"]];
         
-        if (![userInfo[@"mobile"] valid]) {
+        AdviserUser *adviserUser = user.adviserUser;
+        
+        if (![adviserUser.mobile valid]) {
             
             [TLAlert alertWithInfo:@"暂无团队顾问手机号"];
             return ;
         }
         //
-        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", userInfo[@"mobile"]];
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", adviserUser.mobile];
         
         NSURL *url = [NSURL URLWithString:mobile];
         

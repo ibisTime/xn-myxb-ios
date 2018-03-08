@@ -167,10 +167,14 @@
           
           if(success) {
               
-              if (self.baseVC) {
+              //在主线程中加载UI
+              dispatch_async(dispatch_get_main_queue(), ^{
                   
-                  [self.baseVC removePlaceholderView];
-              }
+                  if (self.baseVC) {
+                      
+                      [self.baseVC removePlaceholderView];
+                  }
+              });
               
               success(responseObject);
           }
@@ -179,10 +183,6 @@
           
           if (failure) {
               
-              if (self.baseVC) {
-                  
-                  [self.baseVC addPlaceholderView];
-              }
               failure(nil);
           }
           
@@ -215,12 +215,15 @@
 //       }
        
        if(failure) {
-           
-           if (self.baseVC) {
+           //在主线程中加载UI
+           dispatch_async(dispatch_get_main_queue(), ^{
                
-               [self.baseVC addPlaceholderView];
-           }
-
+               if (self.baseVC) {
+                   
+                   [self.baseVC addPlaceholderView];
+               }
+           });
+        
            failure(error);
        }
        

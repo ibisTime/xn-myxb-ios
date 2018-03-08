@@ -215,7 +215,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"预约成功, 平台将对你的订单进行审核"];
+        [TLAlert alertWithSucces:@"下单成功, 平台将对你的订单进行审核"];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             

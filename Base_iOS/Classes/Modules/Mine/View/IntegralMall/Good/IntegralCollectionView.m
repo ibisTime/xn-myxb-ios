@@ -21,13 +21,14 @@
 
 static NSString *integralGoodCellID = @"IntegralGoodCellID";
 static NSString *headerViewID = @"IntegralMallHeaderViewID";
+static NSString *placeholderViewID = @"placeholderViewID";
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout
 {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         
-        self.backgroundColor = kClearColor;
+        self.backgroundColor = kWhiteColor;
         self.delegate = self;
         self.dataSource = self;
         self.showsVerticalScrollIndicator = NO;
@@ -37,6 +38,8 @@ static NSString *headerViewID = @"IntegralMallHeaderViewID";
         
         [self registerClass:[IntegralMallHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewID];
         
+        [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID];
+
         if (@available(iOS 11.0, *)) {
             self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
@@ -81,19 +84,66 @@ static NSString *headerViewID = @"IntegralMallHeaderViewID";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
-    IntegralMallHeaderView *cell = (IntegralMallHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewID forIndexPath:indexPath];
-    
-    [cell changeInfo];
+    IntegralMallHeaderView *cell;
 
-    self.headerView = cell;
+    if (kind == UICollectionElementKindSectionHeader) {
+        
+        cell = (IntegralMallHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerViewID forIndexPath:indexPath];
+        
+        [cell changeInfo];
+
+        self.headerView = cell;
+        
+        return cell;
+    }
     
-    return cell;
+    UICollectionReusableView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID forIndexPath:indexPath];
+    
+    if (self.integralGoods.count > 0) {
+        
+        return reusableView;
+    }
+    
+    reusableView.frame = CGRectMake(0, 140, kScreenWidth, 200);
+    
+    UIImageView *orderIV = [[UIImageView alloc] init];
+    orderIV.image = kImage(@"暂无订单");
+    orderIV.centerX = kScreenWidth/2.0;
+    
+    [reusableView addSubview:orderIV];
+    [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@50);
+        
+    }];
+    
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+    
+    textLbl.text = @"暂无积分商品";
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [reusableView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(orderIV.mas_bottom).offset(20);
+        make.centerX.equalTo(orderIV.mas_centerX);
+        
+    }];
+    
+    return reusableView;
+    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout
 referenceSizeForHeaderInSection:(NSInteger)section {
     
-    return CGSizeMake(kScreenWidth, 130);
+    return CGSizeMake(kScreenWidth, 140);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    
+    return CGSizeMake(kScreenWidth, 200);
 }
 
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

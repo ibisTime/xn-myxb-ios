@@ -28,14 +28,13 @@ _Pragma("clang diagnostic pop") \
 /**
  * 上拉加载更多
  */
-@property (nonatomic, copy) void(^loadMore)();
+@property (nonatomic, copy) void(^loadMore)(void);
 
 @end
 
 @implementation BaseCollectionView
-{
-    UIView *_placeholderV;
-}
+
+static NSString *placeholderViewID = @"placeholderViewID";
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     if (self = [super initWithFrame:frame collectionViewLayout:layout]) {
@@ -58,6 +57,8 @@ _Pragma("clang diagnostic pop") \
     if (@available(iOS 11.0, *)) {
         self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    //尾视图注册
+    [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID];
 }
 
 - (void)setRefreshDelegate:(id<RefreshCollectionViewDelegate>)refreshDelegate refreshHeadEnable:(BOOL)headEnable refreshFootEnable:(BOOL)footEnable autoRefresh:(BOOL)autoRefresh {
@@ -201,4 +202,42 @@ _Pragma("clang diagnostic pop") \
 //
 //    }
 }
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+
+    UICollectionReusableView *reusableView = nil;
+
+    if (kind == UICollectionElementKindSectionFooter) {
+
+        reusableView = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 200)];
+        
+        UIImageView *orderIV = [[UIImageView alloc] init];
+        orderIV.image = kImage(@"暂无订单");
+        orderIV.centerX = kScreenWidth/2.0;
+        
+        [reusableView addSubview:orderIV];
+        [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerX.equalTo(@0);
+            make.top.equalTo(@90);
+            
+        }];
+        
+        UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+        
+        textLbl.text = @"暂无数据";
+        textLbl.textAlignment = NSTextAlignmentCenter;
+        
+        [reusableView addSubview:textLbl];
+        [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.top.equalTo(orderIV.mas_bottom).offset(20);
+            make.centerX.equalTo(orderIV.mas_centerX);
+            
+        }];
+    }
+
+    return reusableView;
+}
+
 @end

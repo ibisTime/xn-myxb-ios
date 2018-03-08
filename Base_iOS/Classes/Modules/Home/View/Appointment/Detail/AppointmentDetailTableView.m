@@ -416,6 +416,7 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
     [self layoutIfNeeded];
     
     self.detailWebView.webView.scrollView.height = height;
+    self.detailWebView.webView.height = height;
     self.detailWebView.height = height;
     
     self.footerView.height = self.detailWebView.yy;

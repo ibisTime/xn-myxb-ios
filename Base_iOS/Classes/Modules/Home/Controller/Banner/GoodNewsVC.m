@@ -81,6 +81,8 @@
     
     helper.parameters[@"type"] = [self.type isEqualToString:kBannerTypeGoodNews] ? @"0": @"1";
     helper.parameters[@"status"] = @"1";
+    helper.parameters[@"orderColumn"] = @"order_no";
+    helper.parameters[@"orderDir"] = @"asc";
     
     helper.tableView = self.tableView;
     

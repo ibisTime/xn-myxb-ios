@@ -253,3 +253,7 @@ NSString *const kUserTypeExpert = @"S";     //专家
 
 @end
 
+@implementation HandlerUser
+
+@end
+

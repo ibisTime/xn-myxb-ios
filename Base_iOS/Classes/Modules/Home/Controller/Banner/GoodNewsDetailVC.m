@@ -90,6 +90,7 @@
 - (void)setSubViewLayoutWithHeight:(CGFloat)height {
     
     self.detailWebView.webView.scrollView.height = height;
+    self.detailWebView.webView.height = height;
     self.detailWebView.height = height;
     
     self.tableView.tableFooterView = self.detailWebView;

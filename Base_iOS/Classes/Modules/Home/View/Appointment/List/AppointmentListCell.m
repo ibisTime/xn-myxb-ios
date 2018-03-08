@@ -174,12 +174,6 @@
         make.top.equalTo(self.jobLbl.mas_top);
     }];
 
-    //评分
-    [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.nickNameLbl.mas_left);
-        make.bottom.equalTo(self.photoIV.mas_bottom).offset(-5);
-    }];
     //个人简介
     [self.introduceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -197,6 +191,7 @@
     }];
     
     __block CGFloat x = kHeadIconWidth + 30;
+    __block CGFloat y = 6;
     
     //风格
     
@@ -209,20 +204,30 @@
         
         CGFloat w = [NSString getWidthWithString:obj font:11.0] + 10;
         
+        CGFloat xx = x + w + 10;
+        
+        if (xx > kScreenWidth) {
+            
+            y += 23;
+            x = kHeadIconWidth + 30;
+        }
+        
+        UIColor *titleColor = kAppCustomMainColor;
+        
         UIButton *btn = [UIButton buttonWithTitle:obj
-                                       titleColor:_appointmentModel.styleColor[idx]
+                                       titleColor:titleColor
                                   backgroundColor:kWhiteColor
                                         titleFont:11.0
                                      cornerRadius:8.5];
         
         btn.layer.borderWidth = 0.5;
-        btn.layer.borderColor = _appointmentModel.styleColor[idx].CGColor;
+        btn.layer.borderColor = titleColor.CGColor;
         
         [self addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.equalTo(@(x));
-            make.top.equalTo(self.jobLbl.mas_bottom).offset(6);
+            make.top.equalTo(self.jobLbl.mas_bottom).offset(y);
             make.width.equalTo(@(w));
             make.height.equalTo(@17);
         }];
@@ -247,6 +252,13 @@
             make.centerY.equalTo(@0);
         }];
     }
+    
+    //评分
+    [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.nickNameLbl.mas_left);
+        make.top.equalTo(self.jobLbl.mas_bottom).offset(y + 23 + 6);
+    }];
     
     _isFirst = YES;
 }

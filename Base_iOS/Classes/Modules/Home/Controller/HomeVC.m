@@ -87,12 +87,11 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     
     //
-    CGFloat itemWidth = (kScreenWidth - 10)/2.0;
-    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 68);
+    CGFloat itemWidth = (kScreenWidth - 30)/2.0;
+    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 58);
     flowLayout.minimumLineSpacing = 10;
     flowLayout.minimumInteritemSpacing = 10;
-    flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 0, 0);
-    
+    flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     self.collectionView = [[HomeCollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight) collectionViewLayout:flowLayout];

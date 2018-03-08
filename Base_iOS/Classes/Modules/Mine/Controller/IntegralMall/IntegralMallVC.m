@@ -66,10 +66,10 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     //
     CGFloat itemWidth = (kScreenWidth - 30)/2.0;
-    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 75);
+    flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth + 90);
     flowLayout.minimumLineSpacing = 10;
     flowLayout.minimumInteritemSpacing = 10;
-    flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 0, 10);
+    flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     
     self.collectionView = [[IntegralCollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) collectionViewLayout:flowLayout];
@@ -156,6 +156,8 @@
             weakSelf.goods = objs;
             
             weakSelf.collectionView.integralGoods = weakSelf.goods;
+            //
+            [weakSelf.collectionView reloadData_tl];
             //积分
             [weakSelf requestUserInfo];
             

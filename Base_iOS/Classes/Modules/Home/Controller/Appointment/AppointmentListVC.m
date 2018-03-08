@@ -90,7 +90,7 @@
     
     BaseWeakSelf;
     
-    BaseSearchVC *baseSearchVC = [PYSearchViewController searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+    __block BaseSearchVC *baseSearchVC = [PYSearchViewController searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
         
         SearchVC *searchVC = [SearchVC new];
         
@@ -99,7 +99,7 @@
         searchVC.searchType = SearchTypePerson;
         searchVC.titleStr = self.titleStr;
         
-        [searchViewController.navigationController pushViewController:searchVC animated:YES];
+        [baseSearchVC.navigationController pushViewController:searchVC animated:YES];
     }];
     
     // 3. Set style for popular search and search history
@@ -108,8 +108,10 @@
     baseSearchVC.searchHistoryStyle = PYSearchHistoryStyleARCBorderTag;
     
     baseSearchVC.searchBarBackgroundColor = [UIColor colorWithUIColor:kWhiteColor alpha:0.4];
-//    searchViewController.searchBar.height = 32;
-    
+    baseSearchVC.searchBar.tintColor = kWhiteColor;
+    baseSearchVC.searchBar.layer.cornerRadius = 15;
+    baseSearchVC.searchBar.layer.masksToBounds = YES;
+//
     UIButton *cancelBtn = [UIButton buttonWithTitle:@"取消"
                                          titleColor:kWhiteColor
                                     backgroundColor:kClearColor
@@ -120,19 +122,22 @@
     cancelBtn.frame = CGRectMake(0, 0, 60, 44);
     
     baseSearchVC.cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];;
-    
-    UIView* backgroundView = [baseSearchVC.searchBar subViewOfClassName:@"_UISearchBarSearchFieldBackgroundView"];
+    //修改searchbar背景色
+//    UIView* backgroundView = [baseSearchVC.searchBar subViewOfClassName:@"_UISearchBarSearchFieldBackgroundView"];
 
-//    baseSearchVC.searchBar.layer.cornerRadius = 15;
-//    baseSearchVC.searchBar.layer.masksToBounds = YES;
+    //修改searchbar文字颜色
+    UILabel* label = (UILabel *)[baseSearchVC.searchBar subViewOfClassName:@"UISearchBarTextFieldLabel"];
+
+    label.textColor = kWhiteColor;
     
     // 4. Set delegate
     baseSearchVC.delegate = self;
     // 5. Present a navigation controller
     NavigationController *navi = [[NavigationController alloc] initWithRootViewController:baseSearchVC];
-    [self presentViewController:navi animated:YES completion:nil];
     
-    [UINavigationBar appearance].barTintColor = kThemeColor;
+    [navi.navigationBar setBackgroundImage:[kAppCustomMainColor convertToImage] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    
+    [self presentViewController:navi animated:YES completion:nil];
 
 }
 

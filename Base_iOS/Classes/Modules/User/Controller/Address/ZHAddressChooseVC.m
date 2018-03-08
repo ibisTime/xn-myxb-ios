@@ -214,7 +214,7 @@
             NSInteger index = [tableView indexPathForCell:cell].section;
             
             TLNetworking *http = [TLNetworking new];
-            http.showView = self.view;
+            http.showView = weakSelf.view;
             http.code = @"805163";
             http.parameters[@"code"] = weakSelf.addressRoom[index].code;
             http.parameters[@"token"] = [TLUser user].token;
@@ -222,8 +222,8 @@
                 
                 [TLAlert alertWithSucces:@"设置成功"];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ADDRESS_CHANGE_NOTIFICATION" object:self userInfo:@{
-                                                                                                                                 @"sender" : self
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ADDRESS_CHANGE_NOTIFICATION" object:weakSelf userInfo:@{
+                                                                                                                                 @"sender" : weakSelf
                                                                                                                                  }];
                 //改变数据
                 [weakSelf.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

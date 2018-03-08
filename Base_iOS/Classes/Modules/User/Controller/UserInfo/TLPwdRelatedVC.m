@@ -200,7 +200,7 @@
     if (self.type == TLPwdTypeForget || self.type == TLPwdTypeReset){
         
         http.code = USER_FIND_PWD_CODE;
-        http.parameters[@"kind"] = @"C";
+        http.parameters[@"kind"] = APP_KIND;
         http.parameters[@"mobile"] = self.phoneTf.text;
         http.parameters[@"newLoginPwd"] = self.pwdTf.text;
     }

@@ -276,28 +276,30 @@
 
 - (void)requestLinkMobile {
     
-    if (![self.appomintment.handler valid]) {
-        
-        [TLAlert alertWithInfo:[NSString stringWithFormat:@"%@暂无经纪人哦", [self.appomintment getUserType]]];
-        return ;
-    }
-    
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = USER_INFO;
-    http.parameters[@"userId"] = self.appomintment.handler;
+    http.parameters[@"userId"] = self.appomintment.userId;
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSDictionary *userInfo = responseObject[@"data"];
+        TLUser *user = [TLUser mj_objectWithKeyValues:responseObject[@"data"]];
         
-        if (![userInfo[@"mobile"] valid]) {
+        HandlerUser *handleUser = user.handlerUser;
+        
+        if (!handleUser) {
+            
+            [TLAlert alertWithInfo:[NSString stringWithFormat:@"%@暂无经纪人哦", [self.appomintment getUserType]]];
+            return ;
+        }
+        
+        if (![handleUser.mobile valid]) {
             
             [TLAlert alertWithInfo:@"经纪人暂无手机号哦"];
             return ;
         }
         //
-        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", userInfo[@"mobile"]];
+        NSString *mobile = [NSString stringWithFormat:@"telprompt://%@", handleUser.mobile];
         
         NSURL *url = [NSURL URLWithString:mobile];
         

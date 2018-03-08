@@ -8,19 +8,22 @@
 
 #import "TLUserLoginVC.h"
 
-#import "BindMobileVC.h"
-#import "TLUserForgetPwdVC.h"
-
+//Macro
 #import "APICodeMacro.h"
 #import "AppMacro.h"
+//Category
 #import "NSString+Check.h"
 #import "UIBarButtonItem+convience.h"
 #import "UILabel+Extension.h"
-
+//M
 //#import "CurrencyModel.h"
-
+//V
 #import "TLTextField.h"
 #import "TLPickerTextField.h"
+//C
+#import "BindMobileVC.h"
+#import "TLUserForgetPwdVC.h"
+
 
 @interface TLUserLoginVC ()
 

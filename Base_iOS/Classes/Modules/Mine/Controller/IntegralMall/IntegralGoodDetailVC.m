@@ -110,6 +110,8 @@
         
         make.left.equalTo(textLbl.mas_left).offset(-5);
         make.top.equalTo(textLbl.mas_bottom).offset(11);
+        make.right.equalTo(@(-leftMargin));
+
     }];
     //图文详情
     self.detailWebView = [[DetailWebView alloc] initWithFrame:CGRectMake(0, self.headerView.yy + 90, kScreenWidth, 40)];

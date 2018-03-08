@@ -7,9 +7,13 @@
 //
 
 #import "TLUserForgetPwdVC.h"
-#import "CaptchaView.h"
-#import "NSString+Check.h"
+//Macro
 #import "APICodeMacro.h"
+//Category
+#import "NSString+Check.h"
+//V
+#import "CaptchaView.h"
+#import "TLPickerTextField.h"
 
 @interface TLUserForgetPwdVC ()
 
@@ -20,6 +24,8 @@
 @property (nonatomic,strong) TLTextField *rePwdTf;
 
 @property (nonatomic, strong) CaptchaView *captchaView;
+//角色类型
+@property (nonatomic, strong) TLPickerTextField *userTypeTf;
 
 @end
 
@@ -38,16 +44,21 @@
 
 - (void)initSubviews {
 
+    BaseWeakSelf;
+    
     self.view.backgroundColor = kBackgroundColor;
     
     CGFloat margin = ACCOUNT_MARGIN;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;
+    CGFloat titleW = 100;
     
     CGFloat btnMargin = 15;
-    
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:@"手机号" titleWidth:100 placeholder:@"请输入手机号"];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h)
+                                                    leftTitle:@"手机号"
+                                                   titleWidth:titleW
+                                                  placeholder:@"请输入手机号"];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
@@ -60,17 +71,54 @@
     self.captchaView = captchaView;
     
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:@"新密码" titleWidth:100 placeholder:@"请输入密码"];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h)
+                                                  leftTitle:@"新密码"
+                                                 titleWidth:titleW
+                                                placeholder:@"请输入密码"];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
     //re密码
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:@"确认密码" titleWidth:100 placeholder:@"确认密码"];
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h)
+                                                    leftTitle:@"确认密码"
+                                                   titleWidth:titleW
+                                                  placeholder:@"确认密码"];
     rePwdTf.secureTextEntry = YES;
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
+    
+    NSArray *typeArr = @[@"美容院",
+                         @"讲师",
+                         @"专家",
+                         @"美导"];
+    
+    //角色类型
+    TLPickerTextField *userTypeTf = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, rePwdTf.yy + 1, w, h)
+                                                                   leftTitle:@"选择角色"
+                                                                  titleWidth:titleW
+                                                                 placeholder:@"请选择角色"];
+    userTypeTf.tagNames = typeArr;
+    userTypeTf.didSelectBlock = ^(NSInteger index) {
+        
+        weakSelf.userTypeTf.text = typeArr[index];
+    };
+    
+    [self.view addSubview:userTypeTf];
+    self.userTypeTf = userTypeTf;
+    
+    //右箭头
+    CGFloat arrowW = 6;
+    CGFloat arrowH = 10;
+    CGFloat rightMargin = 10;
+    
+    UIImageView *arrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
+    
+    arrowIV.frame = CGRectMake(self.userTypeTf.width - rightMargin - arrowW, 0, arrowW, arrowH);
+    arrowIV.centerY = self.userTypeTf.height/2.0;
+    
+    [self.userTypeTf addSubview:arrowIV];
     
     for (int i = 0; i < 2; i++) {
         
@@ -81,10 +129,10 @@
         [self.view addSubview:line];
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(margin);
-            make.right.mas_equalTo(0);
-            make.height.mas_equalTo(0.5);
-            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
+            make.left.equalTo(@(margin));
+            make.right.equalTo(@0);
+            make.height.equalTo(@0.5);
+            make.top.equalTo(@(10 + h + i*(2*h + 10 + 1)));
             
         }];
     }
@@ -97,16 +145,18 @@
     [self.view addSubview:confirmBtn];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.mas_equalTo(btnMargin);
-        make.width.mas_equalTo(kScreenWidth - 2*btnMargin);
-        make.height.mas_equalTo(h - 5);
-        make.top.mas_equalTo(rePwdTf.mas_bottom).mas_equalTo(40);
+        make.left.equalTo(@(btnMargin));
+        make.width.equalTo(@(kScreenWidth - 2*btnMargin));
+        make.height.equalTo(@(h - 5));
+        make.top.equalTo(userTypeTf.mas_bottom).offset(40);
         
     }];
 }
 
 #pragma mark - Events
 - (void)sendCaptcha {
+    
+    
     
     if (![self.phoneTf.text isPhoneNum]) {
         
@@ -120,7 +170,7 @@
     http.code = CAPTCHA_CODE;
     http.parameters[@"bizType"] = USER_FIND_PWD_CODE;
     http.parameters[@"mobile"] = self.phoneTf.text;
-    
+
     [http postWithSuccess:^(id responseObject) {
         
         [TLAlert alertWithSucces:@"验证码已发送,请注意查收"];
@@ -135,6 +185,33 @@
 }
 
 - (void)changePwd {
+    
+    NSString *kind = @"";
+    
+    switch (_userTypeTf.selectIndex) {
+        case 0:
+        {
+            kind = kUserTypeSalon;
+        }break;
+            
+        case 1:
+        {
+            kind = kUserTypeLecturer;
+        }break;
+            
+        case 2:
+        {
+            kind = kUserTypeExpert;
+        }break;
+            
+        case 3:
+        {
+            kind = kUserTypeBeautyGuide;
+        }break;
+            
+        default:
+            break;
+    }
     
     if (![self.phoneTf.text isPhoneNum]) {
         
@@ -155,11 +232,23 @@
         return;
     }
     
+    if (!(self.rePwdTf.text &&self.rePwdTf.text.length > 5)) {
+        
+        [TLAlert alertWithInfo:@"请输入6位以上密码"];
+        return;
+    }
+    
     if (![self.pwdTf.text isEqualToString:self.rePwdTf.text]) {
         
         [TLAlert alertWithInfo:@"输入的密码不一致"];
         return;
         
+    }
+    
+    if (self.userTypeTf.text.length == 0) {
+        
+        [TLAlert alertWithInfo:@"请选择角色"];
+        return ;
     }
     
     [self.view endEditing:YES];
@@ -170,7 +259,7 @@
     http.parameters[@"mobile"] = self.phoneTf.text;
     http.parameters[@"smsCaptcha"] = self.captchaView.captchaTf.text;
     http.parameters[@"newLoginPwd"] = self.pwdTf.text;
-    http.parameters[@"kind"] = APP_KIND;
+    http.parameters[@"kind"] = kind;
     
     [http postWithSuccess:^(id responseObject) {
         

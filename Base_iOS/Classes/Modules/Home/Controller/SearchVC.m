@@ -21,6 +21,7 @@
 //C
 #import "NavigationController.h"
 #import "SearchVC.h"
+#import "BaseSearchVC.h"
 #import "AppointmentDetailVC.h"
 #import "BrandDetailVC.h"
 
@@ -158,21 +159,25 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     
     BaseWeakSelf;
     
-    PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+    __block BaseSearchVC *baseSearchVC = [BaseSearchVC searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
         
         SearchVC *searchVC = [SearchVC new];
         
         searchVC.searchText = searchText;
         searchVC.searchType = weakSelf.searchType;
         
-        [searchViewController.navigationController pushViewController:searchVC animated:YES];
+        [baseSearchVC.navigationController pushViewController:searchVC animated:YES];
     }];
     // 3. Set style for popular search and search history
-    searchViewController.showHotSearch = NO;
+    baseSearchVC.showHotSearch = NO;
+    baseSearchVC.searchBarBackgroundColor = [UIColor colorWithUIColor:kWhiteColor alpha:0.4];
+    baseSearchVC.searchBar.tintColor = kWhiteColor;
+    baseSearchVC.searchBar.layer.cornerRadius = 15;
+    baseSearchVC.searchBar.layer.masksToBounds = YES;
     
-    searchViewController.searchHistoryStyle = PYSearchHistoryStyleARCBorderTag;
+    baseSearchVC.searchHistoryStyle = PYSearchHistoryStyleARCBorderTag;
     
-    searchViewController.searchBarBackgroundColor = [UIColor colorWithUIColor:kWhiteColor alpha:0.4];
+    baseSearchVC.searchBarBackgroundColor = [UIColor colorWithUIColor:kWhiteColor alpha:0.4];
     
     __weak UIButton *cancelBtn = [UIButton buttonWithTitle:@"取消"
                                                 titleColor:kWhiteColor
@@ -183,17 +188,15 @@ static NSString *AppointmentListCellID = @"AppointmentListCell";
     
     cancelBtn.frame = CGRectMake(0, 0, 60, 44);
     
-    searchViewController.cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
-    
-    UIView* backgroundView = [searchViewController.searchBar subViewOfClassName:@"_UISearchBarSearchFieldBackgroundView"];
-    
-//    backgroundView.layer.cornerRadius = 15;
-//    backgroundView.clipsToBounds = YES;
+    baseSearchVC.cancelButton = [[UIBarButtonItem alloc] initWithCustomView:cancelBtn];
     
     // 4. Set delegate
-    searchViewController.delegate = self;
+    baseSearchVC.delegate = self;
     // 5. Present a navigation controller
-    NavigationController *navi = [[NavigationController alloc] initWithRootViewController:searchViewController];
+    NavigationController *navi = [[NavigationController alloc] initWithRootViewController:baseSearchVC];
+    
+    [navi.navigationBar setBackgroundImage:[kAppCustomMainColor convertToImage] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+
     [self presentViewController:navi animated:YES completion:nil];
 }
 

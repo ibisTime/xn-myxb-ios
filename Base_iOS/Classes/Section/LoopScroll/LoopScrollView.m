@@ -45,7 +45,7 @@
     return self;
 }
 
-+ (instancetype)loopTitleViewWithFrame:(CGRect)frame titleImgArr:(NSArray *)titleImgArr
++ (instancetype)loopTitleViewWithFrame:(CGRect)frame titleImgs:(NSArray *)titleImgs
 {
     LoopScrollView *loopView = [[self alloc] initWithFrame:frame];
     
@@ -55,7 +55,7 @@
     loopView.nextLabel = [[YYLabel alloc]init];
     [loopView.scrollView addSubview:loopView.nextLabel];
     
-    loopView.titleImgArr = titleImgArr;
+    loopView.titleImgs = titleImgs;
     
     return loopView;
 }
@@ -112,9 +112,12 @@
 }
 
 #pragma mark - Setting
-- (void)setTitlesArr:(NSArray *)titlesArr
-{
-    _titlesArr = titlesArr;
+- (void)setTitles:(NSArray *)titles {
+    
+    //判断数据是否大于设置的个数
+    NSInteger count = titles.count <= self.count ? titles.count: self.count;
+    
+    _titles = [titles subarrayWithRange:NSMakeRange(0, count)];
     
     _currentIndex = 0;
     
@@ -127,7 +130,7 @@
         [_timer pauseTimer];
     }
     
-    if (titlesArr.count <= 1) {
+    if (titles.count <= 1) {
         
         self.scrollView.contentSize = CGSizeMake(0, CGRectGetHeight(self.bounds));
         
@@ -141,9 +144,9 @@
     [self refreshCurrentTitleView];
 }
 
-- (void)setTitleImgArr:(NSArray *)titleImgArr {
+- (void)setTitleImgs:(NSArray *)titleImgs {
     
-    _titleImgArr = titleImgArr;
+    _titleImgs = titleImgs;
 }
 
 - (void)setLeftImage:(UIImage *)leftImage {
@@ -175,7 +178,7 @@
         
         _currentIndex ++;
         
-        if (_currentIndex > self.titlesArr.count - 1) {
+        if (_currentIndex > self.titles.count - 1) {
             
             _currentIndex = 0;
         }
@@ -186,11 +189,11 @@
 {
     NSInteger index = _currentIndex;
     
-    self.currentLabel.attributedText = [self getAttachmentTextWithStr:self.titlesArr[index] image:self.titleImgArr[index]];
+    self.currentLabel.attributedText = [self getAttachmentTextWithStr:self.titles[index] image:self.titleImgs[index]];
     
-    index = _currentIndex + 1 >= self.titlesArr.count ? 0: _currentIndex + 1;
+    index = _currentIndex + 1 >= self.titles.count ? 0: _currentIndex + 1;
     
-    self.nextLabel.attributedText = [self getAttachmentTextWithStr:self.titlesArr[index] image:self.titleImgArr[index]];
+    self.nextLabel.attributedText = [self getAttachmentTextWithStr:self.titles[index] image:self.titleImgs[index]];
     
     self.scrollView.contentOffset = CGPointMake(0, 0);
 }

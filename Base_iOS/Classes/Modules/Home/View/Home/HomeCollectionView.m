@@ -20,6 +20,8 @@
 
 @implementation HomeCollectionView
 
+static NSString *placeholderViewID = @"placeholderViewID";
+
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout
 {
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -32,6 +34,9 @@
         [self registerClass:[BrandCell class] forCellWithReuseIdentifier:@"BrandCell"];
         
         [self registerClass:[HomeHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCellId"];
+        
+        [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID];
+
     }
     return self;
 }
@@ -64,19 +69,66 @@
 
     NSString *HeaderCellId = @"HeaderCellId";
 
-    HomeHeaderView *cell = (HomeHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderCellId forIndexPath:indexPath];
-
-    cell.backgroundColor = kBackgroundColor;
+    HomeHeaderView *cell;
     
-    self.headerView = cell;
+    if (kind == UICollectionElementKindSectionHeader) {
+        
+        cell = (HomeHeaderView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderCellId forIndexPath:indexPath];
+        
+        cell.backgroundColor = kBackgroundColor;
+        
+        self.headerView = cell;
+        
+        return cell;
+        
+    }
+    
+    UICollectionReusableView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID forIndexPath:indexPath];
 
-    return cell;
+    if (self.brands.count > 0) {
+        
+        return reusableView;
+    }
+    
+    reusableView.frame = CGRectMake(0, 216 + kWidth(185), kScreenWidth, 200);
+    
+    UIImageView *orderIV = [[UIImageView alloc] init];
+    orderIV.image = kImage(@"暂无订单");
+    orderIV.centerX = kScreenWidth/2.0;
+    
+    [reusableView addSubview:orderIV];
+    [orderIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@0);
+        make.top.equalTo(@50);
+        
+    }];
+    
+    UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor textColor:kTextColor2 font:14.0];
+    
+    textLbl.text = @"暂无品牌";
+    textLbl.textAlignment = NSTextAlignmentCenter;
+    
+    [reusableView addSubview:textLbl];
+    [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(orderIV.mas_bottom).offset(20);
+        make.centerX.equalTo(orderIV.mas_centerX);
+        
+    }];
+    
+    return reusableView;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout
 referenceSizeForHeaderInSection:(NSInteger)section {
     
     return CGSizeMake(kScreenWidth, 216 + kWidth(185));
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    
+    return CGSizeMake(kScreenWidth, 200);
 }
 
 @end

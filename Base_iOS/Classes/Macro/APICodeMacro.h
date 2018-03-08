@@ -34,6 +34,6 @@
 //用户信息
 #define USER_INFO @"805121"
 //AppKind
-#define APP_KIND @"C"
+#define APP_KIND [TLUser user].kind
 
 #endif /* APICodeMacro_h */

@@ -220,6 +220,7 @@
     self.whiteView.y = self.goodView.yy + 10;
     
     self.detailWebView.webView.scrollView.height = height;
+    self.detailWebView.webView.height = height;
     self.detailWebView.frame = CGRectMake(0, self.whiteView.yy, kScreenWidth, height);
     
     self.height = self.detailWebView.yy;

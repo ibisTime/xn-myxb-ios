@@ -16,6 +16,8 @@
 #import <UIImageView+WebCache.h>
 #import "NSNumber+Extension.h"
 
+#define kPhotoW ((kScreenWidth - 30)/2.0)
+
 @interface IntegralGoodCell()
 //image
 @property (nonatomic, strong) UIImageView *goodIV;
@@ -43,9 +45,7 @@
     
     self.backgroundColor = kWhiteColor;
     
-    CGFloat imgW = (kScreenWidth - 30)/2.0;
-    
-    self.goodIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imgW, imgW)];
+    self.goodIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kPhotoW, kPhotoW)];
     
     self.goodIV.contentMode = UIViewContentModeScaleAspectFill;
     self.goodIV.clipsToBounds = YES;
@@ -85,24 +85,24 @@
 
 - (void)setSubviewLayout {
     
-    CGFloat imgW = (kScreenWidth - 10)/2.0;
-
+    CGFloat leftMargin = 10;
+    
     //商品名
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(self.mas_left).offset(15);
-        make.right.equalTo(self.mas_right).offset(-15);
+        make.left.equalTo(self.mas_left).offset(leftMargin);
         make.top.equalTo(self.goodIV.mas_bottom).offset(10);
-        make.width.equalTo(@(imgW - 20));
+        make.width.equalTo(@(kPhotoW - 2*leftMargin));
+        make.height.lessThanOrEqualTo(@40);
     }];
 
     //兑换按钮
     [self.exchangeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(self.nameLbl.mas_bottom).offset(8);
+        make.bottom.equalTo(self.mas_bottom).offset(-10);
         make.height.equalTo(@25);
-        make.left.equalTo(@15);
-        make.right.equalTo(@(-15));
+        make.left.equalTo(@(leftMargin));
+        make.right.equalTo(@(-leftMargin));
     }];
 }
 
@@ -120,11 +120,11 @@
     //布局
     [self setSubviewLayout];
     //
-    [self layoutSubviews];
+//    [self layoutSubviews];
     
-    CGFloat itemW = (kScreenWidth - 30)/2.0;
-
-    integralModel.size = CGSizeMake(itemW, self.exchangeBtn.yy + 10);
+//    CGFloat h = kPhotoW + 10 + 40 + 10 + 30 + 10;
+//
+//    integralModel.size = CGSizeMake(kPhotoW, h);
     
 }
 

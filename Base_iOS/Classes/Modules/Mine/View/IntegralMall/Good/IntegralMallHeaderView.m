@@ -12,20 +12,12 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
-//Framework
 //Category
 #import <UIImageView+WebCache.h>
 #import "NSString+Extension.h"
-//Extension
-//M
-//V
 
 @interface IntegralMallHeaderView()
 
-//头像
-//昵称
-//性别
-//积分数
 //头像
 @property (nonatomic, strong) UIImageView *photoIV;
 //昵称
@@ -131,9 +123,7 @@
         make.height.equalTo(@0.5);
         make.top.equalTo(@85);
     }];
-    //积分订单
-    //积分记录
-    //健康币和积分
+    //积分订单和积分记录
     CGFloat y = 85;
     CGFloat w = kScreenWidth/2.0;
     CGFloat h = 45;
@@ -168,6 +158,19 @@
         make.height.equalTo(@30);
         make.width.equalTo(@0.5);
         make.top.equalTo(line.mas_bottom).offset(7.5);
+    }];
+    
+    //bottomLine
+    UIView *bottomLine = [[UIView alloc] init];
+    
+    bottomLine.backgroundColor = kLineColor;
+    
+    [self addSubview:bottomLine];
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.bottom.equalTo(@0);
+        make.height.equalTo(@10);
+        
     }];
 }
 

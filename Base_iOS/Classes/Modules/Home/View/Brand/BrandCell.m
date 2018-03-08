@@ -38,8 +38,8 @@
 
 #pragma mark - Init
 - (void)initSubviews {
-    
-    CGFloat imgW = (kScreenWidth - 10)/2.0;
+        
+    CGFloat imgW = (kScreenWidth - 30)/2.0;
     
     self.goodIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imgW, imgW)];
     
@@ -51,12 +51,15 @@
     //名称
     self.nameLbl = [UILabel labelWithFrame:CGRectZero textAligment:NSTextAlignmentLeft backgroundColor:[UIColor clearColor] font:Font(14.0) textColor:kTextColor];
     
+    self.nameLbl.numberOfLines = 0;
+    
     [self addSubview:self.nameLbl];
     [self.nameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.mas_left).offset(10);
         make.top.equalTo(self.goodIV.mas_bottom).offset(10);
         make.width.equalTo(@(imgW - 20));
+        make.height.lessThanOrEqualTo(@48);
     }];
 }
 
