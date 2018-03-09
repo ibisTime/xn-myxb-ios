@@ -97,14 +97,17 @@ static NSString *placeholderViewID = @"placeholderViewID";
         return cell;
     }
     
-    UICollectionReusableView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID forIndexPath:indexPath];
-    
-    if (self.integralGoods.count > 0) {
+    CGFloat height = self.integralGoods.count == 0 ? 200: 0.1;
+
+    if (self.reusableView) {
         
-        return reusableView;
+        return self.reusableView;
     }
     
-    reusableView.frame = CGRectMake(0, 140, kScreenWidth, 200);
+    UICollectionReusableView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID forIndexPath:indexPath];
+    
+    reusableView.frame = CGRectMake(0, 140, kScreenWidth, height);
+    reusableView.hidden = YES;
     
     UIImageView *orderIV = [[UIImageView alloc] init];
     orderIV.image = kImage(@"暂无订单");
@@ -131,6 +134,8 @@ static NSString *placeholderViewID = @"placeholderViewID";
         
     }];
     
+    self.reusableView = reusableView;
+    
     return reusableView;
     
 }
@@ -143,7 +148,9 @@ referenceSizeForHeaderInSection:(NSInteger)section {
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     
-    return CGSizeMake(kScreenWidth, 200);
+    CGFloat height = self.integralGoods.count == 0 ? 200: 0.1;
+
+    return CGSizeMake(kScreenWidth, height);
 }
 
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

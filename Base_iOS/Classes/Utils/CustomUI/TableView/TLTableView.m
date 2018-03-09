@@ -248,13 +248,6 @@ _Pragma("clang diagnostic pop") \
     
     if (isEmpty == YES) {
         
-//        [_placeholderV removeFromSuperview];
-//        _placeholderV = nil;
-//        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-//
-//        _placeholderV = _placeholderView();
-//        [self addSubview:_placeholderV];
-        
         if ( ABS((CGRectGetMinY(self.placeHolderView.frame) - CGRectGetHeight(self.tableHeaderView.frame))) > 1 ) {
             
             CGRect frame = self.placeHolderView.frame;
@@ -263,19 +256,10 @@ _Pragma("clang diagnostic pop") \
         }
         self.tableFooterView = self.placeHolderView;
         
-//        [self addSubview:self.placeHolderView];
-
-        
     }else{
         
         [self.placeHolderView removeFromSuperview];
-//        [_placeholderV removeFromSuperview];
-//        _placeholderV = nil;
-//        [[_placeholderV subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
     }
-    
-    
 }
 
 #pragma mark - UITableViewDelegate

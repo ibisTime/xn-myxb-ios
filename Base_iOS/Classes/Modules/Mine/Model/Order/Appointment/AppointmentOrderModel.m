@@ -10,7 +10,8 @@
 #import "TLUser.h"
 
 NSString *const kAppointmentOrderStatusWillCheck = @"1";    //待审核
-NSString *const kAppointmentOrderStatusWillVisit = @"2";    //待上面
+NSString *const kAppointmentOrderStatusWillVisit = @"2";    //待上门
+NSString *const kAppointmentOrderStatusDidCancel = @"3";    //无档期
 NSString *const kAppointmentOrderStatusWillOverClass = @"4";//待下课
 NSString *const kAppointmentOrderStatusDidOverClass = @"5"; //待录入
 NSString *const kAppointmentOrderStatusDidComplete = @"6";  //已完成
@@ -19,11 +20,10 @@ NSString *const kAppointmentOrderStatusDidComplete = @"6";  //已完成
 
 - (NSString *)getStatusName {
     
-    //0 待审核 1 审核未通过 2待发货 3待评价 4已完成
-    
     NSDictionary *dict = @{
                            kAppointmentOrderStatusWillCheck : @"待审核",
                            kAppointmentOrderStatusWillVisit : @"待上门",
+                           kAppointmentOrderStatusDidCancel : @"无档期",
                            kAppointmentOrderStatusWillOverClass : @"待下课",
                            kAppointmentOrderStatusDidOverClass : @"待录入",
                            kAppointmentOrderStatusDidComplete : @"已完成",

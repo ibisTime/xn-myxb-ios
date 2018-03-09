@@ -54,7 +54,6 @@
     
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:text];
 
-    self.tableView.placeHolderView = self.placeHolderView;
     self.tableView.refreshDelegate = self;
     
     [self.view addSubview:self.tableView];

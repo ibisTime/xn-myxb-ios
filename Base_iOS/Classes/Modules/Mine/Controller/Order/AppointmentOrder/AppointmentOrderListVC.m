@@ -58,17 +58,16 @@
 
 - (void)initTableView {
     
-    TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 40)
+    self.tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 40)
                                                          delegate:self
                                                        dataSource:self];
     
-    tableView.rowHeight = 100;
+    self.tableView.rowHeight = 100;
     
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无订单"];
 
-    [self.view addSubview:tableView];
+    [self.view addSubview:self.tableView];
     
-    self.tableView = tableView;
 }
 
 #pragma mark - Notification
@@ -127,30 +126,7 @@
     helper.parameters[@"orderColumn"] = @"apply_datetime";
     helper.parameters[@"orderDir"] = @"desc";
     helper.parameters[@"type"] = self.kind;
-    
-    if (self.status == AppointmentOrderStatusWillCheck) {
-        
-        helper.parameters[@"status"] = @"1";
-        
-    }else if (self.status == AppointmentOrderStatusWillVisit) {
-        
-        helper.parameters[@"status"] = @"2";
-        
-    }else if (self.status == AppointmentOrderStatusWillOverClass)  {
-        
-        helper.parameters[@"status"] = @"4";
-        
-    }else if (self.status == AppointmentOrderStatusDidOverClass)  {
-        
-        helper.parameters[@"status"] = @"5";
-        
-    }else if(self.status == AppointmentOrderStatusDidComplete) {
-        
-        helper.parameters[@"status"] = @"6";
-        
-    } else {//全部
-        
-    }
+    helper.parameters[@"status"] = self.status;
     
     helper.tableView = self.tableView;
     

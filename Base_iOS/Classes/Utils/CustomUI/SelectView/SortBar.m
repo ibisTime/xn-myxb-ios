@@ -31,6 +31,8 @@ static const float kAnimationdDuration = 0.3;
 @property (nonatomic, assign) NSInteger selectIndex;
 
 @property (nonatomic, assign) CGFloat btnW;
+//
+@property (nonatomic, assign) CGFloat allBtnWidth;
 
 @end
 
@@ -66,6 +68,8 @@ static const float kAnimationdDuration = 0.3;
     
     CGFloat lineW = [NSString getWidthWithString:self.sortNames[0] font:MIN(kWidth(16.0), 16)];
     
+    CGFloat leftM = self.allBtnWidth > kScreenWidth ? 10: (widthItem - lineW)/2.0;
+    
     _selectLine = [[UIView alloc] init];
     
     _selectLine.backgroundColor = kAppCustomMainColor;
@@ -73,7 +77,7 @@ static const float kAnimationdDuration = 0.3;
     
     [_selectLine mas_makeConstraints:^(MASConstraintMaker *make) {
        
-        make.left.equalTo(@10);
+        make.left.equalTo(@(leftM));
         make.bottom.equalTo(@(self.frame.size.height -1));
         make.width.equalTo(@(lineW));
         make.height.equalTo(@2);
@@ -84,14 +88,28 @@ static const float kAnimationdDuration = 0.3;
     
     CGFloat w = 0;
     
+    self.allBtnWidth = 0;
+    
+    //判断是否超过屏幕宽度
+    
+    for (NSInteger i = 0; i < _sortNames.count; i++) {
+    
+        NSString *title = _sortNames[i];
+
+        CGFloat widthMargin = [NSString getWidthWithString:title font:MIN(kWidth(16.0), 16)] + 20;
+
+        self.allBtnWidth += widthMargin;
+    }
+    
+    
     for (NSInteger i = 0; i < _sortNames.count; i++) {
         
         NSString *title = _sortNames[i];
         
         CGFloat widthMargin = [NSString getWidthWithString:title font:MIN(kWidth(16.0), 16)] + 20;
         
-//        CGFloat btnW = widthItem;
-        
+        CGFloat btnW = self.allBtnWidth > kScreenWidth ? widthMargin: widthItem;
+
         UIButton *button = [UIButton buttonWithTitle:_sortNames[i] titleColor:[UIColor textColor] backgroundColor:kWhiteColor titleFont:btnFont];
         
         [button setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
@@ -104,11 +122,11 @@ static const float kAnimationdDuration = 0.3;
             
             make.centerY.mas_equalTo(0);
             make.height.mas_equalTo(self.mas_height);
-            make.width.mas_equalTo(widthMargin);
+            make.width.mas_equalTo(btnW);
             make.left.mas_equalTo(w);
         }];
         
-        w += widthMargin;
+        w += btnW;
 
     }
  

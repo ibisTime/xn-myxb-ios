@@ -75,8 +75,8 @@
                                                            delegate:self
                                                          dataSource:self];
     
-    addressTableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"暂无收货地址"];
-    
+    addressTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无收货地址"];
+
     [self.view addSubview:addressTableView];
     self.addressTableView = addressTableView;
     

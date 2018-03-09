@@ -106,7 +106,6 @@
             htmlVC.type = HTMLTypeIntregalRule;
             
             [self.navigationController pushViewController:htmlVC animated:YES];
-            
         }break;
             
         case IntegralTypeIntegralOrder:

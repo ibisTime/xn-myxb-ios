@@ -18,7 +18,7 @@
 
 #define UIColorFromRGB(rgbValue,alp) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:alp]
 
-#define ItemNums 2.0    //item的数量
+#define ItemNums (1.0*self.titleArray.count)    //item的数量
 
 @interface TopLabelUtil ()
 

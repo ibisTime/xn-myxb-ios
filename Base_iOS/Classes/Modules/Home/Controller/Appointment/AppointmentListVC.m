@@ -90,7 +90,7 @@
     
     BaseWeakSelf;
     
-    __block BaseSearchVC *baseSearchVC = [PYSearchViewController searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+    __block BaseSearchVC *baseSearchVC = [BaseSearchVC searchViewControllerWithHotSearches:nil searchBarPlaceholder:NSLocalizedString(@"输入关键字搜索", @"输入关键字搜索") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
         
         SearchVC *searchVC = [SearchVC new];
         

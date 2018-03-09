@@ -171,6 +171,18 @@
         make.right.equalTo(titleLbl.mas_left).offset(-10);
         make.centerY.equalTo(@0);
     }];
+    //bottomLine
+    UIView *bottomLine = [[UIView alloc] init];
+    
+    bottomLine.backgroundColor = kLineColor;
+    
+    [self.titleView addSubview:bottomLine];
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.bottom.equalTo(@0);
+        make.height.equalTo(@0.5);
+        
+    }];
 }
 
 #pragma mark - Setting

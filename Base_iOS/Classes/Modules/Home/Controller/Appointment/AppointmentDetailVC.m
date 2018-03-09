@@ -112,6 +112,8 @@
         
     } forControlEvents:UIControlEventTouchUpInside];
     
+    [agentBtn setImage:kImage(@"经纪人") forState:UIControlStateNormal];
+
     [self.bottomView addSubview:agentBtn];
     [agentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -119,6 +121,9 @@
         make.height.equalTo(@(50));
         make.width.equalTo(@(kWidth(kScreenWidth - 250)));
     }];
+    
+    [agentBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+
     //预约
     UIButton *appointmentBtn = [UIButton buttonWithTitle:@"预约"
                                       titleColor:kWhiteColor

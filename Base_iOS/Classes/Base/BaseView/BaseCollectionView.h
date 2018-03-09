@@ -37,6 +37,8 @@
 @interface BaseCollectionView : UICollectionView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, weak)   id<RefreshCollectionViewDelegate> refreshDelegate;  //代理
+@property (nonatomic, strong) UICollectionReusableView *reusableView;
+
 //- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 /**
  * 添加下拉事件

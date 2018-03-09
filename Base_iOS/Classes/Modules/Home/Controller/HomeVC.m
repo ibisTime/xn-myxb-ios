@@ -110,8 +110,6 @@
     
     [self.view addSubview:self.collectionView];
     
-    [self.collectionView reloadData];
-
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         if (self.collectionView.headerView) {
@@ -192,7 +190,7 @@
             
             weakSelf.collectionView.brands = objs;
             
-            [weakSelf.collectionView reloadData];
+            [weakSelf.collectionView reloadData_tl];
             //系统消息
             [weakSelf requestNoticeList];
             //获取banner列表
@@ -211,7 +209,7 @@
             
             weakSelf.collectionView.brands = objs;
             
-            [weakSelf.collectionView reloadData];
+            [weakSelf.collectionView reloadData_tl];
             
         } failure:^(NSError *error) {
             

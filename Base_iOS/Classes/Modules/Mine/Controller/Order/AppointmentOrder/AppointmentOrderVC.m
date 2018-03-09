@@ -7,13 +7,15 @@
 //
 
 #import "AppointmentOrderVC.h"
+//M
+#import "AppointmentOrderModel.h"
 //V
 #import "SelectScrollView.h"
 #import "TopLabelUtil.h"
 //C
 #import "AppointmentOrderListVC.h"
 
-@interface AppointmentOrderVC ()<SegmentDelegate>
+@interface AppointmentOrderVC ()<SegmentDelegate, UIScrollViewDelegate>
 
 //顶部切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
@@ -23,6 +25,8 @@
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
 //
 @property (nonatomic, strong) NSArray *titles;
+//
+@property (nonatomic, strong) NSArray *statusList;
 //类型
 @property (nonatomic, copy) NSString *kind;
 
@@ -65,27 +69,33 @@
     //1.切换背景
     self.switchScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight)];
     [self.view addSubview:self.switchScrollView];
-    [self.switchScrollView setContentSize:CGSizeMake(2*self.switchScrollView.width, self.switchScrollView.height)];
+    [self.switchScrollView setContentSize:CGSizeMake(titleArr.count*self.switchScrollView.width, self.switchScrollView.height)];
     self.switchScrollView.scrollEnabled = NO;
     //2.订单列表
     NSArray *kindArr = @[kUserTypeBeautyGuide, kUserTypeLecturer, kUserTypeExpert];
 
+    
+    
     for (int i = 0; i < titleArr.count; i++) {
         
-        self.titles = @[@"全部",
-                        @"待审核",
-                        @"待上门",
-                        @"待下课",
-                        @"待录入",
-                        @"已完成"];
+        self.kind = kindArr[i];
+
+        if ([self.kind isEqualToString:kUserTypeExpert]) {
+            
+            self.titles = @[@"全部", @"待审核", @"待上门", @"待下课", @"待录入", @"已完成"];
+            
+        } else {
+            
+            self.titles = @[@"全部", @"待审核", @"待上门", @"待下课", @"已完成"];
+        }
         
         SelectScrollView *selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(i*kScreenWidth, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
         
         [self.switchScrollView addSubview:selectScrollView];
         
-        self.selectScrollView = selectScrollView;
+        self.switchScrollView.delegate = self;
         
-        self.kind = kindArr[i];
+        self.selectScrollView = selectScrollView;
         
         [self addSubViewController];
     }
@@ -94,12 +104,20 @@
 
 - (void)addSubViewController {
     
+    if ([self.kind isEqualToString:kUserTypeExpert]) {
+        
+        self.statusList = @[@"", kAppointmentOrderStatusWillCheck, kAppointmentOrderStatusWillVisit, kAppointmentOrderStatusWillOverClass, kAppointmentOrderStatusDidOverClass, kAppointmentOrderStatusDidComplete];
+        
+    } else {
+        
+        self.statusList = @[@"", kAppointmentOrderStatusWillCheck, kAppointmentOrderStatusWillVisit, kAppointmentOrderStatusWillOverClass, kAppointmentOrderStatusDidComplete];
+    }
     
     for (NSInteger i = 0; i < self.titles.count; i++) {
         
         AppointmentOrderListVC *childVC = [[AppointmentOrderListVC alloc] init];
         
-        childVC.status = i-1;
+        childVC.status = self.statusList[i];
         childVC.kind = self.kind;
         childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
         
@@ -116,6 +134,11 @@
     [self.switchScrollView setContentOffset:CGPointMake((index - 1) * self.switchScrollView.width, 0)];
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    NSLog(@"");
 }
 
 - (void)didReceiveMemoryWarning {

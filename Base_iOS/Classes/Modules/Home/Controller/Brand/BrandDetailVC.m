@@ -107,6 +107,8 @@
         
     } forControlEvents:UIControlEventTouchUpInside];
     
+    [chatBtn setImage:kImage(@"顾问") forState:UIControlStateNormal];
+    
     [self.bottomView addSubview:chatBtn];
     [chatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -114,6 +116,9 @@
         make.height.equalTo(@(50));
         make.width.equalTo(@(kWidth(kScreenWidth - 250)));
     }];
+    
+    [chatBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+
     //下单
     UIButton *buyBtn = [UIButton buttonWithTitle:@"下单"
                                       titleColor:kWhiteColor

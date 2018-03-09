@@ -57,18 +57,16 @@
 
 - (void)initTableView {
     
-    TLTableView *tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 40)
+    self.tableView = [TLTableView groupTableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kNavigationBarHeight - 40)
                                                          delegate:self
                                                        dataSource:self];
     
-    tableView.rowHeight = 100;
+    self.tableView.rowHeight = 100;
     
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无订单"];
 
-    [self.view addSubview:tableView];
-    
-    self.tableView = tableView;
-    
+    [self.view addSubview:self.tableView];
+        
     //--//
     
     //全部（不传） 0 待发货 2待评价 3已完成 4无货取消

@@ -10,6 +10,7 @@
 
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "TLPlaceholderView.h"
 
 @class TLTableView;
 @protocol RefreshDelegate <NSObject>
@@ -67,7 +68,7 @@
 @property (nonatomic, assign) BOOL hiddenFooter;
 @property (nonatomic, assign) BOOL hiddenHeader;
 
-@property (nonatomic,strong) UIView *placeHolderView;
+@property (nonatomic,strong) TLPlaceholderView *placeHolderView;
 
 
 //****************************数据刷新   站位图相关**********************//

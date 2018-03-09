@@ -57,7 +57,8 @@
 @end
 
 FOUNDATION_EXTERN NSString *const kAppointmentOrderStatusWillCheck;    //待审核
-FOUNDATION_EXTERN NSString *const kAppointmentOrderStatusWillVisit;    //待上面
+FOUNDATION_EXTERN NSString *const kAppointmentOrderStatusWillVisit;    //待上门
+FOUNDATION_EXTERN NSString *const kAppointmentOrderStatusDidCancel;    //无档期
 FOUNDATION_EXTERN NSString *const kAppointmentOrderStatusWillOverClass;//待下课
 FOUNDATION_EXTERN NSString *const kAppointmentOrderStatusDidOverClass; //待录入
 FOUNDATION_EXTERN NSString *const kAppointmentOrderStatusDidComplete;  //已完成
