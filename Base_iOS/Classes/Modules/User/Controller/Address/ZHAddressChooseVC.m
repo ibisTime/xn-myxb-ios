@@ -76,7 +76,7 @@
                                                          dataSource:self];
     
     addressTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无收货地址"];
-
+    
     [self.view addSubview:addressTableView];
     self.addressTableView = addressTableView;
     
@@ -223,8 +223,8 @@
                 [TLAlert alertWithSucces:@"设置成功"];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ADDRESS_CHANGE_NOTIFICATION" object:weakSelf userInfo:@{
-                                                                                                                                 @"sender" : weakSelf
-                                                                                                                                 }];
+                                                                                                                                     @"sender" : weakSelf
+                                                                                                                                     }];
                 //改变数据
                 [weakSelf.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     
@@ -258,21 +258,21 @@
     
     ZHReceivingAddress *selectedAddr = self.addressRoom[indexPath.section];
     
-        if (selectedAddr.isSelected == YES) {
-    
-    
-        } else {
-    
-            [self.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress *addr, NSUInteger idx, BOOL * _Nonnull stop) {
-    
-                if (![addr isEqual:selectedAddr]) {
-                    addr.isSelected = NO;
-                }
-    
-            }];
-            selectedAddr.isSelected = YES;
-    
-        }
+    if (selectedAddr.isSelected == YES) {
+        
+        
+    } else {
+        
+        [self.addressRoom enumerateObjectsUsingBlock:^(ZHReceivingAddress *addr, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if (![addr isEqual:selectedAddr]) {
+                addr.isSelected = NO;
+            }
+            
+        }];
+        selectedAddr.isSelected = YES;
+        
+    }
     
     if (self.chooseAddress) {
         

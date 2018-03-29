@@ -15,7 +15,7 @@
 //C
 #import "AppointmentOrderListVC.h"
 
-@interface AppointmentOrderVC ()<SegmentDelegate, UIScrollViewDelegate>
+@interface AppointmentOrderVC ()<SegmentDelegate>
 
 //顶部切换
 @property (nonatomic, strong) TopLabelUtil *labelUnil;
@@ -93,8 +93,6 @@
         
         [self.switchScrollView addSubview:selectScrollView];
         
-        self.switchScrollView.delegate = self;
-        
         self.selectScrollView = selectScrollView;
         
         [self addSubViewController];
@@ -134,11 +132,6 @@
     [self.switchScrollView setContentOffset:CGPointMake((index - 1) * self.switchScrollView.width, 0)];
     [self.labelUnil dyDidScrollChangeTheTitleColorWithContentOfSet:(index-1)*kScreenWidth];
     
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    NSLog(@"");
 }
 
 - (void)didReceiveMemoryWarning {

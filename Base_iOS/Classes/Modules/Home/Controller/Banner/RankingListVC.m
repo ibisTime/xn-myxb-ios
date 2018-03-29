@@ -66,6 +66,8 @@
         
         _headerView = [[RankingHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeaderViewHeight)];
         
+        _headerView.backgroundColor = kWhiteColor;
+        
         self.tableView.tableHeaderView = _headerView;
     }
     return _headerView;
