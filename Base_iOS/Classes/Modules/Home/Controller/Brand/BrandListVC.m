@@ -12,6 +12,7 @@
 //V
 #import "BrandListTableView.h"
 #import "TLPlaceholderView.h"
+#import "BrandHeaderView.h"
 //C
 #import "BrandDetailVC.h"
 
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) BrandListTableView *tableView;
 //
 @property (nonatomic, strong) NSMutableArray <BrandModel *>*brands;
+
+@property (nonatomic, strong) BrandHeaderView *headerView;
 
 @end
 
@@ -46,6 +49,18 @@
 
 - (void)initTableView {
     
+    
+    self.descriptionStr = [NSString stringWithFormat:@"品牌简介:\n\n%@",self.descriptionStr];
+
+    self.headerView.descriptionStr = self.descriptionStr;
+    
+    
+//    CGSize size = [self.headerView.descLabel sizeThatFits:CGSizeMake(kScreenWidth - 30, 30)];
+//
+//    self.headerView.frame = CGRectMake(0, 0, kScreenWidth, size.height + 20);
+    
+    
+    
     self.brands = [NSMutableArray array];
     
     self.tableView = [[BrandListTableView alloc] initWithFrame:CGRectZero
@@ -60,6 +75,7 @@
         
         make.edges.mas_equalTo(0);
     }];
+    self.tableView.tableHeaderView = self.headerView;
 }
 
 #pragma mark - Data
@@ -111,7 +127,14 @@
     [self.tableView endRefreshingWithNoMoreData_tl];
     
 }
-
+- (BrandHeaderView *)headerView
+{
+    if (!_headerView) {
+        _headerView = [[BrandHeaderView alloc]init];
+        [self.view addSubview:_headerView];
+    }
+    return _headerView;
+}
 #pragma mark - RefreshDelegate
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

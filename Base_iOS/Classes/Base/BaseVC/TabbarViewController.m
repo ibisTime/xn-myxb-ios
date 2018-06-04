@@ -16,6 +16,7 @@
 #import "NavigationController.h"
 #import "TLUserLoginVC.h"
 #import "InviteVC.h"
+#import "SchoolOfBusinessVC.h"
 
 @interface TabbarViewController () <UITabBarControllerDelegate, TabBarDelegate>
 //ItemArray
@@ -66,27 +67,31 @@
     self.tabBarItems = [NSMutableArray array];
     
     NSArray *titles = @[@"首页",
-                        @"帮助中心",
+                        @"商学院",
+                        //@"平台建议",
                         @"邀请好友",
-                        @"平台建议",
+                        @"帮助中心",
                         @"我的"];
     
     NSArray *normalImages = @[@"home",
-                              @"help_center",
+                              @"商学院",
+//                              @"platfrom_proposal",
                               @"",
-                              @"platfrom_proposal",
+                              @"help_center",
                               @"mine"];
     
     NSArray *selectImages = @[@"home_select",
-                              @"help_center_select",
+                              @"商学院点击",
+//                              @"platfrom_proposal_select",
                               @"",
-                              @"platfrom_proposal_select",
+                              @"help_center_select",
                               @"mine_select"];
     
     NSArray *vcNames = @[@"HomeVC",
-                         @"HelpCenterVC",
+                         @"SchoolOfBusinessVC",
+//                         @"PlatfromProposalVC",
                          @"InviteVC",
-                         @"PlatfromProposalVC",
+                         @"HelpCenterVC",
                          @"MineVC"];
     
     for (int i = 0; i < normalImages.count; i++) {

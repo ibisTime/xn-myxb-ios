@@ -159,4 +159,16 @@
     _numLbl.text = [NSString stringWithFormat:@"已售: %ld", brandModel.soldOutCount];
     
 }
+- (void)setShopModel:(ShopCarModel *)shopModel
+{
+    _shopModel = shopModel;
+    
+    [_goodIV sd_setImageWithURL:[NSURL URLWithString:[shopModel.product[@"pic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    
+    _nameLbl.text = shopModel.product[@"name"];
+    _descLbl.text = shopModel.product[@"slogan"];
+    
+    _priceLbl.text = [NSString stringWithFormat:@"￥%@", [shopModel.product[@"price"] convertToRealMoney]];
+    _numLbl.text = [NSString stringWithFormat:@"X%ld", [shopModel.quantity integerValue]];
+}
 @end

@@ -21,7 +21,7 @@
 #import "NavigationController.h"
 #import "BrandCommentVC.h"
 
-@interface BrandOrderListVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface BrandOrderListVC ()<UITableViewDelegate,UITableViewDataSource,BrandOrderGoodCellDelegate>
 
 @property (nonatomic,strong) TLTableView *tableView;
 
@@ -122,10 +122,12 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"805273";
+    helper.code = @"805276";
     
     helper.parameters[@"applyUser"] = [TLUser user].userId;
+    helper.parameters[@"userId"] = [TLUser user].userId;
     helper.parameters[@"orderColumn"] = @"apply_datetime";
+    //排序方式
     helper.parameters[@"orderDir"] = @"desc";
     
     if (self.status == BrandOrderStatusWillCheck) {
@@ -232,9 +234,14 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return 110;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BrandOrderModel *model = self.orderGroups[indexPath.section];
+    if ([model.status integerValue] == 0) {
+        return 160;
+
+    }
+    return 120;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -273,8 +280,11 @@
         
         cell = [[BrandOrderGoodCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:OrderGoodsCellId];
     }
+    cell.indexpath = indexPath;
     
     cell.order = self.orderGroups[indexPath.section];
+    
+    cell.delegate = self;
     
     return cell;
     
@@ -328,6 +338,33 @@
     
 }
 
+#pragma mark - BrandOrderGoodCellDelegate
+- (void)cancelOrderWithIndexpath:(NSIndexPath *)indexpath
+{
+    BaseWeakSelf;
+    BrandOrderModel *model = self.orderGroups[indexpath.section];
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.showView = self.view;
+    
+    http.code = @"805273";
+    http.parameters[@"code"] = model.code;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        
+        [weakSelf.orderGroups removeObjectAtIndex:indexpath.section];
+        [weakSelf.tableView reloadData];
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

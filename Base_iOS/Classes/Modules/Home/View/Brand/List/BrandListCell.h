@@ -8,9 +8,11 @@
 
 #import "BaseTableViewCell.h"
 #import "BrandModel.h"
-
+#import "ShopCarModel.h"
 @interface BrandListCell : BaseTableViewCell
 //
 @property (nonatomic, strong) BrandModel *brandModel;
+
+@property (nonatomic, strong)ShopCarModel *shopModel;
 
 @end

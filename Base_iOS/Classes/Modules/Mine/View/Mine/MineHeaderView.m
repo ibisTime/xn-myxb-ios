@@ -117,12 +117,50 @@
     //箭头
     UIImageView *arrowImageView= [[UIImageView alloc] init];
     [self addSubview:arrowImageView];
-    arrowImageView.image = [UIImage imageNamed:@"更多-白色"];
+    arrowImageView.image = kImage(@"更多-白色");
     [arrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(self.mas_right).offset(-15);
         make.centerY.equalTo(self.userPhoto.mas_centerY).offset(0);
         
+    }];
+    
+    //销帮币
+    self.xiaobangbiL = [UILabel labelWithBackgroundColor:kClearColor
+                                           textColor:kWhiteColor
+                                                font:12.0];
+    self.xiaobangbiL.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:self.xiaobangbiL];
+    
+    [self.xiaobangbiL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@0);
+        make.right.equalTo(self.mas_centerX);
+        make.height.equalTo(@14);
+        make.bottom.equalTo(@-10);
+    }];
+    
+    //销帮卷
+    self.xiaobangJuanL = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kWhiteColor
+                                                    font:12.0];
+    self.xiaobangJuanL.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:self.xiaobangJuanL];
+    
+    [self.xiaobangJuanL mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(@0);
+        make.left.equalTo(self.mas_centerX);
+        make.height.equalTo(@14);
+        make.bottom.equalTo(@-10);
+    }];
+    
+    UIView *lineview = [[UIView alloc]init];
+    lineview.backgroundColor = kWhiteColor;
+    [self addSubview:lineview];
+    [lineview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.top.equalTo(self.xiaobangJuanL.mas_top).with.offset(-3);
+        make.bottom.equalTo(self.xiaobangJuanL.mas_bottom).with.offset(3);
+        make.width.equalTo(@1);
     }];
 }
 

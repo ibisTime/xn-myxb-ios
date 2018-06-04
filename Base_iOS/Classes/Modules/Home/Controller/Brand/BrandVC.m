@@ -11,6 +11,8 @@
 #import "UIBarButtonItem+convience.h"
 #import "UIView+Extension.h"
 #import "NSString+Check.h"
+#import "UIControl+Block.h"
+
 //Extension
 #import <PYSearch.h>
 //M
@@ -21,6 +23,8 @@
 #import "BrandListVC.h"
 #import "NavigationController.h"
 #import "SearchVC.h"
+#import "ShoppingCartVC.h"
+#import "TLUserLoginVC.h"
 
 @interface BrandVC ()<PYSearchViewControllerDelegate>
 
@@ -79,6 +83,8 @@
 
         BrandListVC *childVC = [[BrandListVC alloc] init];
         
+        childVC.descriptionStr = model.desc;
+        
         childVC.brandCode = model.code;
 
         childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
@@ -88,9 +94,55 @@
         [_selectScrollView.scrollView addSubview:childVC.view];
         
     }
+    
+    
+    [self addShopCar];
 }
 #pragma mark - Events
 
+- (void)addShopCar
+{
+    UIButton *choopcar = [UIButton buttonWithTitle:@""
+                                       titleColor:kTextColor
+                                  backgroundColor:kShallowGreyColor
+                                        titleFont:18.0];
+    [choopcar setImage:kImage(@"购物车") forState:UIControlStateNormal];
+    choopcar.layer.cornerRadius = 25;
+    
+    [choopcar bk_addEventHandler:^(id sender) {
+        
+        if (![TLUser user].isLogin) {
+            
+            TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+            
+            loginVC.loginSuccess = ^{
+                
+                [self.navigationController pushViewController:[ShoppingCartVC new] animated:YES];
+            };
+            
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+            
+            [self presentViewController:nav animated:YES completion:nil];
+            
+            return;
+        }
+        
+
+        
+        [self.navigationController pushViewController:[ShoppingCartVC new] animated:YES];
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self.view addSubview:choopcar];
+    
+    [choopcar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-70);
+        make.right.equalTo(self.view.mas_right).with.offset(-30);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+    
+    
+}
 /**
  搜索品牌
  */

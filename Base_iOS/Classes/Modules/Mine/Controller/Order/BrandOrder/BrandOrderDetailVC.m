@@ -13,6 +13,7 @@
 //Category
 #import "NSString+Date.h"
 #import "NSString+Check.h"
+#import "UIBarButtonItem+convience.h"
 //M
 #import "ExpressModel.h"
 //V
@@ -22,6 +23,7 @@
 //C
 #import "NavigationController.h"
 #import "BrandCommentVC.h"
+#import "PayOrderVC.h"
 
 @interface BrandOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -48,9 +50,24 @@
     // Do any additional setup after loading the view.
     self.title = @"订单详情";
     
+    NSLog(@"----->%@",self.order.status);
+    
+    if ([self.order.status integerValue] == 0 /*|| [self.order.status integerValue] == 1*/) {
+        [UIBarButtonItem addRightItemWithTitle:@"支付" titleColor:kWhiteColor frame:CGRectMake(0, 0, 50, 44) vc:self action:@selector(gotopayVC)];
+    }
+    
+    
+    
     [self initTableView];
     //获取物流公司
     [self requestExpressName];
+}
+- (void)gotopayVC
+{
+    PayOrderVC *pay = [[PayOrderVC alloc]init];
+    pay.priceText = [NSString stringWithFormat:@"支付金额:%@",[self.order.amount convertToRealMoney]];
+    pay.datacode = self.order.code;
+    [self.navigationController pushViewController:pay animated:YES];
 }
 
 #pragma mark - Init
@@ -212,7 +229,7 @@
     
     NSArray *textArr = @[@"产品名称", @"产品总价", @"下单数量", @"订单号", @"下单时间", @"状态"];
     //
-    NSString *name = self.order.productName;
+    NSString *name = self.order.detailModel.productName;
     STRING_NIL_NULL(name);
     //
     CGFloat totalAmount = [_order.amount doubleValue];

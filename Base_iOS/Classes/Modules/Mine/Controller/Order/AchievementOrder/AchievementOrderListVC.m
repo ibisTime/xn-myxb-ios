@@ -154,6 +154,7 @@
 //    helper.parameters[@"orderDir"] = @"desc";
     helper.parameters[@"type"] = [TLUser user].kind;
     helper.parameters[@"status"] = self.status;
+    helper.parameters[@"userId"] = [TLUser user].userId;
     
     helper.tableView = self.tableView;
     

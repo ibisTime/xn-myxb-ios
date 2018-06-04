@@ -130,6 +130,7 @@
         BrandBuyVC *buyVC = [BrandBuyVC new];
         
         buyVC.code = weakSelf.code;
+        buyVC.price = [weakSelf.good.price convertToRealMoney];
         
         [weakSelf.navigationController pushViewController:buyVC animated:YES];
         

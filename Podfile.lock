@@ -66,6 +66,29 @@ DEPENDENCIES:
   - TZImagePickerController (= 1.8.0)
   - YYText (= 1.0.7)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - DACircularProgress
+    - FDFullscreenPopGesture
+    - HappyDNS
+    - IQKeyboardManager
+    - Masonry
+    - MBProgressHUD
+    - MJExtension
+    - MJRefresh
+    - MLLabel
+    - PYPhotoBrowser
+    - PYSearch
+    - Qiniu
+    - Realm
+    - SDWebImage
+    - SVProgressHUD
+    - TZImagePickerController
+    - YYText
+  https://github.com/tianleios/CDSpecs.git:
+    - CDCommon
+
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   CDCommon: 3551a469e0787c1c7ffdb8d2e2ba912747b903a1
@@ -89,4 +112,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f152803361a8282c48e490d97f9774fd9aa7ef39
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.2

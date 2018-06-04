@@ -142,17 +142,17 @@
     
     _order = order;
     
-    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.productPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.detailModel.product[@"advPic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     //
-    self.nameLbl.text = order.productName;
+    self.nameLbl.text = order.detailModel.product[@"name"];
     //
-    NSString *slogin = order.productSlogan;
+    NSString *slogin = order.detailModel.product[@"slogan"];
     STRING_NIL_NULL(slogin)
     self.sloginLbl.text = slogin;
     //
     self.priceLbl.text = [NSString stringWithFormat:@"%@", [_order.amount convertToRealMoney]];
     //
-    self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.quantity stringValue]];
+    self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.detailModel.quantity stringValue]];
     
 }
 

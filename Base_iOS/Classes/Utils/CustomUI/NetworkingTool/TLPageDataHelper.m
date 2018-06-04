@@ -193,7 +193,18 @@
         }
         
         //拼接数据
-        NSArray *newObjs = responseObject[@"data"][@"list"];
+        NSArray *newObjs;
+        
+        if (!_isList) {
+            
+            newObjs = responseObject[@"data"][@"list"];
+            
+        } else {
+            
+            newObjs = _isCurrency == YES ? responseObject[@"data"][@"accountList"]: responseObject[@"data"];
+        }
+        
+
         if (newObjs.count) {
             
             NSArray *lastArrays = [_className mj_objectArrayWithKeyValuesArray:newObjs];

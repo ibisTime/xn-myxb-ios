@@ -29,6 +29,9 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 //角色
 @property (nonatomic, strong) UILabel *infoLbl;
 
+@property (nonatomic, strong) UILabel *xiaobangbiL;
+@property (nonatomic, strong) UILabel *xiaobangJuanL;
+
 @property (nonatomic, weak) id<MineHeaderSeletedDelegate> delegate;
 
 

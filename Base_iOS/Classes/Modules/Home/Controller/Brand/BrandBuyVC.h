@@ -11,5 +11,6 @@
 @interface BrandBuyVC : BaseViewController
 //
 @property (nonatomic, copy) NSString *code;
+@property (nonatomic ,copy) NSString *price;
 
 @end

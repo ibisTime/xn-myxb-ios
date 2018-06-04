@@ -24,6 +24,8 @@
 #import "BindMobileVC.h"
 #import "TLUserForgetPwdVC.h"
 
+#import "CurrencyModel.h"
+
 
 @interface TLUserLoginVC ()
 
@@ -102,10 +104,10 @@
     [bgView addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
-    NSArray *typeArr = @[@"美容院",
-                         @"讲师",
-                         @"专家",
-                         @"美导"];
+    NSArray *typeArr = @[@"经销商",
+                         @"合伙人",
+                         @"销售精英",
+                         @"服务团队"];
     
     //角色类型
     TLPickerTextField *userTypeTf = [[TLPickerTextField alloc] initWithFrame:CGRectMake(0, pwdTf.yy + 1, w, h)
@@ -228,7 +230,8 @@
             
         case 1:
         {
-            kind = kUserTypeLecturer;
+//            kind = kUserTypeLecturer;
+            kind = kUserTypePartner;
         }break;
             
         case 2:
@@ -313,9 +316,10 @@
         //初始化用户信息
         [[TLUser user] setUserInfoWithDict:userInfo];
         //获取人民币和积分账户
-//        [self requestAccountNumber];
+        [[TLUser user] requestAccountNumberWith:@"CNY"];
+        [[TLUser user] requestAccountNumberWith:@"JF"];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+        
         
     } failure:^(NSError *error) {
         
@@ -324,14 +328,14 @@
     
 }
 
-#pragma mark - 账户
-//- (void)requestAccountNumber {
+//#pragma mark - 账户
+//- (void)requestAccountNumberWith:(NSString *)type {
 //
 //    //获取人民币和积分账户
 //    TLNetworking *http = [TLNetworking new];
 //    http.code = @"802503";
+//    http.parameters[@"currency"] = type;
 //    http.parameters[@"userId"] = [TLUser user].userId;
-//    http.parameters[@"token"] = [TLUser user].token;
 //
 //    [http postWithSuccess:^(id responseObject) {
 //
@@ -341,14 +345,16 @@
 //
 //            if ([obj.currency isEqualToString:@"JF"]) {
 //
-//                [TLUser user].jfAccountNumber = obj.accountNumber;
+//                [TLUser user].jfAccountNumber = [obj.amount convertToRealMoney];
 //
 //            } else if ([obj.currency isEqualToString:@"CNY"]) {
 //
-//                [TLUser user].rmbAccountNumber = obj.accountNumber;
+//                [TLUser user].rmbAccountNumber = [obj.amount convertToRealMoney];
 //            }
 //
 //        }];
+//        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
 //
 //    } failure:^(NSError *error) {
 //

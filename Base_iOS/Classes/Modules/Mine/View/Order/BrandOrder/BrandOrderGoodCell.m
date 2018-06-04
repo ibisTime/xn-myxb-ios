@@ -14,6 +14,8 @@
 #import "NSNumber+Extension.h"
 #import "UILabel+Extension.h"
 #import "NSString+Date.h"
+#import "UIButton+EnLargeEdge.h"
+#import "UIControl+Block.h"
 
 @interface BrandOrderGoodCell()
 
@@ -28,6 +30,10 @@
 @property (nonatomic, strong) UILabel *totalAmountLbl;
 //下单时间
 @property (nonatomic, strong) UILabel *timeLbl;
+
+@property (nonatomic, strong) UIButton *cancelOrder;
+
+@property (nonatomic, strong)UIView *lineview;
 
 @end
 
@@ -97,6 +103,30 @@
                                                 font:12.0];
     
     [self addSubview:self.timeLbl];
+    
+    
+    self.lineview = [[UIView alloc] initWithFrame:CGRectZero];
+    self.lineview.backgroundColor = kLineColor;
+    [self addSubview:self.lineview];
+    
+    BaseWeakSelf;
+    self.cancelOrder = [UIButton buttonWithTitle:@"取消订单"
+                                      titleColor:kWhiteColor
+                                 backgroundColor:kThemeColor
+                                       titleFont:18.0];
+    
+    
+    [self.cancelOrder bk_addEventHandler:^(id sender) {
+        
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(cancelOrderWithIndexpath:)]) {
+            [weakSelf.delegate cancelOrderWithIndexpath:weakSelf.indexpath];
+        }
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    self.cancelOrder.layer.cornerRadius = 4;
+    [self addSubview:self.cancelOrder];
+    
     //
     UIView *line = [[UIView alloc] init];
     line.backgroundColor = kLineColor;
@@ -105,6 +135,9 @@
         make.left.right.bottom.equalTo(self);
         make.height.equalTo(@0.5);
     }];
+    
+    
+    
     //布局
     [self setSubviewLayout];
 }
@@ -117,7 +150,8 @@
         make.left.equalTo(@15);
         make.top.equalTo(@10);
         make.width.equalTo(@90);
-        make.bottom.equalTo(@(-10));
+        make.height.equalTo(@90);
+        
     }];
     //价格
     [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -150,28 +184,56 @@
         make.right.equalTo(@(-15));
         make.width.lessThanOrEqualTo(@(kWidth(150)));
         make.height.equalTo(@(kFontHeight(14.0)));
-        make.bottom.equalTo(@(-15));
+        make.bottom.equalTo(self.coverIV.mas_bottom);
     }];
     //下单时间
     [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.nameLbl.mas_left);
-        make.centerY.equalTo(self.totalAmountLbl.mas_centerY);
+        make.bottom.equalTo(self.coverIV.mas_bottom);
     }];
+    
+    
     
 }
 
 - (void)setOrder:(BrandOrderModel *)order {
     
     _order = order;
+    
+    if ([order.status integerValue] == 0) {
+        
+        self.lineview.hidden = NO;
+        self.cancelOrder.hidden = NO;
+        
+        
+        [self.lineview mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.timeLbl.mas_bottom).with.offset(10);
+            make.left.equalTo(@0);
+            make.right.equalTo(@0);
+            make.height.equalTo(@.7);
+        }];
+        [self.cancelOrder mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.lineview.mas_bottom).with.offset(10);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+            make.right.equalTo(self.mas_right).with.offset(-15);
+            make.width.equalTo(@100);
+        }];
+    }
+    else
+    {
+        self.lineview.hidden = YES;
+        self.cancelOrder.hidden = YES;
+    }
+    
     //
-    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.productPic convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.detailModel.product[@"advPic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     //
-    self.nameLbl.text = order.productName;
+    self.nameLbl.text = order.detailModel.product[@"name"];
     //
-    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.unitPrice convertToRealMoney]];
+    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.detailModel.price convertToRealMoney]];
     //
-    self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.quantity stringValue]];
+    self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.detailModel.quantity stringValue]];
     //
     self.timeLbl.text = [order.applyDatetime convertDate];
     //总计=(商品总额+运费)*折扣

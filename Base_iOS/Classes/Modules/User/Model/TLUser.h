@@ -56,6 +56,8 @@
 @property (nonatomic, strong) HandlerUser *handlerUser;
 //积分账户
 @property (nonatomic, copy) NSString *jfAccountNumber;
+//人民币
+@property (nonatomic, copy) NSString *rmbAccountNumber;
 //邀请码
 @property (nonatomic, copy) NSString *inviteCode;
 //邀请人个数
@@ -81,6 +83,8 @@
 - (void)setUserInfoWithDict:(NSDictionary *)dict;
 //异步更新用户信息
 - (void)updateUserInfo;
+//查询账户余额
+- (void)requestAccountNumberWith:(NSString *)type;
 
 @end
 
@@ -106,4 +110,6 @@ FOUNDATION_EXTERN  NSString *const kUserTypeSalon;
 FOUNDATION_EXTERN  NSString *const kUserTypeBeautyGuide;
 FOUNDATION_EXTERN  NSString *const kUserTypeLecturer;
 FOUNDATION_EXTERN  NSString *const kUserTypeExpert;
+FOUNDATION_EXTERN  NSString *const kUserTypePartner;
+
 

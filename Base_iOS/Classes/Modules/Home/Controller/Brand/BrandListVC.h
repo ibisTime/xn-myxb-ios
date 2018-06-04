@@ -15,4 +15,7 @@
 //
 @property (nonatomic, copy) NSString *brandCode;
 
+//品牌简介
+@property (nonatomic, copy) NSString *descriptionStr;
+
 @end

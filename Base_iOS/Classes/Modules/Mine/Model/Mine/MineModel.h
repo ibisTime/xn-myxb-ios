@@ -15,6 +15,6 @@
 @property (nonatomic, copy) NSString *rightText;
 @property (nonatomic, assign) BOOL isSpecial;
 
-@property (nonatomic,strong) void(^action)();
+@property (nonatomic,copy) void(^action)(void);
 
 @end

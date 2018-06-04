@@ -14,6 +14,8 @@
 #import "UIButton+EnLargeEdge.h"
 #import "UIView+Extension.h"
 #import "NSString+Check.h"
+#import "UIControl+Block.h"
+
 //V
 #import "TLTextField.h"
 #import "TLTextView.h"
@@ -22,6 +24,7 @@
 #import "ZHAddressChooseVC.h"
 #import "ZHAddAddressVC.h"
 #import "BrandOrderVC.h"
+#import "PayOrderVC.h"
 
 @interface BrandBuyVC ()
 
@@ -37,6 +40,7 @@
 //
 @property (nonatomic,strong) ZHAddressChooseView *chooseView;
 
+
 @end
 
 @implementation BrandBuyVC
@@ -50,7 +54,7 @@
     [self getAddress];
 }
 
-#pragma mark - Init
+
 //
 - (UIView *)headerView {
     
@@ -90,7 +94,7 @@
                                         placeholder:@"请输入数量"];
     
     self.numTF.keyboardType = UIKeyboardTypeNumberPad;
-    
+    self.numTF.text = @"1";
     [self.view addSubview:self.numTF];
     //下单说明
     self.remarkTV = [[TLTextView alloc] initWithFrame:CGRectMake(0, self.numTF.yy + 10, kScreenWidth, 180)];
@@ -101,17 +105,60 @@
     self.remarkTV.placholder = @"下单说明";
     
     [self.view addSubview:self.remarkTV];
+    
+    
+    BaseWeakSelf;
+    //顾问
+    UIButton *chatBtn = [UIButton buttonWithTitle:@"加入购物车"
+                                       titleColor:kTextColor
+                                  backgroundColor:kWhiteColor
+                                        titleFont:18.0];
+    
+    [chatBtn bk_addEventHandler:^(id sender) {
+        //获取顾问手机号
+        [self addToCar];
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+//    [chatBtn setImage:kImage(@"顾问") forState:UIControlStateNormal];
+    
+    [self.view addSubview:chatBtn];
+    [chatBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-kBottomInsetHeight);
+        make.left.equalTo(self.view.mas_left);
+        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(kScreenWidth/2);
+    }];
+    
+    [chatBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+
+    
+    
+    
     //确定下单
     UIButton *confirmBtn = [UIButton buttonWithTitle:@"确定下单"
-                                          titleColor:kWhiteColor
-                                     backgroundColor:kThemeColor
-                                           titleFont:18.0
-                                        cornerRadius:7.5];
-    confirmBtn.frame = CGRectMake(15, self.remarkTV.yy + 40, kScreenWidth - 30, 44);
+                                       titleColor:kWhiteColor
+                                  backgroundColor:kThemeColor
+                                        titleFont:18.0];
     
-    [confirmBtn addTarget:self action:@selector(confirmBuy) forControlEvents:UIControlEventTouchUpInside];
+    [confirmBtn bk_addEventHandler:^(id sender) {
+        [weakSelf confirmBuy];
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+//    [confirmBtn setImage:kImage(@"顾问") forState:UIControlStateNormal];
     
     [self.view addSubview:confirmBtn];
+    [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-kBottomInsetHeight);
+        make.right.equalTo(self.view.mas_right);
+        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(kScreenWidth/2);
+    }];
+    
+    [confirmBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
     
 }
 
@@ -219,9 +266,14 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            BrandOrderVC *orderVC = [BrandOrderVC new];
+            PayOrderVC *payorder = [[PayOrderVC alloc]init];
+            payorder.datacode = responseObject[@"data"];
+            payorder.priceText = [NSString stringWithFormat:@"支付金额:¥%@",self.price];
+            [self.navigationController pushViewController:payorder animated:YES];
             
-            [weakSelf.navigationController pushViewController:orderVC animated:YES];
+//            BrandOrderVC *orderVC = [BrandOrderVC new];
+//            
+//            [weakSelf.navigationController pushViewController:orderVC animated:YES];
         });
         
     } failure:^(NSError *error) {
@@ -230,7 +282,26 @@
     
     return;
 }
+- (void)addToCar
+{
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805290";
+    http.showView = self.view;
+    http.parameters[@"productCode"] = self.code;
+    http.parameters[@"quantity"] = self.numTF.text;
+    http.parameters[@"userId"] = [TLUser user].userId;
 
+   
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLAlert alertWithSucces:@"操作成功"];
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 #pragma mark - Data
 - (void)getAddress {
     
@@ -322,6 +393,7 @@
     [self.navigationController pushViewController:addressVC animated:YES];
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

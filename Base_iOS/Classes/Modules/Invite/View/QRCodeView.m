@@ -10,7 +10,7 @@
 //Category
 #import "NSString+Date.h"
 //
-#import "SGQRCodeTool.h"
+//#import "SGQRCodeTool.h"
 
 @interface QRCodeView()
 
@@ -107,9 +107,9 @@
     
     _url = url;
     
-    UIImage *image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:url
-                                                     imageViewWidth:kScreenWidth];
-    self.qrCodeIV.image = image;
+//    UIImage *image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:url
+//                                                     imageViewWidth:kScreenWidth];
+//    self.qrCodeIV.image = image;
 }
 
 #pragma mark - Events

@@ -30,7 +30,14 @@ NSString *const kBrandOrderStatusDidComplete = @"4";
     
     return dict[self.status];
 }
-
+- (BrandDetailModel *)detailModel
+{
+    if (self.productOrderList.count == 0) {
+        return nil;
+    }
+    NSDictionary *dic = [self.productOrderList objectAtIndex:0];
+    return [BrandDetailModel mj_objectWithKeyValues:dic];
+}
 - (NSString *)getExpressName {
     
     __block NSString *name = @"其他";

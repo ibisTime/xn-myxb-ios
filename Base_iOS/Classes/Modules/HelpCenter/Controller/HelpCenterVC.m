@@ -10,11 +10,15 @@
 
 //Macro
 #import "APICodeMacro.h"
+#import "WriteCommentVC.h"
+#import "TLUserLoginVC.h"
+#import "NavigationController.h"
 //Framework
 #import <WebKit/WebKit.h>
 //Category
 #import "UIBarButtonItem+convience.h"
 #import "NSString+Check.h"
+#import "UIControl+Block.h"
 ////M
 //#import "QuestionModel.h"
 ////V
@@ -51,11 +55,56 @@
     [self initItem];
     //webview
     [self initWebView];
+    
+    [self addfeedback];
 
     //    //问题列表
     //    [self initTableView];
     //    //获取问题列表
     //    [self requestQuestionList];
+}
+
+- (void)addfeedback
+{
+    UIButton *choopcar = [UIButton buttonWithTitle:@"反馈"
+                                        titleColor:kTextColor
+                                   backgroundColor:kShallowGreyColor
+                                         titleFont:18.0];
+    [choopcar setImage:kImage(@"购物车") forState:UIControlStateNormal];
+    choopcar.layer.cornerRadius = 25;
+    
+    [choopcar bk_addEventHandler:^(id sender) {
+        
+        
+        if (![TLUser user].isLogin) {
+            
+            TLUserLoginVC *loginVC = [[TLUserLoginVC alloc] init];
+            
+            loginVC.loginSuccess = ^(){
+                
+                [self.navigationController pushViewController:[WriteCommentVC new] animated:YES];
+            };
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+            [self presentViewController:nav animated:YES completion:nil];
+            
+            return;
+        }
+        
+        [self.navigationController pushViewController:[WriteCommentVC new] animated:YES];
+
+        
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self.view addSubview:choopcar];
+    
+    [choopcar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-70);
+        make.right.equalTo(self.view.mas_right).with.offset(-30);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+    
+    
 }
 
 #pragma mark - Init

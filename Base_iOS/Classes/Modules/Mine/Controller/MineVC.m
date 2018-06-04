@@ -49,6 +49,7 @@
 //选择头像
 @property (nonatomic, strong) TLImagePicker *imagePicker;
 
+
 @end
 
 @implementation MineVC
@@ -63,11 +64,25 @@
     
     //模型
     if ([[TLUser user].kind isEqualToString:kUserTypeSalon]) {
-        //美容院
+        ///经销商
         [self initSclonGroup];
-    } else {
+    }
+    else if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide])
+    {
+        //服务团队
+        [self initServiceTeam];
         
+    }
+    else if ([[TLUser user].kind isEqualToString:kUserTypePartner/*kUserTypeLecturer*/])
+    {
+        //合伙人
         [self initGroup];
+    }
+    else {
+        
+        
+        //销售精英
+        [self salesOfTheElite];
     }
     
     self.tableView.mineGroup = self.group;
@@ -79,12 +94,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"我的";
+    
     //通知
     [self addNotification];
     //
     [self initTableView];
     //
     [self changeInfo];
+    [[TLUser user] requestAccountNumberWith:@"CNY"];
+    [[TLUser user] requestAccountNumberWith:@"JF"];
+    
+    NSLog(@"---->%@",[TLUser user].kind);
 
 }
 
@@ -93,13 +113,10 @@
 - (void)initSclonGroup {
     
     BaseWeakSelf;
-    
-    AdviserUser *user = [TLUser user].adviserUser;
-
     //积分余额
     MineModel *jfBalance = [MineModel new];
     
-    jfBalance.text = @"积分余额";
+    jfBalance.text = @"我要成为经销商";
     jfBalance.imgName = @"积分余额";
     jfBalance.action = ^{
         
@@ -107,23 +124,22 @@
         
         [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
     };
+
+    //成果订单
+    MineModel *order2 = [MineModel new];
     
-    //品牌订单
-    MineModel *brandOrder = [MineModel new];
-    
-    brandOrder.text = @"品牌订单";
-    brandOrder.imgName = @"行程列表";
-    brandOrder.action = ^{
+    order2.text = @"我的订单";
+    order2.imgName = @"成果订单";
+    order2.action = ^{
         
-        BrandOrderVC *orderVC = [BrandOrderVC new];
+        AchievementOrderVC *orderVC = [AchievementOrderVC new];
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
-    
     //预约
     MineModel *appointmnet = [MineModel new];
     
-    appointmnet.text = @"预约";
+    appointmnet.text = @"我的预约";
     appointmnet.imgName = @"预约";
     appointmnet.action = ^{
         
@@ -131,101 +147,262 @@
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
-    
-    //我的评论
-    MineModel *myComment = [MineModel new];
-    
-    myComment.text = @"我的评论";
-    myComment.imgName = @"我的评论";
-    myComment.action = ^{
-        
-        MyCommentVC *myCommentVC = [MyCommentVC new];
-        
-        [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
-    };
-    
-    //团队顾问
-    MineModel *teamAdvisor = [MineModel new];
-    
-    teamAdvisor.text = @"团队顾问";
-    teamAdvisor.imgName = @"团队顾问";
-    teamAdvisor.action = ^{
-        //获取团队手机号
-        [weakSelf requestLinkMobile];
-        
-    };
-    
-    //帮助中心
-    MineModel *helpCenter = [MineModel new];
-    
-    helpCenter.text = @"帮助中心";
-    helpCenter.imgName = @"帮助中心";
-    helpCenter.action = ^{
-      
-        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
-        
-        htmlVC.type = HTMLTypeHelpCenter;
-        
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
-    };
+
     
     self.group = [MineGroup new];
-    
-    self.group.sections = @[@[jfBalance, brandOrder, appointmnet, myComment], @[teamAdvisor], @[helpCenter]];
+    self.group.sections = @[@[jfBalance],@[order2],@[appointmnet]];
+//    AdviserUser *user = [TLUser user].adviserUser;
+//
+//    //积分余额
+//    MineModel *jfBalance = [MineModel new];
+//
+//    jfBalance.text = @"积分余额";
+//    jfBalance.imgName = @"积分余额";
+//    jfBalance.action = ^{
+//
+//        IntegralMallVC *integralMallVC = [IntegralMallVC new];
+//
+//        [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
+//    };
+//
+//    //品牌订单
+//    MineModel *brandOrder = [MineModel new];
+//
+//    brandOrder.text = @"品牌订单";
+//    brandOrder.imgName = @"行程列表";
+//    brandOrder.action = ^{
+//
+//        BrandOrderVC *orderVC = [BrandOrderVC new];
+//
+//        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+//    };
+//
+//    //预约
+//    MineModel *appointmnet = [MineModel new];
+//
+//    appointmnet.text = @"预约";
+//    appointmnet.imgName = @"预约";
+//    appointmnet.action = ^{
+//
+//        AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
+//
+//        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+//    };
+//
+//    //我的评论
+//    MineModel *myComment = [MineModel new];
+//
+//    myComment.text = @"我的评论";
+//    myComment.imgName = @"我的评论";
+//    myComment.action = ^{
+//
+//        MyCommentVC *myCommentVC = [MyCommentVC new];
+//
+//        [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
+//    };
+//
+//    //团队顾问
+//    MineModel *teamAdvisor = [MineModel new];
+//
+//    teamAdvisor.text = @"团队顾问";
+//    teamAdvisor.imgName = @"团队顾问";
+//    teamAdvisor.action = ^{
+//        //获取团队手机号
+//        [weakSelf requestLinkMobile];
+//
+//    };
+//
+//    //帮助中心
+//    MineModel *helpCenter = [MineModel new];
+//
+//    helpCenter.text = @"帮助中心";
+//    helpCenter.imgName = @"帮助中心";
+//    helpCenter.action = ^{
+//
+//        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+//
+//        htmlVC.type = HTMLTypeHelpCenter;
+//
+//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//    };
+//
+//    self.group = [MineGroup new];
+//
+//    self.group.sections = @[@[jfBalance, brandOrder, appointmnet, myComment], @[teamAdvisor], @[helpCenter]];
 }
 
 - (void)initGroup {
     
     BaseWeakSelf;
+    //网络图谱
+    MineModel *netMap = [MineModel new];
     
-    //积分余额
-    MineModel *jfBalance = [MineModel new];
-    
-    jfBalance.text = @"积分余额";
-    jfBalance.imgName = @"积分余额";
-    jfBalance.action = ^{
+    netMap.text = @"网络图谱";
+    netMap.imgName = @"帮助中心";
+    netMap.action = ^{
         
-        IntegralMallVC *integralMallVC = [IntegralMallVC new];
+        TripListVC *tripListVC = [TripListVC new];
         
-        [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
+        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
     };
     
-    //行程列表
-    MineModel *travelList = [MineModel new];
+    //团队行程
+    MineModel *travelListTeam = [MineModel new];
     
-    travelList.text = @"行程列表";
-    travelList.imgName = @"行程列表";
-    travelList.action = ^{
-      
+    travelListTeam.text = @"团队行程";
+    travelListTeam.imgName = @"我的排名";
+    travelListTeam.action = ^{
+        
         TripListVC *tripListVC = [TripListVC new];
         
         [weakSelf.navigationController pushViewController:tripListVC animated:YES];
     };
     
     //成果订单
+    MineModel *order2 = [MineModel new];
+    
+    order2.text = @"我的订单";
+    order2.imgName = @"成果订单";
+    order2.action = ^{
+        
+        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+        
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+    };
+    self.group = [MineGroup new];
+    
+    self.group.sections = @[@[netMap],@[travelListTeam],@[order2]];
+    
+//    //积分余额
+//    MineModel *jfBalance = [MineModel new];
+//    
+//    jfBalance.text = @"积分余额";
+//    jfBalance.imgName = @"积分余额";
+//    jfBalance.action = ^{
+//        
+//        IntegralMallVC *integralMallVC = [IntegralMallVC new];
+//        
+//        [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
+//    };
+//    
+//    //行程列表
+//    MineModel *travelList = [MineModel new];
+//    
+//    travelList.text = @"行程列表";
+//    travelList.imgName = @"行程列表";
+//    travelList.action = ^{
+//      
+//        TripListVC *tripListVC = [TripListVC new];
+//        
+//        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+//    };
+//    
+//    //成果订单
+//    MineModel *order = [MineModel new];
+//    
+//    order.text = @"成果订单";
+//    order.imgName = @"成果订单";
+//    order.action = ^{
+//      
+//        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+//        
+//        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+//    };
+//    
+//    //我的资料
+//    MineModel *information = [MineModel new];
+//    
+//    information.text = @"我的资料";
+//    information.imgName = @"我的资料";
+//    information.action = ^{
+//        
+//        MyInfomationVC *infoVC = [MyInfomationVC new];
+//        
+//        [weakSelf.navigationController pushViewController:infoVC animated:YES];
+//    };
+//    
+//    //我的排名
+//    MineModel *ranking = [MineModel new];
+//    
+//    ranking.text = @"我的排名";
+//    ranking.imgName = @"我的排名";
+//    ranking.action = ^{
+//        
+//        MyRankVC *rankVC = [MyRankVC new];
+//        
+//        [weakSelf.navigationController pushViewController:rankVC animated:YES];
+//    };
+//    
+//    //帮助中心
+//    MineModel *helpCenter = [MineModel new];
+//    
+//    helpCenter.text = @"帮助中心";
+//    helpCenter.imgName = @"帮助中心";
+//    helpCenter.action = ^{
+//        
+//        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+//        
+//        htmlVC.type = HTMLTypeHelpCenter;
+//        
+//        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+//    };
+//    
+//    self.group = [MineGroup new];
+//    //排行只有专家才有
+//    if ([[TLUser user].kind isEqualToString:kUserTypeExpert]) {
+//
+//        self.group.sections = @[@[jfBalance, travelList, order, information], @[ranking], @[helpCenter]];
+//
+//    } else {
+//
+//        self.group.sections = @[@[jfBalance, travelList, order, information], @[helpCenter]];
+//    }
+    
+}
+
+//销售精英
+- (void)salesOfTheElite
+{
+    BaseWeakSelf;
+    
+    //行程列表
+    MineModel *travelList = [MineModel new];
+    
+    travelList.text = @"我的行程";
+    travelList.imgName = @"行程列表";
+    travelList.action = ^{
+        
+        TripListVC *tripListVC = [TripListVC new];
+        
+        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+    };
+    
+    
+    //成果订单
     MineModel *order = [MineModel new];
     
-    order.text = @"成果订单";
+    order.text = @"成果查看";
     order.imgName = @"成果订单";
     order.action = ^{
-      
+        
         AchievementOrderVC *orderVC = [AchievementOrderVC new];
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     
-    //我的资料
-    MineModel *information = [MineModel new];
     
-    information.text = @"我的资料";
-    information.imgName = @"我的资料";
-    information.action = ^{
+    //我的评论
+    MineModel *comments = [MineModel new];
+    
+    comments.text = @"我的评论";
+    comments.imgName = @"我的评论";
+    comments.action = ^{
         
-        MyInfomationVC *infoVC = [MyInfomationVC new];
+        MyCommentVC *myCommentVC = [MyCommentVC new];
         
-        [weakSelf.navigationController pushViewController:infoVC animated:YES];
+        [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
+
     };
-    
     //我的排名
     MineModel *ranking = [MineModel new];
     
@@ -237,31 +414,116 @@
         
         [weakSelf.navigationController pushViewController:rankVC animated:YES];
     };
+    //我的资料
+    MineModel *information = [MineModel new];
     
-    //帮助中心
-    MineModel *helpCenter = [MineModel new];
-    
-    helpCenter.text = @"帮助中心";
-    helpCenter.imgName = @"帮助中心";
-    helpCenter.action = ^{
+    information.text = @"我的履历";
+    information.imgName = @"我的资料";
+    information.action = ^{
         
-        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+        MyInfomationVC *infoVC = [MyInfomationVC new];
         
-        htmlVC.type = HTMLTypeHelpCenter;
-        
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf.navigationController pushViewController:infoVC animated:YES];
     };
     
+    
+    //成果订单
+    MineModel *order2 = [MineModel new];
+    
+    order2.text = @"成果订单";
+    order2.imgName = @"成果订单";
+    order2.action = ^{
+        
+        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+        
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+    };
     self.group = [MineGroup new];
-    //排行只有专家才有
-    if ([[TLUser user].kind isEqualToString:kUserTypeExpert]) {
-        
-        self.group.sections = @[@[jfBalance, travelList, order, information], @[ranking], @[helpCenter]];
 
-    } else {
+    self.group.sections = @[@[travelList], @[order], @[comments,ranking,information],@[order2]];
+}
+//服务团队
+- (void)initServiceTeam
+{
+    BaseWeakSelf;
+    //行程列表
+    MineModel *travelList = [MineModel new];
+    
+    travelList.text = @"我的行程";
+    travelList.imgName = @"行程列表";
+    travelList.action = ^{
         
-        self.group.sections = @[@[jfBalance, travelList, order, information], @[helpCenter]];
-    }
+        TripListVC *tripListVC = [TripListVC new];
+        
+        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+    };
+    
+    //团队行程
+    MineModel *travelListTeam = [MineModel new];
+    
+    travelListTeam.text = @"团队行程";
+    travelListTeam.imgName = @"我的排名";
+    travelListTeam.action = ^{
+        
+        TripListVC *tripListVC = [TripListVC new];
+        
+        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+    };
+    
+    //网络图谱
+    MineModel *netMap = [MineModel new];
+    
+    netMap.text = @"网络图谱";
+    netMap.imgName = @"帮助中心";
+    netMap.action = ^{
+        
+        TripListVC *tripListVC = [TripListVC new];
+        
+        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+    };
+    
+    
+    //我的评论
+    MineModel *comments = [MineModel new];
+    
+    comments.text = @"我的评论";
+    comments.imgName = @"我的评论";
+    comments.action = ^{
+        
+        MyCommentVC *myCommentVC = [MyCommentVC new];
+        
+        [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
+        
+    };
+    
+    
+    //我的资料
+    MineModel *information = [MineModel new];
+    
+    information.text = @"我的履历";
+    information.imgName = @"我的资料";
+    information.action = ^{
+        
+        MyInfomationVC *infoVC = [MyInfomationVC new];
+        
+        [weakSelf.navigationController pushViewController:infoVC animated:YES];
+    };
+    
+    
+    //成果订单
+    MineModel *order2 = [MineModel new];
+    
+    order2.text = @"我的订单";
+    order2.imgName = @"成果订单";
+    order2.action = ^{
+        
+        BrandOrderVC *orderVC = [BrandOrderVC new];
+        
+        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+    };
+    self.group = [MineGroup new];
+
+    self.group.sections = @[@[travelList],@[travelListTeam],@[netMap,comments],@[information],@[order2]];
     
 }
 
@@ -349,6 +611,9 @@
     NSString *speciality = ![[TLUser user].speciality valid] ? @"": [NSString stringWithFormat:@" · %@", [TLUser user].speciality];
     
     self.headerView.infoLbl.text = [NSString stringWithFormat:@"%@%@", [[TLUser user] getUserType], speciality];
+    
+    self.headerView.xiaobangJuanL.text = [NSString stringWithFormat:@"销帮卷:%@",[TLUser user].jfAccountNumber];
+    self.headerView.xiaobangbiL.text = [NSString stringWithFormat:@"销帮卷:%@",[TLUser user].rmbAccountNumber];
 }
 
 - (void)loginOut {

@@ -48,6 +48,10 @@
     
     [super viewWillAppear:animated];
     
+    [[TLUser user] requestAccountNumberWith:@"CNY"];
+    [[TLUser user] requestAccountNumberWith:@"JF"];
+    
+    
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     //系统消息
     [self requestNoticeList];
@@ -101,7 +105,7 @@
         BrandModel *good = weakSelf.brands[indexPath.row];
         
         BrandListVC *listVC = [BrandListVC new];
-        
+        listVC.descriptionStr = good.desc;
         listVC.title = good.name;
         listVC.brandCode = good.code;
         
@@ -328,8 +332,10 @@
                     
                 case 2:
                 {
-                    title = @"讲师预约";
-                    type = kUserTypeLecturer;
+//                    title = @"讲师预约";
+//                    type = kUserTypeLecturer;
+                    title = @"专家预约";
+                    type = kUserTypeExpert;
                 }break;
                     
                 case 3:

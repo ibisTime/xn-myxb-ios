@@ -13,6 +13,8 @@
 #import "APICodeMacro.h"
 #import "TLUIHeader.h"
 #import "AppConfig.h"
+#import "CurrencyModel.h"
+#import "NSNumber+Extension.h"
 
 #define USER_ID_KEY @"user_id_key"
 #define TOKEN_ID_KEY @"token_id_key"
@@ -22,10 +24,11 @@ NSString *const kUserLoginNotification = @"kUserLoginNotification";
 NSString *const kUserLoginOutNotification = @"kUserLoginOutNotification";
 NSString *const kUserInfoChange = @"kUserInfoChange";
 //角色类型
-NSString *const kUserTypeSalon = @"C";      //美容院
-NSString *const kUserTypeBeautyGuide = @"T";//美导
-NSString *const kUserTypeLecturer = @"L";   //讲师
-NSString *const kUserTypeExpert = @"S";     //专家
+NSString *const kUserTypeSalon = @"C";      //美容院 //经销商
+NSString *const kUserTypeBeautyGuide = @"T";//美导 //服务团队
+NSString *const kUserTypeLecturer = @"L";   //讲师 //暂时没有
+NSString *const kUserTypeExpert = @"S";     // //销售精英
+NSString *const kUserTypePartner = @"B";    //合伙人
 
 @implementation TLUser
 
@@ -118,38 +121,39 @@ NSString *const kUserTypeExpert = @"S";     //专家
 }
 
 #pragma mark - 账户
-//- (void)requestAccountNumber {
-//
-//    CoinWeakSelf;
-//
-//    //获取人民币和积分账户
-//    TLNetworking *http = [TLNetworking new];
-//    http.code = @"802503";
-//    http.parameters[@"userId"] = [TLUser user].userId;
-//    http.parameters[@"token"] = [TLUser user].token;
-//
-//    [http postWithSuccess:^(id responseObject) {
-//
-//        NSArray <CurrencyModel *> *arr = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
-//
-//        [arr enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//
-//            if ([obj.currency isEqualToString:@"JF"]) {
-//
-//                weakSelf.jfAccountNumber = obj.accountNumber;
-//
-//            } else if ([obj.currency isEqualToString:@"CNY"]) {
-//
-//                weakSelf.rmbAccountNumber = obj.accountNumber;
-//            }
-//
-//        }];
-//
-//    } failure:^(NSError *error) {
-//
-//
-//    }];
-//}
+- (void)requestAccountNumberWith:(NSString *)type {
+
+    BaseWeakSelf;
+
+    //获取人民币和积分账户
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"802503";
+    http.parameters[@"currency"] = type;
+    http.parameters[@"userId"] = [TLUser user].userId;
+
+    [http postWithSuccess:^(id responseObject) {
+
+        NSArray <CurrencyModel *> *arr = [CurrencyModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+
+        [arr enumerateObjectsUsingBlock:^(CurrencyModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+            if ([obj.currency isEqualToString:@"JF"]) {
+
+                weakSelf.jfAccountNumber = [obj.amount convertToRealMoney];
+
+            } else if ([obj.currency isEqualToString:@"CNY"]) {
+
+                weakSelf.rmbAccountNumber = [obj.amount convertToRealMoney];
+            }
+
+        }];
+         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginNotification object:nil];
+
+    } failure:^(NSError *error) {
+
+
+    }];
+}
 
 - (void)loginOut {
 
@@ -238,10 +242,11 @@ NSString *const kUserTypeExpert = @"S";     //专家
 - (NSString *)getUserTypeWithKind:(NSString *)kind {
     
     NSDictionary *dic = @{
-                          kUserTypeSalon        : @"美容院",
-                          kUserTypeBeautyGuide  : @"美导",
-                          kUserTypeLecturer     : @"讲师",
-                          kUserTypeExpert       : @"专家",
+                          kUserTypeSalon        : @"经销商",
+                          kUserTypeBeautyGuide  : @"服务团队",
+//                          kUserTypeLecturer     : @"讲师",
+                          kUserTypeExpert       : @"销售精英",
+                          kUserTypePartner      : @"合伙人",
                           };
     
     return dic[kind];

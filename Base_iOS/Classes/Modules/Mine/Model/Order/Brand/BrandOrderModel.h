@@ -8,12 +8,16 @@
 
 #import "BaseModel.h"
 #import "ExpressModel.h"
+#import "BrandDetailModel.h"
+#import "MJExtension.h"
 
 @interface BrandOrderModel : BaseModel
 
 @property (nonatomic,copy) NSString *code;
 //产品名称
 @property (nonatomic, copy) NSString *productName;
+@property (nonatomic, copy) NSString *brandName;
+
 //广告语
 @property (nonatomic, copy) NSString *productSlogan;
 //产品图片
@@ -32,6 +36,8 @@
 @property (nonatomic,copy) NSString *reMobile;
 //地址
 @property (nonatomic,copy) NSString *reAddress;
+//下单人
+@property (nonatomic,copy) NSString *applyUser;
 //类型
 @property (nonatomic,copy) NSString *type;
 //商家嘱托
@@ -51,6 +57,9 @@
 //下单数量
 @property (nonatomic, strong) NSNumber *quantity;
 //
+@property (nonatomic, strong)NSArray *productOrderList;
+
+@property (nonatomic, strong)BrandDetailModel *detailModel;
 
 - (NSString *)getStatusName;
 

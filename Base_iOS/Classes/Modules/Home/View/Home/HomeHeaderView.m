@@ -117,12 +117,12 @@
     
     self.categoryView = [[UIView alloc] initWithFrame:CGRectMake(0, self.headLineView.yy + 1, kScreenWidth, 105)];
     [self addSubview:self.categoryView];
-    NSArray *titleArr = @[@"品牌", @"美导", @"讲师", @"专家"];
-    NSArray *imgArr = @[@"品牌", @"美导", @"讲师", @"专家"];
+    NSArray *titleArr = @[@"优选品牌", @"服务团队",@"销售精英"/* @"讲师", @"专家"*/];
+    NSArray *imgArr = @[@"品牌", @"美导", @"专家"/*@"讲师", @"专家"*/];
     
     [titleArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        CGFloat w = kScreenWidth/4.0;
+        CGFloat w = kScreenWidth/titleArr.count;
         CGFloat h = 105;
         CGFloat x = idx*w;
         

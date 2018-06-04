@@ -19,6 +19,9 @@
 @property (nonatomic, copy) NSString *code;
 //名称
 @property (nonatomic, copy) NSString *name;
+//类别
+@property (nonatomic, copy) NSString *categoryName;
 
+@property (nonatomic, copy) NSString *desc;
 
 @end

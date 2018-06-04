@@ -114,9 +114,6 @@
 		212ECE982044FDD00091E543 /* AppointmentOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212ECE972044FDD00091E543 /* AppointmentOrderDetailVC.m */; };
 		21302323202D49C400A954E7 /* CustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2130231F202D49C300A954E7 /* CustomShareView.m */; };
 		21302324202D49C400A954E7 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302322202D49C400A954E7 /* ShareView.m */; };
-		2130232C202D49FC00A954E7 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21302328202D49FC00A954E7 /* README.txt */; };
-		2130232D202D49FC00A954E7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2130232A202D49FC00A954E7 /* libWeChatSDK.a */; };
-		2130232E202D49FC00A954E7 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2130232B202D49FC00A954E7 /* read_me.txt */; };
 		21302332202D4A4000A954E7 /* TLWXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302330202D4A4000A954E7 /* TLWXManager.m */; };
 		21302335202D6F4D00A954E7 /* ProposalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302334202D6F4D00A954E7 /* ProposalHeaderView.m */; };
 		21302338202D898600A954E7 /* ProposalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21302337202D898600A954E7 /* ProposalTableView.m */; };
@@ -191,18 +188,6 @@
 		21A103802049B1A100BF4C78 /* ProposalListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1037F2049B1A100BF4C78 /* ProposalListVC.m */; };
 		21A10383204A3A7C00BF4C78 /* ProposalInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A10382204A3A7C00BF4C78 /* ProposalInfoModel.m */; };
 		21A10386204C60F900BF4C78 /* QRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A10385204C60F900BF4C78 /* QRCodeView.m */; };
-		21A1039F204C62E000BF4C78 /* SGGenerateQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A10389204C62DF00BF4C78 /* SGGenerateQRCodeVC.m */; };
-		21A103A0204C62E000BF4C78 /* SGScanningQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1038D204C62DF00BF4C78 /* SGScanningQRCodeVC.m */; };
-		21A103A1204C62E000BF4C78 /* ScanSuccessJumpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1038E204C62DF00BF4C78 /* ScanSuccessJumpVC.m */; };
-		21A103A2204C62E000BF4C78 /* QRCodebottomRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21A10390204C62DF00BF4C78 /* QRCodebottomRight@2x.png */; };
-		21A103A3204C62E000BF4C78 /* QRCodebottomLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21A10392204C62DF00BF4C78 /* QRCodebottomLeft@2x.png */; };
-		21A103A4204C62E000BF4C78 /* SGScanningQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A10393204C62DF00BF4C78 /* SGScanningQRCodeView.m */; };
-		21A103A5204C62E000BF4C78 /* QRCodeLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21A10394204C62DF00BF4C78 /* QRCodeLine@2x.png */; };
-		21A103A6204C62E000BF4C78 /* QRCodeTopRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21A10395204C62DF00BF4C78 /* QRCodeTopRight@2x.png */; };
-		21A103A7204C62E000BF4C78 /* QRCodeTopLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21A10396204C62DF00BF4C78 /* QRCodeTopLeft@2x.png */; };
-		21A103A8204C62E000BF4C78 /* SGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A10399204C62DF00BF4C78 /* SGAlertView.m */; };
-		21A103A9204C62E000BF4C78 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 21A1039B204C62DF00BF4C78 /* sound.caf */; };
-		21A103AA204C62E000BF4C78 /* SGQRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1039D204C62DF00BF4C78 /* SGQRCodeTool.m */; };
 		21A103AD204E8F1100BF4C78 /* ExpressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A103AB204E8F0F00BF4C78 /* ExpressModel.m */; };
 		21A103B1204FD3AF00BF4C78 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A103B0204FD3AF00BF4C78 /* UIViewController+Extension.m */; };
 		21A103B4204FE99C00BF4C78 /* BaseSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A103B3204FE99C00BF4C78 /* BaseSearchVC.m */; };
@@ -299,6 +284,19 @@
 		21FB30CB1F26E9EF0028ADEE /* UINavigationController+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FB30621F26E9EF0028ADEE /* UINavigationController+MethodSwizzling.m */; };
 		21FB30CC1F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FB30641F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m */; };
 		297C531BBC795ED661A638F6 /* libPods-Base_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E041B8AEBBDCC121169B52FB /* libPods-Base_iOS.a */; };
+		C490154020BD2CD80073E85B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153C20BD2CD80073E85B /* README.txt */; };
+		C490154120BD2CD80073E85B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C490153E20BD2CD80073E85B /* libWeChatSDK.a */; };
+		C490154220BD2CD80073E85B /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153F20BD2CD80073E85B /* read_me.txt */; };
+		C490154720BD38730073E85B /* SchoolOfBusinessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490154620BD38730073E85B /* SchoolOfBusinessVC.m */; };
+		C490154A20C0E3BF0073E85B /* BrandHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C490154920C0E3BF0073E85B /* BrandHeaderView.m */; };
+		C490154D20C11E710073E85B /* BrandDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C490154C20C11E710073E85B /* BrandDetailModel.m */; };
+		C490155120C380710073E85B /* ShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490155020C380710073E85B /* ShoppingCartVC.m */; };
+		C490155720C3865D0073E85B /* ShoppingCarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C490155620C3865D0073E85B /* ShoppingCarView.m */; };
+		C490155A20C38A8C0073E85B /* ShopCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C490155920C38A8C0073E85B /* ShopCarModel.m */; };
+		C490155D20C38BDF0073E85B /* ShoppCarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C490155C20C38BDF0073E85B /* ShoppCarCell.m */; };
+		C490156020C3C4E10073E85B /* CarFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = C490155F20C3C4E10073E85B /* CarFootView.m */; };
+		C490156320C4D41A0073E85B /* ConfirmOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490156220C4D41A0073E85B /* ConfirmOrderVC.m */; };
+		C490156620C50EDF0073E85B /* PayOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490156520C50EDF0073E85B /* PayOrderVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -513,12 +511,6 @@
 		21302320202D49C300A954E7 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		21302321202D49C400A954E7 /* CustomShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomShareView.h; sourceTree = "<group>"; };
 		21302322202D49C400A954E7 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
-		21302326202D49FC00A954E7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		21302327202D49FC00A954E7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		21302328202D49FC00A954E7 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		21302329202D49FC00A954E7 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		2130232A202D49FC00A954E7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		2130232B202D49FC00A954E7 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		21302330202D4A4000A954E7 /* TLWXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLWXManager.m; sourceTree = "<group>"; };
 		21302331202D4A4000A954E7 /* TLWXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLWXManager.h; sourceTree = "<group>"; };
 		21302333202D6F4D00A954E7 /* ProposalHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProposalHeaderView.h; sourceTree = "<group>"; };
@@ -663,24 +655,6 @@
 		21A10382204A3A7C00BF4C78 /* ProposalInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProposalInfoModel.m; sourceTree = "<group>"; };
 		21A10384204C60F900BF4C78 /* QRCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeView.h; sourceTree = "<group>"; };
 		21A10385204C60F900BF4C78 /* QRCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRCodeView.m; sourceTree = "<group>"; };
-		21A10389204C62DF00BF4C78 /* SGGenerateQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGenerateQRCodeVC.m; sourceTree = "<group>"; };
-		21A1038A204C62DF00BF4C78 /* SGScanningQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScanningQRCodeVC.h; sourceTree = "<group>"; };
-		21A1038B204C62DF00BF4C78 /* ScanSuccessJumpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanSuccessJumpVC.h; sourceTree = "<group>"; };
-		21A1038C204C62DF00BF4C78 /* SGGenerateQRCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGGenerateQRCodeVC.h; sourceTree = "<group>"; };
-		21A1038D204C62DF00BF4C78 /* SGScanningQRCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGScanningQRCodeVC.m; sourceTree = "<group>"; };
-		21A1038E204C62DF00BF4C78 /* ScanSuccessJumpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanSuccessJumpVC.m; sourceTree = "<group>"; };
-		21A10390204C62DF00BF4C78 /* QRCodebottomRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodebottomRight@2x.png"; sourceTree = "<group>"; };
-		21A10391204C62DF00BF4C78 /* SGScanningQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScanningQRCodeView.h; sourceTree = "<group>"; };
-		21A10392204C62DF00BF4C78 /* QRCodebottomLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodebottomLeft@2x.png"; sourceTree = "<group>"; };
-		21A10393204C62DF00BF4C78 /* SGScanningQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGScanningQRCodeView.m; sourceTree = "<group>"; };
-		21A10394204C62DF00BF4C78 /* QRCodeLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeLine@2x.png"; sourceTree = "<group>"; };
-		21A10395204C62DF00BF4C78 /* QRCodeTopRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopRight@2x.png"; sourceTree = "<group>"; };
-		21A10396204C62DF00BF4C78 /* QRCodeTopLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeTopLeft@2x.png"; sourceTree = "<group>"; };
-		21A10398204C62DF00BF4C78 /* SGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAlertView.h; sourceTree = "<group>"; };
-		21A10399204C62DF00BF4C78 /* SGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAlertView.m; sourceTree = "<group>"; };
-		21A1039B204C62DF00BF4C78 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
-		21A1039D204C62DF00BF4C78 /* SGQRCodeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeTool.m; sourceTree = "<group>"; };
-		21A1039E204C62DF00BF4C78 /* SGQRCodeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeTool.h; sourceTree = "<group>"; };
 		21A103AB204E8F0F00BF4C78 /* ExpressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressModel.m; sourceTree = "<group>"; };
 		21A103AC204E8F0F00BF4C78 /* ExpressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressModel.h; sourceTree = "<group>"; };
 		21A103AF204FD3AF00BF4C78 /* UIViewController+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
@@ -876,6 +850,32 @@
 		21FB30631F26E9EF0028ADEE /* UIViewController+MethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MethodSwizzling.h"; sourceTree = "<group>"; };
 		21FB30641F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MethodSwizzling.m"; sourceTree = "<group>"; };
 		63F0FF5CA6D8C7CAF539F595 /* Pods-Base_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Base_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Base_iOS/Pods-Base_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C490153A20BD2CD80073E85B /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		C490153B20BD2CD80073E85B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		C490153C20BD2CD80073E85B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		C490153D20BD2CD80073E85B /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		C490153E20BD2CD80073E85B /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		C490153F20BD2CD80073E85B /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
+		C490154520BD38730073E85B /* SchoolOfBusinessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SchoolOfBusinessVC.h; sourceTree = "<group>"; };
+		C490154620BD38730073E85B /* SchoolOfBusinessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolOfBusinessVC.m; sourceTree = "<group>"; };
+		C490154820C0E3BF0073E85B /* BrandHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandHeaderView.h; sourceTree = "<group>"; };
+		C490154920C0E3BF0073E85B /* BrandHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandHeaderView.m; sourceTree = "<group>"; };
+		C490154B20C11E710073E85B /* BrandDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandDetailModel.h; sourceTree = "<group>"; };
+		C490154C20C11E710073E85B /* BrandDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandDetailModel.m; sourceTree = "<group>"; };
+		C490154F20C380710073E85B /* ShoppingCartVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCartVC.h; sourceTree = "<group>"; };
+		C490155020C380710073E85B /* ShoppingCartVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartVC.m; sourceTree = "<group>"; };
+		C490155520C3865D0073E85B /* ShoppingCarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppingCarView.h; sourceTree = "<group>"; };
+		C490155620C3865D0073E85B /* ShoppingCarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppingCarView.m; sourceTree = "<group>"; };
+		C490155820C38A8C0073E85B /* ShopCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopCarModel.h; sourceTree = "<group>"; };
+		C490155920C38A8C0073E85B /* ShopCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopCarModel.m; sourceTree = "<group>"; };
+		C490155B20C38BDF0073E85B /* ShoppCarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoppCarCell.h; sourceTree = "<group>"; };
+		C490155C20C38BDF0073E85B /* ShoppCarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoppCarCell.m; sourceTree = "<group>"; };
+		C490155E20C3C4E10073E85B /* CarFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarFootView.h; sourceTree = "<group>"; };
+		C490155F20C3C4E10073E85B /* CarFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarFootView.m; sourceTree = "<group>"; };
+		C490156120C4D41A0073E85B /* ConfirmOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderVC.h; sourceTree = "<group>"; };
+		C490156220C4D41A0073E85B /* ConfirmOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderVC.m; sourceTree = "<group>"; };
+		C490156420C50EDF0073E85B /* PayOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayOrderVC.h; sourceTree = "<group>"; };
+		C490156520C50EDF0073E85B /* PayOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayOrderVC.m; sourceTree = "<group>"; };
 		E041B8AEBBDCC121169B52FB /* libPods-Base_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Base_iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -884,7 +884,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2130232D202D49FC00A954E7 /* libWeChatSDK.a in Frameworks */,
+				C490154120BD2CD80073E85B /* libWeChatSDK.a in Frameworks */,
 				216AB7F41F189F39006C26A1 /* libz.tbd in Frameworks */,
 				216AB7F21F189F30006C26A1 /* libc++.tbd in Frameworks */,
 				216AB7F01F189F22006C26A1 /* libsqlite3.tbd in Frameworks */,
@@ -1290,6 +1290,7 @@
 				2182D26420468B82003215DA /* SearchVC.m */,
 				21A103B2204FE99C00BF4C78 /* BaseSearchVC.h */,
 				21A103B3204FE99C00BF4C78 /* BaseSearchVC.m */,
+				C490154E20C3804E0073E85B /* shoopingCar */,
 				2182D2C620492997003215DA /* Banner */,
 				21A1E9F2203E68AB00A8AD34 /* Brand */,
 				21302342202DA43600A954E7 /* Appointment */,
@@ -1578,6 +1579,8 @@
 				212BE471202BF677000BCC66 /* BrandModel.m */,
 				212ECE622041618C0091E543 /* BrandListModel.h */,
 				212ECE632041618C0091E543 /* BrandListModel.m */,
+				C490155820C38A8C0073E85B /* ShopCarModel.h */,
+				C490155920C38A8C0073E85B /* ShopCarModel.m */,
 			);
 			path = Brand;
 			sourceTree = "<group>";
@@ -1794,6 +1797,8 @@
 				21A103AB204E8F0F00BF4C78 /* ExpressModel.m */,
 				212ECE7620430A020091E543 /* BrandOrderModel.h */,
 				212ECE7720430A020091E543 /* BrandOrderModel.m */,
+				C490154B20C11E710073E85B /* BrandDetailModel.h */,
+				C490154C20C11E710073E85B /* BrandDetailModel.m */,
 			);
 			path = Brand;
 			sourceTree = "<group>";
@@ -1809,19 +1814,6 @@
 				212ECE972044FDD00091E543 /* AppointmentOrderDetailVC.m */,
 			);
 			path = AppointmentOrder;
-			sourceTree = "<group>";
-		};
-		21302325202D49FC00A954E7 /* WeChat */ = {
-			isa = PBXGroup;
-			children = (
-				21302326202D49FC00A954E7 /* WXApi.h */,
-				21302327202D49FC00A954E7 /* WXApiObject.h */,
-				21302329202D49FC00A954E7 /* WechatAuthSDK.h */,
-				21302328202D49FC00A954E7 /* README.txt */,
-				2130232B202D49FC00A954E7 /* read_me.txt */,
-				2130232A202D49FC00A954E7 /* libWeChatSDK.a */,
-			);
-			path = WeChat;
 			sourceTree = "<group>";
 		};
 		2130232F202D4A3200A954E7 /* WX */ = {
@@ -2141,72 +2133,6 @@
 			path = RankingList;
 			sourceTree = "<group>";
 		};
-		21A10387204C62DF00BF4C78 /* SGQRCode */ = {
-			isa = PBXGroup;
-			children = (
-				21A10388204C62DF00BF4C78 /* Controller */,
-				21A1038F204C62DF00BF4C78 /* View */,
-				21A10397204C62DF00BF4C78 /* SGAlertView */,
-				21A1039A204C62DF00BF4C78 /* Sound */,
-				21A1039C204C62DF00BF4C78 /* Tool */,
-			);
-			name = SGQRCode;
-			path = "../../../../../健康e购/健康e购/YS_iOS/Class/Section/SGQRCode";
-			sourceTree = "<group>";
-		};
-		21A10388204C62DF00BF4C78 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				21A10389204C62DF00BF4C78 /* SGGenerateQRCodeVC.m */,
-				21A1038A204C62DF00BF4C78 /* SGScanningQRCodeVC.h */,
-				21A1038B204C62DF00BF4C78 /* ScanSuccessJumpVC.h */,
-				21A1038C204C62DF00BF4C78 /* SGGenerateQRCodeVC.h */,
-				21A1038D204C62DF00BF4C78 /* SGScanningQRCodeVC.m */,
-				21A1038E204C62DF00BF4C78 /* ScanSuccessJumpVC.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		21A1038F204C62DF00BF4C78 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				21A10390204C62DF00BF4C78 /* QRCodebottomRight@2x.png */,
-				21A10391204C62DF00BF4C78 /* SGScanningQRCodeView.h */,
-				21A10392204C62DF00BF4C78 /* QRCodebottomLeft@2x.png */,
-				21A10393204C62DF00BF4C78 /* SGScanningQRCodeView.m */,
-				21A10394204C62DF00BF4C78 /* QRCodeLine@2x.png */,
-				21A10395204C62DF00BF4C78 /* QRCodeTopRight@2x.png */,
-				21A10396204C62DF00BF4C78 /* QRCodeTopLeft@2x.png */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		21A10397204C62DF00BF4C78 /* SGAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				21A10398204C62DF00BF4C78 /* SGAlertView.h */,
-				21A10399204C62DF00BF4C78 /* SGAlertView.m */,
-			);
-			path = SGAlertView;
-			sourceTree = "<group>";
-		};
-		21A1039A204C62DF00BF4C78 /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				21A1039B204C62DF00BF4C78 /* sound.caf */,
-			);
-			path = Sound;
-			sourceTree = "<group>";
-		};
-		21A1039C204C62DF00BF4C78 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				21A1039D204C62DF00BF4C78 /* SGQRCodeTool.m */,
-				21A1039E204C62DF00BF4C78 /* SGQRCodeTool.h */,
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
 		21A103AE204FD38300BF4C78 /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2240,6 +2166,8 @@
 				212BE46D202BF649000BCC66 /* HomeCollectionView.m */,
 				212BE47C202C0023000BCC66 /* HomeHeaderView.h */,
 				212BE47D202C0023000BCC66 /* HomeHeaderView.m */,
+				C490154820C0E3BF0073E85B /* BrandHeaderView.h */,
+				C490154920C0E3BF0073E85B /* BrandHeaderView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2268,6 +2196,12 @@
 				21A1E9FC203E6CA500A8AD34 /* BrandListCell.m */,
 				21A1E9FE203E71F600A8AD34 /* BrandListTableView.h */,
 				21A1E9FF203E71F600A8AD34 /* BrandListTableView.m */,
+				C490155520C3865D0073E85B /* ShoppingCarView.h */,
+				C490155620C3865D0073E85B /* ShoppingCarView.m */,
+				C490155B20C38BDF0073E85B /* ShoppCarCell.h */,
+				C490155C20C38BDF0073E85B /* ShoppCarCell.m */,
+				C490155E20C3C4E10073E85B /* CarFootView.h */,
+				C490155F20C3C4E10073E85B /* CarFootView.m */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -2517,8 +2451,8 @@
 		21F827D11F1742E80019B176 /* Base_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				C490153820BD2CD80073E85B /* Extension */,
 				21F82B551F17719D0019B176 /* Classes */,
-				21F82C911F17719D0019B176 /* Extension */,
 				21F82C921F17719D0019B176 /* Resource */,
 			);
 			path = Base_iOS;
@@ -2639,6 +2573,7 @@
 		21F82B7D1F17719D0019B176 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C490154320BD383E0073E85B /* School */,
 				212BE41120285DCD000BCC66 /* Home */,
 				212BE42E202A9E03000BCC66 /* HelpCenter */,
 				212BE427202A9CA7000BCC66 /* Invite */,
@@ -2647,14 +2582,6 @@
 				21216F471F380DD3007C9855 /* User */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		21F82C911F17719D0019B176 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				21302325202D49FC00A954E7 /* WeChat */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		21F82C921F17719D0019B176 /* Resource */ = {
@@ -2673,7 +2600,6 @@
 		21FB2F7D1F26E9EE0028ADEE /* Section */ = {
 			isa = PBXGroup;
 			children = (
-				21A10387204C62DF00BF4C78 /* SGQRCode */,
 				21A1EA4020402AA700A8AD34 /* AddressPicker */,
 				21302379202EEFE900A954E7 /* Calendar */,
 				2130236B202ECE8F00A954E7 /* LinkLabel */,
@@ -2766,6 +2692,58 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C490153820BD2CD80073E85B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C490153920BD2CD80073E85B /* WechatSDK1.8.2 */,
+			);
+			name = Extension;
+			path = Classes/Extension;
+			sourceTree = "<group>";
+		};
+		C490153920BD2CD80073E85B /* WechatSDK1.8.2 */ = {
+			isa = PBXGroup;
+			children = (
+				C490153A20BD2CD80073E85B /* WXApi.h */,
+				C490153B20BD2CD80073E85B /* WXApiObject.h */,
+				C490153C20BD2CD80073E85B /* README.txt */,
+				C490153D20BD2CD80073E85B /* WechatAuthSDK.h */,
+				C490153E20BD2CD80073E85B /* libWeChatSDK.a */,
+				C490153F20BD2CD80073E85B /* read_me.txt */,
+			);
+			path = WechatSDK1.8.2;
+			sourceTree = "<group>";
+		};
+		C490154320BD383E0073E85B /* School */ = {
+			isa = PBXGroup;
+			children = (
+				C490154420BD383E0073E85B /* ViewController */,
+			);
+			path = School;
+			sourceTree = "<group>";
+		};
+		C490154420BD383E0073E85B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C490154520BD38730073E85B /* SchoolOfBusinessVC.h */,
+				C490154620BD38730073E85B /* SchoolOfBusinessVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C490154E20C3804E0073E85B /* shoopingCar */ = {
+			isa = PBXGroup;
+			children = (
+				C490154F20C380710073E85B /* ShoppingCartVC.h */,
+				C490155020C380710073E85B /* ShoppingCartVC.m */,
+				C490156120C4D41A0073E85B /* ConfirmOrderVC.h */,
+				C490156220C4D41A0073E85B /* ConfirmOrderVC.m */,
+				C490156420C50EDF0073E85B /* PayOrderVC.h */,
+				C490156520C50EDF0073E85B /* PayOrderVC.m */,
+			);
+			path = shoopingCar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2777,7 +2755,6 @@
 				21F827CB1F1742E80019B176 /* Sources */,
 				21F827CC1F1742E80019B176 /* Frameworks */,
 				21F827CD1F1742E80019B176 /* Resources */,
-				AA8E86414C4BB1AFD9B8E280 /* [CP] Embed Pods Frameworks */,
 				54B54C679A639496F59DB6CF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -2835,16 +2812,10 @@
 			files = (
 				21F82D201F17719D0019B176 /* Main.storyboard in Resources */,
 				21F82D1C1F17719D0019B176 /* Assets.xcassets in Resources */,
-				21A103A3204C62E000BF4C78 /* QRCodebottomLeft@2x.png in Resources */,
-				21A103A2204C62E000BF4C78 /* QRCodebottomRight@2x.png in Resources */,
-				2130232C202D49FC00A954E7 /* README.txt in Resources */,
+				C490154020BD2CD80073E85B /* README.txt in Resources */,
 				21A1EA4920402AA700A8AD34 /* addressJSON.txt in Resources */,
-				21A103A7204C62E000BF4C78 /* QRCodeTopLeft@2x.png in Resources */,
 				21F82D1E1F17719D0019B176 /* LaunchScreen.storyboard in Resources */,
-				21A103A6204C62E000BF4C78 /* QRCodeTopRight@2x.png in Resources */,
-				21A103A5204C62E000BF4C78 /* QRCodeLine@2x.png in Resources */,
-				21A103A9204C62E000BF4C78 /* sound.caf in Resources */,
-				2130232E202D49FC00A954E7 /* read_me.txt in Resources */,
+				C490154220BD2CD80073E85B /* read_me.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2879,21 +2850,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Base_iOS/Pods-Base_iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AA8E86414C4BB1AFD9B8E280 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Base_iOS/Pods-Base_iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BB1716A7EE1059654566F3F3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2926,6 +2882,7 @@
 				2182D29D2047A7A4003215DA /* MyCommentCell.m in Sources */,
 				21AC58951FDE741A00F19DE8 /* CaptchaView.m in Sources */,
 				21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */,
+				C490155D20C38BDF0073E85B /* ShoppCarCell.m in Sources */,
 				2182D2A12047CA22003215DA /* MyInfomationVC.m in Sources */,
 				21A1EA2B203FBD7400A8AD34 /* IntegralGoodDetailVC.m in Sources */,
 				21A103B4204FE99C00BF4C78 /* BaseSearchVC.m in Sources */,
@@ -2936,12 +2893,13 @@
 				2182D2782046D113003215DA /* TripListModel.m in Sources */,
 				2182D28A2046DFA9003215DA /* MyRankModel.m in Sources */,
 				212BE491202C3735000BCC66 /* SettingGroup.m in Sources */,
+				C490156320C4D41A0073E85B /* ConfirmOrderVC.m in Sources */,
 				21111BA21F8B5F2C0021B3FE /* CircleGuideView.m in Sources */,
 				21AC58851FDE73B200F19DE8 /* TLChangeMobileVC.m in Sources */,
 				2182D2622046787F003215DA /* AutoresizeLabelModel.m in Sources */,
 				212ECE3E2041026D0091E543 /* IntegralOrderDetailCell.m in Sources */,
 				21AC589F1FDE754400F19DE8 /* AppConfig.m in Sources */,
-				21A103A4204C62E000BF4C78 /* SGScanningQRCodeView.m in Sources */,
+				C490155720C3865D0073E85B /* ShoppingCarView.m in Sources */,
 				212ECE70204307E00091E543 /* BrandOrderGoodCell.m in Sources */,
 				21111BA91F8B5F2C0021B3FE /* TLBannerView.m in Sources */,
 				2182D24B20464795003215DA /* CommentKeywordModel.m in Sources */,
@@ -2971,6 +2929,7 @@
 				21AC596D1FDE814C00F19DE8 /* UIView+Responder.m in Sources */,
 				2130234C202DA5FC00A954E7 /* AppointmentListCell.m in Sources */,
 				212BE460202B04CC000BCC66 /* SystemNoticeVC.m in Sources */,
+				C490156020C3C4E10073E85B /* CarFootView.m in Sources */,
 				2182D24820459729003215DA /* CommentListHeaderView.m in Sources */,
 				21A1EA00203E71F600A8AD34 /* BrandListTableView.m in Sources */,
 				21A1EA06203E8DE600A8AD34 /* BrandDetailTableView.m in Sources */,
@@ -3000,11 +2959,9 @@
 				21A1E9FD203E6CA500A8AD34 /* BrandListCell.m in Sources */,
 				2182D2B520481CD4003215DA /* PictureLibraryCell.m in Sources */,
 				21AC595B1FDE804500F19DE8 /* UILable+convience.m in Sources */,
-				21A103AA204C62E000BF4C78 /* SGQRCodeTool.m in Sources */,
 				21AC593E1FDE7A1B00F19DE8 /* TopLabelUtil.m in Sources */,
 				21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */,
 				21A1EA5120402DE400A8AD34 /* UIView+XMGExtension.m in Sources */,
-				21A1039F204C62E000BF4C78 /* SGGenerateQRCodeVC.m in Sources */,
 				212BE482202C3115000BCC66 /* MineHeaderView.m in Sources */,
 				212ECE8A204402120091E543 /* AppointmentStartVC.m in Sources */,
 				212ECE59204143670091E543 /* IntregalTaskCell.m in Sources */,
@@ -3018,12 +2975,14 @@
 				212ECE6A204307720091E543 /* BrandOrderListVC.m in Sources */,
 				212BE42A202A9CC2000BCC66 /* InviteVC.m in Sources */,
 				212BE4A5202C4009000BCC66 /* SettingCell.m in Sources */,
+				C490156620C50EDF0073E85B /* PayOrderVC.m in Sources */,
 				212BE4AE202C5082000BCC66 /* QuestionModel.m in Sources */,
 				21AC58AA1FDE75AA00F19DE8 /* HttpLogger.m in Sources */,
 				212BE49E202C3D9A000BCC66 /* YYImageClipViewController.m in Sources */,
 				212BE48A202C371D000BCC66 /* MineGroup.m in Sources */,
 				212ECDC720403ADE0091E543 /* IntegralOrderVC.m in Sources */,
 				21302341202D8B6C00A954E7 /* ProposalCell.m in Sources */,
+				C490155120C380710073E85B /* ShoppingCartVC.m in Sources */,
 				21111BCB1F8B5F2C0021B3FE /* MovieAddComment.m in Sources */,
 				212BE44F202B000E000BCC66 /* NoticeModel.m in Sources */,
 				2182D2932047A158003215DA /* MyCommentListVC.m in Sources */,
@@ -3082,11 +3041,13 @@
 				212BE41F202862E8000BCC66 /* UIImage+Tint.m in Sources */,
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
 				2182D2C52048F991003215DA /* AchievementOrderDetailVC.m in Sources */,
+				C490155A20C38A8C0073E85B /* ShopCarModel.m in Sources */,
 				2182D2742046D0B3003215DA /* TripListTableView.m in Sources */,
 				212ECE4D204142540091E543 /* IntegralTaskListVC.m in Sources */,
 				21AC59421FDE7A1B00F19DE8 /* TLDatePicker.m in Sources */,
 				21302374202EEB9800A954E7 /* AppointmentTripCell.m in Sources */,
 				21A1EA12203EBBC800A8AD34 /* BrandBuyVC.m in Sources */,
+				C490154720BD38730073E85B /* SchoolOfBusinessVC.m in Sources */,
 				2182D2A82047E644003215DA /* DataDictionaryModel.m in Sources */,
 				212ECE6D2043079B0091E543 /* BrandOrderDetailVC.m in Sources */,
 				2182D2692046B596003215DA /* NSAttributedString+add.m in Sources */,
@@ -3100,6 +3061,7 @@
 				212BE46E202BF649000BCC66 /* HomeCollectionView.m in Sources */,
 				21AC59851FDE828500F19DE8 /* NSObject+Extension.m in Sources */,
 				21AC59471FDE7A1B00F19DE8 /* TLAlert.m in Sources */,
+				C490154D20C11E710073E85B /* BrandDetailModel.m in Sources */,
 				212BE4B4202C51F5000BCC66 /* HelpCenterCell.m in Sources */,
 				21AC59661FDE80FB00F19DE8 /* UIColor+Extension.m in Sources */,
 				21158E461F1C4F9E00A07266 /* TabBarModel.m in Sources */,
@@ -3116,7 +3078,6 @@
 				212ECE672043075C0091E543 /* BrandOrderVC.m in Sources */,
 				21302338202D898600A954E7 /* ProposalTableView.m in Sources */,
 				21302383202EEFF600A954E7 /* NSDate+Extend.m in Sources */,
-				21A103A8204C62E000BF4C78 /* SGAlertView.m in Sources */,
 				212BE4262029AE45000BCC66 /* NullSafe.m in Sources */,
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				21AC587B1FDE737200F19DE8 /* TLUserForgetPwdVC.m in Sources */,
@@ -3145,7 +3106,6 @@
 				21AC594F1FDE7A1B00F19DE8 /* TLUploadManager.m in Sources */,
 				212BE4B7202C54A9000BCC66 /* HelpCenterAnswerCell.m in Sources */,
 				212ECDCA20403AF70091E543 /* IntegralOrderListVC.m in Sources */,
-				21A103A1204C62E000BF4C78 /* ScanSuccessJumpVC.m in Sources */,
 				21AC59701FDE81D500F19DE8 /* UIBarButtonItem+convience.m in Sources */,
 				212ECE44204107190091E543 /* SendCommentVC.m in Sources */,
 				21F82C9E1F17719D0019B176 /* NavigationController.m in Sources */,
@@ -3177,8 +3137,8 @@
 				21A10386204C60F900BF4C78 /* QRCodeView.m in Sources */,
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
 				21302324202D49C400A954E7 /* ShareView.m in Sources */,
-				21A103A0204C62E000BF4C78 /* SGScanningQRCodeVC.m in Sources */,
 				21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */,
+				C490154A20C0E3BF0073E85B /* BrandHeaderView.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
 				212ECE4A20413BCF0091E543 /* CurrencyModel.m in Sources */,
@@ -3326,6 +3286,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/Twitter",
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/WeChat",
+					"$(PROJECT_DIR)/Base_iOS/Classes/Extension/WechatSDK1.8.2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3364,6 +3325,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/Twitter",
 					"$(PROJECT_DIR)/Base_iOS/Extension/UMSocial/SocialLibraries/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Extension/WeChat",
+					"$(PROJECT_DIR)/Base_iOS/Classes/Extension/WechatSDK1.8.2",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
