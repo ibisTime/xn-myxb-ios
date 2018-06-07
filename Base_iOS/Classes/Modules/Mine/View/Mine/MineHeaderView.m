@@ -11,6 +11,7 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+#import "UIButton+Custom.h"
 //Framework
 //Category
 //Extension
@@ -126,31 +127,26 @@
     }];
     
     //销帮币
-    self.xiaobangbiL = [UILabel labelWithBackgroundColor:kClearColor
-                                           textColor:kWhiteColor
-                                                font:12.0];
-    self.xiaobangbiL.textAlignment = NSTextAlignmentCenter;
+    self.xiaobangbiL = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14.0];
+    
     [self addSubview:self.xiaobangbiL];
     
     [self.xiaobangbiL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(@0);
         make.right.equalTo(self.mas_centerX);
-        make.height.equalTo(@14);
-        make.bottom.equalTo(@-10);
+        make.top.equalTo(self.userPhoto.mas_bottom);
+        make.bottom.equalTo(@0);
     }];
     
     //销帮卷
-    self.xiaobangJuanL = [UILabel labelWithBackgroundColor:kClearColor
-                                               textColor:kWhiteColor
-                                                    font:12.0];
-    self.xiaobangJuanL.textAlignment = NSTextAlignmentCenter;
+    self.xiaobangJuanL = [UIButton buttonWithTitle:@"" titleColor:kWhiteColor backgroundColor:kClearColor titleFont:14.0];
     [self addSubview:self.xiaobangJuanL];
     
     [self.xiaobangJuanL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(@0);
         make.left.equalTo(self.mas_centerX);
-        make.height.equalTo(@14);
-        make.bottom.equalTo(@-10);
+        make.bottom.equalTo(@0);
+        make.top.equalTo(self.userPhoto.mas_bottom);
     }];
     
     UIView *lineview = [[UIView alloc]init];

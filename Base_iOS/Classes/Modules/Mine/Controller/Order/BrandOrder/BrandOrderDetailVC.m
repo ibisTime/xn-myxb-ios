@@ -205,8 +205,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0) {
-        
-        return 1;
+        NSArray *arry = self.order.productOrderList;
+        return arry.count;
     }
     return 6;
 }
@@ -222,7 +222,8 @@
             cell = [[BrandOrderDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:orderDetailCellId];
         }
         
-        cell.order = self.order;
+//        cell.order = self.order;
+        cell.celldata = [self.order.productOrderList objectAtIndex:indexPath.row];
         
         return cell;
     }

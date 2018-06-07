@@ -16,6 +16,8 @@
 
 @interface HomeCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
+@property (nonatomic ,assign)BOOL isremoveHeader;
+
 @end
 
 @implementation HomeCollectionView
@@ -40,7 +42,25 @@ static NSString *placeholderViewID = @"placeholderViewID";
     }
     return self;
 }
-
+- (instancetype)initNoheaderWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout
+{
+    self = [super initWithFrame:frame collectionViewLayout:layout];
+    if (self) {
+        
+        self.backgroundColor = kWhiteColor;
+        self.delegate = self;
+        self.dataSource = self;
+        self.isremoveHeader = YES;
+        
+        [self registerClass:[BrandCell class] forCellWithReuseIdentifier:@"BrandCell"];
+        
+//        [self registerClass:[HomeHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderCellId"];
+        
+        [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:placeholderViewID];
+        
+    }
+    return self;
+}
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //--//
@@ -79,6 +99,9 @@ static NSString *placeholderViewID = @"placeholderViewID";
         
         self.headerView = cell;
         
+        if (self.isremoveHeader) {
+            return nil;
+        }
         return cell;
         
     }
@@ -128,6 +151,9 @@ static NSString *placeholderViewID = @"placeholderViewID";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout
 referenceSizeForHeaderInSection:(NSInteger)section {
     
+    if (self.isremoveHeader) {
+        return CGSizeMake(0, 0);
+    }
     return CGSizeMake(kScreenWidth, 216 + kWidth(185));
 }
 

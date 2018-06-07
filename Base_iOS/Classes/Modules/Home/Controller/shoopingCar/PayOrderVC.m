@@ -63,7 +63,7 @@
     }];
     
     UILabel *xiaobangLable = [UILabel labelWithBackgroundColor:kClearColor textColor:[UIColor blackColor] font:17];
-    xiaobangLable.text = [NSString stringWithFormat:@"销帮币(%@)",[TLUser user].rmbAccountNumber];
+    xiaobangLable.text = [NSString stringWithFormat:@"销帮币(%@)",[TLUser user].rmbamount];
     [self.view addSubview:xiaobangLable];
     [xiaobangLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(oneimage.mas_right).with.offset(5);
@@ -83,7 +83,7 @@
     
     
     UILabel *xiaobangJuanLable = [UILabel labelWithBackgroundColor:kClearColor textColor:[UIColor blackColor] font:17];
-    xiaobangJuanLable.text = [NSString stringWithFormat:@"销帮卷(%@)",[TLUser user].jfAccountNumber];
+    xiaobangJuanLable.text = [NSString stringWithFormat:@"销帮卷(%@)",[TLUser user].jfamount];
     [self.view addSubview:xiaobangJuanLable];
     [xiaobangJuanLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(twoimage.mas_right).with.offset(5);

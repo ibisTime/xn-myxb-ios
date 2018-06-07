@@ -26,6 +26,9 @@
 //时间
 @property (nonatomic, strong) UILabel *timeLbl;
 
+@property (nonatomic, strong) UILabel *type;
+
+
 @end
 
 @implementation TripListCell
@@ -69,6 +72,19 @@
 //                                                font:13.0];
 //    [self addSubview:self.dateLbl];
     
+    //日期
+    self.timeLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                           textColor:kTextColor
+                                                font:13.0];
+    [self addSubview:self.timeLbl];
+    
+    
+    //日期
+    self.type = [UILabel labelWithBackgroundColor:kClearColor
+                                           textColor:kThemeColor
+                                                font:15.0];
+    [self addSubview:self.type];
+    
     //bottomLine
     UIView *bottomLine = [[UIView alloc] init];
     
@@ -101,18 +117,24 @@
 //        make.top.equalTo(self.photoIV.mas_top).offset(3);
 //        make.left.equalTo(self.photoIV.mas_right).offset(12);
 //    }];
+    
+    [self.type mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right).with.offset(-15);
+        make.top.equalTo(self.photoIV.mas_top);
+        make.height.equalTo(@15);
+    }];
 //    //日期
     [self.dateLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-
+        
         make.left.equalTo(self.photoIV.mas_right).offset(12);
         make.centerY.equalTo(@0);
     }];
 //    //时间
-//    [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.left.equalTo(self.weekLbl.mas_left);
-//        make.top.equalTo(self.dateLbl.mas_top).offset(6);
-//    }];
+    [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.left.equalTo(self.photoIV.mas_right).offset(12);
+        make.top.equalTo(self.dateLbl.mas_bottom).offset(6);
+    }];
 }
 
 #pragma mark - Setting
@@ -125,8 +147,16 @@
     NSString *startDate = [trip.startDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
     NSString *endDate = [trip.endDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
     
-    self.dateLbl.text = [NSString stringWithFormat:@"%@ - %@", startDate, endDate];
-    
+    self.dateLbl.text = startDate;//[NSString stringWithFormat:@"%@ - %@", startDate, endDate];
+    self.timeLbl.text = endDate;
+    if ([trip.type integerValue] == 1) {
+        self.type.text = @"可预约";
+    }
+    else
+    {
+        self.type.text = @"可调配时间";
+
+    }
 }
 
 @end

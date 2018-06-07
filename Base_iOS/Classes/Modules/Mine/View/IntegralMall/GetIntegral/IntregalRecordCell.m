@@ -112,7 +112,7 @@
     
     self.taskNameLabel.text = _task.bizNote;
     
-    self.intregalNumLabel.text = [NSString stringWithFormat:@"%@分", [_task.transAmount convertToRealMoney]];
+    self.intregalNumLabel.text = [NSString stringWithFormat:@"%@", [_task.transAmount convertToRealMoney]];
     
     self.timeLabel.text = [_task.createDatetime convertToDetailDate];
 }

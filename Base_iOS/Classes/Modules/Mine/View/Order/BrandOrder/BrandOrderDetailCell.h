@@ -13,4 +13,6 @@
 //
 @property (nonatomic, strong) BrandOrderModel *order;
 
+@property (nonatomic , strong)NSDictionary *celldata;
+
 @end

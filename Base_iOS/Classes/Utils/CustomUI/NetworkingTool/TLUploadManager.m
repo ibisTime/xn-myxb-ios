@@ -95,7 +95,7 @@
     
     getUploadToken.showView = showView;
     getUploadToken.code = IMG_UPLOAD_CODE;
-    getUploadToken.parameters[@"token"] = [TLUser user].token;
+//    getUploadToken.parameters[@"token"] = [TLUser user].token;
     [getUploadToken postWithSuccess:^(id responseObject) {
         
         NSString *token = responseObject[@"data"][@"uploadToken"];

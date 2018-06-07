@@ -16,4 +16,8 @@
 
 @property (nonatomic,copy) NSString *statusCode;
 
+
+@property (nonatomic, strong)NSArray *tatusList;
+
+- (void)reloadTableview;
 @end

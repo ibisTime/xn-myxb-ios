@@ -155,5 +155,23 @@
     self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.detailModel.quantity stringValue]];
     
 }
+- (void)setCelldata:(NSDictionary *)celldata
+{
+    _celldata = celldata;
+    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[celldata[@"product"][@"advPic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    //
+    self.nameLbl.text = celldata[@"product"][@"name"];
+    //
+    NSString *slogin = celldata[@"product"][@"slogan"];
+    STRING_NIL_NULL(slogin)
+    self.sloginLbl.text = slogin;
+    //
+    
+    float price = [celldata[@"price"] integerValue];
+    NSNumber *priceNumber = [NSNumber numberWithInteger:price];
+    self.priceLbl.text = [NSString stringWithFormat:@"%@", [priceNumber convertToRealMoney]];
+    //
+    self.numLbl.text = [NSString stringWithFormat:@"X %@",[celldata[@"quantity"] stringValue]];
+}
 
 @end

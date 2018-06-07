@@ -171,8 +171,10 @@
               dispatch_async(dispatch_get_main_queue(), ^{
                   
                   if (self.baseVC) {
-                      
-                      [self.baseVC removePlaceholderView];
+                      if ([self.baseVC isKindOfClass:[BaseViewController class]]) {
+                          [self.baseVC removePlaceholderView];
+
+                      }
                   }
               });
               

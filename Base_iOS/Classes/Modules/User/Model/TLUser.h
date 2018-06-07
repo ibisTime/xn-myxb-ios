@@ -58,6 +58,11 @@
 @property (nonatomic, copy) NSString *jfAccountNumber;
 //人民币
 @property (nonatomic, copy) NSString *rmbAccountNumber;
+
+//人民币余额
+@property (nonatomic, copy) NSString *rmbamount;
+//积分余额
+@property (nonatomic, copy) NSString *jfamount;
 //邀请码
 @property (nonatomic, copy) NSString *inviteCode;
 //邀请人个数

@@ -11,6 +11,7 @@
 @interface TLTextField : UITextField
 
 @property (nonatomic, strong) UILabel *leftLbl;
+@property (nonatomic, strong) UILabel *rightLbl;
 
 @property (nonatomic,strong) UIImageView *leftIconView;
 
@@ -23,6 +24,12 @@
                      leftIcon:(NSString *)leftIcon
                   placeholder:(NSString *)placeholder;
 
+
+- (instancetype)initWithFrame:(CGRect)frame
+                    leftTitle:(NSString *)leftTitle
+                   rightTitle:(NSString *)rightTitle
+                   titleWidth:(CGFloat)titleWidth
+                  placeholder:(NSString *)placeholder;
 //禁止复制粘贴等功能
 @property (nonatomic,assign) BOOL isSecurity;
 

@@ -15,5 +15,8 @@
 @property (nonatomic, copy) NSString *endDatetime;
 //code
 @property (nonatomic, copy) NSString *code;
+//type
+@property (nonatomic) NSNumber *type;
+
 
 @end

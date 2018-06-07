@@ -31,6 +31,10 @@
 // 获取当前时间的日历
 + (NSDateComponents*)getCurrentComponents;
 
+//获取当前时间跟定样式
++(NSString*)getCurrentTimesTimeStampStr:(NSString *)timeStamStr;
+    
+
 // 根据时间戳得到字符串
 + (NSString*)stringWithTimeStamp:(NSString *)timeStampStr;
 

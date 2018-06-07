@@ -215,7 +215,7 @@
     //根据状态添加按钮
     NSInteger status = [appointmentOrder.status integerValue];
     
-    if (status > [kAppointmentOrderStatusWillOverClass integerValue] && [appointmentOrder.isComment isEqualToString:@"0"]) {
+    if (status > [kAppointmentOrderStatus_6 integerValue] && [appointmentOrder.isComment isEqualToString:@"0"]) {
 
         self.commentBtn.hidden = NO;
 

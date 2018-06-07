@@ -40,6 +40,11 @@
     //配置根控制器
     [self configRootViewController];
     
+    [WXApi startLogByLevel:WXLogLevelNormal logBlock:^(NSString *log) {
+        NSLog(@"---->%@",log);
+    }];
+    //向微信注册,发起支付必须注册
+    [WXApi registerApp:@"wxd0c1725a396dada6" enableMTA:YES];
     return YES;
 }
 

@@ -46,7 +46,11 @@
     [self addNotification];
     
 }
+- (void)reloadTableview
+{
+    [self.tableView beginRefreshing];
 
+}
 #pragma mark - 断网操作
 - (void)placeholderOperation {
     
@@ -122,11 +126,24 @@
     
     helper.code = @"805520";
     
-    helper.parameters[@"applyUser"] = [TLUser user].userId;
-    helper.parameters[@"orderColumn"] = @"apply_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
-    helper.parameters[@"type"] = self.kind;
-    helper.parameters[@"status"] = self.status;
+    if ([self.kind isEqualToString:kUserTypeBeautyGuide] || [[TLUser user].kind isEqualToString:kUserTypeExpert]) {
+        helper.parameters[@"owner"] = [TLUser user].userId;
+//        helper.parameters[@"status"] = @"0";
+//        helper.parameters[@"type"] = self.kind;
+
+
+    }
+    else
+    {
+        helper.parameters[@"applyUser"] = [TLUser user].userId;
+//        helper.parameters[@"orderColumn"] = @"apply_datetime";
+//        helper.parameters[@"orderDir"] = @"desc";
+        helper.parameters[@"type"] = self.kind;
+//        helper.parameters[@"status"] = self.status;
+    }
+    
+    helper.parameters[@"statusList"] = self.tatusList;
+
     
     helper.tableView = self.tableView;
     
@@ -170,7 +187,7 @@
     AppointmentOrderDetailVC *vc = [[AppointmentOrderDetailVC alloc] init];
     
     vc.order = self.orderGroups[indexPath.section];
-    
+    vc.kind = self.kind;
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -201,6 +218,17 @@
     
     footerView.appointmentOrder = self.orderGroups[section];
     
+    //上门、下课和评价
+    if ([order.isComment isEqualToString:@"0"] && [order.status integerValue] == 2 && [order.status integerValue] == 4) {
+        
+        footerView.hidden = NO;;
+    }
+    else
+    {
+        footerView.hidden = YES;
+
+    }
+    
     return footerView;
 }
 
@@ -220,7 +248,7 @@
     AppointmentOrderModel *order = self.orderGroups[section];
 
     //上门、下课和评价
-    if ([order.isComment isEqualToString:@"0"] && [order.status integerValue] > [kAppointmentOrderStatusWillOverClass integerValue]) {
+    if ([order.isComment isEqualToString:@"0"] && [order.status integerValue] == 2 && [order.status integerValue] == 4) {
 
         return 50;
     }

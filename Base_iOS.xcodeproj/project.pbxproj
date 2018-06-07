@@ -297,6 +297,24 @@
 		C490156020C3C4E10073E85B /* CarFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = C490155F20C3C4E10073E85B /* CarFootView.m */; };
 		C490156320C4D41A0073E85B /* ConfirmOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490156220C4D41A0073E85B /* ConfirmOrderVC.m */; };
 		C490156620C50EDF0073E85B /* PayOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490156520C50EDF0073E85B /* PayOrderVC.m */; };
+		C490156920C622AC0073E85B /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C490156820C622AC0073E85B /* MyViewController.m */; };
+		C490156C20C635720073E85B /* AddTripVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490156B20C635720073E85B /* AddTripVC.m */; };
+		C490156F20C66C340073E85B /* TripCalendarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490156E20C66C340073E85B /* TripCalendarVC.m */; };
+		C490157220C682EE0073E85B /* WithdrawalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490157120C682EE0073E85B /* WithdrawalVC.m */; };
+		C490157520C6849A0073E85B /* WithdrawalTable.m in Sources */ = {isa = PBXBuildFile; fileRef = C490157420C6849A0073E85B /* WithdrawalTable.m */; };
+		C490157820C686110073E85B /* WithdrawalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C490157720C686110073E85B /* WithdrawalCell.m */; };
+		C490157E20C6B23B0073E85B /* WithdrawalDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490157D20C6B23B0073E85B /* WithdrawalDetailsVC.m */; };
+		C490158120C6C8F80073E85B /* TopUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490158020C6C8F80073E85B /* TopUpVC.m */; };
+		C490158420C6D2430073E85B /* ChousePayView.m in Sources */ = {isa = PBXBuildFile; fileRef = C490158320C6D2430073E85B /* ChousePayView.m */; };
+		C490158620C6E9780073E85B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490158520C6E9770073E85B /* Security.framework */; };
+		C490158A20C7A6E30073E85B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C490158820C7A6E30073E85B /* AlipaySDK.bundle */; };
+		C490158B20C7A6E30073E85B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C490158920C7A6E30073E85B /* AlipaySDK.framework */; };
+		C490158F20C7B8B10073E85B /* TreeMaoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490158E20C7B8B10073E85B /* TreeMaoVC.m */; };
+		C490159220C817E10073E85B /* ResultsEntryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490159120C817E10073E85B /* ResultsEntryVC.m */; };
+		C490159520C8187B0073E85B /* ResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C490159420C8187B0073E85B /* ResultsView.m */; };
+		C490159820C83AC40073E85B /* ChouseBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = C490159720C83AC40073E85B /* ChouseBrand.m */; };
+		C490159B20C925C90073E85B /* ResultsTheAuditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C490159A20C925C90073E85B /* ResultsTheAuditVC.m */; };
+		C490159E20C9298C0073E85B /* ResultsTheAuditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C490159D20C9298C0073E85B /* ResultsTheAuditCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -876,6 +894,39 @@
 		C490156220C4D41A0073E85B /* ConfirmOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderVC.m; sourceTree = "<group>"; };
 		C490156420C50EDF0073E85B /* PayOrderVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayOrderVC.h; sourceTree = "<group>"; };
 		C490156520C50EDF0073E85B /* PayOrderVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayOrderVC.m; sourceTree = "<group>"; };
+		C490156720C622AC0073E85B /* MyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		C490156820C622AC0073E85B /* MyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		C490156A20C635720073E85B /* AddTripVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddTripVC.h; sourceTree = "<group>"; };
+		C490156B20C635720073E85B /* AddTripVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddTripVC.m; sourceTree = "<group>"; };
+		C490156D20C66C340073E85B /* TripCalendarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripCalendarVC.h; sourceTree = "<group>"; };
+		C490156E20C66C340073E85B /* TripCalendarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripCalendarVC.m; sourceTree = "<group>"; };
+		C490157020C682EE0073E85B /* WithdrawalVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawalVC.h; sourceTree = "<group>"; };
+		C490157120C682EE0073E85B /* WithdrawalVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawalVC.m; sourceTree = "<group>"; };
+		C490157320C6849A0073E85B /* WithdrawalTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawalTable.h; sourceTree = "<group>"; };
+		C490157420C6849A0073E85B /* WithdrawalTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawalTable.m; sourceTree = "<group>"; };
+		C490157620C686110073E85B /* WithdrawalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawalCell.h; sourceTree = "<group>"; };
+		C490157720C686110073E85B /* WithdrawalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawalCell.m; sourceTree = "<group>"; };
+		C490157C20C6B23B0073E85B /* WithdrawalDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawalDetailsVC.h; sourceTree = "<group>"; };
+		C490157D20C6B23B0073E85B /* WithdrawalDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawalDetailsVC.m; sourceTree = "<group>"; };
+		C490157F20C6C8F80073E85B /* TopUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopUpVC.h; sourceTree = "<group>"; };
+		C490158020C6C8F80073E85B /* TopUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopUpVC.m; sourceTree = "<group>"; };
+		C490158220C6D2430073E85B /* ChousePayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChousePayView.h; sourceTree = "<group>"; };
+		C490158320C6D2430073E85B /* ChousePayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChousePayView.m; sourceTree = "<group>"; };
+		C490158520C6E9770073E85B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C490158820C7A6E30073E85B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		C490158920C7A6E30073E85B /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		C490158D20C7B8B10073E85B /* TreeMaoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TreeMaoVC.h; sourceTree = "<group>"; };
+		C490158E20C7B8B10073E85B /* TreeMaoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TreeMaoVC.m; sourceTree = "<group>"; };
+		C490159020C817E10073E85B /* ResultsEntryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsEntryVC.h; sourceTree = "<group>"; };
+		C490159120C817E10073E85B /* ResultsEntryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsEntryVC.m; sourceTree = "<group>"; };
+		C490159320C8187B0073E85B /* ResultsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsView.h; sourceTree = "<group>"; };
+		C490159420C8187B0073E85B /* ResultsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsView.m; sourceTree = "<group>"; };
+		C490159620C83AC40073E85B /* ChouseBrand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChouseBrand.h; sourceTree = "<group>"; };
+		C490159720C83AC40073E85B /* ChouseBrand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChouseBrand.m; sourceTree = "<group>"; };
+		C490159920C925C90073E85B /* ResultsTheAuditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsTheAuditVC.h; sourceTree = "<group>"; };
+		C490159A20C925C90073E85B /* ResultsTheAuditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsTheAuditVC.m; sourceTree = "<group>"; };
+		C490159C20C9298C0073E85B /* ResultsTheAuditCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsTheAuditCell.h; sourceTree = "<group>"; };
+		C490159D20C9298C0073E85B /* ResultsTheAuditCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsTheAuditCell.m; sourceTree = "<group>"; };
 		E041B8AEBBDCC121169B52FB /* libPods-Base_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Base_iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -884,6 +935,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C490158620C6E9780073E85B /* Security.framework in Frameworks */,
+				C490158B20C7A6E30073E85B /* AlipaySDK.framework in Frameworks */,
 				C490154120BD2CD80073E85B /* libWeChatSDK.a in Frameworks */,
 				216AB7F41F189F39006C26A1 /* libz.tbd in Frameworks */,
 				216AB7F21F189F30006C26A1 /* libc++.tbd in Frameworks */,
@@ -1435,6 +1488,15 @@
 			children = (
 				212BE439202A9EC4000BCC66 /* MineVC.h */,
 				212BE43A202A9EC4000BCC66 /* MineVC.m */,
+				C490157020C682EE0073E85B /* WithdrawalVC.h */,
+				C490157120C682EE0073E85B /* WithdrawalVC.m */,
+				C490157C20C6B23B0073E85B /* WithdrawalDetailsVC.h */,
+				C490157D20C6B23B0073E85B /* WithdrawalDetailsVC.m */,
+				C490157F20C6C8F80073E85B /* TopUpVC.h */,
+				C490158020C6C8F80073E85B /* TopUpVC.m */,
+				C490156720C622AC0073E85B /* MyViewController.h */,
+				C490156820C622AC0073E85B /* MyViewController.m */,
+				C490158C20C7B89E0073E85B /* TreeMap */,
 				2182D29E2047C9ED003215DA /* MyInfomation */,
 				2182D28D2047A11A003215DA /* MyComment */,
 				2182D27C2046DEE7003215DA /* MyRank */,
@@ -1594,6 +1656,12 @@
 				212BE495202C3773000BCC66 /* MineTableView.m */,
 				212BE480202C3115000BCC66 /* MineHeaderView.h */,
 				212BE481202C3115000BCC66 /* MineHeaderView.m */,
+				C490157320C6849A0073E85B /* WithdrawalTable.h */,
+				C490157420C6849A0073E85B /* WithdrawalTable.m */,
+				C490157620C686110073E85B /* WithdrawalCell.h */,
+				C490157720C686110073E85B /* WithdrawalCell.m */,
+				C490158220C6D2430073E85B /* ChousePayView.h */,
+				C490158320C6D2430073E85B /* ChousePayView.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1812,6 +1880,12 @@
 				212ECE942044FDA60091E543 /* AppointmentOrderListVC.m */,
 				212ECE962044FDD00091E543 /* AppointmentOrderDetailVC.h */,
 				212ECE972044FDD00091E543 /* AppointmentOrderDetailVC.m */,
+				C490159020C817E10073E85B /* ResultsEntryVC.h */,
+				C490159120C817E10073E85B /* ResultsEntryVC.m */,
+				C490159620C83AC40073E85B /* ChouseBrand.h */,
+				C490159720C83AC40073E85B /* ChouseBrand.m */,
+				C490159920C925C90073E85B /* ResultsTheAuditVC.h */,
+				C490159A20C925C90073E85B /* ResultsTheAuditVC.m */,
 			);
 			path = AppointmentOrder;
 			sourceTree = "<group>";
@@ -1925,6 +1999,10 @@
 			children = (
 				2182D24020453711003215DA /* AppointmentOrderCell.h */,
 				2182D24120453711003215DA /* AppointmentOrderCell.m */,
+				C490159320C8187B0073E85B /* ResultsView.h */,
+				C490159420C8187B0073E85B /* ResultsView.m */,
+				C490159C20C9298C0073E85B /* ResultsTheAuditCell.h */,
+				C490159D20C9298C0073E85B /* ResultsTheAuditCell.m */,
 			);
 			path = AppointmentOrder;
 			sourceTree = "<group>";
@@ -1960,6 +2038,10 @@
 			children = (
 				2182D26B2046CFBD003215DA /* TripListVC.h */,
 				2182D26C2046CFBD003215DA /* TripListVC.m */,
+				C490156A20C635720073E85B /* AddTripVC.h */,
+				C490156B20C635720073E85B /* AddTripVC.m */,
+				C490156D20C66C340073E85B /* TripCalendarVC.h */,
+				C490156E20C66C340073E85B /* TripCalendarVC.m */,
 			);
 			path = TripList;
 			sourceTree = "<group>";
@@ -2675,6 +2757,7 @@
 		6D1019D17ED73A7EE047960F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C490158520C6E9770073E85B /* Security.framework */,
 				210FD1D21F6673E5001DA03D /* CFNetwork.framework */,
 				210FD1D01F6673D6001DA03D /* CoreGraphics.framework */,
 				210FD1CE1F6673CC001DA03D /* CoreText.framework */,
@@ -2695,6 +2778,7 @@
 		C490153820BD2CD80073E85B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				C490158720C7A6CA0073E85B /* AliPay */,
 				C490153920BD2CD80073E85B /* WechatSDK1.8.2 */,
 			);
 			name = Extension;
@@ -2744,6 +2828,24 @@
 			path = shoopingCar;
 			sourceTree = "<group>";
 		};
+		C490158720C7A6CA0073E85B /* AliPay */ = {
+			isa = PBXGroup;
+			children = (
+				C490158820C7A6E30073E85B /* AlipaySDK.bundle */,
+				C490158920C7A6E30073E85B /* AlipaySDK.framework */,
+			);
+			path = AliPay;
+			sourceTree = "<group>";
+		};
+		C490158C20C7B89E0073E85B /* TreeMap */ = {
+			isa = PBXGroup;
+			children = (
+				C490158D20C7B8B10073E85B /* TreeMaoVC.h */,
+				C490158E20C7B8B10073E85B /* TreeMaoVC.m */,
+			);
+			path = TreeMap;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2777,7 +2879,7 @@
 				TargetAttributes = {
 					21F827CE1F1742E80019B176 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7N9TTQ5LT4;
+						DevelopmentTeam = TUV3S622PG;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2812,6 +2914,7 @@
 			files = (
 				21F82D201F17719D0019B176 /* Main.storyboard in Resources */,
 				21F82D1C1F17719D0019B176 /* Assets.xcassets in Resources */,
+				C490158A20C7A6E30073E85B /* AlipaySDK.bundle in Resources */,
 				C490154020BD2CD80073E85B /* README.txt in Resources */,
 				21A1EA4920402AA700A8AD34 /* addressJSON.txt in Resources */,
 				21F82D1E1F17719D0019B176 /* LaunchScreen.storyboard in Resources */,
@@ -2881,6 +2984,7 @@
 				21A103722049533000BF4C78 /* RankingHeaderView.m in Sources */,
 				2182D29D2047A7A4003215DA /* MyCommentCell.m in Sources */,
 				21AC58951FDE741A00F19DE8 /* CaptchaView.m in Sources */,
+				C490157820C686110073E85B /* WithdrawalCell.m in Sources */,
 				21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */,
 				C490155D20C38BDF0073E85B /* ShoppCarCell.m in Sources */,
 				2182D2A12047CA22003215DA /* MyInfomationVC.m in Sources */,
@@ -2894,13 +2998,16 @@
 				2182D28A2046DFA9003215DA /* MyRankModel.m in Sources */,
 				212BE491202C3735000BCC66 /* SettingGroup.m in Sources */,
 				C490156320C4D41A0073E85B /* ConfirmOrderVC.m in Sources */,
+				C490157E20C6B23B0073E85B /* WithdrawalDetailsVC.m in Sources */,
 				21111BA21F8B5F2C0021B3FE /* CircleGuideView.m in Sources */,
 				21AC58851FDE73B200F19DE8 /* TLChangeMobileVC.m in Sources */,
 				2182D2622046787F003215DA /* AutoresizeLabelModel.m in Sources */,
 				212ECE3E2041026D0091E543 /* IntegralOrderDetailCell.m in Sources */,
 				21AC589F1FDE754400F19DE8 /* AppConfig.m in Sources */,
 				C490155720C3865D0073E85B /* ShoppingCarView.m in Sources */,
+				C490159E20C9298C0073E85B /* ResultsTheAuditCell.m in Sources */,
 				212ECE70204307E00091E543 /* BrandOrderGoodCell.m in Sources */,
+				C490157520C6849A0073E85B /* WithdrawalTable.m in Sources */,
 				21111BA91F8B5F2C0021B3FE /* TLBannerView.m in Sources */,
 				2182D24B20464795003215DA /* CommentKeywordModel.m in Sources */,
 				21302381202EEFF600A954E7 /* LDCalendarView.m in Sources */,
@@ -2960,6 +3067,7 @@
 				2182D2B520481CD4003215DA /* PictureLibraryCell.m in Sources */,
 				21AC595B1FDE804500F19DE8 /* UILable+convience.m in Sources */,
 				21AC593E1FDE7A1B00F19DE8 /* TopLabelUtil.m in Sources */,
+				C490156F20C66C340073E85B /* TripCalendarVC.m in Sources */,
 				21A1E9F1203E598700A8AD34 /* TripListView.m in Sources */,
 				21A1EA5120402DE400A8AD34 /* UIView+XMGExtension.m in Sources */,
 				212BE482202C3115000BCC66 /* MineHeaderView.m in Sources */,
@@ -2983,6 +3091,7 @@
 				212ECDC720403ADE0091E543 /* IntegralOrderVC.m in Sources */,
 				21302341202D8B6C00A954E7 /* ProposalCell.m in Sources */,
 				C490155120C380710073E85B /* ShoppingCartVC.m in Sources */,
+				C490156920C622AC0073E85B /* MyViewController.m in Sources */,
 				21111BCB1F8B5F2C0021B3FE /* MovieAddComment.m in Sources */,
 				212BE44F202B000E000BCC66 /* NoticeModel.m in Sources */,
 				2182D2932047A158003215DA /* MyCommentListVC.m in Sources */,
@@ -3001,6 +3110,7 @@
 				2182D2A52047E563003215DA /* MyInfomationModel.m in Sources */,
 				212BE448202AD4E8000BCC66 /* PromptView.m in Sources */,
 				21302332202D4A4000A954E7 /* TLWXManager.m in Sources */,
+				C490158120C6C8F80073E85B /* TopUpVC.m in Sources */,
 				2182D2BA20483D8C003215DA /* AchievementOrderVC.m in Sources */,
 				21AC595A1FDE804500F19DE8 /* UILabel+Extension.m in Sources */,
 				21111BCF1F8B5F2C0021B3FE /* DetailWebView.m in Sources */,
@@ -3038,16 +3148,19 @@
 				21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */,
 				21111BEC1F8B5F2C0021B3FE /* Foundation+Log.m in Sources */,
 				21A103772049536400BF4C78 /* RankingModel.m in Sources */,
+				C490157220C682EE0073E85B /* WithdrawalVC.m in Sources */,
 				212BE41F202862E8000BCC66 /* UIImage+Tint.m in Sources */,
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
 				2182D2C52048F991003215DA /* AchievementOrderDetailVC.m in Sources */,
 				C490155A20C38A8C0073E85B /* ShopCarModel.m in Sources */,
 				2182D2742046D0B3003215DA /* TripListTableView.m in Sources */,
 				212ECE4D204142540091E543 /* IntegralTaskListVC.m in Sources */,
+				C490158420C6D2430073E85B /* ChousePayView.m in Sources */,
 				21AC59421FDE7A1B00F19DE8 /* TLDatePicker.m in Sources */,
 				21302374202EEB9800A954E7 /* AppointmentTripCell.m in Sources */,
 				21A1EA12203EBBC800A8AD34 /* BrandBuyVC.m in Sources */,
 				C490154720BD38730073E85B /* SchoolOfBusinessVC.m in Sources */,
+				C490159B20C925C90073E85B /* ResultsTheAuditVC.m in Sources */,
 				2182D2A82047E644003215DA /* DataDictionaryModel.m in Sources */,
 				212ECE6D2043079B0091E543 /* BrandOrderDetailVC.m in Sources */,
 				2182D2692046B596003215DA /* NSAttributedString+add.m in Sources */,
@@ -3068,6 +3181,7 @@
 				2182D2AB2048062A003215DA /* PictureLibraryView.m in Sources */,
 				21302382202EEFF600A954E7 /* UIColor+Extend.m in Sources */,
 				212BE43B202A9EC4000BCC66 /* MineVC.m in Sources */,
+				C490159520C8187B0073E85B /* ResultsView.m in Sources */,
 				212ECE7B20430C4F0091E543 /* BrandOrderFooterView.m in Sources */,
 				21AC59671FDE80FB00F19DE8 /* UIColor+theme.m in Sources */,
 				21216F8C1F380DD3007C9855 /* ZHAddressCell.m in Sources */,
@@ -3116,11 +3230,13 @@
 				2182D26520468B82003215DA /* SearchVC.m in Sources */,
 				21A1EA28203FAD9800A8AD34 /* IntegralModel.m in Sources */,
 				212ECE50204142CA0091E543 /* IntregalTaskModel.m in Sources */,
+				C490159220C817E10073E85B /* ResultsEntryVC.m in Sources */,
 				212170291F384216007C9855 /* ZHAddAddressVC.m in Sources */,
 				21FB30CC1F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m in Sources */,
 				21A103B1204FD3AF00BF4C78 /* UIViewController+Extension.m in Sources */,
 				21F82D1F1F17719D0019B176 /* main.m in Sources */,
 				21A1EA03203E731300A8AD34 /* BrandDetailVC.m in Sources */,
+				C490156C20C635720073E85B /* AddTripVC.m in Sources */,
 				21F82C9A1F17719D0019B176 /* AppDelegate.mm in Sources */,
 				2121702A1F384216007C9855 /* ZHAddressChooseVC.m in Sources */,
 				21AC593C1FDE7A1B00F19DE8 /* TLTableView.m in Sources */,
@@ -3134,6 +3250,7 @@
 				212BE464202B0618000BCC66 /* NoticeCell.m in Sources */,
 				21A1EA2E203FDF7B00A8AD34 /* IntegralGoodHeaderView.m in Sources */,
 				21AC597E1FDE823C00F19DE8 /* NSString+Date.m in Sources */,
+				C490158F20C7B8B10073E85B /* TreeMaoVC.m in Sources */,
 				21A10386204C60F900BF4C78 /* QRCodeView.m in Sources */,
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
 				21302324202D49C400A954E7 /* ShareView.m in Sources */,
@@ -3143,6 +3260,7 @@
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
 				212ECE4A20413BCF0091E543 /* CurrencyModel.m in Sources */,
 				21302356202EC4A500A954E7 /* AppointmentDetailVC.m in Sources */,
+				C490159820C83AC40073E85B /* ChouseBrand.m in Sources */,
 				2182D25920465A67003215DA /* AutoresizeLabelFlowCell.m in Sources */,
 				21A10383204A3A7C00BF4C78 /* ProposalInfoModel.m in Sources */,
 			);
@@ -3260,12 +3378,13 @@
 			baseConfigurationReference = 63F0FF5CA6D8C7CAF539F595 /* Pods-Base_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7N9TTQ5LT4;
+				DEVELOPMENT_TEAM = TUV3S622PG;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Base_iOS/Extension/Alipay",
 					"$(PROJECT_DIR)/Base_iOS/Extension/Pgy",
+					"$(PROJECT_DIR)/Base_iOS/Classes/Extension/AliPay",
 				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Base_iOS/Resource/Info.plist";
@@ -3288,7 +3407,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Classes/Extension/WechatSDK1.8.2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3299,12 +3418,13 @@
 			baseConfigurationReference = 1D92F7998FE0FF842471AF8F /* Pods-Base_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7N9TTQ5LT4;
+				DEVELOPMENT_TEAM = TUV3S622PG;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Base_iOS/Extension/Alipay",
 					"$(PROJECT_DIR)/Base_iOS/Extension/Pgy",
+					"$(PROJECT_DIR)/Base_iOS/Classes/Extension/AliPay",
 				);
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Base_iOS/Resource/Info.plist";
@@ -3327,7 +3447,7 @@
 					"$(PROJECT_DIR)/Base_iOS/Extension/WeChat",
 					"$(PROJECT_DIR)/Base_iOS/Classes/Extension/WechatSDK1.8.2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.myxbDev2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

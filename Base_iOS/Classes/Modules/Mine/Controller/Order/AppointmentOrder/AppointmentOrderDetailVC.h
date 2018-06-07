@@ -13,4 +13,6 @@
 //
 @property (nonatomic, strong) AppointmentOrderModel *order;
 
+@property (nonatomic, copy) NSString *kind;
+
 @end

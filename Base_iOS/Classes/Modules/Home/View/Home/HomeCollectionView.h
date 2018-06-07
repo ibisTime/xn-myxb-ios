@@ -23,4 +23,7 @@ typedef void(^HomeBlock)(NSIndexPath *indexPath);
 //
 @property (nonatomic, copy) HomeBlock homeBlock;
 
+- (instancetype)initNoheaderWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout;
+
+
 @end

@@ -259,7 +259,7 @@
     AchievementOrderModel *order = self.orderGroups[section];
     
     //上门、下课
-    if ([order.status isEqualToString:kAppointmentOrderStatusWillVisit] || [order.status isEqualToString:kAppointmentOrderStatusWillOverClass]) {
+    if ([order.status isEqualToString:kAppointmentOrderStatus_2] || [order.status isEqualToString:kAppointmentOrderStatus_4]) {
         
         return 50;
     }

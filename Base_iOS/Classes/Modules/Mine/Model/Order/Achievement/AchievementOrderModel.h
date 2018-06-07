@@ -66,7 +66,7 @@
 @end
 
 FOUNDATION_EXTERN NSString *const kAchievementOrderStatusWillCheck;    //待审核
-FOUNDATION_EXTERN NSString *const kAchievementOrderStatusWillVisit;    //待上面
+FOUNDATION_EXTERN NSString *const kAchievementOrderStatusWillVisit;    //待上上课
 FOUNDATION_EXTERN NSString *const kAchievementOrderStatusWillOverClass;//待下课
 FOUNDATION_EXTERN NSString *const kAchievementOrderStatusDidOverClass; //待录入
 FOUNDATION_EXTERN NSString *const kAchievementOrderStatusDidComplete;  //已完成

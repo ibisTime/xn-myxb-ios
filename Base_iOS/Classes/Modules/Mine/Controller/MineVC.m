@@ -19,6 +19,7 @@
 #import <UIImageView+WebCache.h>
 #import "TLProgressHUD.h"
 #import "NSString+Check.h"
+#import "UIControl+Block.h"
 //M
 #import "MineGroup.h"
 //V
@@ -38,6 +39,13 @@
 #import "BrandOrderVC.h"
 #import "AppointmentOrderVC.h"
 #import "MyCommentVC.h"
+
+#import "MyViewController.h"
+#import "IntregalFlowVC.h"
+#import "WithdrawalVC.h"
+
+//网络图谱
+#import "TreeMaoVC.h"
 
 @interface MineVC ()<MineHeaderSeletedDelegate>
 //模型
@@ -108,8 +116,7 @@
 
 }
 
-#pragma mark - Init
-
+#pragma mark - 经销商
 - (void)initSclonGroup {
     
     BaseWeakSelf;
@@ -132,9 +139,13 @@
     order2.imgName = @"成果订单";
     order2.action = ^{
         
-        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+        BrandOrderVC *orderVC = [BrandOrderVC new];
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        
+//        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+//
+//        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     //预约
     MineModel *appointmnet = [MineModel new];
@@ -142,6 +153,8 @@
     appointmnet.text = @"我的预约";
     appointmnet.imgName = @"预约";
     appointmnet.action = ^{
+        
+        
         
         AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
         
@@ -230,7 +243,7 @@
 //
 //    self.group.sections = @[@[jfBalance, brandOrder, appointmnet, myComment], @[teamAdvisor], @[helpCenter]];
 }
-
+#pragma mark - 合伙人
 - (void)initGroup {
     
     BaseWeakSelf;
@@ -372,9 +385,13 @@
     travelList.imgName = @"行程列表";
     travelList.action = ^{
         
-        TripListVC *tripListVC = [TripListVC new];
+        MyViewController *mytripListVC = [MyViewController new];
         
-        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+        [weakSelf.navigationController pushViewController:mytripListVC animated:YES];
+        
+//        TripListVC *tripListVC = [TripListVC new];
+//        
+//        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
     };
     
     
@@ -453,9 +470,9 @@
     travelList.imgName = @"行程列表";
     travelList.action = ^{
         
-        TripListVC *tripListVC = [TripListVC new];
+        MyViewController *mytripListVC = [MyViewController new];
         
-        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+        [weakSelf.navigationController pushViewController:mytripListVC animated:YES];
     };
     
     //团队行程
@@ -477,9 +494,9 @@
     netMap.imgName = @"帮助中心";
     netMap.action = ^{
         
-        TripListVC *tripListVC = [TripListVC new];
+        TreeMaoVC *treeMap = [TreeMaoVC new];
         
-        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+        [weakSelf.navigationController pushViewController:treeMap animated:YES];
     };
     
     
@@ -549,6 +566,14 @@
     
     self.tableView.tableHeaderView = self.headerView;
     
+    [self.headerView.xiaobangbiL bk_addEventHandler:^(id sender) {
+        [self withdrawal];
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.headerView.xiaobangJuanL bk_addEventHandler:^(id sender) {
+        [self billsRunningWater];
+    } forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (TLImagePicker *)imagePicker {
@@ -612,8 +637,8 @@
     
     self.headerView.infoLbl.text = [NSString stringWithFormat:@"%@%@", [[TLUser user] getUserType], speciality];
     
-    self.headerView.xiaobangJuanL.text = [NSString stringWithFormat:@"销帮卷:%@",[TLUser user].jfAccountNumber];
-    self.headerView.xiaobangbiL.text = [NSString stringWithFormat:@"销帮卷:%@",[TLUser user].rmbAccountNumber];
+    [self.headerView.xiaobangJuanL setTitle:[NSString stringWithFormat:@"销帮卷:%@",[TLUser user].jfamount] forState:UIControlStateNormal];
+    [self.headerView.xiaobangbiL setTitle:[NSString stringWithFormat:@"销帮币:%@",[TLUser user].rmbamount] forState:UIControlStateNormal];
 }
 
 - (void)loginOut {
@@ -701,7 +726,17 @@
             break;
     }
 }
+//提现充值页面
+- (void)withdrawal
+{
+    [self.navigationController pushViewController:[WithdrawalVC new] animated:YES];
+}
+//肖邦卷 账单流水
+- (void)billsRunningWater
+{
+    [self.navigationController pushViewController:[IntregalFlowVC new] animated:YES];
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

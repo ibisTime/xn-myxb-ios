@@ -24,10 +24,10 @@ NSString *const kUserLoginNotification = @"kUserLoginNotification";
 NSString *const kUserLoginOutNotification = @"kUserLoginOutNotification";
 NSString *const kUserInfoChange = @"kUserInfoChange";
 //角色类型
-NSString *const kUserTypeSalon = @"C";      //美容院 //经销商
+NSString *const kUserTypeSalon = @"C";      //美容院 // 经销商
 NSString *const kUserTypeBeautyGuide = @"T";//美导 //服务团队
 NSString *const kUserTypeLecturer = @"L";   //讲师 //暂时没有
-NSString *const kUserTypeExpert = @"S";     // //销售精英
+NSString *const kUserTypeExpert = @"S";     //专家 //销售精英 （需要付款）
 NSString *const kUserTypePartner = @"B";    //合伙人
 
 @implementation TLUser
@@ -139,11 +139,12 @@ NSString *const kUserTypePartner = @"B";    //合伙人
 
             if ([obj.currency isEqualToString:@"JF"]) {
 
-                weakSelf.jfAccountNumber = [obj.amount convertToRealMoney];
-
+                [TLUser user].jfamount = [obj.amount convertToRealMoney];
+                [TLUser user].jfAccountNumber = obj.accountNumber;
             } else if ([obj.currency isEqualToString:@"CNY"]) {
 
-                weakSelf.rmbAccountNumber = [obj.amount convertToRealMoney];
+                [TLUser user].rmbamount = [obj.amount convertToRealMoney];
+                [TLUser user].rmbAccountNumber = obj.accountNumber;
             }
 
         }];
