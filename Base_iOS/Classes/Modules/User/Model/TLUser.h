@@ -42,6 +42,8 @@
 @property (nonatomic, copy) NSString *realName;
 //个人简介
 @property (nonatomic, copy) NSString *introduce;
+//账号状态  0.游客  1待签约   2 已签约
+@property (nonatomic, assign) NSString *signStatus;
 //广告语
 @property (nonatomic, copy) NSString *slogan;
 //擅长领域

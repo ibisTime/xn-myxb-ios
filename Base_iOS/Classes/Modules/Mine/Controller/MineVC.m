@@ -123,13 +123,28 @@
     //积分余额
     MineModel *jfBalance = [MineModel new];
     
-    jfBalance.text = @"我要成为经销商";
+    if ([[TLUser user].signStatus integerValue] == 0) {
+        jfBalance.text = @"我要成为经销商";
+
+    }
+    else
+    {
+        jfBalance.text = @"我的图谱";
+
+    }
+    
     jfBalance.imgName = @"积分余额";
     jfBalance.action = ^{
         
-        IntegralMallVC *integralMallVC = [IntegralMallVC new];
-        
-        [weakSelf.navigationController pushViewController:integralMallVC animated:YES];
+        if ([[TLUser user].signStatus integerValue] != 0) {
+            TreeMaoVC *treeMap = [TreeMaoVC new];
+            
+            [weakSelf.navigationController pushViewController:treeMap animated:YES];
+        }
+        else
+        {
+            [TLAlert alertWithMsg:@"我要成为经销商"];
+        }
     };
 
     //成果订单
@@ -254,9 +269,9 @@
     netMap.imgName = @"帮助中心";
     netMap.action = ^{
         
-        TripListVC *tripListVC = [TripListVC new];
+        TreeMaoVC *treeMap = [TreeMaoVC new];
         
-        [weakSelf.navigationController pushViewController:tripListVC animated:YES];
+        [weakSelf.navigationController pushViewController:treeMap animated:YES];
     };
     
     //团队行程
@@ -266,6 +281,7 @@
     travelListTeam.imgName = @"我的排名";
     travelListTeam.action = ^{
         
+
         TripListVC *tripListVC = [TripListVC new];
         
         [weakSelf.navigationController pushViewController:tripListVC animated:YES];
@@ -278,9 +294,13 @@
     order2.imgName = @"成果订单";
     order2.action = ^{
         
-        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+        
+        BrandOrderVC *orderVC = [BrandOrderVC new];
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
+//        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+//        
+//        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     self.group = [MineGroup new];
     
@@ -451,9 +471,13 @@
     order2.imgName = @"成果订单";
     order2.action = ^{
         
-        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+        BrandOrderVC *orderVC = [BrandOrderVC new];
         
         [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        
+//        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+//
+//        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     self.group = [MineGroup new];
 

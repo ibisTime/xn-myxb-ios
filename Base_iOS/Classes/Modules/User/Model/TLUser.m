@@ -222,6 +222,7 @@ NSString *const kUserTypePartner = @"B";    //合伙人
     self.gender = dict[@"gender"];
     self.slogan = dict[@"slogan"];
     self.introduce = dict[@"introduce"];
+    self.signStatus =[NSString stringWithFormat:@"%@",dict[@"signStatus"]];
 }
 
 - (void)saveUserName:(NSString *)userName pwd:(NSString *)pwd {
