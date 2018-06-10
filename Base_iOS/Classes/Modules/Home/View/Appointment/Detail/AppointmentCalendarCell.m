@@ -7,16 +7,20 @@
 //
 
 #import "AppointmentCalendarCell.h"
-
+#import "TLNetworking.h"
 //V
 #import "LDCalendarView.h"
 #import "NSDate+extend.h"
+#import <MJExtension/MJExtension.h>
 
 @interface AppointmentCalendarCell()
 //日历
 @property (nonatomic, strong) LDCalendarView *calendarView;
 //
 @property (nonatomic, strong) UIScrollView *scrollView;
+
+@property (nonatomic , copy)NSString *chouseYear;
+@property (nonatomic , copy)NSString *chouseMouth;
 
 @end
 
@@ -39,7 +43,16 @@
     BaseWeakSelf;
     
     _calendarView = [[LDCalendarView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,300)];
-    
+    _calendarView.clickMounteh = ^(NSString *date) {
+        NSLog(@"----->当前%@",date);
+        
+        NSArray *arry = [date componentsSeparatedByString:@"-"];
+        
+        weakSelf.chouseMouth = [arry objectAtIndex:1];
+        weakSelf.chouseYear = [arry firstObject];
+        [weakSelf requestCalendar];
+        
+    };
     [self addSubview:_calendarView];
     
     [_calendarView show];
@@ -63,5 +76,24 @@
     _trips = trips;
     
     _calendarView.dateArr = trips;
+}
+
+- (void)requestCalendar
+{
+    TLNetworking *http = [TLNetworking new];
+//    http.showView = self.view;
+    http.code = @"805509";
+    //    helper.limit = 10;
+    http.parameters[@"userId"] = self.appointment.userId;
+    http.parameters[@"month"] = self.chouseMouth;
+    http.parameters[@"year"] = self.chouseYear;
+    
+    
+    [http postWithSuccess:^(id responseObject) {
+        self.trips = [TripInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 @end

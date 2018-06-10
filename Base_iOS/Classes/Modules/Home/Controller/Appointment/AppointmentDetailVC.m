@@ -258,10 +258,11 @@
     
     TLNetworking *http = [TLNetworking new];
     
-    http.code = @"805508";
+    http.code = @"805509";
     http.parameters[@"userId"] = self.appomintment.userId;
     http.parameters[@"startMonth"] = currentMonth;
-    
+    http.parameters[@"month"] = [NSString stringWithFormat:@"%ld",date.month];
+    http.parameters[@"year"] = [NSString stringWithFormat:@"%ld",date.year];
     [http postWithSuccess:^(id responseObject) {
         
         weakSelf.trips = [TripInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];

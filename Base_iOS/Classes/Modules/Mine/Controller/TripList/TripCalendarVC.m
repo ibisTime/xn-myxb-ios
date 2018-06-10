@@ -14,9 +14,12 @@
 
 #import "TLProgressHUD.h"
 #import "CommentModel.h"
+#import "TripInfoModel.h"
 
 @interface TripCalendarVC ()
 @property (nonatomic , strong)LDCalendarView *calendarView;
+@property (nonatomic , copy)NSString *chouseYear;
+@property (nonatomic , copy)NSString *chouseMouth;
 
 @end
 
@@ -25,13 +28,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    BaseWeakSelf;
     self.title = @"行程日历";
+    
+    self.chouseYear = [NSString getCurrentTimesTimeStampStr:@"yyyy"];
+    self.chouseMouth = [NSString getCurrentTimesTimeStampStr:@"MM"];
     
     self.calendarView = [[LDCalendarView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,300)];
     self.calendarView.todayDate = [NSString getCurrentTimesTimeStampStr:@"yyy-MM-dd"];
+    self.calendarView.clickMounteh = ^(NSString *date) {
+        NSLog(@"----->当前%@",date);
+        
+        NSArray *arry = [date componentsSeparatedByString:@"-"];
+        
+        weakSelf.chouseMouth = [arry objectAtIndex:1];
+        weakSelf.chouseYear = [arry firstObject];
+        [weakSelf requestCalendar];
+        
+    };
     [self.view addSubview:self.calendarView];
     
     [self.calendarView show];
+    
+    [self requestCalendar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,32 +60,24 @@
 
 - (void)requestCalendar
 {
-    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
-    helper.showView = self.view;
-    helper.code = @"805425";
-    helper.limit = 10;
-    helper.parameters[@"entityCode"] = [TLUser user].userId;
-    helper.parameters[@"type"] = [TLUser user].kind;
-    helper.parameters[@"status"] = @"AB";
-    //    helper.parameters[@"orderColumn"] = @"update_datetime";
-    //    helper.parameters[@"orderDir"] = @"desc";
+    TLNetworking *http = [TLNetworking new];
+    http.showView = self.view;
+    http.code = @"805509";
+//    helper.limit = 10;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"month"] = self.chouseMouth;
+    http.parameters[@"year"] = self.chouseYear;
     
     
-    [helper modelClass:[CommentModel class]];
-    
-    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
-        
-        [TLProgressHUD dismiss];
-        
-//        weakSelf.tableView.commentList = objs;
-//        weakSelf.tableView.detailModel = weakSelf.appomintment;
-//        
-//        [weakSelf.tableView reloadData_tl];
-        
+//    [helper modelClass:[CommentModel class]];
+    [http postWithSuccess:^(id responseObject) {
+        NSLog(@"---->%@",responseObject);
+        NSMutableArray *arry = [TripInfoModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        self.calendarView.dateArr =arry;
     } failure:^(NSError *error) {
         
-        [TLProgressHUD dismiss];
     }];
+    
 }
 /*
 #pragma mark - Navigation

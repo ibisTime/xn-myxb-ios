@@ -126,20 +126,17 @@
     
     helper.code = @"805520";
     
-    if ([self.kind isEqualToString:kUserTypeBeautyGuide] || [[TLUser user].kind isEqualToString:kUserTypeExpert]) {
-        helper.parameters[@"owner"] = [TLUser user].userId;
-//        helper.parameters[@"status"] = @"0";
-//        helper.parameters[@"type"] = self.kind;
+    if ([[TLUser user].kind isEqualToString:kUserTypeSalon] ) {
+        helper.parameters[@"applyUser"] = [TLUser user].userId;
+        
+        helper.parameters[@"type"] = self.kind;
 
 
     }
     else
     {
-        helper.parameters[@"applyUser"] = [TLUser user].userId;
-//        helper.parameters[@"orderColumn"] = @"apply_datetime";
-//        helper.parameters[@"orderDir"] = @"desc";
-        helper.parameters[@"type"] = self.kind;
-//        helper.parameters[@"status"] = self.status;
+        helper.parameters[@"owner"] = [TLUser user].userId;
+
     }
     
     helper.parameters[@"statusList"] = self.tatusList;

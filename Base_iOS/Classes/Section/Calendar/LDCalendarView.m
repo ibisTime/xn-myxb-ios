@@ -205,6 +205,10 @@ static const NSInteger kBtnStartTag = 100;
     self.leftArrowBtn.hidden = _serviceDate.month == _currentDate.month ? YES: NO;
 
     [self initData];
+    
+    if (self.clickMounteh) {
+        self.clickMounteh(todayDate);
+    }
 
 }
 
@@ -471,7 +475,34 @@ static const NSInteger kBtnStartTag = 100;
     iconIV.hidden = NO;
 
 }
+- (void)clickWithType:(NSInteger)type withTag:(NSInteger)inTage
+{
+    UIButton *btn = (UIButton *)[_dateBgView viewWithTag:kBtnStartTag + inTage];
+    
+    //已安排行程的日期
+    [btn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+    btn.layer.cornerRadius = btn.width/2.0;
+    btn.clipsToBounds = YES;
+    if (type == 1) {
+        btn.backgroundColor = [UIColor greenColor];
 
+    }
+    else if (type == 2)
+    {
+        btn.backgroundColor = [UIColor redColor];
+
+    }
+    else
+    {
+        btn.backgroundColor = [UIColor yellowColor];
+
+    }
+//    btn.backgroundColor = kAppCustomMainColor;
+    
+    UIImageView *iconIV = [_dateBgView viewWithTag:2000 + inTage];
+    
+    iconIV.hidden = NO;
+}
 - (void)show {
     
     self.hidden = NO;
@@ -492,16 +523,26 @@ static const NSInteger kBtnStartTag = 100;
     [_dateArr enumerateObjectsUsingBlock:^(TripInfoModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         
-        NSDate *startDate = [NSString dateFromString:obj.startDatetime formatter:kDateFormmatter];
+        NSArray *arry = [obj.date componentsSeparatedByString:@"-"];
         
-        NSDate *endDate = [NSString dateFromString:obj.endDatetime formatter:kDateFormmatter];
+        NSDate *startDate = [NSString dateFormeTimeString:obj.date formatter:kDateFormmatter];//[NSString dateFromString:obj.date formatter:kDateFormmatter];
+        
+        NSDate *endDate = [NSString dateFromString:obj.date formatter:kDateFormmatter];
+        
+        NSInteger dayNumber = [arry.lastObject integerValue];
+        
         
         for (int i = 1; i < self.kTotalNum+1; i++) {
             
-            if (i >= startDate.day && i <= endDate.day) {
-                
-                [self clickForIndex:i - 1 + startDayIndex];
+            if (i == dayNumber) {
+                [self clickWithType:[obj.color integerValue] withTag:i - 1 + startDayIndex];
             }
+            
+            
+//            if (i >= startDate.day && i <= endDate.day) {
+//
+//                [self clickForIndex:i - 1 + startDayIndex];
+//            }
         }
     }];
 }

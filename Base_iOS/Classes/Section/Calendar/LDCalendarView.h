@@ -11,9 +11,13 @@
 
 typedef void(^DaysSelectedBlock)(NSArray *result);
 
+typedef void(^NetOrUpMouth)(NSString* date);
+
 @interface LDCalendarView : UIView
 
 @property (nonatomic, strong) NSArray *defaultDays;
+
+@property (nonatomic , copy)NetOrUpMouth clickMounteh;
 
 @property (nonatomic, copy) DaysSelectedBlock complete;
 //行程列表

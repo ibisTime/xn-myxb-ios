@@ -16,4 +16,8 @@
 //备注
 @property (nonatomic, copy) NSString *remark;
 
+@property (nonatomic, copy) NSString *date;
+
+@property (nonatomic, copy) NSNumber *color;
+
 @end
