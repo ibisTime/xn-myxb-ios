@@ -44,7 +44,6 @@
     
     _calendarView = [[LDCalendarView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth,300)];
     _calendarView.clickMounteh = ^(NSString *date) {
-        NSLog(@"----->当前%@",date);
         
         NSArray *arry = [date componentsSeparatedByString:@"-"];
         

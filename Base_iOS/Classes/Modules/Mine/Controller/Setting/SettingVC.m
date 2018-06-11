@@ -10,6 +10,8 @@
 //Macro
 #import "AppMacro.h"
 #import "APICodeMacro.h"
+#import "TLUploadManager.h"
+#import "TLProgressHUD.h"
 //Category
 #import "TLAlert.h"
 #import "NSString+Check.h"
@@ -30,6 +32,7 @@
 #import "NavigationController.h"
 #import "TLUserLoginVC.h"
 #import "ZHAddressChooseVC.h"
+#import "TLImagePicker.h"
 
 @interface SettingVC ()
 
@@ -51,6 +54,9 @@
 //头像库
 @property (nonatomic, strong) NSArray <PictureModel *>*photos;
 
+@property (nonatomic, strong) TLImagePicker *imagePicker;
+
+
 @end
 
 @implementation SettingVC
@@ -67,7 +73,7 @@
     //
     [self initHeaderView];
     //获取图片库
-    [self requestPhotoLibrary];
+//    [self requestPhotoLibrary];
 
 }
 
@@ -279,6 +285,9 @@
 #pragma mark - 选择头像
 - (void)selectHeadIcon:(UITapGestureRecognizer *)tapGR {
 
+    [self.imagePicker picker];
+    return;
+    
     if (self.photos.count == 0) {
         
         [TLAlert alertWithInfo:@"暂无可选择的头像"];
@@ -350,6 +359,70 @@
 
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
 
+    } failure:^(NSError *error) {
+        
+    }];
+}
+- (TLImagePicker *)imagePicker {
+    
+    if (!_imagePicker) {
+        
+        BaseWeakSelf;
+        
+        _imagePicker = [[TLImagePicker alloc] initWithVC:self];
+        
+        _imagePicker.allowsEditing = NO;
+        _imagePicker.clipHeight = kScreenWidth;
+        
+        _imagePicker.pickFinish = ^(UIImage *photo, NSDictionary *info){
+            
+            UIImage *image = info == nil ? photo: info[@"UIImagePickerControllerOriginalImage"];
+            
+            NSData *imgData = UIImageJPEGRepresentation(image, 0.1);
+            
+            //进行上传
+            [TLProgressHUD show];
+            
+            TLUploadManager *manager = [TLUploadManager manager];
+            
+            manager.imgData = imgData;
+            manager.image = image;
+            
+            [manager getTokenShowView:weakSelf.view succes:^(NSString *key) {
+                
+                [weakSelf changeHeadIconWithKey:key imgData:imgData];
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        };
+    }
+    
+    return _imagePicker;
+}
+#pragma mark - Data
+- (void)changeHeadIconWithKey:(NSString *)key imgData:(NSData *)imgData {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    //    http.showView = self.view;
+    http.code = USER_CHANGE_USER_PHOTO;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"photo"] = key;
+    http.parameters[@"token"] = [TLUser user].token;
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLProgressHUD dismiss];
+        
+        [TLAlert alertWithSucces:@"修改头像成功"];
+        
+        [TLUser user].photo = key;
+        //替换头像
+        [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[key convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserInfoChange object:nil];
+
+        
     } failure:^(NSError *error) {
         
     }];

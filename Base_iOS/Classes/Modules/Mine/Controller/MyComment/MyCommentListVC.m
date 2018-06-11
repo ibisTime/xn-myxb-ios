@@ -59,12 +59,22 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"805425";
-    helper.parameters[@"commenter"] = [TLUser user].userId;
-    helper.parameters[@"status"] = @"AB";
-    helper.parameters[@"orderColumn"] = @"comment_datetime";
-    helper.parameters[@"orderDir"] = @"desc";
-    helper.parameters[@"type"] = self.type;
+    if (self.isMySelf) {
+        helper.code = @"805429";
+        helper.parameters[@"userId"] = [TLUser user].userId;
+
+    }
+    else
+    {
+        helper.code = @"805425";
+        helper.parameters[@"commenter"] = [TLUser user].userId;
+        helper.parameters[@"status"] = @"AB";
+        helper.parameters[@"orderColumn"] = @"comment_datetime";
+        helper.parameters[@"orderDir"] = @"desc";
+        helper.parameters[@"type"] = self.type;
+    }
+    
+    
     
     helper.tableView = self.tableView;
     [helper modelClass:[CommentModel class]];

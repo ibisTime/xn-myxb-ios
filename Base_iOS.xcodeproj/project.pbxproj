@@ -284,6 +284,8 @@
 		21FB30CB1F26E9EF0028ADEE /* UINavigationController+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FB30621F26E9EF0028ADEE /* UINavigationController+MethodSwizzling.m */; };
 		21FB30CC1F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 21FB30641F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m */; };
 		297C531BBC795ED661A638F6 /* libPods-Base_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E041B8AEBBDCC121169B52FB /* libPods-Base_iOS.a */; };
+		C440A6FF20CE43790027F45C /* MyAchieveMentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A6FE20CE43790027F45C /* MyAchieveMentVC.m */; };
+		C440A70220CE484D0027F45C /* MySelfCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A70120CE484D0027F45C /* MySelfCommentVC.m */; };
 		C490154020BD2CD80073E85B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153C20BD2CD80073E85B /* README.txt */; };
 		C490154120BD2CD80073E85B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C490153E20BD2CD80073E85B /* libWeChatSDK.a */; };
 		C490154220BD2CD80073E85B /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153F20BD2CD80073E85B /* read_me.txt */; };
@@ -871,6 +873,10 @@
 		21FB30631F26E9EF0028ADEE /* UIViewController+MethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MethodSwizzling.h"; sourceTree = "<group>"; };
 		21FB30641F26E9EF0028ADEE /* UIViewController+MethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MethodSwizzling.m"; sourceTree = "<group>"; };
 		63F0FF5CA6D8C7CAF539F595 /* Pods-Base_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Base_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Base_iOS/Pods-Base_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C440A6FD20CE43790027F45C /* MyAchieveMentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAchieveMentVC.h; sourceTree = "<group>"; };
+		C440A6FE20CE43790027F45C /* MyAchieveMentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAchieveMentVC.m; sourceTree = "<group>"; };
+		C440A70020CE484D0027F45C /* MySelfCommentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySelfCommentVC.h; sourceTree = "<group>"; };
+		C440A70120CE484D0027F45C /* MySelfCommentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySelfCommentVC.m; sourceTree = "<group>"; };
 		C490153A20BD2CD80073E85B /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		C490153B20BD2CD80073E85B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		C490153C20BD2CD80073E85B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -1507,6 +1513,7 @@
 				C490158020C6C8F80073E85B /* TopUpVC.m */,
 				C490156720C622AC0073E85B /* MyViewController.h */,
 				C490156820C622AC0073E85B /* MyViewController.m */,
+				C440A6FC20CE434C0027F45C /* MyAchievements */,
 				C490158C20C7B89E0073E85B /* TreeMap */,
 				2182D29E2047C9ED003215DA /* MyInfomation */,
 				2182D28D2047A11A003215DA /* MyComment */,
@@ -2113,6 +2120,8 @@
 				2182D28F2047A13C003215DA /* MyCommentVC.m */,
 				2182D2912047A158003215DA /* MyCommentListVC.h */,
 				2182D2922047A158003215DA /* MyCommentListVC.m */,
+				C440A70020CE484D0027F45C /* MySelfCommentVC.h */,
+				C440A70120CE484D0027F45C /* MySelfCommentVC.m */,
 			);
 			path = MyComment;
 			sourceTree = "<group>";
@@ -2786,6 +2795,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C440A6FC20CE434C0027F45C /* MyAchievements */ = {
+			isa = PBXGroup;
+			children = (
+				C440A6FD20CE43790027F45C /* MyAchieveMentVC.h */,
+				C440A6FE20CE43790027F45C /* MyAchieveMentVC.m */,
+			);
+			path = MyAchievements;
+			sourceTree = "<group>";
+		};
 		C490153820BD2CD80073E85B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -3039,6 +3057,7 @@
 				21302377202EEDB700A954E7 /* AppointmentCalendarCell.m in Sources */,
 				21111BAF1F8B5F2C0021B3FE /* BannerCell.m in Sources */,
 				212BE49A202C3CFC000BCC66 /* TLImagePicker.m in Sources */,
+				C440A6FF20CE43790027F45C /* MyAchieveMentVC.m in Sources */,
 				21AC59491FDE7A1B00F19DE8 /* TLCaptchaView.m in Sources */,
 				21AC594C1FDE7A1B00F19DE8 /* TLTextField.m in Sources */,
 				21111BB61F8B5F2C0021B3FE /* PasswordView.m in Sources */,
@@ -3218,6 +3237,7 @@
 				212ECE982044FDD00091E543 /* AppointmentOrderDetailVC.m in Sources */,
 				21A103AD204E8F1100BF4C78 /* ExpressModel.m in Sources */,
 				21AC59551FDE7F1500F19DE8 /* WebVC.m in Sources */,
+				C440A70220CE484D0027F45C /* MySelfCommentVC.m in Sources */,
 				21302371202EE4ED00A954E7 /* AppointmentDetailTableView.m in Sources */,
 				21302353202E8AB200A954E7 /* BaseTableViewCell.m in Sources */,
 				21AC58901FDE73FE00F19DE8 /* TLUser.m in Sources */,

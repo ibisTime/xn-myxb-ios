@@ -12,4 +12,6 @@
 //评论对象
 @property (nonatomic, copy) NSString *type;
 
+@property (nonatomic , assign)BOOL isMySelf;
+
 @end

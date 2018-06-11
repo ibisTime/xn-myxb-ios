@@ -14,6 +14,9 @@
 #import "TopLabelUtil.h"
 //C
 #import "AppointmentOrderListVC.h"
+#import "UIBarButtonItem+convience.h"
+#import "TripListVC.h"
+
 
 @interface AppointmentOrderVC ()<SegmentDelegate>
 
@@ -46,6 +49,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.controArry = [NSMutableArray arrayWithCapacity:0];
+    
+    [UIBarButtonItem addRightItemWithTitle:@"行程管理" titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(linkService)];
+    
     //顶部切换
     [self initSegmentView];
 }
@@ -187,4 +193,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)linkService
+{
+    [self.navigationController pushViewController:[TripListVC new] animated:YES];
+
+}
 @end

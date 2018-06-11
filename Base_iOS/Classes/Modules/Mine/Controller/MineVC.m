@@ -44,6 +44,9 @@
 #import "IntregalFlowVC.h"
 #import "WithdrawalVC.h"
 
+#import "MyAchieveMentVC.h"
+#import "MySelfCommentVC.h"
+
 //网络图谱
 #import "TreeMaoVC.h"
 
@@ -422,9 +425,9 @@
     order.imgName = @"成果订单";
     order.action = ^{
         
-        AchievementOrderVC *orderVC = [AchievementOrderVC new];
+//        AchievementOrderVC *orderVC = [AchievementOrderVC new];
         
-        [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        [weakSelf.navigationController pushViewController:[MyAchieveMentVC new] animated:YES];
     };
     
     
@@ -435,9 +438,9 @@
     comments.imgName = @"我的评论";
     comments.action = ^{
         
-        MyCommentVC *myCommentVC = [MyCommentVC new];
+//        MyCommentVC *myCommentVC = [MyCommentVC new];
         
-        [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
+        [weakSelf.navigationController pushViewController:[MySelfCommentVC new] animated:YES];
 
     };
     //我的排名

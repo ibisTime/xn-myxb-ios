@@ -28,5 +28,10 @@ typedef NS_ENUM(NSUInteger, IntregalTaskType) {
 
 @property (nonatomic, copy) NSString *jfNumText;
 
+@property (nonatomic, strong) UILabel *jfLabel;
+
+@property (nonatomic, strong) UIButton *arrowBtn;
+
+
 
 @end

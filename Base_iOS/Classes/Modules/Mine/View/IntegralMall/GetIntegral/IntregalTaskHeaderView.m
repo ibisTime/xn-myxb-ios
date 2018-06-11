@@ -12,9 +12,7 @@
 
 @interface IntregalTaskHeaderView ()
 
-@property (nonatomic, strong) UILabel *jfLabel;
 
-@property (nonatomic, strong) UIButton *arrowBtn;
 
 @end
 
