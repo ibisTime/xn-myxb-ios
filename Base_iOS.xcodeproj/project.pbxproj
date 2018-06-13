@@ -292,6 +292,7 @@
 		C440A71120CF6A980027F45C /* UIView+YeeBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A70D20CF6A980027F45C /* UIView+YeeBadge.m */; };
 		C440A71420CFFD390027F45C /* ChouseGoodsEntryv.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A71320CFFD390027F45C /* ChouseGoodsEntryv.m */; };
 		C440A71720D028770027F45C /* BecomeServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A71620D028770027F45C /* BecomeServiceVC.m */; };
+		C440A71B20D0C61C0027F45C /* SGQRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A71A20D0C61C0027F45C /* SGQRCodeTool.m */; };
 		C490154020BD2CD80073E85B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153C20BD2CD80073E85B /* README.txt */; };
 		C490154120BD2CD80073E85B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C490153E20BD2CD80073E85B /* libWeChatSDK.a */; };
 		C490154220BD2CD80073E85B /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153F20BD2CD80073E85B /* read_me.txt */; };
@@ -897,6 +898,8 @@
 		C440A71320CFFD390027F45C /* ChouseGoodsEntryv.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChouseGoodsEntryv.m; sourceTree = "<group>"; };
 		C440A71520D028770027F45C /* BecomeServiceVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BecomeServiceVC.h; sourceTree = "<group>"; };
 		C440A71620D028770027F45C /* BecomeServiceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BecomeServiceVC.m; sourceTree = "<group>"; };
+		C440A71920D0C61C0027F45C /* SGQRCodeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeTool.h; sourceTree = "<group>"; };
+		C440A71A20D0C61C0027F45C /* SGQRCodeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeTool.m; sourceTree = "<group>"; };
 		C490153A20BD2CD80073E85B /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		C490153B20BD2CD80073E85B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		C490153C20BD2CD80073E85B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -2846,9 +2849,19 @@
 			path = YeeBadgeView;
 			sourceTree = "<group>";
 		};
+		C440A71820D0C60A0027F45C /* SGQRCodeTool */ = {
+			isa = PBXGroup;
+			children = (
+				C440A71920D0C61C0027F45C /* SGQRCodeTool.h */,
+				C440A71A20D0C61C0027F45C /* SGQRCodeTool.m */,
+			);
+			path = SGQRCodeTool;
+			sourceTree = "<group>";
+		};
 		C490153820BD2CD80073E85B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				C440A71820D0C60A0027F45C /* SGQRCodeTool */,
 				C490158720C7A6CA0073E85B /* AliPay */,
 				C490153920BD2CD80073E85B /* WechatSDK1.8.2 */,
 			);
@@ -3206,6 +3219,7 @@
 				21AC58871FDE73B200F19DE8 /* TLPwdRelatedVC.m in Sources */,
 				21AC59501FDE7A1B00F19DE8 /* TLPlaceholderView.m in Sources */,
 				21AC58841FDE73B200F19DE8 /* BindMobileVC.m in Sources */,
+				C440A71B20D0C61C0027F45C /* SGQRCodeTool.m in Sources */,
 				21A1037A204953DD00BF4C78 /* RankingListVC.m in Sources */,
 				2182D2C22048EDF9003215DA /* AchievementOrderModel.m in Sources */,
 				212BE44E202B000E000BCC66 /* BannerModel.m in Sources */,

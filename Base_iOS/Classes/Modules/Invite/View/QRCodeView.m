@@ -12,7 +12,7 @@
 
 
 //
-//#import "SGQRCodeTool.h"
+#import "SGQRCodeTool.h"
 
 @interface QRCodeView()
 
@@ -109,11 +109,11 @@
     
     _url = url;
     
-//    UIImage *image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:url
-//                                                     imageViewWidth:kScreenWidth];
-//    self.qrCodeIV.image = image;
+    UIImage *image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:url
+                                                     imageViewWidth:kScreenWidth];
+    self.qrCodeIV.image = image;
     
-    [self.qrCodeIV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:nil];
+//    [self.qrCodeIV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:nil];
 }
 
 #pragma mark - Events
