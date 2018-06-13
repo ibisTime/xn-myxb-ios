@@ -504,7 +504,7 @@
         
         NSString *url = responseObject[@"data"][@"cvalue"];
         
-        NSString *shareStr = [NSString stringWithFormat:@"%@/?userReferee=%@&kind=%@", url, [TLUser user].mobile, [TLUser user].kind];
+        NSString *shareStr = [NSString stringWithFormat:@"%@?userReferee=%@&kind=%@", url, [TLUser user].mobile, [TLUser user].kind];
         //
         self.shareUrl = shareStr;
         
