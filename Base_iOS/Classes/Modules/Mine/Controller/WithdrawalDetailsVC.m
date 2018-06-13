@@ -167,7 +167,7 @@
     
     http.parameters[@"accountNumber"] = [TLUser user].rmbAccountNumber;
     //
-    http.parameters[@"amount"] = self.moneyTF.text;   //@"-100";
+    http.parameters[@"amount"] = @([self.moneyTF.text integerValue] * 1000);   //@"-100";
     //银行卡号
     http.parameters[@"payCardInfo"] = self.bankCardTF.text; //开户行信息
     http.parameters[@"payCardNo"] = self.numberTF.text; //银行卡号

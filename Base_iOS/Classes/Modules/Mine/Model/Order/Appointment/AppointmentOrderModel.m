@@ -80,4 +80,7 @@ NSString *const kAppointmentOrderStatus_11 = @"11";  //后台审核不通过
 @implementation AppointmentUser
 
 @end
+@implementation MryUserTwo : NSObject
+
+@end
 

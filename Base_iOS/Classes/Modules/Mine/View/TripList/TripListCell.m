@@ -56,11 +56,11 @@
     self.photoIV.contentMode = UIViewContentModeScaleAspectFill;
     
     [self addSubview:self.photoIV];
-    //星期
-//    self.weekLbl = [UILabel labelWithBackgroundColor:kClearColor
-//                                           textColor:kTextColor
-//                                                font:13.0];
-//    [self addSubview:self.dateLbl];
+//    星期
+    self.weekLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                           textColor:kTextColor
+                                                font:15.0];
+    [self addSubview:self.weekLbl];
     //日期
     self.dateLbl = [UILabel labelWithBackgroundColor:kClearColor
                                            textColor:kTextColor
@@ -111,12 +111,7 @@
         make.top.equalTo(@(10));
         make.width.height.equalTo(@(kHeadIconWidth));
     }];
-    //星期
-//    [self.weekLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        make.top.equalTo(self.photoIV.mas_top).offset(3);
-//        make.left.equalTo(self.photoIV.mas_right).offset(12);
-//    }];
+   
     
     [self.type mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.mas_right).with.offset(-15);
@@ -135,6 +130,15 @@
         make.left.equalTo(self.photoIV.mas_right).offset(12);
         make.top.equalTo(self.dateLbl.mas_bottom).offset(6);
     }];
+    
+    //星期
+    [self.weekLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.bottom.equalTo(self.dateLbl.mas_top).with.offset(-8);
+        make.left.equalTo(self.photoIV.mas_right).with.offset(12);
+        make.height.equalTo(@16);
+    }];
+    
 }
 
 #pragma mark - Setting
@@ -142,21 +146,52 @@
     
     _trip = trip;
     
+    
     [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
 
-    NSString *startDate = [trip.startDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
-    NSString *endDate = [trip.endDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
-    
-    self.dateLbl.text = startDate;//[NSString stringWithFormat:@"%@ - %@", startDate, endDate];
-    self.timeLbl.text = endDate;
-    if ([trip.type integerValue] == 1) {
-        self.type.text = @"可预约";
+    if (self.isTeam) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"MMM dd, yyyy hh:mm:ss aa";
+        formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        
+//        NSDate *date01 = [formatter dateFromString:trip.planDatetime];
+        
+        NSArray *weekday = [NSArray arrayWithObjects: [NSNull null], @"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六", nil];
+        
+        NSDate *newDate = [formatter dateFromString:trip.planDatetime];
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [calendar components:NSCalendarUnitWeekday fromDate:newDate];
+        
+        NSString *weekStr = [weekday objectAtIndex:components.weekday];
+        
+        self.weekLbl.text = [NSString stringWithFormat:@"%@  %@",trip.user[@"loginName"],weekStr];
+        NSString *startDate = [trip.planDatetime convertDateWithFormat:@"yyyy-MM-dd"];
+        NSString *endDate = [trip.planDatetime convertDateWithFormat:@"HH:mm"];
+
+        self.dateLbl.text = startDate;
+        self.timeLbl.text = [NSString stringWithFormat:@"%@-%@",endDate,endDate];
+        self.type.text = @"";
     }
     else
     {
-        self.type.text = @"可调配时间";
-
+        self.weekLbl.text = @"";
+        
+        NSString *startDate = [trip.startDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
+        NSString *endDate = [trip.endDatetime convertDateWithFormat:@"yyyy-MM-dd HH:mm"];
+        
+        self.dateLbl.text = startDate;//[NSString stringWithFormat:@"%@ - %@", startDate, endDate];
+        self.timeLbl.text = endDate;
+        if ([trip.type integerValue] == 1) {
+            self.type.text = @"可预约";
+        }
+        else
+        {
+            self.type.text = @"可调配时间";
+            
+        }
     }
+   
 }
 
 @end

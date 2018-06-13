@@ -101,6 +101,8 @@ static char imgUrlArrayKey;
 
 - (void)loadWebWithString:(NSString *)string {
     
+    
+    
     NSString *html = [NSString stringWithFormat:@"<head><style>img{width:%lfpx !important;height:auto;margin: 0px auto;} p{word-wrap:break-word;overflow:hidden;}</style></head>%@",kScreenWidth - 16, string];
     
     [_webView loadHTMLString:html baseURL:nil];

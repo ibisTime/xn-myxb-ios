@@ -88,7 +88,7 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 80)];
     footerView.backgroundColor = kClearColor;
     
-    if ([status isEqualToString:kBrandOrderStatusWillSendGood]) {
+    if ([status isEqualToString:kBrandOrderStatusWillType]) {
         
         return footerView;
     }
@@ -127,7 +127,7 @@
 
 - (void)initEventsButton {
     
-    if ([self.order.status isEqualToString:kBrandOrderStatusWillComment] || [self.order.status isEqualToString:kBrandOrderStatusDidComplete]) {// 已发货
+    if ([self.order.status isEqualToString:kBrandOrderStatusWillType4] /*|| [self.order.status isEqualToString:kBrandOrderStatusDidComplete]*/) {// 已发货
         
         //footer
         self.tableView.tableFooterView = [self footerViewWithStatus:self.order.status];
@@ -137,7 +137,7 @@
         self.expressCodeLbl.text = [@"物流单号：" add:self.order.logisiticsCode];
         self.expressNameLbl.text = [@"物流公司：" add:name];
         
-        if ([self.order.status isEqualToString:kBrandOrderStatusWillComment]) {
+        if ([self.order.status isEqualToString:kBrandOrderStatusWillType5]) {
             
             //评价
             self.tableView.height = kSuperViewHeight - kTabBarHeight;
@@ -229,15 +229,18 @@
     }
     
     NSArray *textArr = @[@"产品名称", @"产品总价", @"下单数量", @"订单号", @"下单时间", @"状态"];
+    
+    NSDictionary *dic = [self.order.productOrderList objectAtIndex:0];
+    
     //
-    NSString *name = self.order.detailModel.productName;
+    NSString *name = dic[@"product"][@"name"];
     STRING_NIL_NULL(name);
     //
     CGFloat totalAmount = [_order.amount doubleValue];
     NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
     STRING_NIL_NULL(amountStr);
     //
-    NSString *quantity = [self.order.quantity stringValue];
+    NSString *quantity = [dic[@"quantity"] stringValue];//[self.order.quantity stringValue];
     STRING_NIL_NULL(quantity);
     //
     NSString *orderCode = self.order.code;

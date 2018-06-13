@@ -14,4 +14,6 @@
 //
 @property (nonatomic, strong) TripListModel *trip;
 
+@property (nonatomic , assign)BOOL isTeam;
+
 @end

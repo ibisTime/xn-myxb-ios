@@ -45,23 +45,28 @@
     //
     [self.tableView beginRefreshing];
     
-     [UIBarButtonItem addRightItemWithTitle:@"行程日历" titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(linkService)];
     
-    UIButton *addbtn = [UIButton buttonWithTitle:@"新增行程" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:18.0];
-    [addbtn bk_addEventHandler:^(id sender) {
-        AddTripVC *addtrip = [[AddTripVC alloc]init];
-        [self.navigationController pushViewController:addtrip animated:YES];
-        
-    } forControlEvents:UIControlEventTouchUpInside];
-    addbtn.layer.cornerRadius = 5;
-    [self.view addSubview:addbtn];
-    [addbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@20);
-        make.right.equalTo(@-20);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-kBottomInsetHeight);
-        make.height.mas_equalTo(50);
-        
-    }];
+    
+    if (!self.isTeam) {
+        [UIBarButtonItem addRightItemWithTitle:@"行程日历" titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(linkService)];
+        UIButton *addbtn = [UIButton buttonWithTitle:@"新增行程" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:18.0];
+        [addbtn bk_addEventHandler:^(id sender) {
+            AddTripVC *addtrip = [[AddTripVC alloc]init];
+            [self.navigationController pushViewController:addtrip animated:YES];
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        addbtn.layer.cornerRadius = 5;
+        [self.view addSubview:addbtn];
+        [addbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(@20);
+            make.right.equalTo(@-20);
+            make.bottom.equalTo(self.view.mas_bottom).with.offset(-kBottomInsetHeight);
+            make.height.mas_equalTo(50);
+            
+        }];
+    }
+    
+   
 }
 
 #pragma mark - 断网操作
@@ -75,6 +80,7 @@
 - (void)initTableView {
     
     self.tableView = [[TripListTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
+    self.tableView.isTeam = self.isTeam;
     self.tableView.refreshDelegate = self;
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无行程"];
 
@@ -89,7 +95,15 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"805505";
+    if (self.isTeam) {
+        helper.code = @"805523";
+
+    }
+    else
+    {
+        helper.code = @"805505";
+
+    }
     helper.parameters[@"userId"] = [TLUser user].userId;
     helper.tableView = self.tableView;
     [helper modelClass:[TripListModel class]];

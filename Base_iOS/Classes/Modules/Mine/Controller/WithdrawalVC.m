@@ -20,6 +20,11 @@
 @end
 
 @implementation WithdrawalVC
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableview beginRefreshing];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,7 +35,7 @@
     
     [self requestTripList];
     
-    UIButton *extractbtn = [UIButton buttonWithTitle:@"提现" titleColor:kWhiteColor backgroundColor:kDeepGreenColor titleFont:18.0];
+    UIButton *extractbtn = [UIButton buttonWithTitle:@"提现" titleColor:kWhiteColor backgroundColor:[UIColor colorWithHexString:@"#36BD81"] titleFont:18.0];
     [extractbtn bk_addEventHandler:^(id sender) {
         [self.navigationController pushViewController:[WithdrawalDetailsVC new] animated:YES];
         

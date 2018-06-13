@@ -28,6 +28,9 @@
 @property (nonatomic, copy) NSString *brandCode;
 //总价
 @property (nonatomic, strong) NSNumber *amount;
+
+@property (nonatomic, strong) NSNumber *totalAmount;
+
 //单价
 @property (nonatomic, strong) NSNumber *unitPrice;
 //收货人
@@ -61,14 +64,21 @@
 
 @property (nonatomic, strong)BrandDetailModel *detailModel;
 
+@property (nonatomic, assign)NSNumber *payType;
+
+
 - (NSString *)getStatusName;
 
 - (NSString *)getExpressName;
 
 @end
 
-FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillCheck;
-FOUNDATION_EXTERN NSString *const kBrandOrderStatusCheckFailed;
-FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillSendGood;
-FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillComment;
-FOUNDATION_EXTERN NSString *const kBrandOrderStatusDidComplete;
+FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillType;
+FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillType1;
+FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillType2;
+FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillType3;
+FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillType4;
+FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillType5;
+FOUNDATION_EXTERN NSString *const kBrandOrderStatusWillType6;
+
+

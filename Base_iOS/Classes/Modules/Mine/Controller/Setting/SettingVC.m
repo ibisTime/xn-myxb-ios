@@ -145,7 +145,7 @@
                             backgroundColor:kWhiteColor
                                        font:Font(14.0)
                                   textColor:kTextColor];
-        _textLbl.text = @"按照等级从图片库中选择";
+        _textLbl.text = @"点击更换头像";
         _textLbl.centerY = self.photoIV.centerY;
     }
     return _textLbl;
@@ -246,10 +246,10 @@
     
     if (!_loginOutBtn) {
         
-        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 55, kScreenWidth, 45)];
-        _loginOutBtn.backgroundColor = kWhiteColor;
+        _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(30, 55, kScreenWidth - 60, 45)];
+        _loginOutBtn.backgroundColor = kThemeColor;
         [_loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [_loginOutBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+        [_loginOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _loginOutBtn.layer.cornerRadius = 5;
         _loginOutBtn.clipsToBounds = YES;
         _loginOutBtn.titleLabel.font = FONT(15);

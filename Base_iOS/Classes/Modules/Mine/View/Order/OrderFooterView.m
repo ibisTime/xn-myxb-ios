@@ -73,14 +73,14 @@
     
     if (!_commentBtn) {
         
-        _commentBtn = [UIButton buttonWithTitle:@"前往评价"
-                                     titleColor:kAppCustomMainColor
-                                backgroundColor:kClearColor
+        _commentBtn = [UIButton buttonWithTitle:@"评价"
+                                     titleColor:kWhiteColor
+                                backgroundColor:kThemeColor
                                       titleFont:14.0
                                    cornerRadius:3];
         
-        _commentBtn.layer.borderWidth = 1;
-        _commentBtn.layer.borderColor = kAppCustomMainColor.CGColor;
+//        _commentBtn.layer.borderWidth = 1;
+//        _commentBtn.layer.borderColor = kAppCustomMainColor.CGColor;
         
         [_commentBtn addTarget:self action:@selector(comment) forControlEvents:UIControlEventTouchUpInside];
         
@@ -215,7 +215,7 @@
     //根据状态添加按钮
     NSInteger status = [appointmentOrder.status integerValue];
     
-    if (status > [kAppointmentOrderStatus_6 integerValue] && [appointmentOrder.isComment isEqualToString:@"0"]) {
+    if (status >= [kAppointmentOrderStatus_6 integerValue] && [appointmentOrder.isComment isEqualToString:@"0"]) {
 
         self.commentBtn.hidden = NO;
 

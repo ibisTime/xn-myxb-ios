@@ -400,7 +400,11 @@ static NSString *calendarCellID = @"AppointmentCalendarCell";
         [weakSelf setSubViewLayoutWithHeight:height];
     };
     
-    [self.detailWebView loadWebWithString:self.detailModel.introduce];
+    if (self.detailModel.introduce) {
+        [self.detailWebView loadWebWithString:self.detailModel.introduce];
+
+    }
+    
     
     [self.footerView addSubview:self.detailWebView];
     

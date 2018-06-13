@@ -9,6 +9,8 @@
 #import "QRCodeView.h"
 //Category
 #import "NSString+Date.h"
+
+
 //
 //#import "SGQRCodeTool.h"
 
@@ -110,6 +112,8 @@
 //    UIImage *image = [SGQRCodeTool SG_generateWithDefaultQRCodeData:url
 //                                                     imageViewWidth:kScreenWidth];
 //    self.qrCodeIV.image = image;
+    
+    [self.qrCodeIV sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:nil];
 }
 
 #pragma mark - Events

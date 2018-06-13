@@ -13,6 +13,9 @@
 
 #import "UILabel+Extension.h"
 
+#import "YeeBadgeViewHeader.h"
+
+
 @interface MineCell ()
 
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -104,6 +107,18 @@
     self.titleLbl.text = mineModel.text;
 
     self.rightLabel.text = mineModel.rightText;
+    
+    if (mineModel.showNumber != 0) {
+        self.iconImageView.redDotNumber = mineModel.showNumber;
+        [self.iconImageView ShowBadgeView];
+
+    }
+    else
+    {
+        [self.iconImageView hideBadgeView];
+
+    }
+    
     
 }
 

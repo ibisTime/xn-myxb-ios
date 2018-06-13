@@ -47,6 +47,9 @@
 #import "MyAchieveMentVC.h"
 #import "MySelfCommentVC.h"
 
+#import "BecomeServiceVC.h"
+
+
 //网络图谱
 #import "TreeMaoVC.h"
 
@@ -60,6 +63,8 @@
 //选择头像
 @property (nonatomic, strong) TLImagePicker *imagePicker;
 
+@property (nonatomic , strong)MineModel *myOrder;
+@property (nonatomic , strong)MineModel *appointmnet;
 
 @end
 
@@ -99,6 +104,9 @@
     self.tableView.mineGroup = self.group;
 
     [self.tableView reloadData];
+    
+    [[TLUser user] requestOrederNorReadNumber];
+    [[TLUser user] requestAppointmentNorReadNumber];
 }
 
 - (void)viewDidLoad {
@@ -132,11 +140,11 @@
     }
     else
     {
-        jfBalance.text = @"我的图谱";
+        jfBalance.text = @"网络图谱";
 
     }
     
-    jfBalance.imgName = @"积分余额";
+    jfBalance.imgName = @"我的排名";
     jfBalance.action = ^{
         
         if ([[TLUser user].signStatus integerValue] != 0) {
@@ -151,11 +159,12 @@
     };
 
     //成果订单
-    MineModel *order2 = [MineModel new];
+    self.myOrder = [MineModel new];
     
-    order2.text = @"我的订单";
-    order2.imgName = @"成果订单";
-    order2.action = ^{
+    self.myOrder.text = @"我的订单";
+    self.myOrder.imgName = @"行程列表";
+    self.myOrder.showNumber = [TLUser user].toPayCount + [TLUser user].toReceiceCount;
+    self.myOrder.action = ^{
         
         BrandOrderVC *orderVC = [BrandOrderVC new];
         
@@ -166,11 +175,12 @@
 //        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
     //预约
-    MineModel *appointmnet = [MineModel new];
+    self.appointmnet = [MineModel new];
     
-    appointmnet.text = @"我的预约";
-    appointmnet.imgName = @"预约";
-    appointmnet.action = ^{
+    self.appointmnet.text = @"我的预约";
+    self.appointmnet.imgName = @"成果订单";
+    self.appointmnet.showNumber = [TLUser user].jxsToApproveCount;
+    self.appointmnet.action = ^{
         
         
         
@@ -181,7 +191,7 @@
 
     
     self.group = [MineGroup new];
-    self.group.sections = @[@[jfBalance],@[order2],@[appointmnet]];
+    self.group.sections = @[@[jfBalance],@[self.myOrder],@[self.appointmnet]];
 //    AdviserUser *user = [TLUser user].adviserUser;
 //
 //    //积分余额
@@ -269,7 +279,7 @@
     MineModel *netMap = [MineModel new];
     
     netMap.text = @"网络图谱";
-    netMap.imgName = @"帮助中心";
+    netMap.imgName = @"我的排名";
     netMap.action = ^{
         
         TreeMaoVC *treeMap = [TreeMaoVC new];
@@ -281,21 +291,21 @@
     MineModel *travelListTeam = [MineModel new];
     
     travelListTeam.text = @"团队行程";
-    travelListTeam.imgName = @"我的排名";
+    travelListTeam.imgName = @"成果订单";
     travelListTeam.action = ^{
         
 
         TripListVC *tripListVC = [TripListVC new];
-        
+        tripListVC.isTeam = YES;
         [weakSelf.navigationController pushViewController:tripListVC animated:YES];
     };
     
     //成果订单
-    MineModel *order2 = [MineModel new];
+    self.myOrder = [MineModel new];
     
-    order2.text = @"我的订单";
-    order2.imgName = @"成果订单";
-    order2.action = ^{
+    self.myOrder.text = @"我的订单";
+    self.myOrder.imgName = @"行程列表";
+    self.myOrder.action = ^{
         
         
         BrandOrderVC *orderVC = [BrandOrderVC new];
@@ -307,7 +317,7 @@
     };
     self.group = [MineGroup new];
     
-    self.group.sections = @[@[netMap],@[travelListTeam],@[order2]];
+    self.group.sections = @[@[netMap],@[travelListTeam],@[self.myOrder]];
     
 //    //积分余额
 //    MineModel *jfBalance = [MineModel new];
@@ -402,11 +412,11 @@
     BaseWeakSelf;
     
     //行程列表
-    MineModel *travelList = [MineModel new];
+    self.appointmnet = [MineModel new];
     
-    travelList.text = @"我的行程";
-    travelList.imgName = @"行程列表";
-    travelList.action = ^{
+    self.appointmnet.text = @"我的行程";
+    self.appointmnet.imgName = @"行程列表";
+    self.appointmnet.action = ^{
         
         MyViewController *mytripListVC = [MyViewController new];
         
@@ -435,7 +445,7 @@
     MineModel *comments = [MineModel new];
     
     comments.text = @"我的评论";
-    comments.imgName = @"我的评论";
+    comments.imgName = @"积分余额";
     comments.action = ^{
         
 //        MyCommentVC *myCommentVC = [MyCommentVC new];
@@ -468,11 +478,11 @@
     
     
     //成果订单
-    MineModel *order2 = [MineModel new];
+    self.myOrder = [MineModel new];
     
-    order2.text = @"成果订单";
-    order2.imgName = @"成果订单";
-    order2.action = ^{
+    self.myOrder.text = @"成果订单";
+    self.myOrder.imgName = @"行程列表";
+    self.myOrder.action = ^{
         
         BrandOrderVC *orderVC = [BrandOrderVC new];
         
@@ -484,22 +494,29 @@
     };
     self.group = [MineGroup new];
 
-    self.group.sections = @[@[travelList], @[order], @[comments,ranking,information],@[order2]];
+    self.group.sections = @[@[self.appointmnet], @[order], @[comments,ranking,information],@[self.myOrder]];
 }
 //服务团队
 - (void)initServiceTeam
 {
     BaseWeakSelf;
     //行程列表
-    MineModel *travelList = [MineModel new];
+    self.appointmnet = [MineModel new];
     
-    travelList.text = @"我的行程";
-    travelList.imgName = @"行程列表";
-    travelList.action = ^{
+    self.appointmnet.text = @"我的行程";
+    self.appointmnet.imgName = @"成果订单";
+    self.appointmnet.action = ^{
         
-        MyViewController *mytripListVC = [MyViewController new];
+        if (![TLUser user].isSing) {
+            [TLAlert alertWithMsg:@"您还未签约"];
+        }
+        else
+        {
+            MyViewController *mytripListVC = [MyViewController new];
+            
+            [weakSelf.navigationController pushViewController:mytripListVC animated:YES];
+        }
         
-        [weakSelf.navigationController pushViewController:mytripListVC animated:YES];
     };
     
     //团队行程
@@ -510,20 +527,37 @@
     travelListTeam.action = ^{
         
         TripListVC *tripListVC = [TripListVC new];
-        
+        tripListVC.isTeam = YES;
         [weakSelf.navigationController pushViewController:tripListVC animated:YES];
     };
     
     //网络图谱
     MineModel *netMap = [MineModel new];
     
-    netMap.text = @"网络图谱";
+    if ([TLUser user].isSing) {
+        netMap.text = @"网络图谱";
+
+    }
+    else
+    {
+        netMap.text = @"我要成为服务团队";
+
+    }
+    
     netMap.imgName = @"帮助中心";
     netMap.action = ^{
         
-        TreeMaoVC *treeMap = [TreeMaoVC new];
+        if (![TLUser user].isSing) {
+            [self.navigationController pushViewController:[BecomeServiceVC new] animated:YES];
+        }
+        else
+        {
+            TreeMaoVC *treeMap = [TreeMaoVC new];
+            
+            [weakSelf.navigationController pushViewController:treeMap animated:YES];
+        }
         
-        [weakSelf.navigationController pushViewController:treeMap animated:YES];
+        
     };
     
     
@@ -531,12 +565,19 @@
     MineModel *comments = [MineModel new];
     
     comments.text = @"我的评论";
-    comments.imgName = @"我的评论";
+    comments.imgName = @"积分余额";
     comments.action = ^{
+        if (![TLUser user].isSing) {
+            [TLAlert alertWithMsg:@"您还未签约"];
+        }
+        else
+        {
+            MyCommentVC *myCommentVC = [MyCommentVC new];
+            
+            [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
+        }
         
-        MyCommentVC *myCommentVC = [MyCommentVC new];
         
-        [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
         
     };
     
@@ -548,18 +589,25 @@
     information.imgName = @"我的资料";
     information.action = ^{
         
-        MyInfomationVC *infoVC = [MyInfomationVC new];
+        if (![TLUser user].isSing) {
+            [TLAlert alertWithMsg:@"您还未签约"];
+        }
+        else
+        {
+            MyInfomationVC *infoVC = [MyInfomationVC new];
+            
+            [weakSelf.navigationController pushViewController:infoVC animated:YES];
+        }
         
-        [weakSelf.navigationController pushViewController:infoVC animated:YES];
     };
     
     
     //成果订单
-    MineModel *order2 = [MineModel new];
+    self.myOrder = [MineModel new];
     
-    order2.text = @"我的订单";
-    order2.imgName = @"成果订单";
-    order2.action = ^{
+    self.myOrder.text = @"我的订单";
+    self.myOrder.imgName = @"行程列表";
+    self.myOrder.action = ^{
         
         BrandOrderVC *orderVC = [BrandOrderVC new];
         
@@ -567,7 +615,7 @@
     };
     self.group = [MineGroup new];
 
-    self.group.sections = @[@[travelList],@[travelListTeam],@[netMap,comments],@[information],@[order2]];
+    self.group.sections = @[@[self.appointmnet],@[travelListTeam],@[netMap,comments],@[information],@[self.myOrder]];
     
 }
 
@@ -649,6 +697,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserInfoChange object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginOut) name:kUserLoginOutNotification object:nil];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeInfo) name:kUserNotReadNumberNotification object:nil];
 }
 
 #pragma mark - Events
@@ -666,6 +716,17 @@
     
     [self.headerView.xiaobangJuanL setTitle:[NSString stringWithFormat:@"销帮卷:%@",[TLUser user].jfamount] forState:UIControlStateNormal];
     [self.headerView.xiaobangbiL setTitle:[NSString stringWithFormat:@"销帮币:%@",[TLUser user].rmbamount] forState:UIControlStateNormal];
+    self.myOrder.showNumber = [TLUser user].toPayCount + [TLUser user].toReceiceCount;
+    if ([[TLUser user].kind isEqualToString:kUserTypeSalon]) {
+        ///经销商
+        self.appointmnet.showNumber = [TLUser user].jxsToApproveCount;
+    }
+    else
+    {
+        self.appointmnet.showNumber = [TLUser user].fwInputCount + [TLUser user].fwToClassCount + [TLUser user].fwToBookCount + [TLUser user].fwClassEndCount;
+
+    }
+    [self.tableView reloadData];
 }
 
 - (void)loginOut {

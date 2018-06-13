@@ -111,8 +111,17 @@
                                                   titleColor:titleColor
                                              backgroundColor:bgColor
                                                    titleFont:18.0];
-            commentBtn.frame = CGRectMake(0, self.tableView.yy, w, 49);
+            if ([commentBtn.titleLabel.text isEqualToString:@"待接单"]) {
+                [commentBtn setTitle:@"接单" forState:UIControlStateNormal];
+            }
+            else if ([commentBtn.titleLabel.text isEqualToString:@"待上门"])
+            {
+                [commentBtn setTitle:@"确认上门" forState:UIControlStateNormal];
+
+            }
             
+            commentBtn.frame = CGRectMake(30, self.tableView.yy, w - 60, 49);
+            commentBtn.layer.cornerRadius = 5;
             [commentBtn addTarget:self action:@selector(comment) forControlEvents:UIControlEventTouchUpInside];
             
             [self.view addSubview:commentBtn];
@@ -260,7 +269,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1]) {
+    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1] || [self.order.status isEqualToString:kAppointmentOrderStatus_2]) {
         
         return 4;
     }
@@ -299,7 +308,7 @@
     NSArray *textArr;
     NSArray *contentArr;
     
-    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1]) {
+    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1] ||[self.order.status isEqualToString:kAppointmentOrderStatus_2]) {
         
         textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", @"状态"];
         contentArr = @[name, startDate, day, status];

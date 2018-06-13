@@ -18,12 +18,19 @@
     if (self) {
         [self addSubview:self.headerImageView];
         [self addSubview:self.nameLable];
+        [self addSubview:self.peoleoLabel];
         [self addSubview:self.lineview];
 
         
         [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.headerImageView.mas_right).with.offset(10);
             make.top.bottom.right.equalTo(@0);
+        }];
+        
+        [self.peoleoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(@0);
+            make.right.equalTo(self.mas_right).with.offset(-20);
+            make.height.equalTo(@50);
         }];
     }
     return self;
@@ -51,6 +58,15 @@
 
     }
     
+    if (model.peopleNumberl != 0) {
+        self.peoleoLabel.text = [NSString stringWithFormat:@"%ld人",model.peopleNumberl];
+    }
+    else
+    {
+        self.peoleoLabel.text = @"";
+    }
+    
+    
 }
 
 - (UIImageView *)headerImageView
@@ -69,6 +85,14 @@
         _nameLable.textAlignment = NSTextAlignmentLeft;
     }
     return _nameLable;
+}
+- (UILabel *)peoleoLabel
+{
+    if (!_peoleoLabel) {
+        _peoleoLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kThemeColor font:16];
+        _peoleoLabel.textAlignment = NSTextAlignmentRight;
+    }
+    return _peoleoLabel;
 }
 - (UIView *)lineview
 {

@@ -48,8 +48,12 @@
     
     [super viewWillAppear:animated];
     
-    [[TLUser user] requestAccountNumberWith:@"CNY"];
-    [[TLUser user] requestAccountNumberWith:@"JF"];
+    if ([TLUser user].isLogin) {
+        [[TLUser user] requestAccountNumberWith:@"CNY"];
+        [[TLUser user] requestAccountNumberWith:@"JF"];
+    }
+    
+   
     
     
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -326,7 +330,7 @@
                     
                 case 1:
                 {
-                    title = @"美导预约";
+                    title = @"服务团队预约预约";
                     type = kUserTypeBeautyGuide;
                 }break;
                     

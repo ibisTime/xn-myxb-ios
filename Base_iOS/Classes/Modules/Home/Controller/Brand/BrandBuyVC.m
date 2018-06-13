@@ -40,6 +40,8 @@
 //
 @property (nonatomic,strong) ZHAddressChooseView *chooseView;
 
+@property (nonatomic,strong)UILabel *priceLabel;
+
 
 @end
 
@@ -96,6 +98,20 @@
     self.numTF.keyboardType = UIKeyboardTypeNumberPad;
     self.numTF.text = @"1";
     [self.view addSubview:self.numTF];
+    
+    self.priceLabel = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kThemeColor font:15];
+    
+    self.priceLabel.text = [NSString stringWithFormat:@"¥:%@",self.price];
+    [self.numTF addSubview:self.priceLabel];
+    self.priceLabel.textAlignment = NSTextAlignmentRight;
+    
+    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.numTF.mas_right).with.offset(-30);
+        make.top.equalTo(self.numTF.mas_top);
+        make.bottom.equalTo(self.numTF.mas_bottom);
+        make.width.equalTo(@100);
+    }];
+    
     //下单说明
     self.remarkTV = [[TLTextView alloc] initWithFrame:CGRectMake(0, self.numTF.yy + 10, kScreenWidth, 180)];
     
@@ -262,7 +278,17 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        [TLAlert alertWithSucces:@"下单成功, 平台将对你的订单进行审核"];
+        NSString *str = @"";
+        if ([[TLUser user].kind isEqualToString:kUserTypePartner]) {
+            str = @"下单成功";
+        }
+        else
+        {
+            str = @"下单成功, 平台将对你的订单进行审核";
+        }
+        
+        
+        [TLAlert alertWithSucces:str];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             

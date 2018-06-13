@@ -21,6 +21,7 @@
 #define USER_INFO_DICT_KEY @"user_info_dict_key"
 
 NSString *const kUserLoginNotification = @"kUserLoginNotification";
+NSString *const kUserNotReadNumberNotification = @"kUserNotReadNumberNotification";
 NSString *const kUserLoginOutNotification = @"kUserLoginOutNotification";
 NSString *const kUserInfoChange = @"kUserInfoChange";
 //角色类型
@@ -234,6 +235,13 @@ NSString *const kUserTypePartner = @"B";    //合伙人
     [UserDefaultsUtil setUserDefaultPassword:pwd];
     [UserDefaultsUtil setUserDefaultKind:self.kind];
 }
+- (BOOL)isSing
+{
+    if ([[TLUser user].signStatus isEqualToString:@"2"]) {
+        return YES;
+    }
+    return NO;
+}
 
 - (NSString *)getUserType {
     
@@ -252,6 +260,51 @@ NSString *const kUserTypePartner = @"B";    //合伙人
                           };
     
     return dic[kind];
+}
+
+- (void)requestOrederNorReadNumber
+{
+    TLNetworking *http = [TLNetworking new];
+    
+    http.isShowMsg = NO;
+    http.code = @"805527";
+    http.parameters[@"userId"] = self.userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        [TLUser user].toPayCount = [responseObject[@"data"][@"toPayCount"]integerValue];
+        [TLUser user].toReceiceCount = [responseObject[@"data"][@"toReceiceCount"]integerValue];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserNotReadNumberNotification object:nil];
+
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+- (void)requestAppointmentNorReadNumber
+{
+    TLNetworking *http = [TLNetworking new];
+    
+    http.isShowMsg = NO;
+    http.code = @"805528";
+    http.parameters[@"userId"] = self.userId;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSLog(@"---->%@",responseObject);
+        [TLUser user].fwInputCount = [responseObject[@"data"][@"fwInputCount"]integerValue];
+        [TLUser user].fwToClassCount = [responseObject[@"data"][@"fwToClassCount"]integerValue];
+        [TLUser user].fwToBookCount = [responseObject[@"data"][@"fwToBookCount"]integerValue];
+        [TLUser user].fwClassEndCount = [responseObject[@"data"][@"fwInputCount"]integerValue];
+        [TLUser user].jxsToApproveCount = [responseObject[@"data"][@"fwInputCount"]integerValue];
+
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUserNotReadNumberNotification object:nil];
+        
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 @end

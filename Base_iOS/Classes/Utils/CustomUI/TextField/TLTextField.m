@@ -97,7 +97,64 @@
     return self;
     
 }
-
+- (instancetype)initWithFrame:(CGRect)frame
+                    leftTitle:(NSString *)leftTitle
+                   rightTitle:(NSString *)rightTitle
+                   rightImage:(NSString *)rightImage
+                   titleWidth:(CGFloat)titleWidth
+                  placeholder:(NSString *)placeholder
+{
+    
+    if (self = [super initWithFrame:frame]) {
+        
+        UIView *leftBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, titleWidth, frame.size.height)];
+        
+        UILabel *leftLbl = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, titleWidth - 20, frame.size.height)];
+        leftLbl.text = leftTitle;
+        leftLbl.textAlignment = NSTextAlignmentLeft;
+        leftLbl.font = Font(15.0);
+        leftLbl.textColor = [UIColor colorWithHexString:@"#484848"];
+        [leftBgView addSubview:leftLbl];
+        
+        self.leftLbl = leftLbl;
+        
+        self.leftView = leftBgView;
+        
+        self.frame = frame;
+        self.backgroundColor = [UIColor whiteColor];
+        self.leftViewMode = UITextFieldViewModeAlways;
+        self.rightViewMode = UITextFieldViewModeAlways;
+        self.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.placeholder = placeholder;
+        //    [tf addAction];
+        self.font = [UIFont systemFontOfSize:15];
+        
+        
+        
+        UIView *rightBgView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(frame)- 20, 0, 70, frame.size.height)];
+        
+        self.rightLbl = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 20, frame.size.height)];
+        self.rightLbl.text = rightTitle;
+        self.rightLbl.textAlignment = NSTextAlignmentLeft;
+        self.rightLbl.font = Font(15.0);
+        self.rightLbl.textColor = kThemeColor;
+        [rightBgView addSubview:self.rightLbl];
+        
+        
+        self.deleteBtn = [UIButton buttonWithImageName:rightImage cornerRadius:0];
+        self.deleteBtn.frame = CGRectMake(25, 0, 70-25, frame.size.height);
+        [rightBgView addSubview:self.deleteBtn];
+        
+        
+        self.rightView = rightBgView;
+        
+        
+        
+    }
+    return self;
+    
+    
+}
 - (instancetype)initWithFrame:(CGRect)frame {
 
     if (self = [super initWithFrame:frame]) {

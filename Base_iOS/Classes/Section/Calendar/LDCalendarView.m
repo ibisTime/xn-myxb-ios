@@ -484,12 +484,12 @@ static const NSInteger kBtnStartTag = 100;
     btn.layer.cornerRadius = btn.width/2.0;
     btn.clipsToBounds = YES;
     if (type == 1) {
-        btn.backgroundColor = [UIColor greenColor];
+        btn.backgroundColor = [UIColor colorWithHexString:@"#36BD81"];
 
     }
     else if (type == 2)
     {
-        btn.backgroundColor = [UIColor redColor];
+        btn.backgroundColor = kThemeColor;
 
     }
     else
@@ -525,9 +525,9 @@ static const NSInteger kBtnStartTag = 100;
         
         NSArray *arry = [obj.date componentsSeparatedByString:@"-"];
         
-        NSDate *startDate = [NSString dateFormeTimeString:obj.date formatter:kDateFormmatter];//[NSString dateFromString:obj.date formatter:kDateFormmatter];
+//        NSDate *startDate = [NSString dateFormeTimeString:obj.date formatter:kDateFormmatter];//[NSString dateFromString:obj.date formatter:kDateFormmatter];
         
-        NSDate *endDate = [NSString dateFromString:obj.date formatter:kDateFormmatter];
+//        NSDate *endDate = [NSString dateFromString:obj.date formatter:kDateFormmatter];
         
         NSInteger dayNumber = [arry.lastObject integerValue];
         

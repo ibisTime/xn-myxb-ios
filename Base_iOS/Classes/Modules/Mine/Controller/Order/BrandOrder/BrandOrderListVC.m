@@ -129,26 +129,31 @@
     helper.parameters[@"orderColumn"] = @"apply_datetime";
     //排序方式
     helper.parameters[@"orderDir"] = @"desc";
-    
-    if (self.status == BrandOrderStatusWillCheck) {
-        
-        helper.parameters[@"status"] = @"0";
-        
-    }else if (self.status == BrandOrderStatusWillSend) {
-        
-        helper.parameters[@"status"] = @"2";
-        
-    }else if (self.status == BrandOrderStatusWillComment)  {
-        
-        helper.parameters[@"status"] = @"3";
-        
-    } else if(self.status == BrandOrderStatusDidComplete) {
-        
-        helper.parameters[@"status"] = @"4";
-        
-    } else {//全部
-        
+    if (self.status != BrandOrderStatusAllOrder) {
+        helper.parameters[@"status"] = @(self.status);
+
     }
+
+    
+//    if (self.status == BrandOrderStatusWillCheck) {
+//
+//        helper.parameters[@"status"] = @"0";
+//
+//    }else if (self.status == BrandOrderStatusWillSend) {
+//
+//        helper.parameters[@"status"] = @"2";
+//
+//    }else if (self.status == BrandOrderStatusWillComment)  {
+//
+//        helper.parameters[@"status"] = @"3";
+//
+//    } else if(self.status == BrandOrderStatusDidComplete) {
+//
+//        helper.parameters[@"status"] = @"4";
+//
+//    } else {//全部
+//
+//    }
     
     helper.tableView = self.tableView;
     
@@ -253,10 +258,10 @@
     
     BrandOrderModel *order = self.orderGroups[section];
     
-    if ([order.status isEqualToString:kBrandOrderStatusWillComment]) {
-        
-        return 50;
-    }
+//    if ([order.status isEqualToString:kBrandOrderStatusWillType]) {
+//        
+//        return 50;
+//    }
     return 0.00001;
 }
 

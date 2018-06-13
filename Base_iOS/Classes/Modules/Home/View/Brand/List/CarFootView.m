@@ -44,7 +44,7 @@
                                backgroundColor:kClearColor
                                      titleFont:16.0];
     [self.allBtn addTarget:self action:@selector(chouseThis) forControlEvents:UIControlEventTouchUpInside];
-    [self.allBtn setImage:kImage(@"未选中NO") forState:UIControlStateNormal];
+    [self.allBtn setImage:kImage(@"对勾未选") forState:UIControlStateNormal];
     [self.allBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
 
     [self addSubview:self.allBtn];
@@ -95,12 +95,12 @@
     self.isAll = !self.isAll;
     
     if (self.isAll) {
-        [self.allBtn setImage:kImage(@"选中YES") forState:UIControlStateNormal];
+        [self.allBtn setImage:kImage(@"对勾") forState:UIControlStateNormal];
 
     }
     else
     {
-        [self.allBtn setImage:kImage(@"未选中NO") forState:UIControlStateNormal];
+        [self.allBtn setImage:kImage(@"对勾未选") forState:UIControlStateNormal];
 
     }
     

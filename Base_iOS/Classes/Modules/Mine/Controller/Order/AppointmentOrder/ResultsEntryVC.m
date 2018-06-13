@@ -15,6 +15,8 @@
 #import "UIButton+Custom.h"
 #import "UIControl+Block.h"
 #import "ChouseBrand.h"
+#import "AppointmentOrderModel.h"
+
 @interface ResultsEntryVC ()
 @property (nonatomic , strong) UIScrollView *bgScroView;
 @property (nonatomic , strong)TLTextField *timeTF;
@@ -29,7 +31,7 @@
 
 @property (nonatomic , strong)TLTextField *OKpeopleTF;
 
-
+@property (nonatomic , strong)UILabel *yeji;
 
 @end
 
@@ -52,8 +54,16 @@
     CGFloat leftW = 120;
     CGFloat tfH = 50;
     CGFloat tfW = kScreenWidth;
+   
+    TLTextField *nameTL =  [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, headerview.height, tfW, tfH) leftTitle:@"店名" titleWidth:leftW placeholder:@""];
+    nameTL.userInteractionEnabled = NO;
+    MryUserTwo *user = self.chouseOrder.mryUser;
+    nameTL.text = user.storeName;
+    [self.bgScroView addSubview:nameTL];
     
-    self.timeTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, headerview.height, tfW, tfH) leftTitle:@"预约开始时间" titleWidth:leftW placeholder:@"请选择开始时间"];
+    
+    
+    self.timeTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, nameTL.yy, tfW, tfH) leftTitle:@"预约开始时间" titleWidth:leftW placeholder:@"请选择开始时间"];
     
     [self.bgScroView addSubview:self.timeTF];
     //点击手势
@@ -73,27 +83,33 @@
     [self.timeTF addSubview:arrowIV];
     
     
+    
     self.datTF = [[TLTextField alloc]initWithFrame:CGRectMake(0, self.timeTF.yy, tfW, tfH) leftTitle:@"工作天数" rightTitle:@"天" titleWidth:leftW placeholder:@"请输入工作天数"];
+    self.datTF.rightLbl.textColor = [UIColor blackColor];
     self.datTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.bgScroView addSubview:self.datTF];
     
     self.peopleTF = [[TLTextField alloc]initWithFrame:CGRectMake(0, self.datTF.yy, tfW, tfH) leftTitle:@"见客户数" rightTitle:@"人" titleWidth:leftW placeholder:@"请输入见客户数"];
+    self.peopleTF.rightLbl.textColor = [UIColor blackColor];
+
     self.peopleTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.bgScroView addSubview:self.peopleTF];
     
     self.OKpeopleTF = [[TLTextField alloc]initWithFrame:CGRectMake(0, self.peopleTF.yy, tfW, tfH) leftTitle:@"成交客户数" rightTitle:@"人" titleWidth:leftW placeholder:@"请输入成交客户数"];
+    self.OKpeopleTF.rightLbl.textColor = [UIColor blackColor];
+
     self.OKpeopleTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.bgScroView addSubview:self.OKpeopleTF];
     
     
-    UILabel *yeji = [UILabel labelWithBackgroundColor:[UIColor whiteColor] textColor:[UIColor colorWithHexString:@"#484848"] font:15];
-    yeji.textAlignment = NSTextAlignmentLeft;
-    yeji.text = @"    销售业绩";
-    yeji.frame = CGRectMake(0, self.OKpeopleTF.yy, kScreenWidth, 50);
-    [self.bgScroView addSubview:yeji];
+    self.yeji = [UILabel labelWithBackgroundColor:[UIColor whiteColor] textColor:[UIColor colorWithHexString:@"#484848"] font:15];
+    self.yeji.textAlignment = NSTextAlignmentLeft;
+    self.yeji.text = @"    销售业绩";
+    self.yeji.frame = CGRectMake(0, self.OKpeopleTF.yy, kScreenWidth, 50);
+    [self.bgScroView addSubview:self.yeji];
     
-    float linviewY = self.timeTF.yy;
-    for (NSInteger index = 0; index < 5; index ++) {
+    float linviewY = nameTL.yy;
+    for (NSInteger index = 0; index < 6; index ++) {
         UIView *lineview = [[UIView alloc]init];
         lineview.backgroundColor = kSilverGreyColor;
         lineview.frame = CGRectMake(0, linviewY, kScreenWidth, .5);
@@ -102,8 +118,9 @@
     }
     
     
-    self.addbtn = [UIButton buttonWithTitle:@"添加" titleColor:[UIColor colorWithHexString:@"#484848"] backgroundColor:kWhiteColor titleFont:18.0];
-    self.addbtn.frame = CGRectMake(0, yeji.yy, kScreenWidth, 50);
+    self.addbtn = [UIButton buttonWithTitle:@"" titleColor:[UIColor colorWithHexString:@"#484848"] backgroundColor:kWhiteColor titleFont:18.0];
+    [self.addbtn setImage:kImage(@"添加 黑色") forState:UIControlStateNormal];
+    self.addbtn.frame = CGRectMake(0, self.yeji.yy, kScreenWidth, 50);
     [self.addbtn bk_addEventHandler:^(id sender) {
         
         ChouseBrand *chouseView = [[ChouseBrand alloc]init];
@@ -159,13 +176,45 @@
 
     BrandModel *mode = [self.chouseBandArry lastObject];
     
-    TLTextField *OKpeopleTF = [[TLTextField alloc]initWithFrame:CGRectMake(0, self.addbtn.y, kScreenWidth, 50) leftTitle:mode.name rightTitle:@"¥" titleWidth:120 placeholder:@"请输入该品牌的销售业绩"];
+    TLTextField *OKpeopleTF = [[TLTextField alloc]initWithFrame:CGRectMake(0, self.addbtn.y, kScreenWidth, 50) leftTitle:mode.name rightTitle:@"¥" rightImage:@"删除" titleWidth:120 placeholder:@"请输入该品牌的销售业绩"];
+    OKpeopleTF.rightLbl.textColor = [UIColor blackColor];
+    
+    OKpeopleTF.deleteBtn.tag = 1000 + self.chouseTLFiledArry.count;
+    [OKpeopleTF.deleteBtn addTarget:self action:@selector(deleteChouse:) forControlEvents:UIControlEventTouchUpInside];
+    
     OKpeopleTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.bgScroView addSubview:OKpeopleTF];
     
     self.addbtn.y = OKpeopleTF.yy;
     [self.chouseTLFiledArry addObject:OKpeopleTF];
     self.bgScroView.contentSize = CGSizeMake(kScreenWidth, 130 + ( 7 * 50) + (self.chouseTLFiledArry.count *50));
+    
+}
+- (void)deleteChageUI
+{
+    if (self.chouseTLFiledArry.count != 0) {
+        TLTextField *OKpeopleTF = [self.chouseTLFiledArry lastObject];
+        self.addbtn.y = OKpeopleTF.yy;
+        
+    }
+    else
+    {
+        self.addbtn.y = self.yeji.yy;
+
+    }
+    
+    self.bgScroView.contentSize = CGSizeMake(kScreenWidth, 130 + ( 7 * 50) + (self.chouseTLFiledArry.count *50));
+
+}
+- (void)deleteChouse:(UIButton *)btn
+{
+    NSInteger tetFileTag = btn.tag - 1000;
+    
+    TLTextField *OKpeopleTF = [self.chouseTLFiledArry lastObject];
+    [OKpeopleTF removeFromSuperview];
+    [self.chouseTLFiledArry removeObjectAtIndex:tetFileTag];
+    [self.chouseBandArry removeObjectAtIndex:tetFileTag];
+    [self deleteChageUI];
     
 }
 -(UIScrollView *)bgScroView

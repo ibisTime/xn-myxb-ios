@@ -18,6 +18,7 @@
 #import "UIButton+Custom.h"
 #import <CDCommon/UIView+Frame.h>
 #import "BaseView.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 
 //#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 //#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height

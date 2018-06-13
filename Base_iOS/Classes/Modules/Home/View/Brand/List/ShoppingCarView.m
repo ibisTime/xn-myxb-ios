@@ -10,6 +10,7 @@
 #import "ShoppCarCell.h"
 #import "TLNetworking.h"
 #import "TLUser.h"
+#import "TLAlert.h"
 @interface ShoppingCarView()<UITableViewDelegate, UITableViewDataSource,ShoppCarCellDelegate>
 
 @end
@@ -170,8 +171,28 @@ static NSString *identifierCell = @"ShoppCarCell";
 }
 - (void)deleteThisGoods:(NSIndexPath *)indexPath
 {
-    
-    
+    [TLAlert alertWithTitle:@"提示" msg:@"您确定要删除该商品吗？" confirmMsg:@"确定" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
+        
+    } confirm:^(UIAlertAction *action) {
+        
+        ShopCarModel *brandModel = self.brands[indexPath.row];
+        TLNetworking *http = [TLNetworking new];
+        
+        http.showView = self;
+        
+        http.code = @"805291";
+        
+        http.parameters[@"cartCodeList"] = @[brandModel.productCode];
+        http.parameters[@"userId"] = [TLUser user].userId;
+
+        [http postWithSuccess:^(id responseObject) {
+            NSLog(@"---->%@",responseObject);
+        } failure:^(NSError *error) {
+        
+        }];
+        
+    }];
+
 }
 
 @end

@@ -32,6 +32,8 @@ typedef NS_ENUM(NSUInteger, IntregalTaskType) {
 
 @property (nonatomic, strong) UIButton *arrowBtn;
 
+@property (nonatomic, strong) UILabel *textLabel;
+
 
 
 @end

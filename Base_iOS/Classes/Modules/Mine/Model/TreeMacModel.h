@@ -60,4 +60,6 @@
 
 @property (nonatomic , strong) NSString *photo;//
 
+@property (nonatomic , assign)NSInteger peopleNumberl;
+
 @end

@@ -31,7 +31,7 @@
     
     self.tableView = [[ProposalTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"敬请期待"];
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"kongbai" text:@"敬请期待"];
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

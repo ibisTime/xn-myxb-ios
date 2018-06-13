@@ -10,4 +10,6 @@
 
 @interface TripListVC : BaseViewController
 
+@property (nonatomic , assign)BOOL isTeam;
+
 @end

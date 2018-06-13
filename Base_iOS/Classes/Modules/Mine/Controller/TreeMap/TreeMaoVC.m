@@ -77,6 +77,7 @@
     titleModel.nodeId = 1;
     titleModel.depth = 0;
     titleModel.expand = YES;
+    titleModel.peopleNumberl = arry.count;
     [self.treeMapArry addObject:titleModel];
     
     

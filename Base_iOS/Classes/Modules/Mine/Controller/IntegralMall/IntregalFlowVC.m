@@ -37,14 +37,14 @@
     
     [self requestIntregalRecodeList];
     
-    [self requestUserInfo];
+//    [self requestUserInfo];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"积分记录";
+    self.title = @"我的账户";
     
     self.recodes = [NSMutableArray array];
 
@@ -58,16 +58,16 @@
     //
     [self requestIntregalRecodeList];
     //
-    [self requestUserInfo];
+//    [self requestUserInfo];
 }
 
 #pragma mark - Init
 - (void)initHeaderView {
     
     self.headerView = [[IntregalTaskHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 90)];
-    
-    self.headerView.taskType = IntregalTaskTypeFlow;
-    
+    self.headerView.jfLabel.text = [TLUser user].jfamount;
+    self.headerView.textLabel.text = @"销帮卷";
+    self.headerView.arrowBtn.hidden = YES;
     [self.view addSubview:self.headerView];
     
 }
@@ -76,7 +76,7 @@
     
     self.tableView = [TLTableView tableViewWithFrame:CGRectMake(0, self.headerView.yy + 10, kScreenWidth, kScreenHeight - 64 - self.headerView.yy - 10) delegate:self dataSource:self];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无记录"];
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无订单" text:@"暂无流水"];
 
     [self.view addSubview:self.tableView];
 }
@@ -88,12 +88,10 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"805365";
-    helper.parameters[@"token"] = [TLUser user].token;
+    helper.code = @"802524";
     helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"currency"] = kJF;
-//    helper.parameters[@"accountType"] = @"C";
-    helper.parameters[@"accountNumber"] = self.accountNumber;
+    helper.parameters[@"currency"] = @"JF";
+    helper.parameters[@"accountNumber"] = [TLUser user].jfAccountNumber;
     
     [helper modelClass:[IntregalRecordModel class]];
     
@@ -189,10 +187,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    return 0.1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    return [UIView new];
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40)];
     

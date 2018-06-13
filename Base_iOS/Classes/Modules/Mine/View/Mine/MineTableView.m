@@ -13,6 +13,8 @@
 
 #import "MineCell.h"
 
+
+
 #define kHeaderImgHeight (110 + kNavigationBarHeight)
 
 @interface MineTableView ()<UITableViewDataSource, UITableViewDelegate>

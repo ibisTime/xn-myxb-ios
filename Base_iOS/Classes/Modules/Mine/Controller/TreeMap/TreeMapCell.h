@@ -16,6 +16,8 @@
 
 @property (nonatomic , strong)UIView *lineview;
 
+@property (nonatomic , strong)UILabel *peoleoLabel;
+
 @property (nonatomic , strong)TreeMacModel *model;
 
 @end

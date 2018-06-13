@@ -35,9 +35,9 @@
 - (NSString *)getUserType {
     
     NSDictionary *dic = @{
-                          kUserTypeBeautyGuide: @"美导",
+                          kUserTypeBeautyGuide: @"服务团队",
                           kUserTypeLecturer: @"讲师",
-                          kUserTypeExpert: @"专家",
+                          kUserTypeExpert: @"销售精英",
                           };
     
     return dic[self.kind];

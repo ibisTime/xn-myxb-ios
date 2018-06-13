@@ -101,6 +101,8 @@
     [self.xiaobangBtn bk_addEventHandler:^(id sender) {
         [self.xiaobangBtn setImage:kImage(@"选中YES") forState:UIControlStateNormal];
         [self.xiaobangJuanBtn setImage:kImage(@"未选中NO") forState:UIControlStateNormal];
+        self.isFirst = YES;
+
 
     } forControlEvents:UIControlEventTouchUpInside];
     
@@ -111,7 +113,6 @@
         make.centerY.equalTo(oneimage.mas_centerY);
         make.right.equalTo(self.view.mas_right).with.offset(-20);
         make.size.mas_equalTo(CGSizeMake(40, 40));
-        self.isFirst = YES;
     }];
     [self.xiaobangBtn setImage:kImage(@"选中YES") forState:UIControlStateNormal];
     

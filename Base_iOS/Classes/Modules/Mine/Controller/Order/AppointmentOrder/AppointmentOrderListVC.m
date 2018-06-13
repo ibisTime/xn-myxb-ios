@@ -216,7 +216,7 @@
     footerView.appointmentOrder = self.orderGroups[section];
     
     //上门、下课和评价
-    if ([order.isComment isEqualToString:@"0"] && [order.status integerValue] == 2 && [order.status integerValue] == 4) {
+    if ([order.isComment isEqualToString:@"0"]  && [order.status integerValue] == 6) {
         
         footerView.hidden = NO;;
     }
@@ -245,7 +245,7 @@
     AppointmentOrderModel *order = self.orderGroups[section];
 
     //上门、下课和评价
-    if ([order.isComment isEqualToString:@"0"] && [order.status integerValue] == 2 && [order.status integerValue] == 4) {
+    if ([order.isComment isEqualToString:@"0"] && [order.status integerValue] == 6) {
 
         return 50;
     }

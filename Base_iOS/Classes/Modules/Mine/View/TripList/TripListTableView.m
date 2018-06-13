@@ -48,7 +48,8 @@ static NSString *tripListCellID = @"TripListCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TripListCell *cell = [tableView dequeueReusableCellWithIdentifier:tripListCellID forIndexPath:indexPath];
-    
+    cell.isTeam = self.isTeam;
+
     cell.trip = self.trips[indexPath.row];
     
     return cell;

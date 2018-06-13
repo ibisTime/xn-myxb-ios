@@ -18,5 +18,19 @@
 //type
 @property (nonatomic) NSNumber *type;
 
+@property (nonatomic, copy) NSString *planDatetime;//
+
+@property (nonatomic, copy) NSString *mryApproveDatetime;
+
+@property (nonatomic, copy) NSString *updateDatetime;
+
+@property (nonatomic, copy) NSString *realDatetime;
+
+@property (nonatomic, copy) NSString *approveDatetime;
+
+@property (nonatomic , strong) NSDictionary *user;
+
+
+
 
 @end

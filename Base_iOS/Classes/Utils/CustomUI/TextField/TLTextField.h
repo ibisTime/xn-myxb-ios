@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UILabel *leftLbl;
 @property (nonatomic, strong) UILabel *rightLbl;
+@property (nonatomic, strong) UIButton *deleteBtn;
+
 
 @property (nonatomic,strong) UIImageView *leftIconView;
 
@@ -28,6 +30,12 @@
 - (instancetype)initWithFrame:(CGRect)frame
                     leftTitle:(NSString *)leftTitle
                    rightTitle:(NSString *)rightTitle
+                   titleWidth:(CGFloat)titleWidth
+                  placeholder:(NSString *)placeholder;
+- (instancetype)initWithFrame:(CGRect)frame
+                    leftTitle:(NSString *)leftTitle
+                   rightTitle:(NSString *)rightTitle
+                    rightImage:(NSString *)rightImage
                    titleWidth:(CGFloat)titleWidth
                   placeholder:(NSString *)placeholder;
 //禁止复制粘贴等功能

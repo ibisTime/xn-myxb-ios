@@ -62,7 +62,7 @@
         make.right.equalTo(@(-kLeftX));
         make.centerY.equalTo(@0);
         make.height.lessThanOrEqualTo(@14.0);
-        make.width.lessThanOrEqualTo(@200);
+        make.width.lessThanOrEqualTo(@290);
         
     }];
     

@@ -195,6 +195,26 @@
             [TLAlert alertWithSucces:@"修改成功"];
             if (self.editSuccess) {
                 
+                if ([self.address.isDefault integerValue] == 1) {
+                    
+                    TLNetworking *http2 = [TLNetworking new];
+                    http2.showView = self.view;
+                    http2.code = @"805163";
+                    http2.parameters[@"code"] = self.address.code;
+                    http2.parameters[@"token"] = [TLUser user].token;
+                    [http2 postWithSuccess:^(id responseObject) {
+                        [self ediSuccessOK];
+                    } failure:^(NSError *error) {
+                        
+                    }];
+                    
+                }
+                else
+                {
+                    [self ediSuccessOK];
+                }
+                
+                
                 ZHReceivingAddress *address = [ZHReceivingAddress new];
                 address.addressee = self.nameTf.text;
                 address.mobile = self.mobileTf.text;
@@ -232,6 +252,19 @@
 
     
 
+}
+- (void)ediSuccessOK
+{
+    ZHReceivingAddress *address = [ZHReceivingAddress new];
+    address.addressee = self.nameTf.text;
+    address.mobile = self.mobileTf.text;
+    address.province = self.proviceTf.text;
+    
+    address.city  = self.cityTf.text;
+    address.district = self.areaTf.text;
+    address.detailAddress = self.detailAddressTf.text;
+    
+    self.editSuccess(address);
 }
 
 @end

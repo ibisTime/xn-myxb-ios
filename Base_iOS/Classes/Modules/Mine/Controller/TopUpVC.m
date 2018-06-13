@@ -35,7 +35,7 @@
     
     if (!self.isPayExperts) {
         self.moneyTF = [[TLTextField alloc]initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"充值金额" rightTitle:@"¥" titleWidth:100 placeholder:@"请输入充值金额"];
-        self.moneyTF.keyboardType = UIKeyboardTypeNumberPad;
+        self.moneyTF.keyboardType = UIKeyboardTypeDecimalPad;
         self.moneyTF.textAlignment = NSTextAlignmentRight;
         self.moneyTF.delegate = self;
         self.moneyTF.textColor = kThemeColor;
@@ -188,7 +188,16 @@
     http.showView = self.view;
     http.code = @"805518";
     http.parameters[@"payType"] = self.isWeixin ? @"2" : @"33";
-    http.parameters[@"code"] = self.code;
+    if (self.code.length == 0) {
+        http.parameters[@"userId"] = [TLUser user].userId;
+        http.code = @"805190";
+
+    }
+    else
+    {
+        http.parameters[@"code"] = self.code;
+
+    }
 
     [http postWithSuccess:^(id responseObject) {
         NSLog(@"----->%@",responseObject);
@@ -265,12 +274,67 @@
 }
 #pragma mark = UITextFiledDelegte
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    return [self validateNumber:string];
+//    return [self validateNumber:string];
+    //    限制只能输入数字
+    BOOL isHaveDian = YES;
+    if ([string isEqualToString:@" "]) {
+        return NO;
+    }
+    
+    if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+        isHaveDian = NO;
+    }
+    if ([string length] > 0) {
+        
+        unichar single = [string characterAtIndex:0];//当前输入的字符
+        if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
+            
+            if([textField.text length] == 0){
+                if(single == '.') {
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }
+            
+            //输入的字符是否是小数点
+            if (single == '.') {
+                if(!isHaveDian)//text中还没有小数点
+                {
+                    isHaveDian = YES;
+                    return YES;
+                    
+                }else{
+                    [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                    return NO;
+                }
+            }else{
+                if (isHaveDian) {//存在小数点
+                    
+                    //判断小数点的位数
+                    NSRange ran = [textField.text rangeOfString:@"."];
+                    if (range.location - ran.location <= 2) {
+                        return YES;
+                    }else{
+                        return NO;
+                    }
+                }else{
+                    return YES;
+                }
+            }
+        }else{//输入的数据格式不正确
+            [textField.text stringByReplacingCharactersInRange:range withString:@""];
+            return NO;
+        }
+    }
+    else
+    {
+        return YES;
+    }
 }
 
 - (BOOL)validateNumber:(NSString*)number {
     BOOL res = YES;
-    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
     int i = 0;
     while (i < number.length) {
         NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
@@ -279,6 +343,10 @@
             res = NO;
             break;
         }
+        
+        
+        
+        
         i++;
     }
     return res;

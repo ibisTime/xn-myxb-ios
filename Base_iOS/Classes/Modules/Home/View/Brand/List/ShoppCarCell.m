@@ -89,7 +89,7 @@
                             backgroundColor:kClearColor
                                   titleFont:16.0];
     [self.deleteBtn addTarget:self action:@selector(DeleteBtnchouseThis) forControlEvents:UIControlEventTouchUpInside];
-    [self.deleteBtn setImage:kImage(@"删除 红") forState:UIControlStateNormal];
+    [self.deleteBtn setImage:kImage(@"删除") forState:UIControlStateNormal];
     
     [self addSubview:self.deleteBtn];
     
@@ -125,7 +125,7 @@
                             backgroundColor:kClearColor
                                   titleFont:16.0];
     [self.Reduction addTarget:self action:@selector(ReductionchouseThis) forControlEvents:UIControlEventTouchUpInside];
-    [self.Reduction setImage:kImage(@"添加(2)") forState:UIControlStateNormal];
+    [self.Reduction setImage:kImage(@"减号") forState:UIControlStateNormal];
     
     [self addSubview:self.Reduction];
     
@@ -160,7 +160,7 @@
     [self.chouseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left);//.with.offset(leftMargin);
         make.centerY.equalTo(self.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
     
     //产品图片
@@ -223,12 +223,12 @@
     _brandModel = brandModel;
     
     if (brandModel.isChouse) {
-        [self.chouseBtn setImage:kImage(@"选中YES") forState:UIControlStateNormal];
+        [self.chouseBtn setImage:kImage(@"对勾") forState:UIControlStateNormal];
 
     }
     else
     {
-        [self.chouseBtn setImage:kImage(@"未选中NO") forState:UIControlStateNormal];
+        [self.chouseBtn setImage:kImage(@"对勾未选") forState:UIControlStateNormal];
 
     }
     

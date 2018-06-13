@@ -44,6 +44,8 @@
 @property (nonatomic, copy) NSString *introduce;
 //账号状态  0.游客  1待签约   2 已签约
 @property (nonatomic, assign) NSString *signStatus;
+
+@property (nonatomic , assign)BOOL isSing;
 //广告语
 @property (nonatomic, copy) NSString *slogan;
 //擅长领域
@@ -69,6 +71,21 @@
 @property (nonatomic, copy) NSString *inviteCode;
 //邀请人个数
 @property (nonatomic, copy) NSString *referrerNum;
+//待支付数量
+@property (nonatomic) NSInteger toPayCount;
+//待收货数量
+@property (nonatomic) NSInteger toReceiceCount;
+//服务商专家待录入
+@property (nonatomic) NSInteger fwInputCount;
+//服务商专家待上门
+@property (nonatomic) NSInteger fwToClassCount;
+//服务商专家待接单
+@property (nonatomic) NSInteger fwToBookCount;
+//服务商专家待下课
+@property (nonatomic) NSInteger fwClassEndCount;
+//经销商待审核数量
+@property (nonatomic) NSInteger jxsToApproveCount;
+
 
 + (instancetype)user;
 //获取角色
@@ -93,6 +110,12 @@
 //查询账户余额
 - (void)requestAccountNumberWith:(NSString *)type;
 
+//获取订单维度数
+- (void)requestOrederNorReadNumber;
+//获取预约未读数
+- (void)requestAppointmentNorReadNumber;
+
+
 @end
 
 @interface AdviserUser: NSObject
@@ -112,6 +135,7 @@
 FOUNDATION_EXTERN  NSString *const kUserLoginNotification;
 FOUNDATION_EXTERN  NSString *const kUserLoginOutNotification;
 FOUNDATION_EXTERN  NSString *const kUserInfoChange;
+FOUNDATION_EXTERN  NSString *const kUserNotReadNumberNotification;
 //角色类型
 FOUNDATION_EXTERN  NSString *const kUserTypeSalon;
 FOUNDATION_EXTERN  NSString *const kUserTypeBeautyGuide;

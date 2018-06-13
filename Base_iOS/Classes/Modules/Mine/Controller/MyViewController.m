@@ -11,7 +11,8 @@
 #import "TripListVC.h"
 #import "UIBarButtonItem+convience.h"
 #import "AppointmentOrderListVC.h"
-
+#import "YeeBadgeViewHeader.h"
+#import "SortBar.h"
 @interface MyViewController ()
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
 
@@ -42,6 +43,40 @@
     [self addSubViewController];
     
     [UIBarButtonItem addRightItemWithTitle:@"行程管理" titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(linkService)];
+    
+    for (SortBar *barView in self.selectScrollView.subviews) {
+        
+        for (UIButton *btn in barView.subviews) {
+            if (btn.tag == 101) {
+                if ([TLUser user].fwToBookCount !=0) {
+                    btn.titleLabel.redDotNumber =[TLUser user].fwToBookCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+            if (btn.tag == 102) {
+                if ([TLUser user].fwInputCount !=0) {
+                    btn.titleLabel.redDotNumber =[TLUser user].fwInputCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+//            if (btn.tag == 103) {
+//                if ([TLUser user].toReceiceCount !=0) {
+//                    btn.titleLabel.redDotNumber =[TLUser user].toReceiceCount;
+//                    [btn.titleLabel ShowBadgeView];
+//                }
+//            }
+//            if (btn.tag == 104) {
+//                if ([TLUser user].toReceiceCount !=0) {
+//                    btn.titleLabel.redDotNumber =[TLUser user].toReceiceCount;
+//                    [btn.titleLabel ShowBadgeView];
+//                }
+//            }
+            
+        }
+        
+    }
+    
+    
 }
 - (void)initSubview
 {

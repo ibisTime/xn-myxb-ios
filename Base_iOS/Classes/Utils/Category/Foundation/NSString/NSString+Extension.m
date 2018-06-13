@@ -137,6 +137,9 @@
 
 - (NSString *)add:(NSString *)appendStr {
     
+    if (!appendStr) {
+        return self;
+    }
     return [self stringByAppendingString:appendStr];
 }
 

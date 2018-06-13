@@ -13,5 +13,6 @@
 @interface TripListTableView : TLTableView
 //
 @property (nonatomic, strong) NSArray <TripListModel *>*trips;
+@property (nonatomic , assign)BOOL isTeam;
 
 @end

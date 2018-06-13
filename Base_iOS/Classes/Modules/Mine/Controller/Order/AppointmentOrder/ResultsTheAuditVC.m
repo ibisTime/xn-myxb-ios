@@ -55,7 +55,7 @@
         
     }];
     
-    UIButton *notAgree = [UIButton buttonWithTitle:@"通过" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:18.0];
+    UIButton *notAgree = [UIButton buttonWithTitle:@"不通过" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:18.0];
     [notAgree bk_addEventHandler:^(id sender) {
         
         [self requeShenHeWith:@"0"];
@@ -77,11 +77,43 @@
 
 - (void)initTableView {
     
+    UIView *footview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 130)];
+    footview.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:footview];
+    
+    UILabel *titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:[UIColor blackColor] font:15];
+    titleLable.text = @"成果确认函";
+    [footview addSubview:titleLable];
+    [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@15);
+        make.top.equalTo(@0);
+        make.height.mas_equalTo(50);
+    }];
+    
+    self.goodIV = [[UIImageView alloc] initWithFrame:CGRectZero];
+    
+    self.goodIV.contentMode = UIViewContentModeScaleAspectFill;
+    self.goodIV.userInteractionEnabled = YES;
+    self.goodIV.clipsToBounds = YES;
+    self.goodIV.image = GOOD_PLACEHOLDER_SMALL;
+    [footview addSubview:self.goodIV];
+    
+    [self.goodIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@120);
+        make.top.equalTo(@17);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
+        
+    }];
+    UITapGestureRecognizer *tapGR2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectAddImage)];
+    
+    [self.goodIV addGestureRecognizer:tapGR2];
+    
+    
     TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight - 50 - 10)
                                                     delegate:self
                                                   dataSource:self];
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@""];
-
+    tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@""];
+    tableView.tableFooterView = footview;
     [self.view addSubview:tableView];
     
     self.tableView = tableView;
@@ -98,7 +130,7 @@
     if (section == 1) {
         return 5;
     }
-    return 6;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -136,8 +168,8 @@
         NSArray *contentArr;
         
         
-        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", @"预约排班时间", @"预约排班天数", @"状态"];
-        contentArr = @[name, startDate, day, planDate, planDay, status];
+        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", /*@"预约排班时间",*/ @"预约排班天数", @"状态"];
+        contentArr = @[name, startDate, day, planDate, /*planDay,*/ status];
         
         if (indexPath.row == 5) {
             
@@ -253,47 +285,47 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    if (section == 1) {
-        return 130;
-    }
+//    if (section == 1) {
+//        return 130;
+//    }
     return 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == 1) {
-        UIView *footview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
-        footview.backgroundColor = [UIColor whiteColor];
-        
-        
-        UILabel *titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:[UIColor blackColor] font:15];
-        titleLable.text = @"成果确认函";
-        [footview addSubview:titleLable];
-        [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@15);
-            make.top.equalTo(@0);
-            make.height.mas_equalTo(50);
-        }];
-        
-        self.goodIV = [[UIImageView alloc] initWithFrame:CGRectZero];
-        
-        self.goodIV.contentMode = UIViewContentModeScaleAspectFill;
-        self.goodIV.userInteractionEnabled = YES;
-        self.goodIV.clipsToBounds = YES;
-        self.goodIV.image = GOOD_PLACEHOLDER_SMALL;
-        [footview addSubview:self.goodIV];
-        
-        [self.goodIV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(@120);
-            make.top.equalTo(@17);
-            make.size.mas_equalTo(CGSizeMake(100, 100));
-            
-        }];
-        UITapGestureRecognizer *tapGR2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectAddImage)];
-        
-        [self.goodIV addGestureRecognizer:tapGR2];
-        
-        return footview;
-    }
+//    if (section == 1) {
+//        UIView *footview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100)];
+//        footview.backgroundColor = [UIColor whiteColor];
+//
+//
+//        UILabel *titleLable = [UILabel labelWithBackgroundColor:kClearColor textColor:[UIColor blackColor] font:15];
+//        titleLable.text = @"成果确认函";
+//        [footview addSubview:titleLable];
+//        [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(@15);
+//            make.top.equalTo(@0);
+//            make.height.mas_equalTo(50);
+//        }];
+//
+//        self.goodIV = [[UIImageView alloc] initWithFrame:CGRectZero];
+//
+//        self.goodIV.contentMode = UIViewContentModeScaleAspectFill;
+//        self.goodIV.userInteractionEnabled = YES;
+//        self.goodIV.clipsToBounds = YES;
+//        self.goodIV.image = GOOD_PLACEHOLDER_SMALL;
+//        [footview addSubview:self.goodIV];
+//
+//        [self.goodIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(@120);
+//            make.top.equalTo(@17);
+//            make.size.mas_equalTo(CGSizeMake(100, 100));
+//
+//        }];
+//        UITapGestureRecognizer *tapGR2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectAddImage)];
+//
+//        [self.goodIV addGestureRecognizer:tapGR2];
+//
+//        return footview;
+//    }
     return [UIView new];
 }
 - (void)didReceiveMemoryWarning {

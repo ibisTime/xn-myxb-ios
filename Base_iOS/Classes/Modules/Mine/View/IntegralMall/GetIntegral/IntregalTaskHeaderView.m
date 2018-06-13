@@ -52,16 +52,16 @@
         
     }];
     
-    UILabel *textLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14.0];
+    self.textLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kWhiteColor font:14.0];
     
-    textLabel.text = @"积分";
-    textLabel.backgroundColor = kClearColor;
-    [self addSubview:textLabel];
-    [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.textLabel.text = @"积分";
+    self.textLabel.backgroundColor = kClearColor;
+    [self addSubview:self.textLabel];
+    [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.jfLabel.mas_bottom).offset(10);
         make.centerX.equalTo(@0);
-        make.width.lessThanOrEqualTo(@40);
+        make.width.lessThanOrEqualTo(@100);
         make.height.lessThanOrEqualTo(@16);
         
     }];

@@ -131,7 +131,15 @@
     //
     self.nickNameLbl.text = user.realName;
     //
-    self.startDateLbl.text = [order.appointDatetime convertDate];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"MMM dd, yyyy hh:mm:ss aa";
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    
+    NSDate *date01 = [formatter dateFromString:order.appointDatetime];
+    formatter.dateFormat = @"yyyy-MM-dd hh:mm";
+    formatter.locale = [NSLocale currentLocale];
+    self.startDateLbl.text = [formatter stringFromDate:date01];//[order.appointDatetime convertDate];
     //
     self.dayLbl.text = [NSString stringWithFormat:@"%ld天",order.appointDays];
 }

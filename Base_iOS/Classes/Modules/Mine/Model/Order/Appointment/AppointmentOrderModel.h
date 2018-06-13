@@ -7,7 +7,7 @@
 //
 
 #import "BaseModel.h"
-@class AppointmentUser, MryUser;
+@class AppointmentUser, MryUserTwo;
 
 @interface AppointmentOrderModel : BaseModel
 //订单状态
@@ -32,7 +32,7 @@
 //预约用户信息
 @property (nonatomic, strong) AppointmentUser *user;
 //美容院信息
-@property (nonatomic, strong) MryUser *mryUser;
+@property (nonatomic, strong) MryUserTwo *mryUser;
 
 @property (nonatomic, copy) NSString *applyNote;
 
@@ -61,6 +61,20 @@
 @end
 
 @interface AppointmentUser : NSObject
+
+//角色类型
+@property (nonatomic, copy) NSString *kind;
+//真实姓名
+@property (nonatomic, copy) NSString *realName;
+//头像
+@property (nonatomic, copy) NSString *photo;
+
+@end
+
+@interface MryUserTwo : NSObject
+
+//店名
+@property (nonatomic, copy) NSString *storeName;
 
 //角色类型
 @property (nonatomic, copy) NSString *kind;

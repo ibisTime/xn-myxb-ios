@@ -26,7 +26,7 @@
     
     [self initHeaderView];
     
-    [self initTableView];
+//    [self initTableView];
 
 }
 - (void)linkService
@@ -48,6 +48,7 @@
     
     self.headerView = [[IntregalTaskHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 90)];
     self.headerView.jfLabel.text = @"¥0.00";
+    self.headerView.textLabel.text = @"本月总销售";
     self.headerView.arrowBtn.hidden = YES;
     [self.view addSubview:self.headerView];
     

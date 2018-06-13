@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的评论";
+    self.title = @"我收到的评论";
 
     // Do any additional setup after loading the view.
     MyCommentListVC *comment = [[MyCommentListVC alloc]init];

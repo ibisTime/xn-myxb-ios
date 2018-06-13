@@ -10,8 +10,12 @@
 
 //V
 #import "SelectScrollView.h"
+#import "SortBar.h"
 //C
 #import "BrandOrderListVC.h"
+
+#import "YeeBadgeViewHeader.h"
+
 
 @interface BrandOrderVC ()
 
@@ -31,12 +35,31 @@
     [self initSelectScrollView];
     //
     [self addSubViewController];
+    
+    for (SortBar *barView in self.selectScrollView.subviews) {
+        
+        for (UIButton *btn in barView.subviews) {
+            if (btn.tag == 101) {
+                if ([TLUser user].toPayCount !=0) {
+                    btn.titleLabel.redDotNumber =[TLUser user].toPayCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+            if (btn.tag == 103) {
+                if ([TLUser user].toReceiceCount !=0) {
+                    btn.titleLabel.redDotNumber =[TLUser user].toReceiceCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+        }
+        
+    }
 }
 
 #pragma mark - Init
 - (void)initSelectScrollView {
     
-    self.titles = @[@"全部", @"待审核", @"待发货", @"待评价", @"已完成"];
+    self.titles = @[@"全部",@"代付款", @"待发货",@"待收货", @"待评价", @"已完成"];
     
     self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
     
@@ -51,7 +74,46 @@
         
         BrandOrderListVC *childVC = [[BrandOrderListVC alloc] init];
         
-        childVC.status = i-1;
+        switch (i) {
+            case 0:
+                {
+                    childVC.status = BrandOrderStatusAllOrder;
+
+                }
+                break;
+            case 1:
+            {
+                childVC.status = BrandOrderStatusWillTpye1;
+
+            }
+                break;
+            case 2:
+            {
+                childVC.status = BrandOrderStatusWillTpye2;
+
+            }
+                break;
+            case 3:
+            {
+                childVC.status = BrandOrderStatusWillTpye3;
+
+            }
+                break;
+            case 4:
+            {
+                childVC.status = BrandOrderStatusWillTpye4;
+
+            }
+                break;
+            case 5:
+            {
+                childVC.status = BrandOrderStatusWillTpye5;
+
+            }
+                
+            default:
+                break;
+        }
         
         childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
         
