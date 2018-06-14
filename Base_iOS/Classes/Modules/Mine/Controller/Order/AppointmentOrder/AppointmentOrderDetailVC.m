@@ -39,6 +39,11 @@
     // Do any additional setup after loading the view.
     self.title = @"预约详情";
     
+
+    [self requestOrderDeteil];
+}
+- (void)creatUI
+{
     if ([self.order.status integerValue] == [kAppointmentOrderStatus_5 integerValue] || [self.order.status integerValue] == [kAppointmentOrderStatus_1 integerValue] || [self.order.status integerValue] == [kAppointmentOrderStatus_7 integerValue] || [self.order.status integerValue] == [kAppointmentOrderStatus_6 integerValue]) {
         
         NSString *titleStr ;
@@ -47,23 +52,23 @@
             if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide] || [[TLUser user].kind isEqualToString:kUserTypeExpert])
             {
                 titleStr = @"成果录入";
-
+                
             }
-        
+            
         }
         else if ([self.order.status integerValue] == [kAppointmentOrderStatus_1 integerValue])
         {
             if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide])
             {
                 titleStr = @"取消预约";
-
+                
             }
         }
         else if ([self.order.status integerValue] == [kAppointmentOrderStatus_7 integerValue])
         {
             if ([self.kind isEqualToString:kUserTypeExpert]) {
                 titleStr = @"支付";
-
+                
             }
         }
         else if ([self.order.status integerValue] == [kAppointmentOrderStatus_6 integerValue])
@@ -71,66 +76,108 @@
             if  ([[TLUser user].kind isEqualToString:kUserTypeSalon]){
                 titleStr = @"成果审核";
             }
-
+            
         }
         
-         [UIBarButtonItem addRightItemWithTitle:titleStr titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(resultsEntry)];
+        [UIBarButtonItem addRightItemWithTitle:titleStr titleColor:kWhiteColor frame:CGRectMake(0, 0, 70, 44) vc:self action:@selector(resultsEntry)];
     }
-    
-    
-    [self initTableView];
-    //
-    [self initEventsButton];
+    else
+    {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
-
+- (void)requestOrderDeteil
+{
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"805521";
+    http.parameters[@"code"] = self.order.code;
+    http.showView = self.view;
+    [http postWithSuccess:^(id responseObject) {
+        NSLog(@"---->%@",responseObject);
+        self.order = [AppointmentOrderModel mj_objectWithKeyValues:responseObject[@"data"]];
+        [self creatUI];
+        
+        [self initTableView];
+        //
+        [self initEventsButton];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
 #pragma mark - Init
 
 - (void)initTableView {
     
-    TLTableView *tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight)
-                                                    delegate:self
-                                                  dataSource:self];
+    [self.tableView reloadData];
     
-    [self.view addSubview:tableView];
-    
-    self.tableView = tableView;
+}
+
+- (TLTableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight)
+                                                        delegate:self
+                                                      dataSource:self];
+        
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
 }
 
 - (void)initEventsButton {
     
     if (/*[self.order.isComment isEqualToString:@"0"] && */[self.order.status integerValue] == [kAppointmentOrderStatus_1 integerValue]|| [self.order.status integerValue] == [kAppointmentOrderStatus_2 integerValue] || [self.order.status integerValue] == [kAppointmentOrderStatus_4 integerValue]) {
         
+        self.commentBtn.hidden = NO;
+        
         if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide] || [[TLUser user].kind isEqualToString:kUserTypeExpert]) {
             self.tableView.height = kSuperViewHeight - kTabBarHeight;
             
-            CGFloat w = kScreenWidth;
-            UIColor *bgColor = kAppCustomMainColor;
-            UIColor *titleColor =  kWhiteColor;
-            
-            UIButton *commentBtn = [UIButton buttonWithTitle:[self.order getStatusName]
-                                                  titleColor:titleColor
-                                             backgroundColor:bgColor
-                                                   titleFont:18.0];
-            if ([commentBtn.titleLabel.text isEqualToString:@"待接单"]) {
-                [commentBtn setTitle:@"接单" forState:UIControlStateNormal];
+            [self.commentBtn setTitle:[self.order getStatusName] forState:UIControlStateNormal];
+            if ([self.commentBtn.titleLabel.text isEqualToString:@"待接单"]) {
+                [self.commentBtn setTitle:@"接单" forState:UIControlStateNormal];
             }
-            else if ([commentBtn.titleLabel.text isEqualToString:@"待上门"])
+            else if ([self.commentBtn.titleLabel.text isEqualToString:@"待上门"])
             {
-                [commentBtn setTitle:@"确认上门" forState:UIControlStateNormal];
+                [self.commentBtn setTitle:@"确认上门" forState:UIControlStateNormal];
 
             }
             
-            commentBtn.frame = CGRectMake(30, self.tableView.yy, w - 60, 49);
-            commentBtn.layer.cornerRadius = 5;
-            [commentBtn addTarget:self action:@selector(comment) forControlEvents:UIControlEventTouchUpInside];
             
-            [self.view addSubview:commentBtn];
+        }
+        else
+        {
+            self.commentBtn.hidden = YES;
         }
         //评价
        
     }
-}
+    else
+    {
+        self.commentBtn.hidden = NO;
 
+    }
+}
+- (UIButton *)commentBtn
+{
+    if (!_commentBtn) {
+        CGFloat w = kScreenWidth;
+        UIColor *bgColor = kAppCustomMainColor;
+        UIColor *titleColor =  kWhiteColor;
+        _commentBtn = [UIButton buttonWithTitle:[self.order getStatusName]
+                                         titleColor:titleColor
+                                    backgroundColor:bgColor
+                                          titleFont:18.0];
+        _commentBtn.frame = CGRectMake(30, self.tableView.yy, w - 60, 49);
+        _commentBtn.layer.cornerRadius = 5;
+        [_commentBtn addTarget:self action:@selector(comment) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:_commentBtn];
+    }
+    return _commentBtn;
+}
 #pragma mark - Events
 //评价
 - (void)comment {
@@ -196,8 +243,8 @@
 //
 //                _overClassSuccess();
 //            }
-            
-            [self.navigationController popViewControllerAnimated:YES];
+            [self requestOrderDeteil];
+//            [self.navigationController popViewControllerAnimated:YES];
             
         } failure:^(NSError *error) {
             
@@ -226,8 +273,8 @@
 //
 //                _visitSuccess();
 //            }
-            
-            [self.navigationController popViewControllerAnimated:YES];
+            [self requestOrderDeteil];
+//            [self.navigationController popViewControllerAnimated:YES];
             
         } failure:^(NSError *error) {
             
@@ -251,8 +298,8 @@
             
             [TLAlert alertWithSucces:@"接单成功"];
         
-            
-            [self.navigationController popViewControllerAnimated:YES];
+            [self requestOrderDeteil];
+//            [self.navigationController popViewControllerAnimated:YES];
             
         } failure:^(NSError *error) {
             

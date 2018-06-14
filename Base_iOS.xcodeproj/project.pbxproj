@@ -293,6 +293,8 @@
 		C440A71420CFFD390027F45C /* ChouseGoodsEntryv.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A71320CFFD390027F45C /* ChouseGoodsEntryv.m */; };
 		C440A71720D028770027F45C /* BecomeServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A71620D028770027F45C /* BecomeServiceVC.m */; };
 		C440A71B20D0C61C0027F45C /* SGQRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A71A20D0C61C0027F45C /* SGQRCodeTool.m */; };
+		C440A71E20D263D20027F45C /* BigCategoriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A71D20D263D20027F45C /* BigCategoriesModel.m */; };
+		C440A72120D26B070027F45C /* SmallCategoriesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = C440A72020D26B070027F45C /* SmallCategoriesVC.m */; };
 		C490154020BD2CD80073E85B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153C20BD2CD80073E85B /* README.txt */; };
 		C490154120BD2CD80073E85B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C490153E20BD2CD80073E85B /* libWeChatSDK.a */; };
 		C490154220BD2CD80073E85B /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = C490153F20BD2CD80073E85B /* read_me.txt */; };
@@ -900,6 +902,10 @@
 		C440A71620D028770027F45C /* BecomeServiceVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BecomeServiceVC.m; sourceTree = "<group>"; };
 		C440A71920D0C61C0027F45C /* SGQRCodeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQRCodeTool.h; sourceTree = "<group>"; };
 		C440A71A20D0C61C0027F45C /* SGQRCodeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQRCodeTool.m; sourceTree = "<group>"; };
+		C440A71C20D263D20027F45C /* BigCategoriesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BigCategoriesModel.h; sourceTree = "<group>"; };
+		C440A71D20D263D20027F45C /* BigCategoriesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BigCategoriesModel.m; sourceTree = "<group>"; };
+		C440A71F20D26B070027F45C /* SmallCategoriesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SmallCategoriesVC.h; sourceTree = "<group>"; };
+		C440A72020D26B070027F45C /* SmallCategoriesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmallCategoriesVC.m; sourceTree = "<group>"; };
 		C490153A20BD2CD80073E85B /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		C490153B20BD2CD80073E85B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		C490153C20BD2CD80073E85B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -1687,6 +1693,8 @@
 				212ECE632041618C0091E543 /* BrandListModel.m */,
 				C490155820C38A8C0073E85B /* ShopCarModel.h */,
 				C490155920C38A8C0073E85B /* ShopCarModel.m */,
+				C440A71C20D263D20027F45C /* BigCategoriesModel.h */,
+				C440A71D20D263D20027F45C /* BigCategoriesModel.m */,
 			);
 			path = Brand;
 			sourceTree = "<group>";
@@ -2277,6 +2285,8 @@
 			children = (
 				21A1E9F6203E695500A8AD34 /* BrandVC.h */,
 				21A1E9F7203E695500A8AD34 /* BrandVC.m */,
+				C440A71F20D26B070027F45C /* SmallCategoriesVC.h */,
+				C440A72020D26B070027F45C /* SmallCategoriesVC.m */,
 				21A1E9F3203E68C300A8AD34 /* BrandListVC.h */,
 				21A1E9F4203E68C300A8AD34 /* BrandListVC.m */,
 				21A1EA01203E731300A8AD34 /* BrandDetailVC.h */,
@@ -3066,6 +3076,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C440A71E20D263D20027F45C /* BigCategoriesModel.m in Sources */,
 				2182D24520453940003215DA /* OrderFooterView.m in Sources */,
 				2182D2B22048192E003215DA /* PictureLibraryCollectionView.m in Sources */,
 				21AC58AE1FDE75AA00F19DE8 /* HttpSign.m in Sources */,
@@ -3075,6 +3086,7 @@
 				C490157820C686110073E85B /* WithdrawalCell.m in Sources */,
 				21A1E9F8203E695500A8AD34 /* BrandVC.m in Sources */,
 				C490155D20C38BDF0073E85B /* ShoppCarCell.m in Sources */,
+				C440A72120D26B070027F45C /* SmallCategoriesVC.m in Sources */,
 				2182D2A12047CA22003215DA /* MyInfomationVC.m in Sources */,
 				21A1EA2B203FBD7400A8AD34 /* IntegralGoodDetailVC.m in Sources */,
 				21A103B4204FE99C00BF4C78 /* BaseSearchVC.m in Sources */,

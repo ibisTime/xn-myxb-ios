@@ -17,6 +17,7 @@
 #import <PYSearch.h>
 //M
 #import "BrandListModel.h"
+#import "BigCategoriesModel.h"
 //V
 #import "SelectScrollView.h"
 //C
@@ -25,12 +26,13 @@
 #import "SearchVC.h"
 #import "ShoppingCartVC.h"
 #import "TLUserLoginVC.h"
+#import "SmallCategoriesVC.h"
 
 @interface BrandVC ()<PYSearchViewControllerDelegate>
 
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
 
-@property (nonatomic, strong) NSArray <BrandListModel *>*brandList;
+@property (nonatomic, strong) NSArray *brandList;
 
 @end
 
@@ -58,14 +60,19 @@
     
     NSMutableArray *titles = [NSMutableArray array];
     
-    [self.brandList enumerateObjectsUsingBlock:^(BrandListModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.brandList enumerateObjectsUsingBlock:^(BigCategoriesModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
-        BrandListModel *model = self.brandList[idx];
+//        BigCategoriesModel *model = self.brandList[idx];
         
-        if ([model.name valid]) {
-            
-            [titles addObject:model.name];
-        }
+        [titles addObject:obj.name];
+        
+        
+//        BrandListModel *model = self.brandList[idx];
+//        
+//        if ([model.name valid]) {
+//            
+//            [titles addObject:model.name];
+//        }
         
     }];
     
@@ -77,21 +84,35 @@
 
 - (void)addSubViewController {
     
+    
+    
+    
     for (NSInteger i = 0; i < self.brandList.count; i++) {
         
-        BrandListModel *model = self.brandList[i];
+        BigCategoriesModel *model = self.brandList[i];
+        
+        SmallCategoriesVC *small = [[SmallCategoriesVC alloc]init];
+        
+        small.code = model.code;
+        
+        small.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
 
-        BrandListVC *childVC = [[BrandListVC alloc] init];
-        
-        childVC.descriptionStr = model.desc;
-        
-        childVC.brandCode = model.code;
+        [self addChildViewController:small];
 
-        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
-        
-        [self addChildViewController:childVC];
-        
-        [_selectScrollView.scrollView addSubview:childVC.view];
+        [_selectScrollView.scrollView addSubview:small.view];
+//        BrandListModel *model = self.brandList[i];
+//
+//        BrandListVC *childVC = [[BrandListVC alloc] init];
+//
+//        childVC.descriptionStr = model.desc;
+//
+//        childVC.brandCode = model.code;
+//
+//        childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
+//
+//        [self addChildViewController:childVC];
+//
+//        [_selectScrollView.scrollView addSubview:childVC.view];
         
     }
     
@@ -197,6 +218,28 @@
 }
 #pragma mark - Data
 - (void)requestBrandList {
+    
+    
+    TLNetworking *http = [TLNetworking new];
+    http.code = @"805247";
+    http.parameters[@"start"] = @"1";
+    http.parameters[@"limit"] =@"100";
+    
+    [http postWithSuccess:^(id responseObject) {
+        NSArray *arry = responseObject[@"data"];
+        
+        
+        self.brandList = [BigCategoriesModel mj_objectArrayWithKeyValuesArray:arry];
+        [self initSelectScrollView];
+        [self addSubViewController];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+   
+
+    
+    return;
     //1 未上架 2已上架 3已下架
     TLPageDataHelper *helper = [TLPageDataHelper new];
     
