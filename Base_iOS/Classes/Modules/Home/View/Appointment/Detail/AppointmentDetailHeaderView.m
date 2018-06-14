@@ -32,6 +32,9 @@
 @property (nonatomic, strong) UILabel *jobLbl;
 //专长
 @property (nonatomic, strong) UILabel *expertiseLbl;
+
+@property (nonatomic, strong) UILabel *leveLbl;
+
 //评分
 @property (nonatomic, strong) UIView *starView;
 //
@@ -87,9 +90,13 @@
                                                 textColor:kTextColor
                                                      font:13.0];
     [self addSubview:self.expertiseLbl];
-    //评分
-    self.starView = [[UIView alloc] init];
     
+    self.leveLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                textColor:kThemeColor
+                                                     font:13.0];
+    [self addSubview:self.leveLbl];//    //评分
+    self.starView = [[UIView alloc] init];
+
     [self addSubview:self.starView];
 }
 
@@ -141,6 +148,8 @@
         make.top.equalTo(self.jobLbl.mas_top);
     }];
     
+   
+    
     __block CGFloat x = kHeadIconWidth + 30;
     __block CGFloat y = 6;
 
@@ -186,26 +195,30 @@
     }];
     //星星
     for (int i = 0; i < 5; i++) {
-        
+
         CGFloat x = i*15;
         CGFloat w = 10;
-        
+
         UIImageView *iv = [[UIImageView alloc] init];
-        
-        iv.image = i < [_detailModel.level integerValue] ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
-        
+
+//        iv.image = i < [_detailModel.level integerValue] ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+
         [self.starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
-            
+
             make.left.equalTo(@(x));
             make.width.height.equalTo(@(w));
             make.centerY.equalTo(@0);
         }];
     }
-    
+
     //评分
     [self.starView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+
+        make.left.equalTo(self.nickNameLbl.mas_left);
+        make.top.equalTo(self.jobLbl.mas_bottom).offset(y + 23 + 6);
+    }];
+    [self.leveLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nickNameLbl.mas_left);
         make.top.equalTo(self.jobLbl.mas_bottom).offset(y + 23 + 6);
     }];
@@ -223,12 +236,13 @@
     
     self.nickNameLbl.text = detailModel.realName;
     
-    self.genderIV.image = [detailModel.gender isEqualToString:@"0"] ? kImage(@"女生"): kImage(@"男士");
+    self.genderIV.image = [detailModel.gender isEqualToString:@"0"] ? kImage(@"男士"):kImage(@"女生") ;
 
     self.jobLbl.text = [detailModel getUserType];
     
     self.expertiseLbl.text = [detailModel.speciality valid] ?
     [NSString stringWithFormat:@"专长: %@", detailModel.speciality]: @"";
+    self.leveLbl.text = @"初级";
     //布局
     [self setSubviewLayout];
     //

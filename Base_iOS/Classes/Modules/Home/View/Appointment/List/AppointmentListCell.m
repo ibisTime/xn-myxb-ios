@@ -32,6 +32,9 @@
 @property (nonatomic, strong) UILabel *jobLbl;
 //专长
 @property (nonatomic, strong) UILabel *expertiseLbl;
+
+@property (nonatomic, strong) UILabel *leveLbl;
+
 //评分
 @property (nonatomic, strong) UIView *starView;
 //个人简介
@@ -91,6 +94,11 @@
                                            textColor:kTextColor
                                                 font:13.0];
     [self addSubview:self.expertiseLbl];
+    
+    self.leveLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                textColor:kThemeColor
+                                                     font:13.0];
+    [self addSubview:self.leveLbl];
     //评分
     self.starView = [[UIView alloc] init];
     
@@ -173,7 +181,7 @@
         make.left.equalTo(self.jobLbl.mas_right).offset(8);
         make.top.equalTo(self.jobLbl.mas_top);
     }];
-
+   
     //个人简介
     [self.introduceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -242,7 +250,7 @@
         
         UIImageView *iv = [[UIImageView alloc] init];
         
-        iv.image = i < [_appointmentModel.level integerValue] ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+//        iv.image = i < [_appointmentModel.level integerValue] ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
         
         [self.starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -260,6 +268,12 @@
         make.top.equalTo(self.jobLbl.mas_bottom).offset(y + 23 + 6);
     }];
     
+    [self.leveLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.nickNameLbl.mas_left);
+        make.top.equalTo(self.jobLbl.mas_bottom).offset(y + 23 + 6);
+        
+        
+    }];
     _isFirst = YES;
 }
 
@@ -273,12 +287,13 @@
     
     self.nickNameLbl.text = appointmentModel.realName;
     
-    self.genderIV.image = [appointmentModel.gender isEqualToString:@"0"] ? kImage(@"女生"): kImage(@"男士");
+    self.genderIV.image = [appointmentModel.gender isEqualToString:@"0"] ?  kImage(@"男士"): kImage(@"女生");
     
     self.jobLbl.text = [appointmentModel getUserType];
     
     self.expertiseLbl.text = [appointmentModel.speciality valid] ?
     [NSString stringWithFormat:@"专长: %@", appointmentModel.speciality]: @"";
+    self.leveLbl.text = @"初级";
     
     [self.introduceLbl labelWithTextString:appointmentModel.slogan lineSpace:5];
     //布局

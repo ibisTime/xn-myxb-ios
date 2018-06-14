@@ -9,6 +9,10 @@
 #import "BaseModel.h"
 
 @interface AppointmentListModel : BaseModel
+
+//签约状态 0 游客 1未签约  2 已签约
+@property (nonatomic, copy) NSString *signStatus;
+
 //用户编号
 @property (nonatomic, copy) NSString *userId;
 //头像

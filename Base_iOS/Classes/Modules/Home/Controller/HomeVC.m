@@ -330,7 +330,7 @@
                     
                 case 1:
                 {
-                    title = @"服务团队预约预约";
+                    title = @"服务团队预约";
                     type = kUserTypeBeautyGuide;
                 }break;
                     

@@ -154,7 +154,8 @@
         }
         else
         {
-            [TLAlert alertWithMsg:@"我要成为经销商"];
+            [self.navigationController pushViewController:[BecomeServiceVC new] animated:YES];
+
         }
     };
 
@@ -182,11 +183,17 @@
     self.appointmnet.showNumber = [TLUser user].jxsToApproveCount;
     self.appointmnet.action = ^{
         
+        if ([TLUser user].isSing) {
+            AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
+            
+            [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        }
+        else
+        {
+            [TLAlert alertWithMsg:@"您还未签约"];
+        }
         
         
-        AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
-        
-        [weakSelf.navigationController pushViewController:orderVC animated:YES];
     };
 
     
@@ -509,6 +516,7 @@
         
         if (![TLUser user].isSing) {
             [TLAlert alertWithMsg:@"您还未签约"];
+            
         }
         else
         {

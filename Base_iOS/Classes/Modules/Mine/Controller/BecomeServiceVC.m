@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"签约";
     
     UIButton *agree = [UIButton buttonWithTitle:@"我已知晓,开始支付" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:18.0];
     [agree bk_addEventHandler:^(id sender) {

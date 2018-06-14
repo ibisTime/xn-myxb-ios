@@ -167,7 +167,14 @@
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
-            weakSelf.appointmentList = objs;
+            NSMutableArray *chousrArry = [NSMutableArray arrayWithCapacity:0];
+            [objs enumerateObjectsUsingBlock:^(AppointmentListModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj.signStatus integerValue] == 2) {
+                    [chousrArry addObject:obj];
+                }
+            }];
+            
+            weakSelf.appointmentList = chousrArry;
 
             weakSelf.tableView.appointmentList = weakSelf.appointmentList;
             
@@ -183,7 +190,14 @@
         
         [helper loadMore:^(NSMutableArray *objs, BOOL stillHave) {
             
-            weakSelf.appointmentList = objs;
+            NSMutableArray *chousrArry = [NSMutableArray arrayWithCapacity:0];
+            [objs enumerateObjectsUsingBlock:^(AppointmentListModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj.signStatus integerValue] == 2) {
+                    [chousrArry addObject:obj];
+                }
+            }];
+            
+            weakSelf.appointmentList = chousrArry;
             
             weakSelf.tableView.appointmentList = weakSelf.appointmentList;
             

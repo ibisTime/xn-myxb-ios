@@ -9,15 +9,13 @@
 #import "BaseView.h"
 
 @protocol ChousePayViewDelegate<NSObject>
-/**
- *  提交续费按钮事件
- *
- *  @param moneyCount 钱的数目
- */
--(void)commitMoneyButtonClickWithMoney:(BOOL)isWeixin;
+
+
+-(void)commitMoneyButtonClickWithMoneyType:(NSInteger)type;
 
 @end
 @interface ChousePayView : BaseView
+- (instancetype)initWithFrame:(CGRect)frame become:(BOOL)become;
 
 @property (nonatomic , weak)id<ChousePayViewDelegate>delegate;
 

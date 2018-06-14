@@ -18,7 +18,7 @@
 
 @interface TopUpVC ()<ChousePayViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) TLTextField *moneyTF;
-@property (nonatomic , assign) BOOL isWeixin;
+@property (nonatomic , assign) NSInteger payType;//0 余额 1 微信  2 支付宝
 
 @end
 
@@ -31,48 +31,60 @@
     
     // Do any additional setup after loading the view.
     self.title = @"充值";
-    self.isWeixin = YES;
     
     if (!self.isPayExperts) {
+        self.payType = 1;
+
+        
         self.moneyTF = [[TLTextField alloc]initWithFrame:CGRectMake(0, 10, kScreenWidth, 50) leftTitle:@"充值金额" rightTitle:@"¥" titleWidth:100 placeholder:@"请输入充值金额"];
         self.moneyTF.keyboardType = UIKeyboardTypeDecimalPad;
         self.moneyTF.textAlignment = NSTextAlignmentRight;
         self.moneyTF.delegate = self;
         self.moneyTF.textColor = kThemeColor;
+
         
         [self.view addSubview:self.moneyTF];
-    }
-    
-    
-    
-    
-    
-    
-    ChousePayView *chousepay = [[ChousePayView alloc]init];
-    [chousepay setBackgroundColor:[UIColor whiteColor]];
-    chousepay.delegate = self;
-    [self.view addSubview:chousepay];
-    
-    if (self.isPayExperts) {
-        [chousepay mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.equalTo(@0);
-            make.height.mas_equalTo(143);
-        }];
-    }
-    else
-    {
+        
+        ChousePayView *chousepay = [[ChousePayView alloc]init];
+        [chousepay setBackgroundColor:[UIColor whiteColor]];
+        chousepay.delegate = self;
+        [self.view addSubview:chousepay];
+        
         [chousepay mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(@0);
             make.top.equalTo(self.moneyTF.mas_bottom).with.offset(10);
             make.height.mas_equalTo(143);
         }];
         
+        UIButton *addbtn = [UIButton buttonWithTitle:@"确认支付" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:18.0];
+        [addbtn bk_addEventHandler:^(id sender) {
+            
+            [self requeOrder];
+            
+        } forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:addbtn];
+        [addbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(@0);
+            make.bottom.equalTo(self.view.mas_bottom).with.offset(-kBottomInsetHeight);
+            make.height.mas_equalTo(50);
+            
+        }];
     }
-    
-   
-    
-    
-    if (self.isPayExperts) {
+    else
+    {
+        self.payType = 0;
+        
+        ChousePayView *chousepay = [[ChousePayView alloc]initWithFrame:CGRectZero become:YES];
+        [chousepay setBackgroundColor:[UIColor whiteColor]];
+        chousepay.delegate = self;
+        [self.view addSubview:chousepay];
+        
+        [chousepay mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.equalTo(@0);
+            make.height.mas_equalTo(203);
+        }];
+        
+        
         NSString *pirceStr = [NSString stringWithFormat:@"    支付金额:¥%@",self.deductAmount];
         UILabel *label = [UILabel labelWithTitle:@"" frame:CGRectZero];
         label.textAlignment = NSTextAlignmentLeft;
@@ -98,7 +110,7 @@
         [addbtn bk_addEventHandler:^(id sender) {
             
             
-             [self getisPayExperts];
+            [self getisPayExperts];
             
         } forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:addbtn];
@@ -109,25 +121,8 @@
             make.left.equalTo(label.mas_right);
             
         }];
+        
     }
-    else
-    {
-        UIButton *addbtn = [UIButton buttonWithTitle:@"确认支付" titleColor:kWhiteColor backgroundColor:kThemeColor titleFont:18.0];
-        [addbtn bk_addEventHandler:^(id sender) {
-            
-            [self requeOrder];
-            
-        } forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:addbtn];
-        [addbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(@0);
-            make.bottom.equalTo(self.view.mas_bottom).with.offset(-kBottomInsetHeight);
-            make.height.mas_equalTo(50);
-            
-        }];
-    }
-    
-    
     
     
     [TLWXManager manager].wxPay = ^(BOOL isSuccess, int errorCode) {
@@ -147,9 +142,9 @@
     };
     
 }
--(void)commitMoneyButtonClickWithMoney:(BOOL)isWeixin
+-(void)commitMoneyButtonClickWithMoneyType:(NSInteger)type;
 {
-    self.isWeixin = isWeixin;
+    self.payType = type;
     
     
    
@@ -187,8 +182,21 @@
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = @"805518";
-    http.parameters[@"payType"] = self.isWeixin ? @"2" : @"33";
-    if (self.code.length == 0) {
+    if (self.payType == 1) {
+        
+        http.parameters[@"payType"] =  @"2";
+    }
+    else if (self.payType == 0)
+    {
+        http.parameters[@"payType"] =  @"1";
+
+    }
+    else
+    {
+        http.parameters[@"payType"] =  @"3";
+    }
+    
+    if (self.code.length == 0) {//发起签约
         http.parameters[@"userId"] = [TLUser user].userId;
         http.code = @"805190";
 
@@ -202,7 +210,10 @@
     [http postWithSuccess:^(id responseObject) {
         NSLog(@"----->%@",responseObject);
 
-        self.isWeixin ? [self wxPayWithInfo:responseObject] :[self AliPayWithInfo:responseObject];
+        if (self.payType != 0) {
+            self.payType == 1 ? [self wxPayWithInfo:responseObject] :[self AliPayWithInfo:responseObject];
+
+        }
     } failure:^(NSError *error) {
         
     }];
@@ -215,11 +226,19 @@
     http.code = @"802710";
     http.parameters[@"amount"] = @([self.moneyTF.text intValue] *1000);
     http.parameters[@"applyUser"] = [TLUser user].userId;
-    http.parameters[@"channelType"] = self.isWeixin ? @"36" : @"30";
+    if (self.payType == 1) {
+        http.parameters[@"channelType"] = @"36";
+
+    }
+    else
+    {
+        http.parameters[@"channelType"] = @"30";
+    }
+//    http.parameters[@"channelType"] = self.isWeixin ? @"36" : @"30";
     
     [http postWithSuccess:^(id responseObject) {
         
-        self.isWeixin ? [self wxPayWithInfo:responseObject] :[self AliPayWithInfo:responseObject];
+        self.payType == 1 ? [self wxPayWithInfo:responseObject] :[self AliPayWithInfo:responseObject];
         NSLog(@"----->%@",responseObject);
     } failure:^(NSError *error) {
         

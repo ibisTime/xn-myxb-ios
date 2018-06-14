@@ -13,7 +13,7 @@
 #import "TreeTableView.h"
 
 
-@interface TreeMaoVC ()//<UITableViewDelegate,UITableViewDataSource>
+@interface TreeMaoVC ()
 
 @property (nonatomic , strong)NSMutableArray *treeMapArry;
 
@@ -27,6 +27,9 @@
     // Do any additional setup after loading the view.
     self.title = @"网络图谱";
     self.treeMapArry = [NSMutableArray arrayWithCapacity:0];
+    
+    
+    
     [self requestTreeMap];
 }
 - (void)requestTreeMap
@@ -252,6 +255,41 @@
     TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight) withData:self.treeMapArry];
 //    tableview.treeTableCellDelegate = self;
     [self.view addSubview:tableview];
+    
+    if ([[TLUser user].kind isEqualToString:kUserTypePartner]) {
+        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+        headerView.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *imageBtn = [UIButton buttonWithImageName:@"白金"];
+        [headerView addSubview:imageBtn];
+        [imageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(@0);
+            make.left.equalTo(@0);
+            make.width.equalTo(@50);
+        }];
+        
+        UILabel *vipTypeLabel = [UILabel labelWithBackgroundColor:kClearColor textColor:kBlackColor font:16];
+        vipTypeLabel.text = @"白金";
+        [headerView addSubview:vipTypeLabel];
+        
+        [vipTypeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(imageBtn.mas_right);
+            make.top.bottom.equalTo(@0);
+        }];
+        
+        UIView *linvew = [[UIView alloc]init];
+        linvew.backgroundColor = kSilverGreyColor;
+        [headerView addSubview:linvew];
+        
+        [linvew mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(@0);
+            make.height.equalTo(@.5);
+        }];
+
+        tableview.tableHeaderView = headerView;
+        
+        
+    }
     
 //    self.tableview = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight)
 //                                                    delegate:self

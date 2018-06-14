@@ -7,24 +7,38 @@
 //
 
 #import "ChousePayView.h"
+#import "TLUser.h"
 @interface ChousePayView ()
 @property (nonatomic , strong)NSMutableArray *buttonArray;
 @property (nonatomic , strong)UIButton *weixin;
 @property (nonatomic , strong)UIButton *zhifubao;
+@property (nonatomic , strong)UIButton *rmbBtn;
+
 @end
 
 @implementation ChousePayView
+
+
+- (instancetype)initWithFrame:(CGRect)frame become:(BOOL)become
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.buttonArray = [NSMutableArray arrayWithCapacity:0];
+        [self setupWith:YES];
+    }
+    return self;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.buttonArray = [NSMutableArray arrayWithCapacity:0];
-        [self setupUI];
+        [self setupWith:NO];
     }
     return self;
 }
--(void)setupUI
+-(void)setupWith:(BOOL)become
 {
     
     
@@ -41,11 +55,29 @@
         make.height.equalTo(@20);
     }];
     
-    [self creatButton:@"微信充值" money:@"微信" index:0];
-    self.weixin = [self.buttonArray objectAtIndex:0];
-    self.weixin.selected = YES;
-    [self creatButton:@"支付宝" money:@"支付宝" index:1];
-    self.zhifubao = [self.buttonArray objectAtIndex:1];
+    
+    if (become) {
+        NSString *money = [NSString stringWithFormat:@"销帮币(%@)",[TLUser user].rmbamount];
+        [self creatButton:@"余额" money:money index:0];
+        self.rmbBtn = [self.buttonArray objectAtIndex:0];
+        self.rmbBtn.selected = YES;
+
+        
+        [self creatButton:@"微信充值" money:@"微信" index:1];
+        self.weixin = [self.buttonArray objectAtIndex:1];
+        [self creatButton:@"支付宝" money:@"支付宝" index:2];
+        self.zhifubao = [self.buttonArray objectAtIndex:2];
+    }
+    else
+    {
+        [self creatButton:@"微信充值" money:@"微信" index:0];
+        self.weixin = [self.buttonArray objectAtIndex:0];
+        self.weixin.selected = YES;
+        [self creatButton:@"支付宝" money:@"支付宝" index:1];
+        self.zhifubao = [self.buttonArray objectAtIndex:1];
+    }
+    
+    
     
 }
 /**
@@ -119,18 +151,35 @@
 //点击那个数目
 -(void)selectedButtonClick:(UIButton *)sender
 {
+    NSInteger type = 1;
+
+    
     if (sender == self.weixin) {
         self.weixin.selected = YES;
         self.zhifubao.selected = NO;
+        self.rmbBtn.selected = NO;
+        type = 1;
+
+    }
+    else if (sender == self.rmbBtn)
+    {
+        self.weixin.selected = NO;
+        self.zhifubao.selected = NO;
+        self.rmbBtn.selected = YES;
+        type = 0;
     }
     else
     {
         self.weixin.selected = NO;
         self.zhifubao.selected = YES;
+        self.rmbBtn.selected = NO;
+        type = 2;
     }
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(commitMoneyButtonClickWithMoney:)]) {
-        [self.delegate commitMoneyButtonClickWithMoney:self.weixin.selected];
+
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(commitMoneyButtonClickWithMoneyType:)]) {
+        [self.delegate commitMoneyButtonClickWithMoneyType:type];
     }
 }
 

@@ -38,7 +38,7 @@
 @property (nonatomic, assign) CGFloat average;
 //
 @property (nonatomic, assign) CGFloat commentHeight;
-
+@property (nonatomic, copy) NSString *type;
 
 @end
 

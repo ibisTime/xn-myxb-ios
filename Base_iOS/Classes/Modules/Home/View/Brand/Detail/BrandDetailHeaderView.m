@@ -235,7 +235,7 @@
     
     _bannerView.imgUrls = detailModel.pics;
     
-    _nameLbl.text = detailModel.name;
+    _nameLbl.text = [NSString stringWithFormat:@"%@(%@类)",detailModel.name,detailModel.type];
     _descLbl.text = detailModel.slogan;
     
     _priceLbl.text = [NSString stringWithFormat:@"￥%@", [detailModel.price convertToRealMoney]];

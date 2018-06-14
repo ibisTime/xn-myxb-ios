@@ -22,6 +22,8 @@
 @property (nonatomic, copy) NSString *photo;
 @property (nonatomic, copy) NSString *entityCode;
 @property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *type;
+
 
 @property (nonatomic, assign) NSInteger score;
 
