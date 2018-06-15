@@ -214,6 +214,11 @@
             self.payType == 1 ? [self wxPayWithInfo:responseObject] :[self AliPayWithInfo:responseObject];
 
         }
+        else
+        {
+            [TLAlert alertWithSucces:@"签约成功"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     } failure:^(NSError *error) {
         
     }];
@@ -224,7 +229,7 @@
     TLNetworking *http = [TLNetworking new];
     http.showView = self.view;
     http.code = @"802710";
-    http.parameters[@"amount"] = @([self.moneyTF.text intValue] *1000);
+    http.parameters[@"amount"] = @([self.moneyTF.text floatValue] *1000);
     http.parameters[@"applyUser"] = [TLUser user].userId;
     if (self.payType == 1) {
         http.parameters[@"channelType"] = @"36";

@@ -155,10 +155,10 @@
     
     _comment = comment;
     
-    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[comment.photo convertImageUrl]]
+    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[comment.commentUser[@"pdf"] convertImageUrl]]
                     placeholderImage:USER_PLACEHOLDER_SMALL];
     
-    self.nameLbl.text = comment.nickname;
+    self.nameLbl.text = comment.commentUser[@"realName"];
     
     self.timeLbl.text = [comment.commentDatetime convertToDetailDate];
     

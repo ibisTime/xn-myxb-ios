@@ -11,6 +11,7 @@
 #import "TreeMacModel.h"
 
 #import "TreeTableView.h"
+#import "TLUser.h"
 
 
 @interface TreeMaoVC ()
@@ -73,6 +74,10 @@
 - (void)groupingWithArry:(NSMutableArray *)arry
 {
     
+    
+//    [[NSUserDefaults standardUserDefaults] setObject:userInfo forKey:USER_INFO_DICT_KEY];
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults]objectForKey:@"user_info_dict_key"];
+    
     TreeMacModel *titleModel = [[TreeMacModel alloc]init];
     titleModel.realName = @"有效推荐码";
     titleModel.ShowLinview = YES;
@@ -80,7 +85,7 @@
     titleModel.nodeId = 1;
     titleModel.depth = 0;
     titleModel.expand = YES;
-    titleModel.peopleNumberl = arry.count;
+    titleModel.peopleNumberl = [[NSString stringWithFormat:@"%@",dic[@"maxNumber"]] integerValue];
     [self.treeMapArry addObject:titleModel];
     
     
@@ -96,7 +101,7 @@
         
         
         for (NSInteger indexTwo = 0; indexTwo < twoArry.count; indexTwo ++) {
-            TreeMacModel *submodel = [twoArry objectAtIndex:index];
+            TreeMacModel *submodel = [twoArry objectAtIndex:indexTwo];
             submodel.parentId = model.nodeId;
             submodel.nodeId = model.nodeId * 1000 + indexTwo;
             submodel.depth = model.depth + 1;

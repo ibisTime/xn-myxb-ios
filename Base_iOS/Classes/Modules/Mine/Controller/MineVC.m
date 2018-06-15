@@ -105,8 +105,15 @@
 
     [self.tableView reloadData];
     
-    [[TLUser user] requestOrederNorReadNumber];
-    [[TLUser user] requestAppointmentNorReadNumber];
+    if ([TLUser user].isLogin) {
+        [[TLUser user] updateUserInfo];
+        [[TLUser user] requestOrederNorReadNumber];
+        [[TLUser user] requestAppointmentNorReadNumber];
+        [[TLUser user] requestAccountNumberWith:@"CNY"];
+        [[TLUser user] requestAccountNumberWith:@"JF"];
+    }
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -134,7 +141,7 @@
     //积分余额
     MineModel *jfBalance = [MineModel new];
     
-    if ([[TLUser user].signStatus integerValue] == 0) {
+    if ([[TLUser user].signStatus integerValue] == 0 || [[TLUser user].signStatus integerValue] == 1 ) {
         jfBalance.text = @"我要成为经销商";
 
     }
@@ -147,10 +154,14 @@
     jfBalance.imgName = @"我的排名";
     jfBalance.action = ^{
         
-        if ([[TLUser user].signStatus integerValue] != 0) {
+        if ([[TLUser user].signStatus integerValue] == 2) {
             TreeMaoVC *treeMap = [TreeMaoVC new];
             
             [weakSelf.navigationController pushViewController:treeMap animated:YES];
+        }
+        else if ([[TLUser user].signStatus integerValue] == 1 )
+        {
+            [TLAlert alertWithMsg:@"您的签约正在审核"];
         }
         else
         {
@@ -180,19 +191,28 @@
     
     self.appointmnet.text = @"我的预约";
     self.appointmnet.imgName = @"成果订单";
-    self.appointmnet.showNumber = [TLUser user].jxsToApproveCount;
+    self.appointmnet.showNumber = [TLUser user].fwInputCount + [TLUser user].fwToClassCount + [TLUser user].fwToBookCount + [TLUser user].fwClassEndCount + [TLUser user].jxsToApproveCount ;
     self.appointmnet.action = ^{
         
-        if ([TLUser user].isSing) {
-            AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
+        
+        if ([[TLUser user].signStatus isEqualToString:@"0"]) {
+            [TLAlert alertWithMsg:@"您还未签约"];
             
-            [weakSelf.navigationController pushViewController:orderVC animated:YES];
+        }
+        else if ([[TLUser user].signStatus isEqualToString:@"1"])
+        {
+            [TLAlert alertWithMsg:@"您的签约正在审核"];
+            
         }
         else
         {
-            [TLAlert alertWithMsg:@"您还未签约"];
+            AppointmentOrderVC *orderVC = [AppointmentOrderVC new];
+            
+            [weakSelf.navigationController pushViewController:orderVC animated:YES];
+            
         }
         
+    
         
     };
 
@@ -423,6 +443,7 @@
     
     self.appointmnet.text = @"我的行程";
     self.appointmnet.imgName = @"行程列表";
+    self.appointmnet.showNumber = [TLUser user].fwInputCount + [TLUser user].fwToClassCount + [TLUser user].fwToBookCount + [TLUser user].fwClassEndCount + [TLUser user].jxsToApproveCount;
     self.appointmnet.action = ^{
         
         MyViewController *mytripListVC = [MyViewController new];
@@ -487,7 +508,7 @@
     //成果订单
     self.myOrder = [MineModel new];
     
-    self.myOrder.text = @"成果订单";
+    self.myOrder.text = @"我的订单";
     self.myOrder.imgName = @"行程列表";
     self.myOrder.action = ^{
         
@@ -512,11 +533,17 @@
     
     self.appointmnet.text = @"我的行程";
     self.appointmnet.imgName = @"成果订单";
+    self.appointmnet.showNumber = [TLUser user].fwInputCount + [TLUser user].fwToClassCount + [TLUser user].fwToBookCount + [TLUser user].fwClassEndCount + [TLUser user].jxsToApproveCount;
     self.appointmnet.action = ^{
         
-        if (![TLUser user].isSing) {
+        if ([[TLUser user].signStatus isEqualToString:@"0"]) {
             [TLAlert alertWithMsg:@"您还未签约"];
             
+        }
+        else if ([[TLUser user].signStatus isEqualToString:@"1"])
+        {
+            [TLAlert alertWithMsg:@"您的签约正在审核"];
+
         }
         else
         {
@@ -555,8 +582,17 @@
     netMap.imgName = @"帮助中心";
     netMap.action = ^{
         
-        if (![TLUser user].isSing) {
+        
+        if ([[TLUser user].signStatus isEqualToString:@"0"]) {
+//            [TLAlert alertWithMsg:@"您还未签约"];
             [self.navigationController pushViewController:[BecomeServiceVC new] animated:YES];
+
+            
+        }
+        else if ([[TLUser user].signStatus isEqualToString:@"1"])
+        {
+            [TLAlert alertWithMsg:@"您的签约正在审核"];
+            
         }
         else
         {
@@ -564,6 +600,7 @@
             
             [weakSelf.navigationController pushViewController:treeMap animated:YES];
         }
+    
         
         
     };
@@ -575,11 +612,20 @@
     comments.text = @"我的评论";
     comments.imgName = @"积分余额";
     comments.action = ^{
-        if (![TLUser user].isSing) {
+        
+        
+        if ([[TLUser user].signStatus isEqualToString:@"0"]) {
             [TLAlert alertWithMsg:@"您还未签约"];
+            
+        }
+        else if ([[TLUser user].signStatus isEqualToString:@"1"])
+        {
+            [TLAlert alertWithMsg:@"您的签约正在审核"];
+            
         }
         else
         {
+    
             MyCommentVC *myCommentVC = [MyCommentVC new];
             
             [weakSelf.navigationController pushViewController:myCommentVC animated:YES];
@@ -597,8 +643,14 @@
     information.imgName = @"我的资料";
     information.action = ^{
         
-        if (![TLUser user].isSing) {
+        if ([[TLUser user].signStatus isEqualToString:@"0"]) {
             [TLAlert alertWithMsg:@"您还未签约"];
+            
+        }
+        else if ([[TLUser user].signStatus isEqualToString:@"1"])
+        {
+            [TLAlert alertWithMsg:@"您的签约正在审核"];
+            
         }
         else
         {
@@ -721,6 +773,10 @@
     NSString *speciality = ![[TLUser user].speciality valid] ? @"": [NSString stringWithFormat:@" · %@", [TLUser user].speciality];
     
     self.headerView.infoLbl.text = [NSString stringWithFormat:@"%@%@", [[TLUser user] getUserType], speciality];
+    
+    self.headerView.levelLabel.text = [[TLUser user].level isEqualToString:@"zero_level"] ? @"初级" :@"白金";
+    
+    self.headerView.typeImageview.image = [[TLUser user].level isEqualToString:@"zero_level"] ? kImage(@"初级白") :kImage(@"白金白");
     
     [self.headerView.xiaobangJuanL setTitle:[NSString stringWithFormat:@"销帮卷:%@",[TLUser user].jfamount] forState:UIControlStateNormal];
     [self.headerView.xiaobangbiL setTitle:[NSString stringWithFormat:@"销帮币:%@",[TLUser user].rmbamount] forState:UIControlStateNormal];

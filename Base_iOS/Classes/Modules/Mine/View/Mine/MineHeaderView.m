@@ -103,6 +103,27 @@
         make.centerX.equalTo(self.userPhoto.mas_right).offset(-(imgWidth/4.0 - 5));
     }];
     
+    self.typeImageview = [[UIImageView alloc]init];
+    [self addSubview:self.typeImageview];
+    
+    [self.typeImageview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.nameLbl.mas_left);
+        make.top.equalTo(self.nameLbl.mas_bottom).with.offset(3.5);
+        make.height.equalTo(@15);
+
+    }];
+    
+    self.levelLabel = [UILabel labelWithBackgroundColor:kClearColor
+                                           textColor:kWhiteColor
+                                                font:12.0];
+    [self addSubview:self.levelLabel];
+    
+    [self.levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.typeImageview.mas_right);
+        make.top.equalTo(self.nameLbl.mas_bottom).with.offset(5);
+        make.height.equalTo(@13);
+    }];
+    
     //角色
     self.infoLbl = [UILabel labelWithBackgroundColor:kClearColor
                                            textColor:kWhiteColor
@@ -111,7 +132,8 @@
     [self.infoLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(self.nameLbl.mas_left);
-        make.top.equalTo(self.nameLbl.mas_bottom).offset(8);
+        make.bottom.equalTo(self.userPhoto.mas_bottom);
+        make.height.equalTo(@12);
         
     }];
     

@@ -66,7 +66,7 @@
     CGFloat leftW = 120;
     CGFloat tfH = 50;
     CGFloat tfW = kScreenWidth;
-    self.timeTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 0, tfW, tfH) leftTitle:@"预约开始时间" titleWidth:leftW placeholder:@"请选择预约时间"];
+    self.timeTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, 0, tfW, tfH) leftTitle:@"开始时间" titleWidth:leftW placeholder:@"请选择预约时间"];
     
     [self.view addSubview:self.timeTF];
     //点击手势

@@ -59,7 +59,7 @@
 #pragma mark - Init
 - (void)initSelectScrollView {
     
-    self.titles = @[@"全部",@"代付款", @"待发货",@"待收货", @"待评价", @"已完成"];
+    self.titles = @[@"全部",@"待付款", @"待发货",@"待收货", @"待评价", @"已完成"];
     
     self.selectScrollView = [[SelectScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) itemTitles:self.titles];
     

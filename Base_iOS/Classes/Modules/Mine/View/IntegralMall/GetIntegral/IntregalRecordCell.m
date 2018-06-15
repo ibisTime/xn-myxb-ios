@@ -75,7 +75,6 @@
         
         make.left.equalTo(@15);
         make.top.equalTo(@10);
-        make.width.lessThanOrEqualTo(@200);
         make.height.lessThanOrEqualTo(@16);
         
     }];

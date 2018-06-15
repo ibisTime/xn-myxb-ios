@@ -60,7 +60,7 @@
     
     [self initTableView];
     //获取物流公司
-    [self requestExpressName];
+//    [self requestExpressName];
 }
 - (void)gotopayVC
 {
@@ -222,8 +222,8 @@
             cell = [[BrandOrderDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:orderDetailCellId];
         }
         
-//        cell.order = self.order;
-        cell.celldata = [self.order.productOrderList objectAtIndex:indexPath.row];
+        cell.order = self.order;
+//        cell.celldata = [self.order.productOrderList objectAtIndex:indexPath.row];
         
         return cell;
     }
@@ -232,15 +232,42 @@
     
     NSDictionary *dic = [self.order.productOrderList objectAtIndex:0];
     
+    NSInteger allPage = 0;
+    for (NSInteger index = 0; index < self.order.productOrderList.count; index ++) {
+
+
+
+        NSDictionary *dic2 = [self.order.productOrderList objectAtIndex:index];
+        allPage += [dic2[@"quantity"] intValue];
+
+    }
+    CGFloat totalAmount = 0.0;
+    
+    if ([self.order.payType integerValue] == 0) {
+        totalAmount = [self.order.totalAmount doubleValue];
+    }
+    else
+    {
+        if ([[TLUser user].kind isEqualToString:kUserTypeSalon]) {
+            totalAmount = [self.order.amount doubleValue];
+        }
+        else
+        {
+            totalAmount = [self.order.totalAmount doubleValue];
+        }
+    }
+    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
+    
     //
     NSString *name = dic[@"product"][@"name"];
     STRING_NIL_NULL(name);
     //
-    CGFloat totalAmount = [_order.amount doubleValue];
-    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
+//    CGFloat totalAmount = [_order.amount doubleValue];
+//    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
     STRING_NIL_NULL(amountStr);
     //
-    NSString *quantity = [dic[@"quantity"] stringValue];//[self.order.quantity stringValue];
+//    NSString *quantity = [dic[@"quantity"] stringValue];//[self.order.quantity stringValue];
+    NSString *quantity = [NSString stringWithFormat:@"%ld",allPage];
     STRING_NIL_NULL(quantity);
     //
     NSString *orderCode = self.order.code;

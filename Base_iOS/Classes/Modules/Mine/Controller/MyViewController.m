@@ -47,6 +47,12 @@
     for (SortBar *barView in self.selectScrollView.subviews) {
         
         for (UIButton *btn in barView.subviews) {
+            if (btn.tag == 100) {
+                if ([TLUser user].fwToBookCount !=0) {
+                    btn.titleLabel.redDotNumber = [TLUser user].fwInputCount + [TLUser user].fwToClassCount + [TLUser user].fwToBookCount + [TLUser user].fwClassEndCount + [TLUser user].jxsToApproveCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
             if (btn.tag == 101) {
                 if ([TLUser user].fwToBookCount !=0) {
                     btn.titleLabel.redDotNumber =[TLUser user].fwToBookCount;
@@ -59,15 +65,16 @@
                     [btn.titleLabel ShowBadgeView];
                 }
             }
-//            if (btn.tag == 103) {
-//                if ([TLUser user].toReceiceCount !=0) {
-//                    btn.titleLabel.redDotNumber =[TLUser user].toReceiceCount;
-//                    [btn.titleLabel ShowBadgeView];
-//                }
-//            }
+            if (btn.tag == 103) {
+                if ([TLUser user].jxsToApproveCount !=0) {
+                    btn.titleLabel.redDotNumber =[TLUser user].jxsToApproveCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+            
 //            if (btn.tag == 104) {
 //                if ([TLUser user].toReceiceCount !=0) {
-//                    btn.titleLabel.redDotNumber =[TLUser user].toReceiceCount;
+//                    btn.titleLabel.redDotNumber =[TLUser user].jxsToApproveCount;
 //                    [btn.titleLabel ShowBadgeView];
 //                }
 //            }

@@ -67,9 +67,9 @@ NSString *const kAppointmentOrderStatus_11 = @"11";  //后台审核不通过
 - (NSString *)getUserType {
     
     NSDictionary *dic = @{
-                          kUserTypeBeautyGuide: @"美导",
+                          kUserTypeBeautyGuide: @"服务团队",
                           kUserTypeLecturer: @"讲师",
-                          kUserTypeExpert: @"专家",
+                          kUserTypeExpert: @"销售精英",
                           };
     
     return dic[self.type];

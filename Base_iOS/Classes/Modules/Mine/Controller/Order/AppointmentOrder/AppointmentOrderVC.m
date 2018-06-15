@@ -16,6 +16,8 @@
 #import "AppointmentOrderListVC.h"
 #import "UIBarButtonItem+convience.h"
 #import "TripListVC.h"
+#import "SortBar.h"
+#import "YeeBadgeViewHeader.h"
 
 
 @interface AppointmentOrderVC ()<SegmentDelegate>
@@ -26,6 +28,8 @@
 @property (nonatomic, strong) UIScrollView *switchScrollView;
 //
 @property (nonatomic, strong) SelectScrollView *selectScrollView;
+@property (nonatomic, strong) SelectScrollView *selectScrollView2;
+
 //
 @property (nonatomic, strong) NSArray *titles;
 //
@@ -34,6 +38,8 @@
 @property (nonatomic, copy) NSString *kind;
 
 @property (nonatomic , strong)NSMutableArray *controArry;
+
+
 
 @end
 
@@ -54,6 +60,46 @@
     
     //顶部切换
     [self initSegmentView];
+    
+    
+    
+    for (SortBar *barView in self.selectScrollView.subviews) {
+        
+        for (UIButton *btn in barView.subviews) {
+            if (btn.tag == 100) {
+                if ([TLUser user].toPayCount !=0) {
+                    btn.titleLabel.redDotNumber = [TLUser user].fwInputCount + [TLUser user].fwToClassCount + [TLUser user].fwToBookCount + [TLUser user].fwClassEndCount + [TLUser user].jxsToApproveCount ;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+            if (btn.tag == 103) {
+                if ([TLUser user].toReceiceCount !=0) {
+                    btn.titleLabel.redDotNumber =[TLUser user].jxsToApproveCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+        }
+        
+    }
+    for (SortBar *barView in self.selectScrollView2.subviews) {
+        
+        for (UIButton *btn in barView.subviews) {
+            if (btn.tag == 100) {
+                if ([TLUser user].toPayCount !=0) {
+                    btn.titleLabel.redDotNumber = [TLUser user].fwInputCount + [TLUser user].fwToClassCount + [TLUser user].fwToBookCount + [TLUser user].fwClassEndCount + [TLUser user].jxsToApproveCount ;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+            if (btn.tag == 102) {
+                if ([TLUser user].toReceiceCount !=0) {
+                    btn.titleLabel.redDotNumber =[TLUser user].jxsToApproveCount;
+                    [btn.titleLabel ShowBadgeView];
+                }
+            }
+        }
+        
+    }
+   
 }
 
 #pragma mark - Init
@@ -110,7 +156,15 @@
         
         [self.switchScrollView addSubview:selectScrollView];
         
-        self.selectScrollView = selectScrollView;
+        if (i == 0) {
+            self.selectScrollView = selectScrollView;
+
+        }
+        else
+        {
+            self.selectScrollView2 = selectScrollView;
+
+        }
         
         [self addSubViewControllerwith:[kindArr objectAtIndex:i]];
     }
@@ -169,7 +223,15 @@
         
         [self addChildViewController:childVC];
         
-        [self.selectScrollView.scrollView addSubview:childVC.view];
+        if ([type isEqualToString:kUserTypeBeautyGuide]) {
+            [self.selectScrollView.scrollView addSubview:childVC.view];
+
+        }
+        else
+        {
+            [self.selectScrollView2.scrollView addSubview:childVC.view];
+        }
+        
         [self.controArry addObject:childVC];
         
     }

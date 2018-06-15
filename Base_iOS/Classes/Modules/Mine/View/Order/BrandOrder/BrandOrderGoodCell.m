@@ -16,6 +16,7 @@
 #import "NSString+Date.h"
 #import "UIButton+EnLargeEdge.h"
 #import "UIControl+Block.h"
+#import "TLUser.h"
 
 @interface BrandOrderGoodCell()
 
@@ -227,18 +228,34 @@
     }
     
     //
-    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.detailModel.product[@"advPic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.detailModel.product[@"pic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     //
     self.nameLbl.text = order.detailModel.product[@"name"];
     //
-    self.priceLbl.text = [NSString stringWithFormat:@"￥%@", [_order.detailModel.price convertToRealMoney]];
+    self.priceLbl.text = @"";//[NSString stringWithFormat:@"￥%@", [_order.detailModel.price convertToRealMoney]];
     //
-    self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.detailModel.quantity stringValue]];
+//    self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.detailModel.quantity stringValue]];
+    self.numLbl.text = [NSString stringWithFormat:@"X %ld",order.productOrderList.count];
+
     //
     self.timeLbl.text = [order.applyDatetime convertDate];
     //总计=(商品总额+运费)*折扣
     // + [_order.yunfei doubleValue]
-    CGFloat totalAmount = [_order.amount doubleValue];
+    CGFloat totalAmount = 0.0;//[_order.amount doubleValue];
+
+    if ([order.payType integerValue] == 0) {
+        totalAmount = [order.totalAmount doubleValue];
+    }
+    else
+    {
+         if ([[TLUser user].kind isEqualToString:kUserTypeSalon]) {
+             totalAmount = [_order.amount doubleValue];
+         }
+        else
+        {
+            totalAmount = [order.totalAmount doubleValue];
+        }
+    }
     NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
     [_totalAmountLbl labelWithString:[NSString stringWithFormat:@"总计: %@", amountStr] title:amountStr font:Font(15.0) color:kThemeColor];
 }

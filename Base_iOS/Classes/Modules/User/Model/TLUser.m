@@ -237,7 +237,7 @@ NSString *const kUserTypePartner = @"B";    //合伙人
 }
 - (BOOL)isSing
 {
-    if ([[TLUser user].signStatus isEqualToString:@"2"]) {
+    if ([[TLUser user].signStatus isEqualToString:@"2"] ) {
         return YES;
     }
     return NO;
@@ -291,12 +291,11 @@ NSString *const kUserTypePartner = @"B";    //合伙人
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSLog(@"---->%@",responseObject);
         [TLUser user].fwInputCount = [responseObject[@"data"][@"fwInputCount"]integerValue];
         [TLUser user].fwToClassCount = [responseObject[@"data"][@"fwToClassCount"]integerValue];
         [TLUser user].fwToBookCount = [responseObject[@"data"][@"fwToBookCount"]integerValue];
-        [TLUser user].fwClassEndCount = [responseObject[@"data"][@"fwInputCount"]integerValue];
-        [TLUser user].jxsToApproveCount = [responseObject[@"data"][@"fwInputCount"]integerValue];
+        [TLUser user].fwClassEndCount = [responseObject[@"data"][@"fwClassEndCount"]integerValue];
+        [TLUser user].jxsToApproveCount = [responseObject[@"data"][@"jxsToApproveCount"]integerValue];
 
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserNotReadNumberNotification object:nil];

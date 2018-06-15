@@ -53,7 +53,7 @@
     
     
     UIImageView *oneimage = [[UIImageView alloc]init];
-    oneimage.image = kImage(@"积分");
+    oneimage.image = kImage(@"余额");
     [self.view addSubview:oneimage];
     
     [oneimage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,7 +72,7 @@
     }];
     
     UIImageView *twoimage = [[UIImageView alloc]init];
-    twoimage.image = kImage(@"积分");
+    twoimage.image = kImage(@"余额");
     [self.view addSubview:twoimage];
     
     [twoimage mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,8 +99,8 @@
                                         titleFont:14.0];
     
     [self.xiaobangBtn bk_addEventHandler:^(id sender) {
-        [self.xiaobangBtn setImage:kImage(@"选中YES") forState:UIControlStateNormal];
-        [self.xiaobangJuanBtn setImage:kImage(@"未选中NO") forState:UIControlStateNormal];
+        [self.xiaobangBtn setImage:kImage(@"支付选中") forState:UIControlStateNormal];
+        [self.xiaobangJuanBtn setImage:kImage(@"未选中") forState:UIControlStateNormal];
         self.isFirst = YES;
 
 
@@ -114,7 +114,7 @@
         make.right.equalTo(self.view.mas_right).with.offset(-20);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
-    [self.xiaobangBtn setImage:kImage(@"选中YES") forState:UIControlStateNormal];
+    [self.xiaobangBtn setImage:kImage(@"支付选中") forState:UIControlStateNormal];
     
     
     
@@ -124,13 +124,13 @@
                                             titleFont:14.0];
     
     [self.xiaobangJuanBtn bk_addEventHandler:^(id sender) {
-        [self.xiaobangJuanBtn setImage:kImage(@"选中YES") forState:UIControlStateNormal];
-        [self.xiaobangBtn setImage:kImage(@"未选中NO") forState:UIControlStateNormal];
+        [self.xiaobangJuanBtn setImage:kImage(@"支付选中") forState:UIControlStateNormal];
+        [self.xiaobangBtn setImage:kImage(@"未选中") forState:UIControlStateNormal];
         self.isFirst = NO;
 
     } forControlEvents:UIControlEventTouchUpInside];
     
-    [self.xiaobangJuanBtn setImage:kImage(@"未选中NO") forState:UIControlStateNormal];
+    [self.xiaobangJuanBtn setImage:kImage(@"未选中") forState:UIControlStateNormal];
 
     
     [self.view addSubview:self.xiaobangJuanBtn];

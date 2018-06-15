@@ -168,10 +168,10 @@
         NSArray *contentArr;
         
         
-        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", /*@"预约排班时间",*/ @"预约排班天数", @"状态"];
+        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", /*@"预约排班时间",*/ @"预约时间", @"状态"];
         contentArr = @[name, startDate, day, planDate, /*planDay,*/ status];
         
-        if (indexPath.row == 5) {
+        if (indexPath.row == 4) {
             
             cell.contentLbl.textColor = kThemeColor;
         }

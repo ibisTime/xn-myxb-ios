@@ -40,6 +40,17 @@
 //    //navigation底部分割线
 //    self.navigationController.navigationBar.shadowImage = [kLineColor convertToImage];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginAgain) name:@"LOGIN_AGAIN" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginAgain) name:@"kUserLoginOutNotification" object:nil];
+}
+- (void)loginAgain
+{
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    window.backgroundColor = [UIColor whiteColor];
+    [window makeKeyAndVisible];
+    
+    TabbarViewController *tabbarCtrl = [[TabbarViewController alloc] init];
+    window.rootViewController = tabbarCtrl;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

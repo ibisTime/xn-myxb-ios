@@ -58,7 +58,7 @@
         }
         else if ([self.order.status integerValue] == [kAppointmentOrderStatus_1 integerValue])
         {
-            if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide])
+            if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide] || [[TLUser user].kind isEqualToString:kUserTypeExpert])
             {
                 titleStr = @"取消预约";
                 
@@ -117,7 +117,7 @@
 - (TLTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight)
+        _tableView = [TLTableView tableViewWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kBottomInsetHeight - 50)
                                                         delegate:self
                                                       dataSource:self];
         
@@ -144,6 +144,11 @@
                 [self.commentBtn setTitle:@"确认上门" forState:UIControlStateNormal];
 
             }
+            else if ([self.commentBtn.titleLabel.text isEqualToString:@"待下课"])
+            {
+                [self.commentBtn setTitle:@"确认下课" forState:UIControlStateNormal];
+                
+            }
             
             
         }
@@ -156,7 +161,7 @@
     }
     else
     {
-        self.commentBtn.hidden = NO;
+        self.commentBtn.hidden = YES;
 
     }
 }
@@ -316,11 +321,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1] || [self.order.status isEqualToString:kAppointmentOrderStatus_2]) {
-        
+//    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1] || [self.order.status isEqualToString:kAppointmentOrderStatus_2]) {
+//
         return 4;
-    }
-    return 6;
+//    }
+//    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -355,8 +360,8 @@
     NSArray *textArr;
     NSArray *contentArr;
     
-    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1] ||[self.order.status isEqualToString:kAppointmentOrderStatus_2]) {
-        
+//    if ([self.order.status isEqualToString:kAppointmentOrderStatus_1] ||[self.order.status isEqualToString:kAppointmentOrderStatus_2]) {
+    
         textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", @"状态"];
         contentArr = @[name, startDate, day, status];
 
@@ -365,16 +370,16 @@
             cell.contentLbl.textColor = kThemeColor;
         }
         
-    } else {
-        
-        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", @"预约排班时间", @"预约排班天数", @"状态"];
-        contentArr = @[name, startDate, day, planDate, planDay, status];
-        
-        if (indexPath.row == 5) {
-            
-            cell.contentLbl.textColor = kThemeColor;
-        }
-    }
+//    } else {
+//
+//        textArr = @[[NSString stringWithFormat:@"预约%@", [self.order getUserType]], @"预约开始时间", @"预约天数", @"预约排班时间", @"预约排班天数", @"状态"];
+//        contentArr = @[name, startDate, day, planDate, planDay, status];
+//
+//        if (indexPath.row == 5) {
+//
+//            cell.contentLbl.textColor = kThemeColor;
+//        }
+//    }
     
     cell.textLbl.text = textArr[indexPath.row];
     cell.contentLbl.text = contentArr[indexPath.row];
@@ -431,7 +436,7 @@
     }
     else if ([self.order.status integerValue] == [kAppointmentOrderStatus_1 integerValue])
     {
-        if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide])
+        if ([[TLUser user].kind isEqualToString:kUserTypeBeautyGuide] ||[[TLUser user].kind isEqualToString:kUserTypeExpert] )
         {
             [TLAlert alertWithTitle:@"" msg:@"您确定要取消该预约单吗?" confirmMsg:@"确认" cancleMsg:@"取消" cancle:^(UIAlertAction *action) {
                 

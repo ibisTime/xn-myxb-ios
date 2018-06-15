@@ -35,7 +35,7 @@
         
         [self.peoleoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.equalTo(@0);
-            make.right.equalTo(self.mas_right).with.offset(-20);
+            make.right.equalTo(self.mas_right).with.offset(-50);
             make.height.equalTo(@50);
         }];
         
@@ -111,13 +111,15 @@
     
     
     
-    if (model.peopleNumberl != 0) {
+    
+    if ([model.realName isEqualToString:@"有效推荐码"]) {
         self.peoleoLabel.text = [NSString stringWithFormat:@"%ld人",model.peopleNumberl];
     }
     else
     {
         self.peoleoLabel.text = @"";
     }
+   
     
     
 }

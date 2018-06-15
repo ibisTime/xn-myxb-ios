@@ -30,7 +30,7 @@
 
 @property (nonatomic , strong) NSDictionary *user;
 
-
+@property (nonatomic , strong) NSDictionary *refereeUser;
 
 
 @end

@@ -117,7 +117,7 @@
         
         UIImageView *iv = [[UIImageView alloc] init];
         
-        iv.image = i < _comment.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
+//        iv.image = i < _comment.score ? kImage(@"big_star_select"): kImage(@"big_star_unselect");
         
         [self.starView addSubview:iv];
         [iv mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,7 +134,7 @@
     
     _comment = comment;
     
-    self.nameLbl.text = comment.nickname;
+    self.nameLbl.text = comment.commentUser[@"loginName"];
     
     self.timeLbl.text = [comment.commentDatetime convertToDetailDate];
     

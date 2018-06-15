@@ -70,8 +70,8 @@
     if (!_commentBtn) {
         
         _commentBtn = [UIButton buttonWithTitle:@"评价"
-                                     titleColor:kAppCustomMainColor
-                                backgroundColor:kClearColor
+                                     titleColor:kWhiteColor
+                                backgroundColor:kThemeColor
                                       titleFont:14.0
                                    cornerRadius:3];
         
@@ -97,20 +97,28 @@
 - (void)setOrder:(BrandOrderModel *)order {
     
     _order = order;
-    
-    //根据状态添加按钮
-    NSInteger status = [_order.status integerValue];
-    
-    switch (status) {
-            
-        case 3:
-        {
-            self.commentBtn.hidden = NO;
-        }break;
-            
-        default:
-            break;
+    if ([order.status isEqualToString:kBrandOrderStatusWillType5]) {
+        self.commentBtn.hidden = NO;
+        self.receiptBtn.hidden = YES;
     }
+    else
+    {
+        self.commentBtn.hidden = YES;
+        self.receiptBtn.hidden = YES;
+    }
+    //根据状态添加按钮
+//    NSInteger status = [_order.status integerValue];
+//    
+//    switch (status) {
+//            
+//        case 3:
+//        {
+//            self.commentBtn.hidden = NO;
+//        }break;
+//            
+//        default:
+//            break;
+//    }
     
 }
 

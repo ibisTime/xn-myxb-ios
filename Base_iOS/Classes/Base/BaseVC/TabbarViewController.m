@@ -32,10 +32,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 创建子控制器
-    [self createSubControllers];
-    // 设置tabbar样式
-    [self initTabBar];
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults]objectForKey:@"user_info_dict_key"];
+    
+    if ([dic[@"kind"] isEqualToString:kUserTypeExpert]) {
+        [self createSubControllersTwo];
+        self.tabBar.tintColor = kThemeColor;
+
+    }
+    else
+    {
+        // 创建子控制器
+        [self createSubControllers];
+        // 设置tabbar样式
+        [self initTabBar];
+    }
+    
+    
 }
 
 #pragma mark - Init
@@ -61,7 +73,39 @@
     self.customTabbar = tabBar;
 
 }
-
+- (void)createSubControllersTwo
+{
+    self.tabBarItems = [NSMutableArray array];
+    
+    NSArray *titles = @[@"首页",
+                        @"商学院",
+                        @"帮助中心",
+                        @"我的"];
+    
+    NSArray *normalImages = @[@"home",
+                              @"商学院",
+                              @"help_center",
+                              @"mine"];
+    
+    NSArray *selectImages = @[@"home_select",
+                              @"商学院点击",
+                              @"help_center_select",
+                              @"mine_select"];
+    
+    NSArray *vcNames = @[@"HomeVC",
+                         @"SchoolOfBusinessVC",
+                         @"HelpCenterVC",
+                         @"MineVC"];
+    
+    for (int i = 0; i < normalImages.count; i++) {
+        
+        [self addChildVCWithTitle:titles[i]
+                           vcName:vcNames[i]
+                        imgNormal:normalImages[i]
+                      imgSelected:selectImages[i]];
+    }
+    
+}
 - (void)createSubControllers {
     
     self.tabBarItems = [NSMutableArray array];

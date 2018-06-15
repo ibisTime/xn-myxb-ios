@@ -24,7 +24,7 @@
 @property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, copy) NSString *type;
 
-
+@property (nonatomic , strong)NSDictionary *commentUser;
 @property (nonatomic, assign) NSInteger score;
 
 //

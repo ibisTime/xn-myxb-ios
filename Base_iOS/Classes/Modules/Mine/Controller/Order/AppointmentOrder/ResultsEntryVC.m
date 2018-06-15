@@ -63,7 +63,7 @@
     
     
     
-    self.timeTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, nameTL.yy, tfW, tfH) leftTitle:@"预约开始时间" titleWidth:leftW placeholder:@"请选择开始时间"];
+    self.timeTF = [[TLTextField alloc] initWithFrame:CGRectMake(leftMargin, nameTL.yy, tfW, tfH) leftTitle:@"开始时间" titleWidth:leftW placeholder:@"请选择开始时间"];
     
     [self.bgScroView addSubview:self.timeTF];
     //点击手势

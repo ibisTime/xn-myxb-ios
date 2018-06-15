@@ -92,8 +92,8 @@
  
     BaseWeakSelf;
     
-    NSString *shareTitle = PASS_NULL_TO_NIL(_shareTitle).length > 0 ? _shareTitle : @"美业销帮";
-    NSString *shareDesc = PASS_NULL_TO_NIL(_shareDesc).length > 0 ? _shareDesc : @"欢迎使用美业销帮";
+    NSString *shareTitle = PASS_NULL_TO_NIL(_shareTitle).length > 0 ? _shareTitle : @"美销帮";
+    NSString *shareDesc = PASS_NULL_TO_NIL(_shareDesc).length > 0 ? _shareDesc : @"欢迎使用美销帮";
     UIImage *shareImage =  [_shareImgStr isEqualToString:@""] || _shareImgStr == nil? [UIImage imageNamed:@"icon"] : [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[_shareImgStr convertImageUrl]]]];
     
     WXMediaMessage *message = [WXMediaMessage message];
@@ -116,6 +116,8 @@
     req.bText = NO;
     
     req.message = message;
+    [WXApi registerApp:@"wxd0c1725a396dada6" enableMTA:YES];
+
     
     req.scene = [title isEqualToString:@"微信"] ? WXSceneSession: WXSceneTimeline;
     

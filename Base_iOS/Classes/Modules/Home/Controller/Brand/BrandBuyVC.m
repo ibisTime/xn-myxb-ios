@@ -101,7 +101,7 @@
     
     self.priceLabel = [UILabel labelWithBackgroundColor:kWhiteColor textColor:kThemeColor font:15];
     
-    self.priceLabel.text = [NSString stringWithFormat:@"¥:%@",self.price];
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@",self.price];
     [self.numTF addSubview:self.priceLabel];
     self.priceLabel.textAlignment = NSTextAlignmentRight;
     

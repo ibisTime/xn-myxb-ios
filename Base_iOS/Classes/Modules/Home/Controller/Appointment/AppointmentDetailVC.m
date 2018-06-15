@@ -75,7 +75,9 @@
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.edges.mas_equalTo(0);
+        make.left.top.right.equalTo(@0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-50- kBottomInsetHeight);
+        
     }];
     //HeaderView
     self.headerView = [[AppointmentDetailHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 115)];

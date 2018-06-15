@@ -319,7 +319,9 @@
         [[TLUser user] requestAccountNumberWith:@"CNY"];
         [[TLUser user] requestAccountNumberWith:@"JF"];
         
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LOGIN_AGAIN" object:nil];
+
+
         
     } failure:^(NSError *error) {
         

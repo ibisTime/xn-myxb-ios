@@ -293,7 +293,16 @@
     
     self.expertiseLbl.text = [appointmentModel.speciality valid] ?
     [NSString stringWithFormat:@"专长: %@", appointmentModel.speciality]: @"";
-    self.leveLbl.text = @"初级";
+    
+    if ([appointmentModel.level isEqualToString:@"zs_spec"]) {
+        self.leveLbl.text = @"资深";
+
+    }
+    else
+    {
+        self.leveLbl.text = @"初级";
+
+    }
     
     [self.introduceLbl labelWithTextString:appointmentModel.slogan lineSpace:5];
     //布局

@@ -258,10 +258,10 @@
     
     BrandOrderModel *order = self.orderGroups[section];
     
-//    if ([order.status isEqualToString:kBrandOrderStatusWillType]) {
-//        
-//        return 50;
-//    }
+    if ([order.status isEqualToString:kBrandOrderStatusWillType5]) {
+        
+        return 50;
+    }
     return 0.00001;
 }
 

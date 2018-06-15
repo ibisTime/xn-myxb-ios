@@ -147,7 +147,7 @@
     _trip = trip;
     
     
-    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
+    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[trip.refereeUser[@"refereeUser"] convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
 
     if (self.isTeam) {
         
@@ -159,15 +159,15 @@
         
         NSArray *weekday = [NSArray arrayWithObjects: [NSNull null], @"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六", nil];
         
-        NSDate *newDate = [formatter dateFromString:trip.planDatetime];
+        NSDate *newDate = [formatter dateFromString:trip.planDatetime == nil ?trip.updateDatetime : trip.planDatetime];
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDateComponents *components = [calendar components:NSCalendarUnitWeekday fromDate:newDate];
         
         NSString *weekStr = [weekday objectAtIndex:components.weekday];
         
         self.weekLbl.text = [NSString stringWithFormat:@"%@  %@",trip.user[@"loginName"],weekStr];
-        NSString *startDate = [trip.planDatetime convertDateWithFormat:@"yyyy-MM-dd"];
-        NSString *endDate = [trip.planDatetime convertDateWithFormat:@"HH:mm"];
+        NSString *startDate = [trip.planDatetime == nil ?trip.updateDatetime : trip.planDatetime convertDateWithFormat:@"yyyy-MM-dd"];
+        NSString *endDate = [trip.planDatetime == nil ?trip.updateDatetime : trip.planDatetime convertDateWithFormat:@"HH:mm"];
 
         self.dateLbl.text = startDate;
         self.timeLbl.text = [NSString stringWithFormat:@"%@-%@",endDate,endDate];

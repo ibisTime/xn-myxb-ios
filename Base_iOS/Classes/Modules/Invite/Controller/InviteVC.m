@@ -68,7 +68,7 @@
     //获取活动规则
     [self requestActivityRule];
     //获取邀请人数和收益
-    [self requestInviteNumber];
+//    [self requestInviteNumber];
     //获取分享链接
     [self getShareUrl];
     
@@ -164,8 +164,8 @@
     [self.scrollView addSubview:titleLbl];
     
     //提成收益
-    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, inviteIV.yy + 15, kScreenWidth - 2*leftMargin, 100)];
-    
+    UIView *profitView = [[UIView alloc] initWithFrame:CGRectMake(leftMargin, inviteIV.yy + 15, kScreenWidth - 2*leftMargin, .1/*100*/)];//暂时隐藏 高度为1
+    profitView.clipsToBounds = YES;
     profitView.backgroundColor = [UIColor colorWithHexString:@"#fff9eb"];
     profitView.layer.shadowOffset = CGSizeMake(4, 4);
     profitView.layer.shadowOpacity = 1.0f;

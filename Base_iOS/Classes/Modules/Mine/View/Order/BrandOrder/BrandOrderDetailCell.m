@@ -7,7 +7,7 @@
 //
 
 #import "BrandOrderDetailCell.h"
-
+#import "TLUser.h"
 //Macro
 #import "AppMacro.h"
 //Category
@@ -142,15 +142,34 @@
     
     _order = order;
     
-    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.detailModel.product[@"advPic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[order.detailModel.product[@"pic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     //
     self.nameLbl.text = order.detailModel.product[@"name"];
     //
     NSString *slogin = order.detailModel.product[@"slogan"];
     STRING_NIL_NULL(slogin)
     self.sloginLbl.text = slogin;
+    
+    
+    CGFloat totalAmount = 0.0;//[_order.amount doubleValue];
+    
+    if ([order.payType integerValue] == 0) {
+        totalAmount = [order.totalAmount doubleValue];
+    }
+    else
+    {
+        if ([[TLUser user].kind isEqualToString:kUserTypeSalon]) {
+            totalAmount = [_order.amount doubleValue];
+        }
+        else
+        {
+            totalAmount = [order.totalAmount doubleValue];
+        }
+    }
+    NSString *amountStr = [NSString stringWithFormat:@"%@", [@(totalAmount) convertToRealMoney]];
+    
     //
-    self.priceLbl.text = [NSString stringWithFormat:@"%@", [_order.amount convertToRealMoney]];
+    self.priceLbl.text = amountStr;
     //
     self.numLbl.text = [NSString stringWithFormat:@"X %@",[order.detailModel.quantity stringValue]];
     
@@ -158,7 +177,7 @@
 - (void)setCelldata:(NSDictionary *)celldata
 {
     _celldata = celldata;
-    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[celldata[@"product"][@"advPic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
+    [self.coverIV sd_setImageWithURL:[NSURL URLWithString:[celldata[@"product"][@"pic"] convertImageUrl]] placeholderImage:GOOD_PLACEHOLDER_SMALL];
     //
     self.nameLbl.text = celldata[@"product"][@"name"];
     //
@@ -167,11 +186,43 @@
     self.sloginLbl.text = slogin;
     //
     
-    float price = [celldata[@"price"] integerValue];
-    NSNumber *priceNumber = [NSNumber numberWithInteger:price];
-    self.priceLbl.text = [NSString stringWithFormat:@"%@", [priceNumber convertToRealMoney]];
+    NSInteger orderNo = [celldata[@"product"][@"orderNo"]integerValue];
+    
+    
+    
+        if ([[TLUser user].kind isEqualToString:kUserTypeSalon]) {
+//            totalAmount = [_order.amount doubleValue];
+            float price = [celldata[@"discountPrice"] integerValue];
+            NSNumber *priceNumber = [NSNumber numberWithInteger:price];
+            self.priceLbl.text = [NSString stringWithFormat:@"%@", [priceNumber convertToRealMoney]];
+        }
+        else
+        {
+            float price = [celldata[@"price"] integerValue];
+            NSNumber *priceNumber = [NSNumber numberWithInteger:price];
+            self.priceLbl.text = [NSString stringWithFormat:@"%@", [priceNumber convertToRealMoney]];
+            
+        }
+    
+    
+//    if (orderNo == 1 || orderNo == 3 || orderNo == 0) {
+//
+//
+//        float price = [celldata[@"discountPrice"] integerValue];
+//        NSNumber *priceNumber = [NSNumber numberWithInteger:price];
+//        self.priceLbl.text = [NSString stringWithFormat:@"%@", [priceNumber convertToRealMoney]];
+//    }
+//    else
+//    {
+//        float price = [celldata[@"price"] integerValue];
+//        NSNumber *priceNumber = [NSNumber numberWithInteger:price];
+//        self.priceLbl.text = [NSString stringWithFormat:@"%@", [priceNumber convertToRealMoney]];
+//    }
+    
+   
     //
     self.numLbl.text = [NSString stringWithFormat:@"X %@",[celldata[@"quantity"] stringValue]];
 }
+
 
 @end
