@@ -116,7 +116,8 @@
     req.bText = NO;
     
     req.message = message;
-    [WXApi registerApp:@"wxd0c1725a396dada6" enableMTA:YES];
+    [[TLWXManager manager] registerApp];
+    
 
     
     req.scene = [title isEqualToString:@"微信"] ? WXSceneSession: WXSceneTimeline;

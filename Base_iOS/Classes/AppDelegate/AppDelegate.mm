@@ -44,7 +44,8 @@
         NSLog(@"---->%@",log);
     }];
     //向微信注册,发起支付必须注册
-    [WXApi registerApp:@"wxd0c1725a396dada6" enableMTA:YES];
+    [[TLWXManager manager] registerApp];
+//    [WXApi registerApp:@"wxd0c1725a396dada6" enableMTA:YES];
     return YES;
 }
 
